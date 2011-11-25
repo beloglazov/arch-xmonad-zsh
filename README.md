@@ -4,7 +4,7 @@ This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the reposi
 
 1. First of all, you need to clone the repository of oh-my-zsh to your home directory:
 
-> git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+ > git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 2. Then, you need to clone this repository to any directory you want:
 

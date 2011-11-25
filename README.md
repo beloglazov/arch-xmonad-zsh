@@ -18,7 +18,7 @@ This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the reposi
 
    ./install.sh
 
-5. If you want to install the same configuration for root, just do:
+5. If you want to install the same configuration for root, just run the following script and enter your sudo password:
 
    ./install-root.sh
 

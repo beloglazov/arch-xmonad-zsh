@@ -1,4 +1,4 @@
-This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the repository is far from being complete and includes just Zsh configs and simple install scripts.
+This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the repository is far from being complete and includes just .xinirc, .Xresources, Zsh configs with a custom theme for .oh-my-zsh and simple install scripts.
 
 # Zsh Configuration
 

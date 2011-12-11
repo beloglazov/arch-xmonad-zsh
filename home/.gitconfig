@@ -1,0 +1,17 @@
+[core]
+	editor = nano
+[user]
+	name = Anton Beloglazov
+	email = anton.beloglazov@gmail.com
+[color]
+	ui = true
+[alias]
+	st = status
+	co = checkout
+	ci = commit -m
+	b = branch
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ca = commit -a -m
+	s = status
+	d = diff --stat
+	p = push

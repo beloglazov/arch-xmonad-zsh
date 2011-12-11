@@ -88,6 +88,7 @@ alias gitl='git l'
 alias gitco='git co'
 alias gitb='git b'
 alias gitd='git d'
+alias gitp='git p'
 
 # Eclipse aliases
 alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null &>/dev/null &'

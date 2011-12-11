@@ -6,3 +6,7 @@ ln -s ${DIR}/home/.zshrc ~/.zshrc
 ln -s ${DIR}/home/.zshenv ~/.zshenv
 ln -s ${DIR}/home/.oh-my-zsh/themes/beloglazov.zsh-theme ~/.oh-my-zsh/themes/beloglazov.zsh-theme
 
+mkdir ~/.xmonad
+ln -s ${DIR}/home/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
+ln -s ${DIR}/home/.gitconfig ~/.gitconfig
+

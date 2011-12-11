@@ -65,6 +65,7 @@ bindkey "\e[F" end-of-line
 
 alias ll='ls -lah'
 alias l='ls -lh'
+alias lltime='ll -tr'
 alias df='pydf'
 alias du='du -hs'
 alias mkdirs='mkdir -p'

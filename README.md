@@ -6,6 +6,7 @@ This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the reposi
  * Zsh configs with a custom theme for .oh-my-zsh
  * .gitconfig
  * .emacs
+ * .nanorc
  * .rtorrent.rc
 
 Apart from that, simple install scripts are also included.

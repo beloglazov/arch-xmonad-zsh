@@ -10,3 +10,4 @@ sudo mkdir /root/.xmonad
 sudo ln -s ${DIR}/home/.xmonad/xmonad.hs /root/.xmonad/xmonad.hs
 sudo ln -s ${DIR}/home/.gitconfig /root/.gitconfig
 sudo ln -s ${DIR}/home/.emacs /root/.emacs
+sudo ln -s ${DIR}/home/.nanorc /root/.nanorc

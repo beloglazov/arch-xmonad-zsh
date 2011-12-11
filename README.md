@@ -3,7 +3,8 @@ This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the reposi
  * .xinirc
  * .Xresources
  * Xmonad config
- * Zsh configs with a custom theme for .oh-my-zsh
+ * Zsh configs
+ * oh-my-zsh with a custom theme
  * .gitconfig
  * .emacs
  * .nanorc
@@ -13,11 +14,7 @@ Apart from that, simple install scripts are also included.
 
 # Installation
 
-First of all, you need to clone the repository of oh-my-zsh to your home directory:
-
- > git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-Then, you need to clone this repository to any directory you want:
+First of all, you need to clone this repository to any directory you want:
 
 > git clone git@github.com:beloglazov/arch-xmonad-zsh.git
 
@@ -25,15 +22,11 @@ Next, you need to cd into the cloned repository:
 
 > cd arch-xmonad-zsh
 
-And run the installation script, which will create symbolic links to .zshenv and .zshrc in your home directory:
+And run the installation script, which will create symbolic links to the configuration files for the current user and for root (it will ask the sudo password for linking configuration files in /root):
 
 > ./install.sh
 
-If you want to install the same configuration for root, just run the following script and enter your sudo password:
-
-> ./install-root.sh
-
-Now you need to restart your shell to see the changes.
+Now you need to restart X11 to see the changes.
 
 
 Enjoy!

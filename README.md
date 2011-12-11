@@ -22,7 +22,7 @@ Next, you need to cd into the cloned repository:
 
 > cd arch-xmonad-zsh
 
-And run the installation script, which will create symbolic links to the configuration files for the current user and for root (it will ask the sudo password for linking configuration files in /root):
+And run the installation script, which will create symbolic links to the configuration files for the current user and for root (it will ask the sudo password for linking the configuration files in /root):
 
 > ./install.sh
 

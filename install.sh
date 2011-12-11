@@ -9,5 +9,6 @@ ln -s ${DIR}/home/.oh-my-zsh/themes/beloglazov.zsh-theme ~/.oh-my-zsh/themes/bel
 mkdir ~/.xmonad
 ln -s ${DIR}/home/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 ln -s ${DIR}/home/.gitconfig ~/.gitconfig
+ln -s ${DIR}/home/.emacs ~/.emacs
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
 

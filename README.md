@@ -1,6 +1,16 @@
-This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the repository is far from being complete and includes just .xinirc, .Xresources, Xmonad config, Zsh configs with a custom theme for .oh-my-zsh, .gitconfig, .rtorrent.rc and simple install scripts.
+This is my configuration of Arch Linux + Xmonad + Zsh. At the moment, the repository includes the following configuration files:
 
-# Zsh Configuration
+ * .xinirc
+ * .Xresources
+ * Xmonad config
+ * Zsh configs with a custom theme for .oh-my-zsh
+ * .gitconfig
+ * .emacs
+ * .rtorrent.rc
+
+Apart from that, simple install scripts are also included.
+
+# Installation
 
 First of all, you need to clone the repository of oh-my-zsh to your home directory:
 

@@ -1,10 +1,11 @@
-(sleep 5s && xset b off) &
-(sleep 5s && xset r rate 350 40) &
+(sleep 10s && xset b off) &
+(sleep 10s && xset r rate 350 40) &
+export PATH=$PATH:~/bin
 xsetroot -cursor_name left_ptr &
 xmodmap -e "pointer = 1 8 3 4 5 6 7 2" &
 numlockx &
 #unclutter &
 xrdb -merge ~/.Xresources
-#emacs --daemon
+emacs --daemon
 chromium &
-exec ck-launch-session dbus-launch ~/.cabal/bin/xmonad
+exec ck-launch-session dbus-launch xmonad

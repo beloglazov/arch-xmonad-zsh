@@ -1,24 +1,73 @@
+;;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+(add-to-list 'load-path "~/.emacs.d/ecb-snap/")
+;;(add-to-list 'load-path "~/.emacs.d/cedet-1.0.1/")
+(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+
+;;(require 'ido)
+;;(ido-mode t)
+;;(setq ido-enable-flex-matching t) ;; enable fuzzy matching
+
+;;(load-file "~/.emacs.d/cedet-1.1beta2/common/cedet.el")
+;;(global-ede-mode 1)                      ; Enable the Project management system
+;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
+
+(require 'ecb)
 (require 'color-theme)
 (require 'zenburn)
 (zenburn)
 (set-scroll-bar-mode 'right)
-(setenv "ERGOEMACS_KEYBOARD_LAYOUT" "us") ; US
-(load-file "/usr/share/emacs/23.3/lisp/net/tramp.elc")
-(load-file "~/.emacs.d/ergoemacs_1.9.3.1/site-lisp/site-start.el")
 
+(icomplete-mode t) ;; constantly updating completions in the mini buffer
+(global-linum-mode 0) ;; disable line number column
+
+(and
+ (require 'centered-cursor-mode)
+ (global-centered-cursor-mode +1))
+
+(set-face-attribute 'default nil
+	:weight 'normal 
+	:height 120 
+	:width 'normal 
+	:family "Terminus (TTF)")
+
+(setq vc-follow-symlinks t)
+(setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
+	
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(diredp-date-time ((((type tty)) :foreground "yellow") (t :foreground "#F0DFAF")))
- '(diredp-dir-heading ((((type tty)) :background "yellow" :foreground "blue") (t :background "#41363C" :foreground "#ECBCBC")))
- '(diredp-dir-priv ((t (:background "#3F3F3F" :foreground "thistle"))))
- '(diredp-display-msg ((((type tty)) :foreground "blue") (t :foreground "#93B3A3")))
- '(diredp-file-name ((t (:foreground "#8CD0D3"))))
- '(diredp-file-suffix ((t (:foreground "#7F9F7F"))))
- '(diredp-flag-mark-line ((t (:background "#9FAFAF"))))
- '(diredp-ignored-file-name ((t (:foreground "#80D4AA"))))
- '(diredp-number ((t (:foreground "#8F8F8F"))))
- '(diredp-symlink ((t (:foreground "#F0DFAF"))))
- '(slime-repl-inputed-output-face ((t :background "#41363C" :foreground "#ECBCBC"))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(completions-common-part ((t (:inherit default :foreground "red"))))
+ '(diredp-ignored-file-name ((t (:foreground "#bebebe"))))
+ '(isearch ((((class color) (min-colors 88) (background light)) (:background "black" :foreground "white"))))
+ '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(cua-mode t nil (cua-base))
+ '(ecb-options-version "2.40")
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
+(put 'set-goal-column 'disabled nil)
+
+
+;; Key bindings
+
+(global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
+(global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
+
+(global-set-key (kbd "C-f") 'isearch-forward)
+(global-set-key (kbd "C-s") 'save-buffer)
+(global-set-key (kbd "C-w") 'kill-this-buffer)
+(global-set-key (kbd "C-b") 'ido-switch-buffer)
+
+(global-set-key (kbd "C-<delete>") 'kill-word)
+
+(global-set-key (kbd "C-<tab>") 'other-window)

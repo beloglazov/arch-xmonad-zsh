@@ -28,6 +28,9 @@ plugins=(git archlinux extract history-substring-search lein svn)
 
 source $ZSH/oh-my-zsh.sh
 
+# Disable auto-correction
+unsetopt correct_all
+
 # Customize to your needs...
 
 # Colorized ls
@@ -61,6 +64,12 @@ bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
 
+# Functions
+
+function e () {nohup emacsclient -c $* </dev/null &>/dev/null &}
+function acroread () {nohup acroread $* </dev/null &>/dev/null &}
+function svnd () {svn diff $* | colordiff}
+
 # Aliases
 
 alias ll='ls -lah'
@@ -70,14 +79,18 @@ alias df='pydf'
 alias du='du -hs'
 alias mkdirs='mkdir -p'
 alias n='nano'
-alias e='emacsclient -c'
 alias shutdown='sudo shutdown -Hh now'
 alias reboot='sudo reboot'
+alias xbox='lftp xbox:xbox@xbox'
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+alias bc='bc -l'
+alias psg='ps aux | grep'
 
 # SVN aliales
 alias svn='colorsvn'
 alias svnc='svn ci -m'
-alias svnd='svn diff $* | colordiff'
+# alias svnd='svn diff $* | colordiff'
 alias svnl='svn up -q; colorsvn log -l 10'
 alias svns='svn st'
 
@@ -124,3 +137,9 @@ alias mem="free -m"
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY
+
+export PERL_LOCAL_LIB_ROOT="/home/anton/perl5";
+export PERL_MB_OPT="--install_base /home/anton/perl5";
+export PERL_MM_OPT="INSTALL_BASE=/home/anton/perl5";
+export PERL5LIB="/home/anton/perl5/lib/perl5/i686-linux-thread-multi:/home/anton/perl5/lib/perl5";
+export PATH="/home/anton/perl5/bin:$PATH";

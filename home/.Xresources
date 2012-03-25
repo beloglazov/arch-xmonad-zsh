@@ -1,3 +1,7 @@
+! Disable ctrl-shift keycap picture insert mode
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 URxvt.perl-ext-common:  default,keyboard-select,url-select,clipboard
 URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.underlineURLs:    true

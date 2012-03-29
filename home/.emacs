@@ -24,9 +24,9 @@
 (icomplete-mode t) ;; constantly updating completions in the mini buffer
 (global-linum-mode 0) ;; disable line number column
 
-(and
- (require 'centered-cursor-mode)
- (global-centered-cursor-mode +1))
+;;(and ;; need to replace this with scrolling with arrows while holding C-S
+;; (require 'centered-cursor-mode)
+;; (global-centered-cursor-mode +1))
 
 (set-face-attribute 'default nil
 	:weight 'normal 
@@ -36,6 +36,9 @@
 
 (setq vc-follow-symlinks t)
 (setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
+(setq bookmark-save-flag 1)
+(setq scroll-margin 2)
+
 	
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -64,6 +67,7 @@
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
 (global-set-key (kbd "C-f") 'isearch-forward)
+(global-set-key (kbd "C-S-f") 'isearch-backward)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-w") 'kill-this-buffer)
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
@@ -71,3 +75,21 @@
 (global-set-key (kbd "C-<delete>") 'kill-word)
 
 (global-set-key (kbd "C-<tab>") 'other-window)
+
+(global-set-key (kbd "M-1") 'delete-other-windows)
+
+
+(defun scroll-down-in-place (n)
+  (interactive "p")
+  (previous-line n)
+  (scroll-down n))
+
+(defun scroll-up-in-place (n)
+  (interactive "p")
+  (next-line n)
+  (scroll-up n))
+
+;;(global-set-key [mouse-4] 'scroll-down-in-place)
+;;(global-set-key [mouse-5] 'scroll-up-in-place)
+(global-set-key [C-up] 'scroll-down-in-place)
+(global-set-key [C-down] 'scroll-up-in-place)

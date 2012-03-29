@@ -80,9 +80,9 @@
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
 (global-set-key (kbd "C-f") 'isearch-forward)
-(global-set-key (kbd "C-f") 'isearch-repeat-forward)
+;(global-set-key (kbd "C-f") 'isearch-repeat-forward)
 (global-set-key (kbd "C-S-f") 'isearch-backward)
-(global-set-key (kbd "C-S-f") 'isearch-repeat-backward)
+;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward)
 
 (global-set-key (kbd "C-M-<prior>") 'isearch-ring-retreat)
 (global-set-key (kbd "C-M-<next>") 'isearch-ring-advance)

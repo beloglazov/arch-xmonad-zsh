@@ -86,6 +86,7 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias bc='bc -l'
 alias psg='ps aux | grep'
+alias emacs-restart='pkill emacs; emacs --daemon'
 
 # SVN aliales
 alias svn='colorsvn'

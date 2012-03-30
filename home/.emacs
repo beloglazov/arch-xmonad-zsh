@@ -64,6 +64,7 @@
 (setq x-select-enable-clipboard t) ;; using clipboard by default
 (setq sentence-end-double-space nil)
 (setq imenu-auto-rescan t) ;; auto-updating the index of M-x imenu
+(setq doc-view-continuous t) ;; continuous scrolling in pdfs
 
 ;; ibuffer grouping
 (setq ibuffer-saved-filter-groups

@@ -27,6 +27,12 @@
 ;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
+(require 'uniquify)
+(setq 
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
+
+
 (require 'ecb)
 (require 'color-theme)
 (require 'zenburn)
@@ -37,6 +43,8 @@
 
 (icomplete-mode t) ;; constantly updating completions in the mini buffer
 (global-linum-mode 0) ;; disable line number column
+(show-paren-mode t) ;; highlight matching parentheses
+(menu-bar-mode nil) ;; disable the menu bar
 
 (set-face-attribute 'default nil
 	:weight 'normal 
@@ -51,6 +59,37 @@
 (setq tab-width 4)
 (setq undo-limit 1000000)
 (setq undo-strong-limit 2000000)
+(setq split-window-keep-point t)
+(setq mouse-yank-at-point t) ;; don't move the point when pasting with the mouse
+(setq x-select-enable-clipboard t) ;; using clipboard by default
+(setq sentence-end-double-space nil)
+(setq imenu-auto-rescan t) ;; auto-updating the index of M-x imenu
+
+;; ibuffer grouping
+(setq ibuffer-saved-filter-groups
+          (quote (("default"
+                   ("dired" (mode . dired-mode))
+                   ("perl" (mode . cperl-mode))
+                   ("erc" (mode . erc-mode))
+                   ("planner" (or
+                               (name . "^\\*Calendar\\*$")
+                               (name . "^diary$")
+                               (mode . muse-mode)))
+                   ("emacs" (or
+                             (name . "^\\*scratch\\*$")
+                             (name . "^\\*Messages\\*$")))
+                   ("gnus" (or
+                            (mode . message-mode)
+                            (mode . bbdb-mode)
+                            (mode . mail-mode)
+                            (mode . gnus-group-mode)
+                            (mode . gnus-summary-mode)
+                            (mode . gnus-article-mode)
+                            (name . "^\\.bbdb$")
+                            (name . "^\\.newsrc-dribble")))))))
+    (add-hook 'ibuffer-mode-hook
+              (lambda ()
+                (ibuffer-switch-to-saved-filter-groups "default")))
 
 	
 (custom-set-faces
@@ -76,6 +115,8 @@
 
 ;; Key bindings
 
+(global-set-key (kbd "<return>") 'newline-and-indent)
+
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
@@ -95,6 +136,7 @@
 
 (global-set-key (kbd "C-<tab>") 'other-window)
 
+(global-set-key (kbd "C-M-1") 'kill-buffer-and-window)
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'split-window-horizontally)
 (global-set-key (kbd "M-3") 'split-window-vertically)
@@ -114,6 +156,19 @@
 ;;(global-set-key [mouse-5] 'scroll-up-in-place)
 (global-set-key [C-up] 'scroll-down-in-place)
 (global-set-key [C-down] 'scroll-up-in-place)
+
+
+(defun smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to the first non-whitespace character on this line.
+If point was already at that position, move point to beginning of line."
+  (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work
+  (let ((oldpos (point)))
+    (back-to-indentation)
+    (and (= oldpos (point))
+         (beginning-of-line))))
+
+(global-set-key [home] 'smart-beginning-of-line)
 
 
 ;; Backups

@@ -36,7 +36,7 @@ unsetopt correct_all
 # Colorized ls
 eval `dircolors -b`
 
-export EDITOR="nano"
+export EDITOR="emacsclient -c"
 
 # Key Bindings
 

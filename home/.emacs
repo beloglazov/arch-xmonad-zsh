@@ -142,6 +142,16 @@
 (global-set-key (kbd "M-2") 'split-window-horizontally)
 (global-set-key (kbd "M-3") 'split-window-vertically)
 
+;; Registers
+
+(global-set-key (kbd "M-<f1>") 'point-to-register)
+(global-set-key (kbd "<f1>") 'jump-to-register)
+(global-set-key (kbd "M-<f2>") 'bookmark-set)
+(global-set-key (kbd "<f2>") 'bookmark-jump)
+(global-set-key (kbd "M-<f5>") 'copy-to-register)
+(global-set-key (kbd "<f5>") 'insert-register)
+
+
 
 (defun scroll-down-in-place (n)
   (interactive "p")

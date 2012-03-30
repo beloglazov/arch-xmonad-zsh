@@ -116,7 +116,7 @@
 
 ;; Key bindings
 
-(global-set-key (kbd "<return>") 'newline-and-indent)
+;(global-set-key (kbd "<return>") 'newline-and-indent) ;; TODO: need to move this to a hook
 
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
@@ -169,6 +169,7 @@
 (global-set-key [C-down] 'scroll-up-in-place)
 
 
+;; TODO: need to fix highlighting by S-<home>
 (defun smart-beginning-of-line ()
   "Move point to first non-whitespace character or beginning-of-line.
 Move point to the first non-whitespace character on this line.

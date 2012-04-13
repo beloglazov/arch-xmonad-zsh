@@ -21,13 +21,16 @@ main = do
 		}
 		`additionalKeys`
                  [ ((mod4Mask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
-                 , ((mod4Mask, xK_o), spawn "/home/anton/repos/dmenu-tools/dmenu-edit")
+                 , ((mod4Mask, xK_o), spawn "dmenu-edit")
+                 , ((mod4Mask, xK_u), spawn "dmenu-urxvt")
                  , ((mod4Mask .|. controlMask, xK_Down), spawn "amixer set Master 1-")
                  , ((mod4Mask .|. controlMask, xK_Up  ), spawn "amixer set Master 1+")
                  , ((mod4Mask, xK_Right), windows W.focusDown)
                  , ((mod4Mask, xK_Left),  windows W.focusUp  )
                  , ((mod4Mask, xK_Down),  sendMessage Shrink)
                  , ((mod4Mask, xK_Up),    sendMessage Expand)
+		 , ((mod4Mask .|. shiftMask, xK_F12), spawn "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop")
+		 , ((mod4Mask .|. shiftMask, xK_F11), spawn "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart")
                  ]
                  `additionalKeysP`
                  [ ("M-S-a", kill)

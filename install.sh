@@ -23,6 +23,10 @@ ln -s ${DIR}/home/.emacs ~/.emacs
 ln -s ${DIR}/home/.nanorc ~/.nanorc
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
 
+# bin
+mkdir ~/bin
+ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
+ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
 
 # root configs
 sudo ln -s ${DIR}/home/.Xresources /root/.Xresources

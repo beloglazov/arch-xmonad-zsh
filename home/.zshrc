@@ -69,6 +69,7 @@ bindkey "\e[F" end-of-line
 function e () {nohup emacsclient -c $* </dev/null &>/dev/null &}
 function acroread () {nohup acroread $* </dev/null &>/dev/null &}
 function svnd () {svn diff $* | colordiff}
+function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 
 # Aliases
 
@@ -134,7 +135,6 @@ alias f='find |grep'
 alias c="clear"
 alias dir='ls -1'
 alias mem="free -m"
-
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY

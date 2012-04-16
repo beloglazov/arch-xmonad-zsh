@@ -25,8 +25,18 @@ ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
 
 # bin
 mkdir ~/bin
+ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
 ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
 ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
+ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
+ln -s ${DIR}/home/bin/e ~/bin/e
+
+# .config
+mkdir ~/.config
+mkdir ~/.config/dmenu
+ln -s ${DIR}/home/.config/dmenu/urxvt-list ~/.config/dmenu/urxvt-list
+ln -s ${DIR}/home/.config/dmenu/edit-list ~/.config/dmenu/edit-list
+
 
 # root configs
 sudo ln -s ${DIR}/home/.Xresources /root/.Xresources

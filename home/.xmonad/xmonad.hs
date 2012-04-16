@@ -12,7 +12,7 @@ import XMonad.Util.EZConfig
 main = do
 	xmonad $ ewmh defaultConfig
 		{ layoutHook = smartBorders $ layoutHook defaultConfig
-		, terminal		= "urxvt"
+		, terminal		= "urxvtc"
 		, modMask		= mod4Mask
 		, borderWidth		= 2
 		, normalBorderColor	= "#0c0d0e"
@@ -21,8 +21,10 @@ main = do
 		}
 		`additionalKeys`
                  [ ((mod4Mask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
+                 , ((mod4Mask, xK_e), spawn "e")
                  , ((mod4Mask, xK_o), spawn "dmenu-edit")
                  , ((mod4Mask, xK_u), spawn "dmenu-urxvt")
+		 , ((mod4Mask, xK_p), spawn "dmenu-run")
                  , ((mod4Mask .|. controlMask, xK_Down), spawn "amixer set Master 1-")
                  , ((mod4Mask .|. controlMask, xK_Up  ), spawn "amixer set Master 1+")
                  , ((mod4Mask, xK_Right), windows W.focusDown)

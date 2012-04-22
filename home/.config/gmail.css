@@ -1,43 +1,74 @@
+/** main background **/
+
 body > div > div > div {
     background: #0c0d0e;
 }
 
-div.J-KU-Jg.J-KU-Jg-Zc.aj5 {
+/** main background **/
+
+.no {
+    background: #0c0d0e;
+}
+
+/** content height **/
+
+.oLaOvc.aeJ {
+    height: 966px;
+}
+
+/** Gmail title **/
+
+.akh {
+    color: #7f8f9f;
+}
+
+/** Gmail title arrow **/
+
+.asT-asx.J-J5-Ji {
     display: none;
 }
 
-.PF.PE {
-    background: transparent;
-    border: none;
+/** left menu items**/
+
+a.J-Ke.n0 {
+    color: #7f8f9f;
 }
 
-div.asT-asx.J-J5-Ji {
-    display: none;
-}
+/** current menu item side bar **/
 
 .ain {
     border-left: 2px solid #7f8f9f;
 }
 
-.tG, .tB {
+/** drafts count **/
+
+.LrBjie> .TK> .aim:nth-of-type(5) .aio.UKr6le span {
+    overflow: hidden;
+    width: 40px;
+    display: block;
+    height: 16px;
+    margin-top: 2px;
+}
+
+/** drafts **/
+
+.LrBjie> .TK> .aim:nth-of-type(5) .aio.UKr6le a {
+    font-weight: normal;
+}
+
+/** menu more **/
+
+.CJ {
     color: #7f8f9f;
 }
 
-span.CJ {
-    color: #7f8f9f;
+/** menu more arrow **/
+
+.ait {
+    display: none;
 }
 
-span.HHshnc {
-    color: #7f8f9f;
-}
-
-span.vG {
-    color: #7f8f9f;
-}
-
-span.vG a {
-    color: #7f8f9f;
-}
+/** chat search **/
 
 input.dI.dG {
     background-color: #0c0d0e;
@@ -46,22 +77,36 @@ input.dI.dG {
     width: 48px;
 }
 
-div.akh {
+/** chat contacts **/
+
+.HHshnc {
     color: #7f8f9f;
 }
 
-a.J-Ke.n0 {
+/** under chat tabs **/
+
+.J-KU-Jg.J-KU-Jg-Zc.aj5 {
+    display: none;
+}
+
+/** float contact email **/
+
+.tG, .tB {
     color: #7f8f9f;
 }
 
-.T-I-KE {
+/** buttons **/
+
+.T-I.J-J5-Ji.T-Pm.T-I-ax7.L3.J-JN-M-I, .T-I.J-J5-Ji.nu.T-I-ax7.L3, .T-I.J-J5-Ji.ar7, .T-I.J-J5-Ji.amD.T-I-awG.amE.T-I-ax7.T-I-JE.L3, .T-I.J-J5-Ji.adg.T-I-awG.T-I-ax7.L3, .T-I.J-J5-Ji.ash.T-I-ax7.L3, .T-I.J-J5-Ji.T-I-KE.L3 {
     background-image: none;
     background-color: #181A1C;
     color: #7f8f9f;
     border-color: #181A1C;
 }
 
-.T-I-KE:hover {
+/** buttons **/
+
+.T-I.J-J5-Ji.T-Pm.T-I-ax7.L3.J-JN-M-I:hover, .T-I.J-J5-Ji.nu.T-I-ax7.L3:hover, .T-I.J-J5-Ji.ar7:hover, .T-I.J-J5-Ji.amD.T-I-awG.amE.T-I-ax7.T-I-JE.L3:hover, .T-I.J-J5-Ji.adg.T-I-awG.T-I-ax7.L3:hover, .T-I.J-J5-Ji.ash.T-I-ax7.L3:hover, .T-I.J-J5-Ji.T-I-KE.L3:hover {
     background-image: none;
     background-color: #212426;
     color: #7f8f9f;
@@ -69,20 +114,41 @@ a.J-Ke.n0 {
     cursor: pointer;
 }
 
-div.G-asx.T-I-J3.J-J5-Ji {
-    display: none;
-}
+/** page numbers **/
 
-span.Dj {
+.Dj {
     color: #7f8f9f;
 }
 
-div.at, div.au, div.av {
+/** page numbers **/
+
+.adl {
+    color: #7f8f9f;
+}
+
+/** current email side bar **/
+
+.PF.PE {
+    background: transparent;
+    border: none;
+}
+
+/** labels **/
+
+.at, .au, .av {
     background-color: #2b1f2b;
     border: none;
 }
 
-span.adl {
-    color: #7f8f9f;
+/** checkboxes **/
+
+.T-Jo:focus {
+    border: 1px solid rgba(155, 155, 155, .57);
+}
+
+/** checkboxes **/
+
+.T-Jo:focus:hover {
+    border: 1px solid #B2B2B2;
 }
 

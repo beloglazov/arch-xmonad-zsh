@@ -50,3 +50,11 @@ sudo ln -s ${DIR}/home/.xmonad/xmonad.hs /root/.xmonad/xmonad.hs
 sudo ln -s ${DIR}/home/.gitconfig /root/.gitconfig
 sudo ln -s ${DIR}/home/.emacs /root/.emacs
 sudo ln -s ${DIR}/home/.nanorc /root/.nanorc
+
+
+# /etc 
+
+sudo ln -s ${DIR}/etc/X11/xorg.conf.d/50-keyboard.conf /etc/X11/xorg.conf.d/50-keyboard.conf
+sudo ln -s ${DIR}/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+sudo ln -s ${DIR}/etc/nanorc /etc/nanorc
+sudo ln -s ${DIR}/etc/rc.conf /etc/rc.conf

@@ -30,6 +30,7 @@ ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
 ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
 ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
 ln -s ${DIR}/home/bin/e ~/bin/e
+ln -s ${DIR}/home/bin/disk-benchmark ~/bin/disk-benchmark
 
 # .config
 mkdir ~/.config

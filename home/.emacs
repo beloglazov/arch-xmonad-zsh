@@ -35,8 +35,8 @@
 
 (require 'ecb)
 (require 'color-theme)
-(require 'zenburn)
-(zenburn)
+(require 'zenburn-theme)
+;;(zenburn)
 
 ;;(set-scroll-bar-mode 'right)
 (scroll-bar-mode -1) ;; disable scroll bar

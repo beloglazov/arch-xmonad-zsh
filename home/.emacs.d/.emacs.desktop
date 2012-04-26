@@ -1,0 +1,51 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Thu Mar 22 10:43:42 2012
+;; Desktop file format version 206
+;; Emacs version 23.4.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("windowload" "size" "wh" "empty" "offset" "pos" "lt" "format" "dimens" "classname" "-clip" "include" "psb" "$result" "result" "results"))
+(setq regexp-search-ring nil)
+(setq register-alist '((48 . "\n--                 , (\"S-M-q\", spawn \"xmonad --recompile && xmonad --restart\")")))
+(setq file-name-history '("/home/anton/.xinitrc" "~/repos/xmonad/XMonad/Config.hs" "~/repos/xmonad/XMonad.hs" "~/repos/dmenu-tools/dmenu-edit" "~/.xmonad/xmonad.hs" "~/workspace-other/zotero-scholar-citations/chrome/content/scripts/zoteroscholarcitations.js" "~/workspace-other/ccgrid/registration.html" "~/workspace-other/ccgrid/includes/header2.html" "~/workspace-other/ccgrid/index.html" "~/workspace-other/ccgrid/accepted-papers.html" "~/workspace-other/ccgrid/cfp-CCGrid2012-Posters.txt" "~/workspace-other/ccgrid/cfposters.html" "~/workspace-other/ccgrid/doctoral-symposium.html" "~/uni/papers/2012-tpds/analysis/planetlab-analysis.txt" "~/workspace-clojure/tpds-2012-simulation/run-planetlab-violations.sh" "~/workspace-clojure/tpds-2012-simulation/run-planetlab.sh" "~/workspace-clojure/tpds-2012-simulation/run-planetlab-extra2.sh" "~/workspace-clojure/tpds-2012-simulation/run-planetlab-extra.sh" "~/uni/papers/2012-tpds/analysis/analysis.R" "/home/anton/uni/papers/2012-tpds/analysis/analysis-icdcs.R" "~/uni/papers/2012-tpds/analysis/analysis.R" "~/workspace-other/ccgrid/committee.html" "~/workspace-other/ccgrid/cfp-CCGrid2012.txt" "~/workspace-other/ccgrid/includes/important_dates.html" "~/workspace-clojure/tpds-2012-simulation/run-planetlab-extra.sh" "~/.xmonad/xmonad.hs" "~/workspace-clojure/tpds-2012-simulation/json-to-csv.sh" "~/workspace-clojure/tpds-2012-simulation/run-artificial.sh" "~/workspace-clojure/tpds-2012-simulation/run-planetlab.sh" "~/workspace-clojure/tpds-2012-simulation/run.sh"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/anton/repos/my/arch-xmonad-zsh/home/.xinitrc"
+  ".xinitrc"
+  'sh-mode
+  '(ergoemacs-mode xmsi-mode auto-complete-mode)
+  8
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/anton/repos/my/arch-xmonad-zsh/home/.xmonad/xmonad.hs"
+  "xmonad.hs"
+  'haskell-mode
+  '(haskell-doc-mode ergoemacs-mode xmsi-mode haskell-indentation-mode)
+  819
+  '(1558 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/home/anton/workspace-other/zotero-scholar-citations/chrome/content/scripts/zoteroscholarcitations.js"
+  "zoteroscholarcitations.js"
+  'js2-mode
+  '(ergoemacs-mode xmsi-mode auto-complete-mode)
+  3660
+  '(2981 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+

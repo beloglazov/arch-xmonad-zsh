@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/plugins/")
 ;(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
-(add-to-list 'load-path "~/.emacs.d/ecb-snap/")
+;(add-to-list 'load-path "~/.emacs.d/ecb-snap/")
 ;;(add-to-list 'load-path "~/.emacs.d/cedet-1.0.1/")
 
 (load (expand-file-name "~/.emacs.d/elpa/package.el"))

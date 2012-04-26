@@ -245,7 +245,7 @@ bind ^g gotoline main
 
 
 ## Nanorc files
-#include "/usr/share/nano/nanorc.nanorc"
+include "/usr/share/nano/nanorc.nanorc"
 
 ## C/C++
 include "/usr/share/nano/c.nanorc"
@@ -289,6 +289,9 @@ include "/usr/share/nano/patch.nanorc"
 ## Perl
 include "/usr/share/nano/perl.nanorc"
 
+## PHP
+include "/usr/share/nano/php.nanorc"
+
 ## Python
 include "/usr/share/nano/python.nanorc"
 
@@ -321,133 +324,3 @@ include "/usr/share/nano/sh.nanorc"
 
 ## XML-type files
 include "/usr/share/nano/xml.nanorc"
-
-
-
-## Emacs
-include "/usr/share/nano/dotemacs.nanorc"
-## C++
-#include "/usr/share/nano/c.nanorc"
-## C
-#include "/usr/share/nano/c-file.nanorc"
-## Pov-Ray
-#include "/usr/share/nano/pov.nanorc"
-## HTML
-#there is better one in xml.nanorc
-# include "/usr/share/nano/html.nanorc"
-## TeX
-#include "/usr/share/nano/tex.nanorc"
-## Quoted emails (under e.g. mutt)
-#include "/usr/share/nano/mutt.nanorc"
-## Patch files
-#include "/usr/share/nano/patch.nanorc"
-## Manpages
-#include "/usr/share/nano/man.nanorc"
-## Groff
-#include "/usr/share/nano/groff.nanorc"
-## Perl
-#include "/usr/share/nano/perl.nanorc"
-## Python
-#include "/usr/share/nano/python.nanorc"
-## Ruby
-#include "/usr/share/nano/ruby.nanorc"
-## Java
-#include "/usr/share/nano/java.nanorc"
-## Assembler
-#include "/usr/share/nano/asm.nanorc"
-## Bourne shell scripts
-#include "/usr/share/nano/sh.nanorc"
-## Gentoo ebuilds and such
-#include "/usr/share/nano/gentoo.nanorc"
-## PHP something missing in there...
-#include "/usr/share/nano/php.nanorc"
-## PHP
-#include "/usr/share/nano/php2.nanorc"
-## Xorg config
-include "/usr/share/nano/xorg.nanorc"
-## XML
-#include "/usr/share/nano/xml.nanorc"
-## URLS
-include "/usr/share/nano/urls.nanorc"
-## CSS
-#include "/usr/share/nano/css.nanorc"
-## Conky
-include "/usr/share/nano/conky.nanorc"
-## .cf
-#include "/usr/share/nano/maincf.nanorc"
-## *rc - catches more files for now
-#include "/usr/share/nano/rcfiles.nanorc"
-## *rc
-include "/usr/share/nano/rcfiles-new.nanorc"
-## profile
-include "/usr/share/nano/profile.nanorc"
-## java script
-include "/usr/share/nano/js.nanorc"
-## configs
-include "/usr/share/nano/configfiles.nanorc"
-## Xstuff
-include "/usr/share/nano/xdefaults.nanorc"
-## configs
-include "/usr/share/nano/config.nanorc"
-## configs
-include "/usr/share/nano/config2.nanorc"
-## configs
-include "/usr/share/nano/config3.nanorc"
-## configs
-include "/usr/share/nano/tab.nanorc"
-## configs
-include "/usr/share/nano/passwd.nanorc"
-include "/usr/share/nano/desc.nanorc"
-## Delphi
-#include "/usr/share/nano/delphi.nanorc"
-# ChangeLog - colors everything in blue
-#include "/usr/share/nano/changelog.nanorc"
-## ChangeLog		(C)ryszardzonk
-include "/usr/share/nano/changelogs.nanorc"
-## video metadata info	(C)ryszardzonk
-include "/usr/share/nano/info.nanorc"
-## configs in /etc	(C)ryszardzonk
-include "/usr/share/nano/etc-stuff.nanorc"
-## logs in /var/log	(C)ryszardzonk
-include "/usr/share/nano/log-stuff.nanorc"
-## nanorc syntax
-include "/usr/share/nano/nanorc.nanorc"
-## *.po files		(C)ryszardzonk
-include "/usr/share/nano/po.nanorc"
-## Apache 2
-include "/usr/share/nano/apache2.nanorc"
-## Apache 2 Virtual Host
-include "/usr/share/nano/vhost.nanorc"
-## /etc/init.d/*	custom gentoo.nanorc
-include "/usr/share/nano/initscript.nanorc"
-## Named		(C)ryszardzonk
-include "/usr/share/nano/named.nanorc"
-## File Types		(C)ryszardzonk
-include "/usr/share/nano/mimetype.nanorc"
-## /etc/initng/		custom sh.nanorc
-include "/usr/share/nano/initng.nanorc"
-## /etc/xml         custom xml.nanorc
-include "/usr/share/nano/etcxml.nanorc"
-## sh.nanorc syntax for custom files
-include "/usr/share/nano/shlike.nanorc"
-## c.nanorc syntax for custom files
-include "/usr/share/nano/clike.nanorc"
-## EKG History view     (C)ryszardzonk  
-include "/usr/share/nano/ekghistory.nanorc"
-## others		(C)ryszardzonk
-include "/usr/share/nano/others.nanorc"
-## others		(C)ryszardzonk + LinuxHelp Wiki
-#include "/usr/share/nano/makefile.nanorc"
-## postegreSQL
-include "/usr/share/nano/postgresql.nanorc"
-## Debian Sources (off by default)
-#include "/usr/share/nano/sources_list.nanorc"
-## SoftCam.Key mgcamd
-#include "/usr/share/nano/softcam.nanorc"
-## Paludis http://gentoo-wiki.com/TIP_Nano_Context_Highlighting
-#include "/usr/share/nano/paludis.nanorc"
-## HAVP config		(C)ryszardzonk
-#include "/usr/share/nano/havp.nanorc"
-## Privoxy		(C)ryszardzonk
-#include "/usr/share/nano/privoxy.nanorc"
-                

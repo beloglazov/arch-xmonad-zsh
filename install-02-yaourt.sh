@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # install deps
-sudo pacman -S curl yajl
+sudo pacman -S curl yajl base-devel
 mkdir /tmp/aur
 cd /tmp/aur
 

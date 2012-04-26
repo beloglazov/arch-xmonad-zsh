@@ -1,6 +1,7 @@
 (sleep 10s && xset b off) &
 (sleep 10s && xset r rate 350 40) &
 export PATH=~/bin:$PATH
+xset +fp /usr/share/fonts/local
 xsetroot -cursor_name left_ptr &
 xmodmap -e "pointer = 1 8 3 4 5 6 7 2" &
 #xmodmap -e "keycode  66 = Delete" # map caps lock to delete

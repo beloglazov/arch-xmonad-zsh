@@ -57,5 +57,7 @@ sudo ln -s ${DIR}/home/.nanorc /root/.nanorc
 
 sudo ln -s ${DIR}/etc/X11/xorg.conf.d/50-keyboard.conf /etc/X11/xorg.conf.d/50-keyboard.conf
 sudo ln -s ${DIR}/etc/X11/xorg.conf.d/50-mouse-acceleration.conf /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
+
+sudo mv /etc/nanorc /etc/nanorc-backup
 sudo ln -s ${DIR}/etc/nanorc /etc/nanorc
-sudo ln -s ${DIR}/etc/rc.conf /etc/rc.conf
+#sudo ln -s ${DIR}/etc/rc.conf /etc/rc.conf

@@ -20,6 +20,7 @@ rm ~/.emacs.d
 rm ~/.emacs
 rm ~/.nanorc
 rm ~/.rtorrent.rc
+rm -rf ~/.backups
 
 # bin
 rm ~/bin/dmenu-run
@@ -46,6 +47,7 @@ sudo rm /root/.gitconfig
 sudo rm /root/.emacs.d
 sudo rm /root/.emacs
 sudo rm /root/.nanorc
+sudo rm -rf /root/.backups
 
 
 # /etc 

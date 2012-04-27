@@ -22,7 +22,7 @@ set autoindent
 set backup
 
 ## The directory to put unique backup files in.
-set backupdir "~/.nano-backups"
+set backupdir "~/.backups/nano"
 
 ## Do backwards searches by default.
 # set backwards

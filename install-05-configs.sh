@@ -52,6 +52,8 @@ sudo ln -s ${DIR}/home/.zshrc /root/.zshrc
 sudo ln -s ${DIR}/home/.zshenv /root/.zshenv
 sudo ln -s ${DIR}/home/.oh-my-zsh /root/.oh-my-zsh
 
+sudo ln -s ~/.oh-my-zsh /root/.oh-my-zsh
+
 sudo mkdir /root/.xmonad
 sudo ln -s ${DIR}/home/.xmonad/xmonad.hs /root/.xmonad/xmonad.hs
 sudo ln -s ${DIR}/home/.gitconfig /root/.gitconfig

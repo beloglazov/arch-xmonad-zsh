@@ -103,7 +103,7 @@ alias gitca='git ca'
 alias gitl='git l'
 alias gitco='git co'
 alias gitb='git b'
-alias gitd='git d'
+alias gitd='git diff'
 alias gitp='git p'
 
 # Eclipse aliases

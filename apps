@@ -1,0 +1,46 @@
+alsamixer		sound mixer
+alsi			Arch linux system info
+aspell
+aspell-ru
+atdtool			command line interfact to After the Deadline
+axel
+bc			calculator
+colordiff		colorized diff
+colorsvn		colorized svn
+cope-git		color wrapper for terminal programs
+dict			dictd
+diction			phrase checker
+dmidecode		system information
+dehtml			extract text from html
+detex			extract text from tex
+elinks			console browser
+google-talkplugin	Video chat plugin 
+iftop			network monitor
+hdparm			hdd benchmark
+languagetool		grammar checker
+lesspipe		colorized less
+lftp			console ftp client
+highlight		cli source code highlighter
+mpd			audio player, deamon
+nano			editor
+nanosyntax		nano syntax highlighting
+ncdu			du analyser
+ncmpcpp			mpd client
+feh			image viewer
+htop
+hwinfo
+yaourt
+pacman-color
+palimpsest		hdd benchmark
+pydf
+ranger			cli file manager
+rsync
+rtorrent		torrent client
+slock 			screen locker
+style			analyses the style of text
+tidy			clean up and format html
+unclutter		hide mouse when it's unused
+extract
+zgv			image viewer
+
+

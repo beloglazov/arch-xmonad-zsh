@@ -19,6 +19,7 @@ ln -s ${DIR}/home/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 
 # other
 ln -s ${DIR}/home/.gitconfig ~/.gitconfig
+ln -s ${DIR}/home/.emacs.d ~/.emacs.d
 ln -s ${DIR}/home/.emacs ~/.emacs
 ln -s ${DIR}/home/.nanorc ~/.nanorc
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
@@ -49,6 +50,7 @@ sudo ln -s ${DIR}/home/.oh-my-zsh /root/.oh-my-zsh
 sudo mkdir /root/.xmonad
 sudo ln -s ${DIR}/home/.xmonad/xmonad.hs /root/.xmonad/xmonad.hs
 sudo ln -s ${DIR}/home/.gitconfig /root/.gitconfig
+sudo ln -s ${DIR}/home/.emacs.d /root/.emacs.d
 sudo ln -s ${DIR}/home/.emacs /root/.emacs
 sudo ln -s ${DIR}/home/.nanorc /root/.nanorc
 

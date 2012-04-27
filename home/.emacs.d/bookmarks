@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("1"
+ (filename . "~/repos/my/arch-xmonad-zsh/home/.emacs")
+ (front-context-string . "(global-set-key ")
+ (rear-context-string . "mex-initialize)\n")
+ (position . 508))
+)

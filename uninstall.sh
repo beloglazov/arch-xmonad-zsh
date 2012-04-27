@@ -16,6 +16,7 @@ rm ~/.xmonad/xmonad.hs
 
 # other
 rm ~/.gitconfig
+rm ~/.emacs.d
 rm ~/.emacs
 rm ~/.nanorc
 rm ~/.rtorrent.rc
@@ -42,6 +43,7 @@ sudo rm /root/.oh-my-zsh
 
 sudo rm /root/.xmonad/xmonad.hs
 sudo rm /root/.gitconfig
+sudo rm /root/.emacs.d
 sudo rm /root/.emacs
 sudo rm /root/.nanorc
 

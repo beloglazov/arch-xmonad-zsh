@@ -3,7 +3,9 @@
 export PATH=~/bin:$PATH
 xset +fp /usr/share/fonts/local
 xsetroot -cursor_name left_ptr &
-xmodmap -e "pointer = 1 8 3 4 5 6 7 2" &
+~/.mouse
+#xmodmap -e "pointer = 1 8 3 4 5 6 7 2" &
+#xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9 10" & # normal middle button
 #xmodmap -e "keycode  66 = Delete" # map caps lock to delete
 numlockx &
 #unclutter &

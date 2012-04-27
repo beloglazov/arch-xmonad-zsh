@@ -18,6 +18,13 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; the old M-x.
 
+;; Haskell
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
 ;;(require 'ido)
 ;;(ido-mode t)
 ;;(setq ido-enable-flex-matching t) ;; enable fuzzy matching

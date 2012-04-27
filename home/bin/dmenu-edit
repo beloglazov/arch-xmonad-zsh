@@ -25,7 +25,7 @@ BASE="$(dirname "$(readlink -f "$0")")"
 #. "$BASE/lib/isSet.sh"
 #. "$BASE/lib/isTerminal.sh"
 
-isTerminal
+#isTerminal
 
 #choice="$(tty -s && dmenu < "$FILES")"
 choice="$(dmenu < $FILES)"

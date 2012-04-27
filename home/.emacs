@@ -119,8 +119,14 @@
 
 ;; Key bindings
 
-;(global-set-key (kbd "<return>") 'newline-and-indent) ;; TODO: need to move this to a hook
+;; newline-and-indent in hooks
 
+(defun set-local-newline-and-indent ()
+  (local-set-key (kbd "<return>") 'newline-and-indent))
+
+(add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
+(add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)
+	    
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 

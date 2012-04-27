@@ -44,7 +44,9 @@
 (icomplete-mode t) ;; constantly updating completions in the mini buffer
 (global-linum-mode 0) ;; disable line number column
 (show-paren-mode t) ;; highlight matching parentheses
-(menu-bar-mode nil) ;; disable the menu bar
+;(menu-bar-mode nil) ;; disable the menu bar
+(setq menu-bar-mode nil)
+
 
 (set-face-attribute 'default nil
 	:weight 'normal 
@@ -53,7 +55,7 @@
 	:family "Terminus (TTF)")
 
 (setq vc-follow-symlinks t)
-(setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
+;(setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
 (setq bookmark-save-flag 1)
 (setq scroll-margin 2)
 (setq tab-width 4)
@@ -65,6 +67,7 @@
 (setq sentence-end-double-space nil)
 (setq imenu-auto-rescan t) ;; auto-updating the index of M-x imenu
 (setq doc-view-continuous t) ;; continuous scrolling in pdfs
+(setq shift-select-mode t)
 
 ;; ibuffer grouping
 (setq ibuffer-saved-filter-groups
@@ -88,9 +91,9 @@
                             (mode . gnus-article-mode)
                             (name . "^\\.bbdb$")
                             (name . "^\\.newsrc-dribble")))))))
-    (add-hook 'ibuffer-mode-hook
-              (lambda ()
-                (ibuffer-switch-to-saved-filter-groups "default")))
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	    (ibuffer-switch-to-saved-filter-groups "default")))
 
 	
 (custom-set-faces
@@ -121,9 +124,9 @@
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
-(global-set-key (kbd "C-f") 'isearch-forward)
+;(global-set-key (kbd "C-f") 'isearch-forward)
 ;(global-set-key (kbd "C-f") 'isearch-repeat-forward)
-(global-set-key (kbd "C-S-f") 'isearch-backward)
+;(global-set-key (kbd "C-S-f") 'isearch-backward)
 ;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward)
 
 (global-set-key (kbd "C-M-<prior>") 'isearch-ring-retreat)
@@ -134,7 +137,7 @@
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
 
 (global-set-key (kbd "C-<delete>") 'kill-word)
-
+(global-set-key (kbd "C-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-<tab>") 'other-window)
 
 (global-set-key (kbd "C-M-1") 'kill-buffer-and-window)
@@ -144,13 +147,22 @@
 
 ;; Registers
 
-(global-set-key (kbd "M-<f1>") 'point-to-register)
-(global-set-key (kbd "<f1>") 'jump-to-register)
-(global-set-key (kbd "M-<f2>") 'bookmark-set)
-(global-set-key (kbd "<f2>") 'bookmark-jump)
-(global-set-key (kbd "M-<f5>") 'copy-to-register)
-(global-set-key (kbd "<f5>") 'insert-register)
+(global-set-key (kbd "M-<f6>") 'point-to-register)
+(global-set-key (kbd "<f6>") 'jump-to-register)
+(global-set-key (kbd "M-<f7>") 'bookmark-set)
+(global-set-key (kbd "<f7>") 'bookmark-jump)
+(global-set-key (kbd "M-<f8>") 'copy-to-register)
+(global-set-key (kbd "<f8>") 'insert-register)
 
+;; Search
+
+(global-set-key (kbd "<f1>") 'isearch-forward)
+(global-set-key (kbd "<f2>") 'isearch-backward)
+
+(add-hook 'isearch-mode-hook 
+	  (lambda ()
+	    (define-key isearch-mode-map (kbd "<f1>") 'isearch-repeat-forward)
+	    (define-key isearch-mode-map (kbd "<f2>") 'isearch-repeat-backward)))
 
 
 (defun scroll-down-in-place (n)
@@ -163,24 +175,21 @@
   (next-line n)
   (scroll-up n))
 
-;;(global-set-key [mouse-4] 'scroll-down-in-place)
-;;(global-set-key [mouse-5] 'scroll-up-in-place)
 (global-set-key [C-up] 'scroll-down-in-place)
 (global-set-key [C-down] 'scroll-up-in-place)
 
 
-;; TODO: need to fix highlighting by S-<home>
 (defun smart-beginning-of-line ()
-  "Move point to first non-whitespace character or beginning-of-line.
-Move point to the first non-whitespace character on this line.
-If point was already at that position, move point to beginning of line."
-  (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work
+  "Move point to first non-whitespace character or beginning-of-line."
+  (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work 
   (let ((oldpos (point)))
     (back-to-indentation)
     (and (= oldpos (point))
          (beginning-of-line))))
 
+(put 'smart-beginning-of-line 'CUA 'move)
 (global-set-key [home] 'smart-beginning-of-line)
+
 
 
 ;; Backups
@@ -192,7 +201,7 @@ If point was already at that position, move point to beginning of line."
   "Return a new file path of a given file path.
 If the new path's directories does not exist, create them."
   (let (backup-root bpath)
-    (setq backup-root "~/.emacs.d/emacs-backup")
+    (setq backup-root "~/.backups/emacs")
     (setq bpath (concat backup-root fPath "~"))
     (make-directory (file-name-directory bpath) bpath)
     bpath

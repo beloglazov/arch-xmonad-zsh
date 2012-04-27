@@ -31,8 +31,9 @@ main = do
                  , ((mod4Mask, xK_Left),  windows W.focusUp  )
                  , ((mod4Mask, xK_Down),  sendMessage Shrink)
                  , ((mod4Mask, xK_Up),    sendMessage Expand)
-		 , ((mod4Mask .|. shiftMask, xK_F12), spawn "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop")
+		 , ((mod4Mask .|. shiftMask, xK_F10), spawn "slock")
 		 , ((mod4Mask .|. shiftMask, xK_F11), spawn "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart")
+		 , ((mod4Mask .|. shiftMask, xK_F12), spawn "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop")
                  ]
                  `additionalKeysP`
                  [ ("M-S-a", kill)

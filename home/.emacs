@@ -5,7 +5,34 @@
 
 ;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
 ;(setq skeleton-pair nil) ; disable the custom pairing
- 
+
+;; python
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+(setq ropemacs-enable-autoimport t)
+(setq ropemacs-autoimport-modules '("os" "shutil"))
+
+;; pyflakes for python
+(when (load "flymake" t)
+  (require 'flymake-cursor)
+  (defun flymake-pychecker-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakespep8.py" (list local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pychecker-init)))
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (flymake-mode t)
+	    (setq flymake-cursor-error-display-delay 0.0)))
+
+;; auto-complete
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
 ;; zenburn
 (require 'zenburn-theme)
 
@@ -123,14 +150,6 @@
 (global-set-key (kbd "M-2") 'split-window-horizontally)
 (global-set-key (kbd "M-3") 'split-window-vertically)
 
-;; registers
-(global-set-key (kbd "M-<f6>") 'point-to-register)
-(global-set-key (kbd "<f6>") 'jump-to-register)
-(global-set-key (kbd "M-<f7>") 'bookmark-set)
-(global-set-key (kbd "<f7>") 'bookmark-jump)
-(global-set-key (kbd "M-<f8>") 'copy-to-register)
-(global-set-key (kbd "<f8>") 'insert-register)
-
 ;; search
 (global-set-key (kbd "<f1>") 'isearch-forward)
 (global-set-key (kbd "<f2>") 'isearch-backward)
@@ -139,6 +158,18 @@
 	  (lambda ()
 	    (define-key isearch-mode-map (kbd "<f1>") 'isearch-repeat-forward)
 	    (define-key isearch-mode-map (kbd "<f2>") 'isearch-repeat-backward)))
+
+;; registers
+(global-set-key (kbd "M-<f5>") 'point-to-register)
+(global-set-key (kbd "<f5>") 'jump-to-register)
+(global-set-key (kbd "M-<f6>") 'bookmark-set)
+(global-set-key (kbd "<f6>") 'bookmark-jump)
+(global-set-key (kbd "M-<f7>") 'copy-to-register)
+(global-set-key (kbd "<f7>") 'insert-register)
+
+;; flymake errors
+(global-set-key (kbd "<f8>") 'flymake-goto-next-error)
+(global-set-key (kbd "<f9>") 'flymake-goto-prev-error)
 
 
 ;; scroll in-place

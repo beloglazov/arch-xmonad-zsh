@@ -1,58 +1,44 @@
 (add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/plugins/")
-;(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous/")
-;(add-to-list 'load-path "~/.emacs.d/ecb-snap/")
-;;(add-to-list 'load-path "~/.emacs.d/cedet-1.0.1/")
-
 (load (expand-file-name "~/.emacs.d/elpa/package.el"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
+;(setq skeleton-pair nil) ; disable the custom pairing
+ 
+;; zenburn
+(require 'zenburn-theme)
 
-
+;; ido
 (ido-ubiquitous-mode t)
 
+;; smex
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; the old M-x.
 
-;; Haskell
+;; autopair
+(require 'autopair)
+(autopair-global-mode)
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
-;;(require 'ido)
-;;(ido-mode t)
-;;(setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
-;;(load-file "~/.emacs.d/cedet-1.1beta2/common/cedet.el")
-;;(global-ede-mode 1)                      ; Enable the Project management system
-;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
-;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
-
+;; uniquify
 (require 'uniquify)
 (setq 
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
 
+;; haskell
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
-;;(require 'ecb)
-(require 'color-theme)
-(require 'zenburn-theme)
-;;(zenburn)
-
-;;(set-scroll-bar-mode 'right)
+(cua-mode t)
 (scroll-bar-mode -1) ;; disable scroll bar
-
-(icomplete-mode t) ;; constantly updating completions in the mini buffer
-(global-linum-mode 0) ;; disable line number column
+(icomplete-mode t) ;; constantly update completions in the mini buffer
+(global-linum-mode -1) ;; disable line number column
+(menu-bar-mode -1) ;; disable the menu bar
+(tool-bar-mode -1) ;; disable the tool bar
 (show-paren-mode t) ;; highlight matching parentheses
-;(menu-bar-mode nil) ;; disable the menu bar
-(setq menu-bar-mode nil)
 
 
 (set-face-attribute 'default nil
@@ -62,7 +48,6 @@
 	:family "Terminus (TTF)")
 
 (setq vc-follow-symlinks t)
-;(setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
 (setq bookmark-save-flag 1)
 (setq scroll-margin 2)
 (setq tab-width 4)
@@ -74,7 +59,7 @@
 (setq sentence-end-double-space nil)
 (setq imenu-auto-rescan t) ;; auto-updating the index of M-x imenu
 (setq doc-view-continuous t) ;; continuous scrolling in pdfs
-(setq shift-select-mode t)
+
 
 ;; ibuffer grouping
 (setq ibuffer-saved-filter-groups
@@ -102,38 +87,16 @@
 	  (lambda ()
 	    (ibuffer-switch-to-saved-filter-groups "default")))
 
-	
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(completions-common-part ((t (:inherit default :foreground "red"))))
- '(diredp-ignored-file-name ((t (:foreground "#bebebe"))))
- '(isearch ((((class color) (min-colors 88) (background light)) (:background "black" :foreground "white"))))
- '(show-paren-match ((((class color) (background light)) (:background "azure2")))))
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(cua-mode t nil (cua-base))
- ;; '(ecb-options-version "2.40")
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-(put 'set-goal-column 'disabled nil)
 
-
-;; Key bindings
-
-;; newline-and-indent in hooks
+;; key bindings
 
 (defun set-local-newline-and-indent ()
   (local-set-key (kbd "<return>") 'newline-and-indent))
-
 (add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)
-	    
+(add-hook 'javascript-mode-hook 'set-local-newline-and-indent)
+
+
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
@@ -144,6 +107,8 @@
 
 (global-set-key (kbd "C-M-<prior>") 'isearch-ring-retreat)
 (global-set-key (kbd "C-M-<next>") 'isearch-ring-advance)
+
+(global-set-key (kbd "H-a") 'delete-forward-char)
 
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-w") 'kill-this-buffer)
@@ -158,8 +123,7 @@
 (global-set-key (kbd "M-2") 'split-window-horizontally)
 (global-set-key (kbd "M-3") 'split-window-vertically)
 
-;; Registers
-
+;; registers
 (global-set-key (kbd "M-<f6>") 'point-to-register)
 (global-set-key (kbd "<f6>") 'jump-to-register)
 (global-set-key (kbd "M-<f7>") 'bookmark-set)
@@ -167,8 +131,7 @@
 (global-set-key (kbd "M-<f8>") 'copy-to-register)
 (global-set-key (kbd "<f8>") 'insert-register)
 
-;; Search
-
+;; search
 (global-set-key (kbd "<f1>") 'isearch-forward)
 (global-set-key (kbd "<f2>") 'isearch-backward)
 
@@ -177,6 +140,8 @@
 	    (define-key isearch-mode-map (kbd "<f1>") 'isearch-repeat-forward)
 	    (define-key isearch-mode-map (kbd "<f2>") 'isearch-repeat-backward)))
 
+
+;; scroll in-place
 
 (defun scroll-down-in-place (n)
   (interactive "p")
@@ -192,6 +157,8 @@
 (global-set-key [C-down] 'scroll-up-in-place)
 
 
+;; smart home
+
 (defun smart-beginning-of-line ()
   "Move point to first non-whitespace character or beginning-of-line."
   (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work 
@@ -205,7 +172,7 @@
 
 
 
-;; Backups
+;; backups
 
 ; return a backup file path of a give file path
 ; with full directory mirroring from a root dir

@@ -30,6 +30,7 @@ rm ~/bin/dmenu-urxvt
 rm ~/bin/urxvtc
 rm ~/bin/e
 rm ~/bin/disk-benchmark
+rm ~/bin/pyflakespep8.py
 
 # .config
 rm ~/.config/dmenu/urxvt-list

@@ -38,6 +38,7 @@ ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
 ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
 ln -s ${DIR}/home/bin/e ~/bin/e
 ln -s ${DIR}/home/bin/disk-benchmark ~/bin/disk-benchmark
+ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py
 
 # .config
 mkdir ~/.config

@@ -10,6 +10,7 @@ xsetroot -cursor_name left_ptr &
 numlockx &
 #unclutter &
 xrdb -merge ~/.Xresources
+xxkb &
 emacs --daemon
 urxvtd -q -o -f
 chromium &

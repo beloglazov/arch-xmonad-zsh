@@ -1,0 +1,10 @@
+XXkb.group.base: 1
+XXkb.group.alt: 2
+XXkb.mainwindow.enable: no
+XXkb.button.enable: no
+XXkb.bell.enable: no
+XXkb.controls.add_when_start: no
+XXkb.controls.add_when_create: yes
+XXkb.controls.add_when_change: yes
+XXkb.controls.focusout: yes
+XXkb.controls.two_state: yes

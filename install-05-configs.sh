@@ -23,6 +23,7 @@ ln -s ${DIR}/home/.emacs.d ~/.emacs.d
 ln -s ${DIR}/home/.emacs ~/.emacs
 ln -s ${DIR}/home/.nanorc ~/.nanorc
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
+ln -s ${DIR}/home/.xxkbrc ~/.xxkbrc
 
 # backup directories
 mkdir ~/.backups
@@ -60,6 +61,7 @@ sudo ln -s ${DIR}/home/.gitconfig /root/.gitconfig
 sudo ln -s ${DIR}/home/.emacs.d /root/.emacs.d
 sudo ln -s ${DIR}/home/.emacs /root/.emacs
 sudo ln -s ${DIR}/home/.nanorc /root/.nanorc
+sudo ln -s ${DIR}/home/.xxkbrc /root/.xxkbrc
 
 sudo mkdir /root/.backups
 sudo mkdir /root/.backups/nano 

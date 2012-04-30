@@ -6,28 +6,7 @@
 ;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
 ;(setq skeleton-pair nil) ; disable the custom pairing
 
-;; python
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport t)
-(setq ropemacs-autoimport-modules '("os" "shutil"))
-
-;; pyflakes for python
-(when (load "flymake" t)
-  (require 'flymake-cursor)
-  (defun flymake-pychecker-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakespep8.py" (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pychecker-init)))
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (flymake-mode t)
-	    (setq flymake-cursor-error-display-delay 0.0)))
+(load-file "~/.emacs.d/init-python.el")
 
 ;; auto-complete
 (require 'auto-complete)
@@ -58,6 +37,10 @@
 ;; haskell
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
+;; elisp
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
 
 (cua-mode t)
 (scroll-bar-mode -1) ;; disable scroll bar

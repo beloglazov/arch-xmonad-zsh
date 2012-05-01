@@ -3,10 +3,6 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
-;(setq skeleton-pair nil) ; disable the custom pairing
-
-(load-file "~/.emacs.d/init-python.el")
 
 ;; auto-complete
 (require 'auto-complete-config)
@@ -16,6 +12,9 @@
 (setq ac-quick-help-delay 0)
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
+
+;; python
+(load-file "~/.emacs.d/init-python.el")
 
 ;; zenburn
 (require 'zenburn-theme)
@@ -154,10 +153,10 @@
 ;; registers
 (global-set-key (kbd "M-<f5>") 'point-to-register)
 (global-set-key (kbd "<f5>") 'jump-to-register)
-(global-set-key (kbd "M-<f6>") 'bookmark-set)
-(global-set-key (kbd "<f6>") 'bookmark-jump)
-(global-set-key (kbd "M-<f7>") 'copy-to-register)
-(global-set-key (kbd "<f7>") 'insert-register)
+(global-set-key (kbd "M-<f6>") 'copy-to-register)
+(global-set-key (kbd "<f6>") 'insert-register)
+(global-set-key (kbd "M-<f7>") 'bookmark-set)
+(global-set-key (kbd "<f7>") 'bookmark-jump)
 
 ;; flymake errors
 (global-set-key (kbd "<f8>") 'flymake-goto-next-error)
@@ -256,7 +255,7 @@
 (global-set-key (kbd "C-d") 'djcb-duplicate-line)
 
 ;; duplicate a line and comment the first
-(global-set-key (kbd "C-c d")
+(global-set-key (kbd "C-c c")
 		(lambda ()
 		  (interactive)
 		  (djcb-duplicate-line t)))

@@ -1,5 +1,5 @@
 (sleep 10s && xset b off) &
-(sleep 10s && xset r rate 350 40) &
+(sleep 10s && xset r rate 200 45) &
 export PATH=~/bin:$PATH
 xset +fp /usr/share/fonts/local
 xsetroot -cursor_name left_ptr &

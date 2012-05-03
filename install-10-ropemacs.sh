@@ -1,4 +1,4 @@
 #!/bin/sh
 
-yaourt -S ropemacs-hg pyflakes
-sudo pip install pep8
+yaourt -S python2-pip ropemacs-hg python2-pyflakes
+sudo pip2 install pep8

@@ -1,0 +1,3 @@
+#!/bin/sh
+xset b off &
+xset r rate 250 45 &

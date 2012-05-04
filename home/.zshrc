@@ -74,6 +74,9 @@ function acroread () {nohup acroread $* </dev/null &>/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 
+unalias yain
+function yain () {yaourt -S $*; rehash}
+
 # Aliases
 
 alias ll='ls -lah'

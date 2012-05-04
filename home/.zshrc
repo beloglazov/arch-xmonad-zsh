@@ -33,6 +33,9 @@ unsetopt correct_all
 
 # Customize to your needs...
 
+# To enable autojump
+source /etc/profile
+
 # Colorized ls
 eval `dircolors -b`
 

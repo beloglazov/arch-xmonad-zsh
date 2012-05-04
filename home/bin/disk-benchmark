@@ -3,20 +3,6 @@
 hdparm -Tt /dev/sdb
 hdparm -Tt /dev/sdb
 hdparm -Tt /dev/sdb
-hdparm -Tt /dev/sdb
-hdparm -Tt /dev/sdb
-
-rm tempfile
-dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
-echo 3 > /proc/sys/vm/drop_caches
-dd if=tempfile of=/dev/null bs=1M count=1024
-dd if=tempfile of=/dev/null bs=1M count=1024
-
-rm tempfile
-dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc
-echo 3 > /proc/sys/vm/drop_caches
-dd if=tempfile of=/dev/null bs=1M count=1024
-dd if=tempfile of=/dev/null bs=1M count=1024
 
 rm tempfile
 dd if=/dev/zero of=tempfile bs=1M count=1024 conv=fdatasync,notrunc

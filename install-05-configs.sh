@@ -31,6 +31,7 @@ mkdir ~/.backups/emacs
 
 # bin
 mkdir ~/bin
+ln -s ${DIR}/home/bin/chromium ~/bin/chromium
 ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
 ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
 ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt

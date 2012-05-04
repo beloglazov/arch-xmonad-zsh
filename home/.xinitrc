@@ -1,4 +1,3 @@
-/etc/profile.d/infinality-settings.sh
 (sleep 10s && xset b off) &
 (sleep 10s && xset r rate 250 45) &
 export PATH=~/bin:$PATH

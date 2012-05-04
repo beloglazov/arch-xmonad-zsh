@@ -262,20 +262,9 @@
 
 
 ;; backups
-
-; return a backup file path of a give file path
-; with full directory mirroring from a root dir
-; non-existant dir will be created
-(defun my-backup-file-name (fPath)
-  "Return a new file path of a given file path.
-If the new path's directories does not exist, create them."
-  (let (backup-root bpath)
-    (setq backup-root "~/.backups/emacs")
-    (setq bpath (concat backup-root fPath "~"))
-    (make-directory (file-name-directory bpath) bpath)
-    bpath
-  )
-)
-(setq make-backup-file-name-function 'my-backup-file-name)
+(setq backup-directory-alist `(("." . "~/.backups/emacs")))
 (setq version-control t) ; make numbered backups
 (setq backup-by-copying t)
+(setq delete-old-versions t)
+(setq kept-new-versions 6)
+(setq kept-old-versions 2)

@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
 (load (expand-file-name "~/.emacs.d/elpa/package.el"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
@@ -17,6 +18,10 @@
 (load-file "~/.emacs.d/init-python.el")
 
 ;; zenburn
+;(require 'color-theme)
+;(setq color-theme-load-all-themes nil)
+;(require 'color-theme-tangotango)
+
 (require 'zenburn-theme)
 
 ;; ido

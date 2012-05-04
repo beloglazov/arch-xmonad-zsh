@@ -24,6 +24,9 @@ Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size:  22
 
 
+Emacs*Background:	#0c0d0e
+Emacs*Foreground:	#7f8f9f
+
 !urxvt*font:	xft:terminus:size=10x20
 urxvt*font:	-*-terminus-medium-*-*-*-18-*-*-*-*-*-*-*
 !urxvt*font:	xft:DejaVu Sans:size=10x20

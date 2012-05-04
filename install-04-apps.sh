@@ -1,4 +1,4 @@
 #!/bin/sh
 
-sudo pacman -S xorg xorg-xinit xmonad xmonad-contrib consolekit rxvt-unicode dmenu numlockx chromium rsync jdk7-openjdk apache-ant maven lftp unzip tree subversion slock
+sudo pacman -S xorg xorg-xinit xmonad xmonad-contrib consolekit rxvt-unicode dmenu numlockx xxkb chromium rsync jdk7-openjdk apache-ant maven lftp unzip tree subversion slock
 yaourt urxvt-perls-git chromium-stable-libpdf flashplugin

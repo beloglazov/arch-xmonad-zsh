@@ -17,12 +17,13 @@
 ;; python
 (load-file "~/.emacs.d/init-python.el")
 
-;; zenburn
+;; Zenburn
 ;(require 'color-theme)
 ;(setq color-theme-load-all-themes nil)
 ;(require 'color-theme-tangotango)
 
-(require 'zenburn-theme)
+;(require 'zenburn-theme)
+(load-theme 'deeper-blue)
 
 ;; ido
 (require 'ido)

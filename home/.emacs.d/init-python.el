@@ -4,6 +4,7 @@
 (setq ropemacs-guess-project t)
 (setq ropemacs-enable-autoimport t)
 (setq ropemacs-autoimport-modules '("os" "shutil" "sys" "logging"))
+(setq ropemacs-separate-doc-buffer nil)
 
 ;; automatically open a rope project if there is one
 ;; in the current or in the upper level directory
@@ -46,10 +47,12 @@
 
 (ac-define-source nropemacs
   '((candidates . ac-ropemacs-candidates)
+    (document   . ac-symbol-documentation)
     (symbol     . "p")))
 
 (ac-define-source nropemacs-dot
   '((candidates . ac-ropemacs-candidates)
+    (document   . ac-symbol-documentation)
     (symbol     . "p")
     (prefix     . c-dot)
     (requires   . 0)))
@@ -60,5 +63,9 @@
 (defun ac-python-mode-setup ()
   (add-to-list 'ac-sources 'ac-source-yasnippet))
 
-(add-hook 'python-mode-hook 'ac-python-mode-setup)
-(add-hook 'rope-open-project-hook 'ac-nropemacs-setup)
+;(add-hook 'python-mode-hook 'ac-python-mode-setup)
+(add-hook 'python-mode-hook 'ac-nropemacs-setup)
+;(add-hook 'rope-open-project-hook 'ac-nropemacs-setup)
+
+(add-hook 'python-mode-hook
+          '(lambda () (eldoc-mode 1)) t)

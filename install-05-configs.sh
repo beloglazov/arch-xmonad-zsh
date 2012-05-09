@@ -55,7 +55,6 @@ sudo ln -s ${DIR}/home/.Xresources /root/.Xresources
 sudo ln -s ${DIR}/home/.xinitrc /root/.xinitrc
 sudo ln -s ${DIR}/home/.zshrc /root/.zshrc
 sudo ln -s ${DIR}/home/.zshenv /root/.zshenv
-sudo ln -s ${DIR}/home/.oh-my-zsh /root/.oh-my-zsh
 
 sudo git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh
 sudo ln -s ${DIR}/home/.oh-my-zsh/themes/beloglazov.zsh-theme /root/.oh-my-zsh/themes/beloglazov.zsh-theme

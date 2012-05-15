@@ -98,6 +98,7 @@ alias bc='bc -l'
 alias psg='ps aux | grep'
 alias emacs-restart='pkill emacs; emacs --daemon'
 alias grepi='grep -i'
+alias x='extract'
 
 # SVN aliales
 alias svn='colorsvn'

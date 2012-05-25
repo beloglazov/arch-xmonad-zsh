@@ -77,6 +77,9 @@ function acroread () {nohup acroread $* </dev/null &>/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 
+unalias g
+function g () {git ca "$*"; git push}
+
 unalias yain
 function yain () {yaourt -S $*; rehash}
 

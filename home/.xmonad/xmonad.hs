@@ -25,8 +25,6 @@ main = do
                  , ((mod4Mask, xK_o), spawn "dmenu-edit")
                  , ((mod4Mask, xK_u), spawn "dmenu-urxvt")
 		 , ((mod4Mask, xK_p), spawn "dmenu-run")
-                 , ((mod4Mask .|. controlMask, xK_Down), spawn "amixer set Master 1-")
-                 , ((mod4Mask .|. controlMask, xK_Up  ), spawn "amixer set Master 1+")
                  , ((mod4Mask, xK_Right), windows W.focusDown)
                  , ((mod4Mask, xK_Left),  windows W.focusUp  )
                  , ((mod4Mask, xK_Down),  sendMessage Shrink)
@@ -38,8 +36,8 @@ main = do
                  `additionalKeysP`
                  [ ("M-S-a", kill)
                  , ("M-<Insert>", spawn "amixer -q set Front toggle")
-                 , ("M-<Page_Up>", spawn "amixer -q set Front 5%+")
-                 , ("M-<Page_Down>", spawn "amixer -q set Front 5%-")
+                 , ("M-<Page_Up>", spawn "amixer set Master 1+")
+                 , ("M-<Page_Down>", spawn "amixer set Master 1-")
                  
                  , ("M-z", windows $ W.greedyView "1")
                  , ("S-M-z", windows $ W.shift "1")

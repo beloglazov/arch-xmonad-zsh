@@ -14,4 +14,4 @@
 	ca = commit -a -m
 	s = status
 	d = diff --stat
-	p = push
+	p = push -u

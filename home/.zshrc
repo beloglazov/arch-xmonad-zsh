@@ -72,8 +72,8 @@ bindkey "\e[F" end-of-line
 
 # Functions
 
-function e () {nohup emacsclient -c $* </dev/null &>/dev/null &}
-function acroread () {nohup acroread $* </dev/null &>/dev/null &}
+function e () {nohup emacsclient -c $* </dev/null >&/dev/null &}
+function acroread () {nohup acroread $* </dev/null >&/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 
@@ -121,9 +121,9 @@ alias gitd='git diff'
 alias gitp='git p'
 
 # Eclipse aliases
-alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null &>/dev/null &'
-alias eclipse-java='nohup ~/soft/eclipse/eclipse-java-indigo/eclipse </dev/null &>/dev/null &'
-alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null &>/dev/null &'
+alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null >&/dev/null &'
+alias eclipse-java='nohup ~/soft/eclipse/eclipse-java-indigo/eclipse </dev/null >&/dev/null &'
+alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null >&/dev/null &'
 
 # Set up auto extension stuff
 #alias -s html=$BROWSER

@@ -5,6 +5,19 @@
 (package-initialize)
 
 
+;; Color theme
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
+;(load-theme 'solarized-dark t)
+
+;; Zenburn
+;(require 'color-theme)
+;(setq color-theme-load-all-themes nil)
+;(require 'color-theme-tangotango)
+
+;(require 'zenburn-theme)
+(load-theme 'deeper-blue)
+
+
 ;; auto-complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
@@ -16,14 +29,6 @@
 
 ;; python
 (load-file "~/.emacs.d/init-python.el")
-
-;; Zenburn
-;(require 'color-theme)
-;(setq color-theme-load-all-themes nil)
-;(require 'color-theme-tangotango)
-
-;(require 'zenburn-theme)
-(load-theme 'deeper-blue)
 
 ;; ido
 (require 'ido)
@@ -274,3 +279,19 @@
 (setq delete-old-versions t)
 (setq kept-new-versions 6)
 (setq kept-old-versions 2)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(background-color nil)
+ '(background-mode dark)
+ '(cursor-color nil)
+ '(custom-safe-themes (quote ("501caa208affa1145ccbb4b74b6cd66c3091e41c5bb66c677feda9def5eab19c" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
+ '(foreground-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

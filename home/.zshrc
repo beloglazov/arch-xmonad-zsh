@@ -158,3 +158,5 @@ export PERL_MB_OPT="--install_base /home/anton/perl5";
 export PERL_MM_OPT="INSTALL_BASE=/home/anton/perl5";
 export PERL5LIB="/home/anton/perl5/lib/perl5/i686-linux-thread-multi:/home/anton/perl5/lib/perl5";
 export PATH="/home/anton/perl5/bin:$PATH";
+
+source .zshenv

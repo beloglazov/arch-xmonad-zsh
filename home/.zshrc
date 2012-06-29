@@ -76,6 +76,7 @@ function e () {nohup emacsclient -c $* </dev/null &>/dev/null &}
 function acroread () {nohup acroread $* </dev/null &>/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
+function f() {find ./ -name "*$1*" | grep $1}
 
 unalias g
 function g () {git ca $*; git push}
@@ -145,7 +146,7 @@ alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null &>
 # Other aliases
 alias lsd='ls -lhd *(-/DN)'
 alias lsh='ls -lhd .*'
-alias f='find |grep'
+alias ff='find |grep'
 alias c="clear"
 alias dir='ls -1'
 alias mem="free -m"

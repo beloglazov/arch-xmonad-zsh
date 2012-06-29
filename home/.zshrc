@@ -76,7 +76,7 @@ function e () {nohup emacsclient -c $* </dev/null >&/dev/null &}
 function acroread () {nohup acroread $* </dev/null >&/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
-function f() {find ./ -name "*$1*" | grep $1}
+function f() {find ./ -iname "*$1*" | grep -i $1}
 
 unalias g
 function g () {git ca $*; git push}

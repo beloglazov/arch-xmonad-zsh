@@ -1,3 +1,3 @@
 #!/bin/sh
 
-yaourt -S libreoffice
+yaourt -S libreoffice libreoffice-en-US

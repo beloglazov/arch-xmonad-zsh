@@ -72,8 +72,8 @@ bindkey "\e[F" end-of-line
 
 # Functions
 
-function e () {nohup emacsclient -c $* </dev/null &>/dev/null &}
-function acroread () {nohup acroread $* </dev/null &>/dev/null &}
+function e () {nohup emacsclient -c $* </dev/null >&/dev/null &}
+function acroread () {nohup acroread $* </dev/null >&/dev/null &}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
 function f() {find ./ -name "*$1*" | grep $1}
@@ -122,9 +122,9 @@ alias gitd='git diff'
 alias gitp='git p'
 
 # Eclipse aliases
-alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null &>/dev/null &'
-alias eclipse-java='nohup ~/soft/eclipse/eclipse-java-indigo/eclipse </dev/null &>/dev/null &'
-alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null &>/dev/null &'
+alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null >&/dev/null &'
+alias eclipse-java='nohup ~/soft/eclipse/eclipse-java-indigo/eclipse </dev/null >&/dev/null &'
+alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null >&/dev/null &'
 
 # Set up auto extension stuff
 #alias -s html=$BROWSER
@@ -159,3 +159,5 @@ export PERL_MB_OPT="--install_base /home/anton/perl5";
 export PERL_MM_OPT="INSTALL_BASE=/home/anton/perl5";
 export PERL5LIB="/home/anton/perl5/lib/perl5/i686-linux-thread-multi:/home/anton/perl5/lib/perl5";
 export PATH="/home/anton/perl5/bin:$PATH";
+
+source .zshenv

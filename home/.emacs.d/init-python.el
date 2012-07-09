@@ -66,6 +66,3 @@
 ;(add-hook 'python-mode-hook 'ac-python-mode-setup)
 (add-hook 'python-mode-hook 'ac-nropemacs-setup)
 ;(add-hook 'rope-open-project-hook 'ac-nropemacs-setup)
-
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)

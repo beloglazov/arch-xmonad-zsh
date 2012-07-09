@@ -1,5 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
 (load (expand-file-name "~/.emacs.d/elpa/package.el"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
@@ -58,6 +59,25 @@
 
 ;; elisp
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+;; markdown
+(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (setq fill-column 100)
+	    turn-on-auto-fill))
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (when buffer-file-name
+	      (add-hook 'after-save-hook
+			'check-parens
+			nil t))))
+
+; warning, may yield wrong results in edge-cases like single double-quotes in code block.
+; Use only if your files usually are balanced w/r/t double-quotes
+; <http://stackoverflow.com/questions/9527593/customizing-check-parens-to-check-double-quotes>
+(add-hook 'markdown-mode-hook (lambda () (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table)))
 
 
 (cua-mode t)

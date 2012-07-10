@@ -34,9 +34,13 @@
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
-;; python
-(load-file "~/.emacs.d/init-python.el")
 
+;; python
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (load-file "~/.emacs.d/init-python.el")))
+
+	  
 ;; ido
 (require 'ido)
 (ido-mode t)
@@ -292,10 +296,21 @@
 (global-set-key (kbd "C-d") 'djcb-duplicate-line)
 
 ;; duplicate a line and comment the first
-(global-set-key (kbd "C-c c")
+(global-set-key (kbd "C-c d")
 		(lambda ()
 		  (interactive)
 		  (djcb-duplicate-line t)))
+
+;; toggle comment
+(defun comment-or-uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
+(global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
 
 ;; backups

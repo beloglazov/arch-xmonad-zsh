@@ -1,7 +1,14 @@
 (add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(load (expand-file-name "~/.emacs.d/elpa/package.el"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
+
+
+;; Package
+;(load (expand-file-name "~/.emacs.d/elpa/package.el"))
+(require 'package)
+(add-to-list 'package-archives 
+    '("marmalade" .
+          "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 
@@ -27,9 +34,13 @@
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
-;; python
-(load-file "~/.emacs.d/init-python.el")
 
+;; python
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (load-file "~/.emacs.d/init-python.el")))
+
+	  
 ;; ido
 (require 'ido)
 (ido-mode t)
@@ -58,6 +69,25 @@
 
 ;; elisp
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+;; markdown
+(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (setq fill-column 100)
+	    turn-on-auto-fill))
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (when buffer-file-name
+	      (add-hook 'after-save-hook
+			'check-parens
+			nil t))))
+
+; warning, may yield wrong results in edge-cases like single double-quotes in code block.
+; Use only if your files usually are balanced w/r/t double-quotes
+; <http://stackoverflow.com/questions/9527593/customizing-check-parens-to-check-double-quotes>
+(add-hook 'markdown-mode-hook (lambda () (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table)))
 
 
 (cua-mode t)
@@ -266,10 +296,21 @@
 (global-set-key (kbd "C-d") 'djcb-duplicate-line)
 
 ;; duplicate a line and comment the first
-(global-set-key (kbd "C-c c")
+(global-set-key (kbd "C-c d")
 		(lambda ()
 		  (interactive)
 		  (djcb-duplicate-line t)))
+
+;; toggle comment
+(defun comment-or-uncomment-region-or-line ()
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
+(global-set-key (kbd "C-/") 'comment-or-uncomment-region-or-line)
 
 
 ;; backups
@@ -279,19 +320,3 @@
 (setq delete-old-versions t)
 (setq kept-new-versions 6)
 (setq kept-old-versions 2)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(background-color nil)
- '(background-mode dark)
- '(cursor-color nil)
- '(custom-safe-themes (quote ("501caa208affa1145ccbb4b74b6cd66c3091e41c5bb66c677feda9def5eab19c" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" default)))
- '(foreground-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

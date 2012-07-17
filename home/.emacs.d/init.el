@@ -1,25 +1,9 @@
 (add-to-list 'load-path "~/.emacs.d/")
-;(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-
-
-;; Package
-;(load (expand-file-name "~/.emacs.d/elpa/package.el"))
-(require 'package)
-(add-to-list 'package-archives
-    '("marmalade" .
-          "http://marmalade-repo.org/packages/"))
-(package-initialize)
 
 
 ;; Color theme
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 ;(load-theme 'solarized-dark t)
-
-;; Zenburn
-;(require 'color-theme)
-;(setq color-theme-load-all-themes nil)
-;(require 'color-theme-tangotango)
-
 ;(require 'zenburn-theme)
 (load-theme 'deeper-blue)
 

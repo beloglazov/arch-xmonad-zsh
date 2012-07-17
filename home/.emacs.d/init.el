@@ -37,7 +37,7 @@
 
 ;; ido
 (require 'ido-ubiquitous)
-;(ido-mode t)
+(ido-mode t)
 (ido-ubiquitous t)
 (setq ido-enable-flex-matching t)
 

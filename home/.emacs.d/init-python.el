@@ -1,7 +1,7 @@
 (add-to-list 'load-path "~/.emacs.d/modes/python-mode.el-6.0.10")
+(require 'python-mode)
 (setq py-install-directory "~/.emacs.d/modes/python-mode.el-6.0.10")
 (setq py-shell-name "ipython2")
-(require 'python-mode)
 
 (require 'pymacs)
 (pymacs-load "ropemacs" "rope-")

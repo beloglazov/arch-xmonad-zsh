@@ -98,6 +98,7 @@
  uniquify-separator ":")
 
 ;; haskell
+(add-to-list 'load-path "~/.emacs.d/haskell-mode")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 

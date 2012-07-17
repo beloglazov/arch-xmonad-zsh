@@ -13,7 +13,7 @@
 ;(setq ropemacs-confirm-saving nil)
 
 ;; flymake for python
-(add-to-list 'load-path "~/.emacs.d/emacs-flymake-cursor")
+(add-to-list 'load-path "~/.emacs.d/flymake-cursor")
 (when (load "flymake" t)
   (require 'flymake-cursor)
   (defun flymake-pychecker-init ()

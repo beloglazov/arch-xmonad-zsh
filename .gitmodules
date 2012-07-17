@@ -16,3 +16,6 @@
 [submodule "home/.emacs.d/flymake-cursor"]
 	path = home/.emacs.d/flymake-cursor
 	url = https://github.com/illusori/emacs-flymake-cursor.git
+[submodule "home/.emacs.d/haskell-mode"]
+	path = home/.emacs.d/haskell-mode
+	url = https://github.com/haskell/haskell-mode.git

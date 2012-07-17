@@ -97,6 +97,7 @@
 (menu-bar-mode -1) ;; disable the menu bar
 (tool-bar-mode -1) ;; disable the tool bar
 (show-paren-mode t) ;; highlight matching parentheses
+(setq show-paren-delay 0) ;; remove the highlighting delay
 
 
 (set-face-attribute 'default nil

@@ -33,6 +33,17 @@
 (ac-config-default)
 (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
+;; yasnippet: https://github.com/capitaomorte/yasnippet
+;(add-to-list 'load-path "~/.emacs.d/")
+(require 'yasnippet)
+;(yas/global-mode 1)
+;Don't map TAB to yasnippet
+;In fact, set it to something we'll never use because
+;we'll only ever trigger it indirectly.
+(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/yasnippet-0.7.0/snippets")
+
 
 ;; w3m browser
 (require 'w3m-load)

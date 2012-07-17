@@ -72,10 +72,11 @@ bindkey "\e[F" end-of-line
 
 # Functions
 
-function e () {nohup emacsclient -c $* </dev/null >&/dev/null &}
-function acroread () {nohup acroread $* </dev/null >&/dev/null &}
+function silent () {nohup $@ &>/dev/null &!}
+function e () {silent emacsclient -c $*}
+function acroread () {silent acroread $*}
 function svnd () {svn diff $* | colordiff}
-function top10 () {history|awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}'|sort|uniq -c|sort -rn|head -10}
+function top10 () {history | awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}' | sort | uniq -c | sort -rn | head -10}
 function f() {find ./ -iname "*$1*" | grep -i $1}
 
 unalias g
@@ -122,9 +123,9 @@ alias gitd='git diff'
 alias gitp='git p'
 
 # Eclipse aliases
-alias eclipse-clojure='nohup ~/soft/eclipse/eclipse-clojure-indigo/eclipse </dev/null >&/dev/null &'
-alias eclipse-java='nohup ~/soft/eclipse/eclipse-java-indigo/eclipse </dev/null >&/dev/null &'
-alias eclipse-jee='nohup ~/soft/eclipse/eclipse-jee-indigo/eclipse </dev/null >&/dev/null &'
+alias eclipse-clojure='silent ~/soft/eclipse/eclipse-clojure-indigo/eclipse'
+alias eclipse-java='silent ~/soft/eclipse/eclipse-java-indigo/eclipse'
+alias eclipse-jee='silent ~/soft/eclipse/eclipse-jee-indigo/eclipse'
 
 # Set up auto extension stuff
 #alias -s html=$BROWSER

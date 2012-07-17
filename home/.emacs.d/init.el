@@ -6,7 +6,7 @@
 ;; Package
 ;(load (expand-file-name "~/.emacs.d/elpa/package.el"))
 (require 'package)
-(add-to-list 'package-archives 
+(add-to-list 'package-archives
     '("marmalade" .
           "http://marmalade-repo.org/packages/"))
 (package-initialize)
@@ -36,11 +36,13 @@
 
 
 ;; python
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (load-file "~/.emacs.d/init-python.el")))
+;(load-file "~/.emacs.d/init-python.el")
+(add-to-list 'load-path "~/.emacs.d/python-mode.el-6.0.10/")
+(setq py-install-directory "~/.emacs.d/python-mode.el-6.0.10/")
+(setq py-shell-name "ipython2")
+(require 'python-mode)
 
-	  
+
 ;; ido
 (require 'ido)
 (ido-mode t)
@@ -59,7 +61,7 @@
 
 ;; uniquify
 (require 'uniquify)
-(setq 
+(setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
 
@@ -89,6 +91,9 @@
 ; <http://stackoverflow.com/questions/9527593/customizing-check-parens-to-check-double-quotes>
 (add-hook 'markdown-mode-hook (lambda () (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table)))
 
+;; before-save hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 (cua-mode t)
 (scroll-bar-mode -1) ;; disable scroll bar
@@ -101,9 +106,9 @@
 
 
 (set-face-attribute 'default nil
-	:weight 'normal 
-	:height 120 
-	:width 'normal 
+	:weight 'normal
+	:height 120
+	:width 'normal
 	:family "Terminus (TTF)")
 
 (setq vc-follow-symlinks t)
@@ -187,7 +192,7 @@
 (global-set-key (kbd "<f1>") 'isearch-forward)
 (global-set-key (kbd "<f2>") 'isearch-backward)
 
-(add-hook 'isearch-mode-hook 
+(add-hook 'isearch-mode-hook
 	  (lambda ()
 	    (define-key isearch-mode-map (kbd "<f1>") 'isearch-repeat-forward)
 	    (define-key isearch-mode-map (kbd "<f2>") 'isearch-repeat-backward)))
@@ -225,7 +230,7 @@
 
 (defun smart-beginning-of-line ()
   "Move point to first non-whitespace character or beginning-of-line."
-  (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work 
+  (interactive) ; Use (interactive "^") in Emacs 23 to make shift-select work
   (let ((oldpos (point)))
     (back-to-indentation)
     (and (= oldpos (point))

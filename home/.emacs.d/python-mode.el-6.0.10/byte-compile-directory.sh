@@ -33,8 +33,8 @@ if [ -s "python-components-mode.el" ];
 fi
 
 EMACS=emacs
-PYMACSDIR=pymacs
+PYMACSDIR=Pymacs
 
-$EMACS -Q --batch --eval "(message (emacs-version))" --eval "(when (featurep 'python-mode)(unload-feature 'python-mode t))" --eval "(add-to-list 'load-path \"$PDIR/\")" --eval "(add-to-list 'load-path \"$PYMACSDIR/\")" -load "$PDIR/$PYMACSDIR/pymacs.el" -load "$PDIR/$PYTHONMODE" --eval '(byte-recompile-directory default-directory 0 t)'
+$EMACS -Q --batch --eval "(message (emacs-version))" --eval "(when (featurep 'python-mode)(unload-feature 'python-mode t))" --eval "(add-to-list 'load-path \"$PDIR/\")" --eval "(add-to-list 'load-path \"$PYMACSDIR/\")" -load "$PDIR/pymacs.el" -load "$PDIR/$PYTHONMODE" --eval '(byte-recompile-directory default-directory 1 t)'
 
 

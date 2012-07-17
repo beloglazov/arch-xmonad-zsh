@@ -1,5 +1,5 @@
-(add-to-list 'load-path "~/.emacs.d/python-mode.el-6.0.10/")
-(setq py-install-directory "~/.emacs.d/python-mode.el-6.0.10/")
+(add-to-list 'load-path "~/.emacs.d/modes/python-mode.el-6.0.10")
+(setq py-install-directory "~/.emacs.d/modes/python-mode.el-6.0.10")
 (setq py-shell-name "ipython2")
 (require 'python-mode)
 

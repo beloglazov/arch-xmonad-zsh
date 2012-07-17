@@ -13,3 +13,6 @@
 [submodule "home/.emacs.d/pylookup"]
 	path = home/.emacs.d/pylookup
 	url = https://github.com/tsgates/pylookup.git
+[submodule "home/.emacs.d/flymake-cursor"]
+	path = home/.emacs.d/flymake-cursor
+	url = https://github.com/illusori/emacs-flymake-cursor.git

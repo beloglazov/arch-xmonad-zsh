@@ -36,11 +36,7 @@
 
 
 ;; python
-;(load-file "~/.emacs.d/init-python.el")
-(add-to-list 'load-path "~/.emacs.d/python-mode.el-6.0.10/")
-(setq py-install-directory "~/.emacs.d/python-mode.el-6.0.10/")
-(setq py-shell-name "ipython2")
-(require 'python-mode)
+(load-file "~/.emacs.d/init-python.el")
 
 
 ;; ido

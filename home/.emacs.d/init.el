@@ -1,22 +1,20 @@
-(add-to-list 'load-path "~/.emacs.d/")
-
+(add-to-list 'load-path "~/.emacs.d")
+;Add all modes to the load path
+(progn (cd "~/.emacs.d/modes")
+       (normal-top-level-add-subdirs-to-load-path))
 
 ;; Color theme
-;(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 ;(load-theme 'solarized-dark t)
 ;(require 'zenburn-theme)
 (load-theme 'deeper-blue)
 
 
 ;; auto-complete: https://github.com/m2ym/auto-complete
-(add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/modes/auto-complete/dict")
 (ac-config-default)
 
-;; (add-to-list 'load-path "~/.emacs.d/auto-complete-1.4/")
 ;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
 ;; (setq ac-dwim t)
 ;; (setq ac-delay 0)
 ;; (setq ac-quick-help-delay 0)
@@ -24,16 +22,13 @@
 ;; (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
-(add-to-list 'load-path "~/.emacs.d/yasnippet")
 (require 'yasnippet)
-(setq yas/snippet-dirs "~/.emacs.d/yasnippet/snippets")
+(setq yas/snippet-dirs "~/.emacs.d/modes/yasnippet/snippets")
 (yas/global-mode 1)
 ;Don't map TAB to yasnippet
 ;In fact, set it to something we'll never use because
 ;we'll only ever trigger it indirectly.
 ;(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
-;(yas/initialize)
-;(yas/load-directory "~/.emacs.d/yasnippet-0.7.0/snippets")
 
 
 ;; w3m browser
@@ -41,11 +36,10 @@
 (setq browse-url-browser-function 'w3m-browse-url)
 
 ;; ido
-(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous")
-(require 'ido)
-(ido-mode t)
+(require 'ido-ubiquitous)
+;(ido-mode t)
+(ido-ubiquitous t)
 (setq ido-enable-flex-matching t)
-(ido-ubiquitous-mode t)
 
 
 
@@ -54,9 +48,7 @@
 
 
 ;; magit
-(add-to-list 'load-path "~/.emacs.d/magit")
 (require 'magit)
-
 ;; magit diff colors
 (eval-after-load 'magit
   '(progn
@@ -67,7 +59,7 @@
 
 
 ;; smex
-(add-to-list 'load-path "~/.emacs.d/smex")
+(require 'smex)
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -86,7 +78,6 @@
  uniquify-separator ":")
 
 ;; haskell
-(add-to-list 'load-path "~/.emacs.d/haskell-mode")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
@@ -94,7 +85,6 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 ;; markdown
-(add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
 (add-hook 'markdown-mode-hook

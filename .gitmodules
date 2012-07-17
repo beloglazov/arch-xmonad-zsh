@@ -19,3 +19,6 @@
 [submodule "home/.emacs.d/haskell-mode"]
 	path = home/.emacs.d/haskell-mode
 	url = https://github.com/haskell/haskell-mode.git
+[submodule "home/.emacs.d/ido-ubiquitous"]
+	path = home/.emacs.d/ido-ubiquitous
+	url = https://github.com/technomancy/ido-ubiquitous.git

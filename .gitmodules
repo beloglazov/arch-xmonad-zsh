@@ -4,3 +4,15 @@
 [submodule "home/.emacs.d/auto-complete"]
 	path = home/.emacs.d/auto-complete
 	url = https://github.com/m2ym/auto-complete.git
+[submodule "home/.emacs.d/magit"]
+	path = home/.emacs.d/magit
+	url = https://github.com/magit/magit.git
+[submodule "markdown-mode"]
+	path = markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
+[submodule "home/.emacs.d/pylookup"]
+	path = home/.emacs.d/pylookup
+	url = https://github.com/tsgates/pylookup.git
+[submodule "home/.emacs.d/emacs-flymake-cursor"]
+	path = home/.emacs.d/emacs-flymake-cursor
+	url = https://github.com/illusori/emacs-flymake-cursor.git

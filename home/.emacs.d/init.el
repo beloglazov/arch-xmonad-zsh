@@ -24,30 +24,44 @@
 (load-theme 'deeper-blue)
 
 
-;; auto-complete
+;; auto-complete: https://github.com/m2ym/auto-complete
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
-(setq ac-dwim t)
-(setq ac-delay 0)
-(setq ac-quick-help-delay 0)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
 (ac-config-default)
-(define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
+
+;; (add-to-list 'load-path "~/.emacs.d/auto-complete-1.4/")
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-1.4/dict")
+;; (setq ac-dwim t)
+;; (setq ac-delay 0)
+;; (setq ac-quick-help-delay 0)
+;; (ac-config-default)
+;; (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
-;(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/yasnippet")
 (require 'yasnippet)
-;(yas/global-mode 1)
+(setq yas/snippet-dirs "~/.emacs.d/yasnippet/snippets")
+(yas/global-mode 1)
 ;Don't map TAB to yasnippet
 ;In fact, set it to something we'll never use because
 ;we'll only ever trigger it indirectly.
-(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet-0.7.0/snippets")
+;(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
+;(yas/initialize)
+;(yas/load-directory "~/.emacs.d/yasnippet-0.7.0/snippets")
 
 
 ;; w3m browser
 (require 'w3m-load)
 (setq browse-url-browser-function 'w3m-browse-url)
+
+;; ido
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+(ido-ubiquitous-mode t)
+
 
 
 ;; python
@@ -55,7 +69,7 @@
 
 
 ;; magit
-(add-to-list 'load-path "~/.emacs.d/magit-1.1.1/")
+(add-to-list 'load-path "~/.emacs.d/magit")
 (require 'magit)
 
 ;; magit diff colors
@@ -66,11 +80,6 @@
      (when (not window-system)
        (set-face-background 'magit-item-highlight "gray6"))))
 
-;; ido
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(ido-ubiquitous-mode t)
 
 ;; smex
 (smex-initialize)
@@ -96,15 +105,13 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 ;; markdown
-(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
+(add-to-list 'load-path "~/.emacs.d/markdown-mode")
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
 (add-hook 'markdown-mode-hook
 	  (lambda ()
 	    (setq fill-column 100)
-	    turn-on-auto-fill))
-(add-hook 'markdown-mode-hook
-	  (lambda ()
+	    (turn-on-auto-fill)
 	    (when buffer-file-name
 	      (add-hook 'after-save-hook
 			'check-parens

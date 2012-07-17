@@ -49,6 +49,7 @@
 
 ;; magit
 (require 'magit)
+(setq magit-commit-all-when-nothing-staged t)
 ;; magit diff colors
 (eval-after-load 'magit
   '(progn

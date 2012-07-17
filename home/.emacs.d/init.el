@@ -57,6 +57,7 @@
 (setq browse-url-browser-function 'w3m-browse-url)
 
 ;; ido
+(add-to-list 'load-path "~/.emacs.d/ido-ubiquitous")
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
@@ -82,14 +83,17 @@
 
 
 ;; smex
+(add-to-list 'load-path "~/.emacs.d/smex")
 (smex-initialize)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; the old M-x.
 
 ;; autopair
-(require 'autopair)
-(autopair-global-mode)
+(electric-pair-mode)
+
+;(require 'autopair)
+;(autopair-global-mode)
 
 ;; uniquify
 (require 'uniquify)

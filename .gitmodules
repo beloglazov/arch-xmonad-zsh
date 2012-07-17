@@ -22,3 +22,6 @@
 [submodule "home/.emacs.d/ido-ubiquitous"]
 	path = home/.emacs.d/ido-ubiquitous
 	url = https://github.com/technomancy/ido-ubiquitous.git
+[submodule "home/.emacs.d/smex"]
+	path = home/.emacs.d/smex
+	url = https://github.com/nonsequitur/smex.git

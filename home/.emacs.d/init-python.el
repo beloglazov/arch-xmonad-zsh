@@ -49,7 +49,7 @@
 (setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
 
 ;; set search option if you want
-;; (setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
+(setq pylookup-search-options '("--insensitive" "0" "--desc" "0"))
 
 ;; to speedup, just load it on demand
 (autoload 'pylookup-lookup "pylookup"

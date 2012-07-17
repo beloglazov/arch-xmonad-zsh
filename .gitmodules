@@ -1,0 +1,30 @@
+[submodule "home/.emacs.d/modes/yasnippet"]
+	path = home/.emacs.d/modes/yasnippet
+	url = https://github.com/capitaomorte/yasnippet.git
+[submodule "home/.emacs.d/modes/auto-complete"]
+	path = home/.emacs.d/modes/auto-complete
+	url = https://github.com/m2ym/auto-complete.git
+[submodule "home/.emacs.d/modes/magit"]
+	path = home/.emacs.d/modes/magit
+	url = https://github.com/magit/magit.git
+[submodule "home/.emacs.d/modes/markdown-mode"]
+	path = home/.emacs.d/modes/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
+[submodule "home/.emacs.d/modes/pylookup"]
+	path = home/.emacs.d/modes/pylookup
+	url = https://github.com/tsgates/pylookup.git
+[submodule "home/.emacs.d/modes/flymake-cursor"]
+	path = home/.emacs.d/modes/flymake-cursor
+	url = https://github.com/illusori/emacs-flymake-cursor.git
+[submodule "home/.emacs.d/modes/haskell-mode"]
+	path = home/.emacs.d/modes/haskell-mode
+	url = https://github.com/haskell/haskell-mode.git
+[submodule "home/.emacs.d/modes/ido-ubiquitous"]
+	path = home/.emacs.d/modes/ido-ubiquitous
+	url = https://github.com/technomancy/ido-ubiquitous.git
+[submodule "home/.emacs.d/modes/smex"]
+	path = home/.emacs.d/modes/smex
+	url = https://github.com/nonsequitur/smex.git
+[submodule "home/.emacs.d/modes/popup-el"]
+	path = home/.emacs.d/modes/popup-el
+	url = https://github.com/m2ym/popup-el.git

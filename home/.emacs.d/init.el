@@ -1,6 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/")
 ;(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
 
 
 ;; Package
@@ -35,9 +34,26 @@
 (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
 
+;; w3m browser
+(require 'w3m-load)
+(setq browse-url-browser-function 'w3m-browse-url)
+
+
 ;; python
 (load-file "~/.emacs.d/init-python.el")
 
+
+;; magit
+(add-to-list 'load-path "~/.emacs.d/magit-1.1.1/")
+(require 'magit)
+
+;; magit diff colors
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "gray6"))))
 
 ;; ido
 (require 'ido)
@@ -69,6 +85,7 @@
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 ;; markdown
+(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
 (add-hook 'markdown-mode-hook
@@ -204,6 +221,9 @@
 ;; flymake errors
 (global-set-key (kbd "<f8>") 'flymake-goto-next-error)
 (global-set-key (kbd "<f9>") 'flymake-goto-prev-error)
+
+;; magit
+(global-set-key (kbd "<f12>") 'magit-status)
 
 
 ;; scroll in-place

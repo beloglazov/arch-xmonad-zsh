@@ -71,8 +71,10 @@
 
 	    ;; rope keybindings
 	    (define-key python-mode-map "\C-ci" 'rope-auto-import)
-	    (define-key python-mode-map "\C-c\C-d" 'rope-show-calltip)
+	    ;(define-key python-mode-map "\C-c\C-d" 'rope-show-calltip)
 
+	    ;; pylookup keybindings
+	    (define-key python-mode-map "\C-c\C-d" 'pylookup-lookup)
 
 	    ))
 

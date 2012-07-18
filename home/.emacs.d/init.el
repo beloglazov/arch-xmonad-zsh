@@ -212,6 +212,7 @@
 
 (global-set-key (kbd "H-a") 'delete-forward-char)
 
+(global-set-key (kbd "C-a") 'mark-whole-buffer)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-w") 'kill-this-buffer)
 (global-set-key (kbd "C-b") 'ido-switch-buffer)

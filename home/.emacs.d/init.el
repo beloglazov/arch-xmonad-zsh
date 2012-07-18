@@ -100,6 +100,7 @@
 
 	    (turn-on-auto-fill)
 	    (outline-minor-mode)
+	    (flyspell-mode)
 
 	    (local-set-key (kbd "C-M-<left>") 'outline-backward-same-level)
 	    (local-set-key (kbd "C-M-<right>") 'outline-forward-same-level)

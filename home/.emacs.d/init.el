@@ -250,7 +250,7 @@
 (global-set-key (kbd "<f9>") 'flymake-goto-prev-error)
 
 ;; ispell
-(global-set-key (kbd "<f11>") 'ispell-word)
+(global-set-key (kbd "<f11>") 'ispell-buffer)
 
 ;; magit
 (global-set-key (kbd "<f12>") 'magit-status)

@@ -249,6 +249,9 @@
 (global-set-key (kbd "<f8>") 'flymake-goto-next-error)
 (global-set-key (kbd "<f9>") 'flymake-goto-prev-error)
 
+;; ispell
+(global-set-key (kbd "<f11>") 'ispell-word)
+
 ;; magit
 (global-set-key (kbd "<f12>") 'magit-status)
 

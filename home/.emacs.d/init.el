@@ -24,7 +24,10 @@
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
 (require 'yasnippet)
 (setq yas/snippet-dirs "~/.emacs.d/modes/yasnippet/snippets")
+(global-unset-key (kbd "M-`"))
+(global-set-key (kbd "M-`") 'yas/expand)
 (yas/global-mode 1)
+(setq yas/trigger-key (kbd "M-`"))
 ;Don't map TAB to yasnippet
 ;In fact, set it to something we'll never use because
 ;we'll only ever trigger it indirectly.
@@ -88,10 +91,34 @@
 ;; markdown
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(setq markdown-command "pandoc")
+(setq markdown-enable-math t)
 (add-hook 'markdown-mode-hook
 	  (lambda ()
+
 	    (setq fill-column 100)
+
 	    (turn-on-auto-fill)
+	    (outline-minor-mode)
+
+	    (local-set-key (kbd "C-M-<left>") 'outline-backward-same-level)
+	    (local-set-key (kbd "C-M-<right>") 'outline-forward-same-level)
+	    (local-set-key (kbd "C-M-<up>") 'outline-previous-visible-heading)
+	    (local-set-key (kbd "C-M-<down>") 'outline-next-visible-heading)
+
+	    (local-set-key (kbd "C-c C-p") 'markdown-preview)
+	    (local-set-key (kbd "C-c C-b") 'markdown-insert-bold)
+	    (local-set-key (kbd "C-c C-e") 'markdown-insert-italic)
+	    (local-set-key (kbd "C-c C-q") 'markdown-insert-blockquote)
+	    (local-set-key (kbd "C-c C-c C-c") 'markdown-insert-code)
+	    (local-set-key (kbd "C-c C-l") 'markdown-insert-link)
+	    (local-set-key (kbd "C-c 1") 'markdown-insert-header-1)
+	    (local-set-key (kbd "C-c 2") 'markdown-insert-header-2)
+	    (local-set-key (kbd "C-c 3") 'markdown-insert-header-3)
+	    (local-set-key (kbd "C-c 4") 'markdown-insert-header-4)
+	    (local-set-key (kbd "C-c 5") 'markdown-insert-header-5)
+	    (local-set-key (kbd "C-c 6") 'markdown-insert-header-6)
+
 	    (when buffer-file-name
 	      (add-hook 'after-save-hook
 			'check-parens

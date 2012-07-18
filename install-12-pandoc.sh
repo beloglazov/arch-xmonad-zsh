@@ -1,3 +1,5 @@
 #!/bin/sh
 
-yaourt -S haskell-pandoc
+yaourt -S cabal-install
+cabal update
+cabal install pandoc

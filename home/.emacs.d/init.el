@@ -25,9 +25,9 @@
 (require 'yasnippet)
 (setq yas/snippet-dirs "~/.emacs.d/modes/yasnippet/snippets")
 (global-unset-key (kbd "M-`"))
-(global-set-key (kbd "M-`") 'yas/expand)
+(global-set-key (kbd "C-`") 'yas/expand)
 (yas/global-mode 1)
-(setq yas/trigger-key (kbd "M-`"))
+(setq yas/trigger-key (kbd "C-`"))
 ;Don't map TAB to yasnippet
 ;In fact, set it to something we'll never use because
 ;we'll only ever trigger it indirectly.
@@ -224,6 +224,7 @@
 (global-set-key (kbd "C-<tab>") 'other-window)
 
 (global-set-key (kbd "C-M-1") 'kill-buffer-and-window)
+(global-set-key (kbd "M-`") 'delete-window)
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'split-window-horizontally)
 (global-set-key (kbd "M-3") 'split-window-vertically)

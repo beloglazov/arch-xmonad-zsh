@@ -122,7 +122,7 @@
 
 	    (when buffer-file-name
 	      (add-hook 'after-save-hook
-			'check-parens
+			;'check-parens
 			nil t))))
 
 ; warning, may yield wrong results in edge-cases like single double-quotes in code block.

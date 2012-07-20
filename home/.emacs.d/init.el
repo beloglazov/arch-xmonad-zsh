@@ -130,6 +130,9 @@
 ; <http://stackoverflow.com/questions/9527593/customizing-check-parens-to-check-double-quotes>
 (add-hook 'markdown-mode-hook (lambda () (modify-syntax-entry ?\" "\"" markdown-mode-syntax-table)))
 
+;; move the mouse pointer to the corner when typing
+(mouse-avoidance-mode)
+
 ;; before-save hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 

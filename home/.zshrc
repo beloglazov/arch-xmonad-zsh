@@ -26,12 +26,13 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git archlinux extract history-substring-search lein svn autojump)
 
+# Add custom completion scripts
+fpath=(~/.zsh/completion $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # Disable auto-correction
 unsetopt correct_all
-
-# Customize to your needs...
 
 # To enable autojump
 source /etc/profile
@@ -39,7 +40,7 @@ source /etc/profile
 # Colorized ls
 eval `dircolors -b`
 
-export EDITOR="emacsclient -c"
+export EDITOR="nano"
 
 # Key Bindings
 

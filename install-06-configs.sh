@@ -6,6 +6,7 @@ ln -s ${DIR}/home/.Xresources ~/.Xresources
 ln -s ${DIR}/home/.xinitrc ~/.xinitrc
 
 # zsh
+ln -s ${DIR}/home/.zsh ~/.zsh
 ln -s ${DIR}/home/.zshrc ~/.zshrc
 ln -s ${DIR}/home/.zshenv ~/.zshenv
 
@@ -53,6 +54,7 @@ ln -s ${DIR}/home/.config/dmenu/edit-list ~/.config/dmenu/edit-list
 # root configs
 sudo ln -s ${DIR}/home/.Xresources /root/.Xresources
 sudo ln -s ${DIR}/home/.xinitrc /root/.xinitrc
+sudo ln -s ${DIR}/home/.zsh /root/.zsh
 sudo ln -s ${DIR}/home/.zshrc /root/.zshrc
 sudo ln -s ${DIR}/home/.zshenv /root/.zshenv
 

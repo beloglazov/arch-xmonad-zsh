@@ -33,16 +33,17 @@ mkdir ~/.backups/emacs
 # bin
 mkdir ~/bin
 ln -s ${DIR}/home/bin/chromium ~/bin/chromium
-ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
-ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
-ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
-ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
-ln -s ${DIR}/home/bin/e ~/bin/e
 ln -s ${DIR}/home/bin/disk-benchmark ~/bin/disk-benchmark
-ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py
+ln -s ${DIR}/home/bin/dmenu-edit ~/bin/dmenu-edit
+ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
+ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
+ln -s ${DIR}/home/bin/e ~/bin/e
 ln -s ${DIR}/home/bin/fix-keyboard ~/bin/fix-keyboard
+ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py
 ln -s ${DIR}/home/bin/reboot ~/bin/reboot
 ln -s ${DIR}/home/bin/shutdown ~/bin/shutdown
+ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
+ln -s ${DIR}/home/bin/za ~/bin/za
 
 # .config
 mkdir ~/.config

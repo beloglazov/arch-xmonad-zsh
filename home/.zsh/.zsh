@@ -1,0 +1,1 @@
+/home/anton/repos/arch-xmonad-zsh/home/.zsh

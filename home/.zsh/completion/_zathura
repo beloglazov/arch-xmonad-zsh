@@ -1,0 +1,3 @@
+#compdef zathura
+
+_files -g "*.pdf"

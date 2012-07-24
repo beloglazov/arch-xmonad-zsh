@@ -1,4 +1,3 @@
-(add-to-list 'load-path "~/.emacs.d/modes/python-mode.el-6.0.10")
 (require 'python-mode)
 (setq py-install-directory "~/.emacs.d/modes/python-mode.el-6.0.10")
 (setq py-shell-name "ipython2")
@@ -13,7 +12,6 @@
 ;(setq ropemacs-confirm-saving nil)
 
 ;; flymake for python
-(add-to-list 'load-path "~/.emacs.d/flymake-cursor")
 (when (load "flymake" t)
   (require 'flymake-cursor)
   (defun flymake-pychecker-init ()
@@ -24,12 +22,22 @@
                         (file-name-directory buffer-file-name))))
       (list "pyflakespep8.py" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pychecker-init)))
+               '("\\.py\\'" flymake-pychecker-init))
+  ;; Disable the "buffer has running process"" confirmation
+  ;; when the process is a flymake process
+  (defadvice flymake-start-syntax-check-process
+    (after
+     cheeso-advice-flymake-start-syntax-check-1
+     (cmd args dir)
+     activate compile)
+    ;; set flag to allow exit without query on any
+    ;; active flymake processes
+    (set-process-query-on-exit-flag ad-return-value nil)))
 
 
 ;; pylookup: https://github.com/tsgates/pylookup
 ;; add pylookup to your loadpath, ex) ~/.emacs.d/pylookup
-(setq pylookup-dir "~/.emacs.d/pylookup")
+(setq pylookup-dir "~/.emacs.d/modes/pylookup")
 (add-to-list 'load-path pylookup-dir)
 ;; load pylookup when compile time
 (eval-when-compile (require 'pylookup))
@@ -45,67 +53,23 @@
   "Run pylookup-update and create the database at `pylookup-db-file'." t)
 
 
-;; auto-complete integration with yasnippet and rope
+;; ropemacs integration with auto-completion
+(defun ac-ropemacs-candidates ()
+  (mapcar (lambda (completion)
+	    (concat ac-prefix completion))
+	  (rope-completions)))
 
-;; (defun prefix-list-elements (list prefix)
-;;   (let (value)
-;;     (nreverse
-;;      (dolist (element list value)
-;;        (setq value (cons (format "%s%s" prefix element) value))))))
+(ac-define-source nropemacs
+  '((candidates . ac-ropemacs-candidates)
+    ;(document   . py-documentation)
+    (symbol     . "p")))
 
-;; (defvar ac-source-rope
-;;   '((candidates
-;;      . (lambda ()
-;;          (prefix-list-elements (rope-completions) ac-target))))
-;;   "Source for Rope")
-
-;; (defun ac-python-find ()
-;;   "Python `ac-find-function'."
-;;   (require 'thingatpt)
-;;   (let ((symbol (car-safe (bounds-of-thing-at-point 'symbol))))
-;;     (if (null symbol)
-;;         (if (string= "." (buffer-substring (- (point) 1) (point)))
-;;             (point)
-;;           nil)
-;;       symbol)))
-
-;; (defun ac-python-candidate ()
-;;   "Python `ac-candidates-function'"
-;;   (let (candidates)
-;;     (dolist (source ac-sources)
-;;       (if (symbolp source)
-;;           (setq source (symbol-value source)))
-;;       (let* ((ac-limit (or (cdr-safe (assq 'limit source)) ac-limit))
-;;              (requires (cdr-safe (assq 'requires source)))
-;;              cand)
-;;         (if (or (null requires)
-;;                 (>= (length ac-target) requires))
-;;             (setq cand
-;;                   (delq nil
-;;                         (mapcar (lambda (candidate)
-;;                                   (propertize candidate 'source source))
-;;                                 (funcall (cdr (assq 'candidates source)))))))
-;;         (if (and (> ac-limit 1)
-;;                  (> (length cand) ac-limit))
-;;             (setcdr (nthcdr (1- ac-limit) cand) nil))
-;;         (setq candidates (append candidates cand))))
-;;     (delete-dups candidates)))
-
-;;Ryan's python specific tab completion
-;; Try the following:
-;; 1) Do a yasnippet expansion
-;; 2) Do a Rope code completion
-;; 3) Do an indent
-;; (defun ryan-python-tab ()
-;;   (interactive)
-;;   (if (eql (ac-start) 0)
-;;       (indent-for-tab-command)))
-
-;; (defadvice ac-start (before advice-turn-on-auto-start activate)
-;;   (set (make-local-variable 'ac-auto-start) t))
-
-;; (defadvice ac-cleanup (after advice-turn-off-auto-start activate)
-;;   (set (make-local-variable 'ac-auto-start) nil))
+(ac-define-source nropemacs-dot
+  '((candidates . ac-ropemacs-candidates)
+    ;(document   . py-documentation)
+    (symbol     . "p")
+    (prefix     . c-dot)
+    (requires   . 0)))
 
 
 (add-hook 'python-mode-hook
@@ -122,6 +86,7 @@
 
 	    ;; enable eldoc-mode
 	    (eldoc-mode)
+	    (set (make-local-variable 'eldoc-documentation-function) 'rope-get-calltip)
 
 	    ;; enable flymake
 	    (flymake-mode t)
@@ -135,56 +100,16 @@
 	    (define-key python-mode-map "\C-c\C-d" 'pylookup-lookup)
 
 	    ;; rebind the yasnippet trigger key
-	    (setq yas/trigger-key (kbd "C-c <kp-multiply>"))
+	    ;; it's already binded
+	    ;(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
 
 	    ;; auto-complete
-	    ;; (auto-complete-mode 1)
-	    ;; (set (make-local-variable 'ac-sources)
-	    ;; 	 (append ac-sources '(ac-source-rope) '(ac-source-yasnippet)))
-	    ;; (set (make-local-variable 'ac-find-function) 'ac-python-find)
-	    ;; (set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
-	    ;; (set (make-local-variable 'ac-auto-start) nil)
+	    ;; enable ropemacs completions
+	    ;(add-to-list 'ac-sources 'ac-source-ropemacs)
+	    ;(add-to-list 'ac-sources 'ac-source-filename)
+	    (add-to-list 'ac-sources 'ac-source-yasnippet)
+	    (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
-	    ;; (define-key python-mode-map "\t" 'ryan-python-tab)
-
+	    (add-to-list 'ac-sources 'ac-source-nropemacs)
+	    (add-to-list 'ac-sources 'ac-source-nropemacs-dot)
 	    ))
-
-
-
-;;(add-hook 'local-write-file-hooks 'rope-organize-imports)
-;; (add-hook 'write-file-functions (lambda ()
-;; 				  (let ((tmp-hooks write-file-functions))
-;; 				    (setq write-file-functions nil)
-;; 				    (setq ropemacs-confirm-saving nil)
-;; 				    (rope-organize-imports nil)
-;; 				    (setq ropemacs-confirm-saving t)
-;; 				    (setq write-file-functions tmp-hooks))))
-
-
-;; ;; ropemacs integration with auto-completion
-;; (defun ac-ropemacs-candidates ()
-;;   (mapcar (lambda (completion)
-;;       (concat ac-prefix completion))
-;;     (rope-completions)))
-
-;; (ac-define-source nropemacs
-;;   '((candidates . ac-ropemacs-candidates)
-;;     (document   . ac-symbol-documentation)
-;;     (symbol     . "p")))
-
-;; (ac-define-source nropemacs-dot
-;;   '((candidates . ac-ropemacs-candidates)
-;;     (document   . ac-symbol-documentation)
-;;     (symbol     . "p")
-;;     (prefix     . c-dot)
-;;     (requires   . 0)))
-
-;; (defun ac-nropemacs-setup ()
-;;   (setq ac-sources (append '(ac-source-nropemacs
-;;                              ac-source-nropemacs-dot) ac-sources)))
-;; (defun ac-python-mode-setup ()
-;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
-
-;; ;(add-hook 'python-mode-hook 'ac-python-mode-setup)
-;; (add-hook 'python-mode-hook 'ac-nropemacs-setup)
-;; ;(add-hook 'rope-open-project-hook 'ac-nropemacs-setup)

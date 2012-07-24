@@ -13,13 +13,12 @@
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/modes/auto-complete/dict")
 (ac-config-default)
+(setq ac-delay 0)
+(setq ac-quick-help-delay 0)
+(setq ac-use-fuzzy t)
+(setq popup-use-optimized-column-computation nil)
+(define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
-;; (require 'auto-complete-config)
-;; (setq ac-dwim t)
-;; (setq ac-delay 0)
-;; (setq ac-quick-help-delay 0)
-;; (ac-config-default)
-;; (define-key ac-mode-map (kbd "C-<SPC>") 'auto-complete)
 
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
 (require 'yasnippet)
@@ -101,6 +100,10 @@
 	    (turn-on-auto-fill)
 	    (outline-minor-mode)
 	    (flyspell-mode)
+
+	    ;; A way of delaying processes of flyspell-mode disables auto completion.
+	    ;; This is a workaround for the problem.
+	    (ac-flyspell-workaround)
 
 	    (local-set-key (kbd "C-M-<left>") 'outline-backward-same-level)
 	    (local-set-key (kbd "C-M-<right>") 'outline-forward-same-level)

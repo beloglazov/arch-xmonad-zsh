@@ -50,6 +50,7 @@ mkdir ~/.config
 mkdir ~/.config/dmenu
 ln -s ${DIR}/home/.config/dmenu/urxvt-list ~/.config/dmenu/urxvt-list
 ln -s ${DIR}/home/.config/dmenu/edit-list ~/.config/dmenu/edit-list
+ln -s ${DIR}/home/.config/zathura/zathurarc ~/.config/zathura/zathurarc
 
 
 # root configs

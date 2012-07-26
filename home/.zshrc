@@ -103,7 +103,7 @@ alias pbpaste='xsel --clipboard --output'
 alias bc='bc -l'
 alias psg='ps aux | grep'
 alias emacs-restart='pkill emacs; emacs --daemon'
-alias grepi='grep -i'
+alias g='grep -i'
 alias x='extract'
 #alias za='silent zathura'
 

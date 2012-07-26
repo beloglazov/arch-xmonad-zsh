@@ -105,7 +105,7 @@ alias psg='ps aux | grep'
 alias emacs-restart='pkill emacs; emacs --daemon'
 alias g='grep -i'
 alias x='extract'
-#alias za='silent zathura'
+alias za='silent zathura'
 
 # SVN aliales
 alias svn='colorsvn'

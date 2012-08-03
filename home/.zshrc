@@ -152,7 +152,7 @@ alias lsh='ls -lhd .*'
 alias ff='find |grep'
 alias c="clear"
 alias dir='ls -1'
-alias mem="free -m"
+alias mem="free -hto"
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY

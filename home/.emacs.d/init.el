@@ -22,7 +22,8 @@
 
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
 (require 'yasnippet)
-(setq yas/snippet-dirs "~/.emacs.d/modes/yasnippet/snippets")
+(setq yas/snippet-dirs '("~/.emacs.d/modes/yasnippet/snippets"
+			 "~/.emacs.d/snippets"))
 (global-unset-key (kbd "M-`"))
 (global-set-key (kbd "C-`") 'yas/expand)
 (yas/global-mode 1)

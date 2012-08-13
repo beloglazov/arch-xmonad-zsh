@@ -7,7 +7,7 @@
 # --
 @contract
 def ${1:name}($2):
-    """$3
+    """ $3
     ${2:$
       (let*
         ((indent
@@ -32,7 +32,7 @@ def ${1:name}($2):
           (make-string 3 34)
         (mapconcat
          'identity
-         (list "" args ":rtype: " (make-string 3 34))
+         (list "" args ":return: " " :rtype: " (make-string 3 34))
          indent)))
     }
     $0

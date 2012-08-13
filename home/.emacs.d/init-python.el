@@ -108,7 +108,7 @@
 	    ;; enable ropemacs completions
 	    ;(add-to-list 'ac-sources 'ac-source-ropemacs)
 	    ;(add-to-list 'ac-sources 'ac-source-filename)
-	    (add-to-list 'ac-sources 'ac-source-yasnippet)
+	    ;(add-to-list 'ac-sources 'ac-source-yasnippet)
 	    (add-to-list 'ac-sources 'ac-source-words-in-same-mode-buffers)
 
 	    (add-to-list 'ac-sources 'ac-source-nropemacs)

@@ -75,6 +75,9 @@
 ;(require 'autopair)
 ;(autopair-global-mode)
 
+;; fill-column-indicator
+(require 'fill-column-indicator)
+
 ;; uniquify
 (require 'uniquify)
 (setq

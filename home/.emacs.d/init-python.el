@@ -75,6 +75,11 @@
 (add-hook 'python-mode-hook
 	  (lambda ()
 
+	    ;; fill-column-indicator
+	    (setq fill-column 80)
+	    (setq fci-rule-color "gray6")
+	    (fci-mode 1)
+
 	    ;; automatically open a rope project if there is one
 	    ;; in the current or in the upper level directory
 	    (cond ((file-exists-p ".ropeproject")

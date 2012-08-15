@@ -28,3 +28,6 @@
 [submodule "home/.emacs.d/modes/popup-el"]
 	path = home/.emacs.d/modes/popup-el
 	url = https://github.com/m2ym/popup-el.git
+[submodule "home/.emacs.d/modes/fill-column-indicator"]
+	path = home/.emacs.d/modes/fill-column-indicator
+	url = https://github.com/alpaker/Fill-Column-Indicator.git

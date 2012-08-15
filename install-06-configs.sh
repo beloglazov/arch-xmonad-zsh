@@ -42,6 +42,7 @@ ln -s ${DIR}/home/bin/fix-keyboard ~/bin/fix-keyboard
 ln -s ${DIR}/home/bin/mem ~/bin/mem
 ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py
 ln -s ${DIR}/home/bin/reboot ~/bin/reboot
+ln -s ${DIR}/home/bin/screenshot ~/bin/screenshot
 ln -s ${DIR}/home/bin/shutdown ~/bin/shutdown
 ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
 ln -s ${DIR}/home/bin/za ~/bin/za

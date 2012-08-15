@@ -1,0 +1,3 @@
+#!/bin/sh
+
+import -window root ~/screenshot.jpg

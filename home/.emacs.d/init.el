@@ -220,12 +220,14 @@
 
 (global-set-key (kbd "H-a") 'delete-forward-char)
 
-(global-set-key (kbd "C-a") 'mark-whole-buffer)
+(global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 ;(global-set-key (kbd "C-s") 'save-buffer)
-(global-set-key (kbd "C-w") 'kill-this-buffer)
+(global-set-key (kbd "C-S-w") 'kill-this-buffer)
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-d") 'kill-word)
 (global-set-key (kbd "C-<delete>") 'kill-word)
 (global-set-key (kbd "C-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-<tab>") 'other-window)
@@ -353,7 +355,7 @@
     (forward-line -1)))
 
 ;; duplicate a line
-(global-set-key (kbd "C-d") 'djcb-duplicate-line)
+(global-set-key (kbd "C-S-d") 'djcb-duplicate-line)
 
 ;; duplicate a line and comment the first
 (global-set-key (kbd "C-c d")

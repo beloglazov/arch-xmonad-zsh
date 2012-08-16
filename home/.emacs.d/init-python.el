@@ -1,5 +1,5 @@
 (require 'python-mode)
-(setq py-install-directory "~/.emacs.d/modes/python-mode.el-6.0.10")
+(setq py-install-directory "~/.emacs.d/modes/python-mode.el-6.0.11")
 (setq py-shell-name "ipython2")
 
 (require 'pymacs)
@@ -111,7 +111,7 @@
 
 	    ;; auto-complete
 	    (setq ac-auto-start 4)
-	    (setq popup-use-optimized-column-computation nil)
+	    ;(setq popup-use-optimized-column-computation nil)
 	    ;; enable ropemacs completions
 	    ;(add-to-list 'ac-sources 'ac-source-ropemacs)
 	    ;(add-to-list 'ac-sources 'ac-source-filename)

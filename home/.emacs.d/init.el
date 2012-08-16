@@ -22,12 +22,13 @@
 
 ;; yasnippet: https://github.com/capitaomorte/yasnippet
 (require 'yasnippet)
-(setq yas/snippet-dirs '("~/.emacs.d/modes/yasnippet/snippets"
+(setq yas-snippet-dirs '("~/.emacs.d/modes/yasnippet/snippets"
 			 "~/.emacs.d/snippets"))
-(global-unset-key (kbd "M-`"))
-(global-set-key (kbd "C-`") 'yas/expand)
-(yas/global-mode 1)
-(setq yas/trigger-key (kbd "C-`"))
+;(global-unset-key (kbd "M-`"))
+;(global-set-key (kbd "C-`") 'yas-expand)
+;(setq yas-trigger-key (kbd "C-`"))
+;(setq yas-trigger-key "C-`")
+(yas-global-mode 1)
 ;Don't map TAB to yasnippet
 ;In fact, set it to something we'll never use because
 ;we'll only ever trigger it indirectly.

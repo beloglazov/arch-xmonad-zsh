@@ -10,13 +10,6 @@ body > div > div > div {
     background: #0c0d0e;
 }
 
-/** email rows **/
-
-tr.zA.yO {
-    background: #0c0d0e;
-    color: #7f8f9f;
-}
-
 /** content height **/
 
 .oLaOvc.aeJ {
@@ -86,7 +79,7 @@ input.dI.dG {
 
 /** chat contacts **/
 
-span.az1, .HHshnc {
+.az1 {
     color: #7f8f9f;
 }
 
@@ -164,4 +157,3 @@ span.az1, .HHshnc {
 div.nH.ko.aXjCH {
     height: 350px;
 }
-

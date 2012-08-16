@@ -110,6 +110,8 @@
 	    ;(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
 
 	    ;; auto-complete
+	    (setq ac-auto-start 4)
+	    (setq popup-use-optimized-column-computation nil)
 	    ;; enable ropemacs completions
 	    ;(add-to-list 'ac-sources 'ac-source-ropemacs)
 	    ;(add-to-list 'ac-sources 'ac-source-filename)

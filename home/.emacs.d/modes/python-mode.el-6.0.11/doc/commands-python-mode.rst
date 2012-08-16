@@ -147,33 +147,6 @@ default (global) value to that.  The associated Python process is
 the one that gets input from M-x python-send-region et al when used
 in a buffer that doesn't have a local value of `python-buffer'.
 
-python-fill-paragraph
----------------------
-`fill-paragraph-function' handling multi-line strings and possibly comments.
-If any of the current line is in or at the end of a multi-line string,
-fill the string or the paragraph of it that point is in, preserving
-the string's indentation.
-
-python-shift-left
------------------
-Shift lines in region COUNT (the prefix arg) columns to the left.
-COUNT defaults to `py-indent-offset'.  If region isn't active, just shift
-current line.  The region shifted includes the lines in which START and
-END lie.  It is an error if any lines in the region are indented less than
-COUNT columns.
-
-python-shift-right
-------------------
-Shift lines in region COUNT (the prefix arg) columns to the right.
-COUNT defaults to `py-indent-offset'.  If region isn't active, just shift
-current line.  The region shifted includes the lines in which START and
-END lie.
-
-python-mark-block
------------------
-Mark the block around point.
-Uses `python-beginning-of-block', `python-end-of-block'.
-
 python-find-imports
 -------------------
 Find top-level imports, updating `python-imports'.
@@ -1422,10 +1395,6 @@ py-guess-default-python
 -----------------------
 Defaults to "python", if guessing didn't succeed. 
 
-py-set-shell-completion-environment
------------------------------------
-Sets `...-completion-command-string' and `py-complete-function'. 
-
 py-set-ipython-completion-command-string
 ----------------------------------------
 Set and return `ipython-completion-command-string'. 
@@ -2016,6 +1985,8 @@ py-find-imports
 ---------------
 Find top-level imports, updating `python-imports'.
 
+Returns python-imports
+
 py-eldoc-function
 -----------------
 Print help on symbol at point. 
@@ -2215,6 +2186,24 @@ Make sure, `py-smart-indentation' is off.
 
 Returns value of `py-smart-indentation'. 
 
+py-toggle-smart-operator
+------------------------
+If `py-smart-operator-mode-p' should be on or off.
+
+Returns value of `py-smart-operator-mode-p' switched to. 
+
+py-smart-operator-mode-on
+-------------------------
+Make sure, `py-smart-operator-mode-p' is on.
+
+Returns value of `py-smart-operator-mode-p'. 
+
+py-smart-operator-mode-off
+--------------------------
+Make sure, `py-smart-operator-mode-p' is off.
+
+Returns value of `py-smart-operator-mode-p'. 
+
 py-toggle-split-windows-on-execute
 ----------------------------------
 If `py-split-windows-on-execute-p' should be on or off.
@@ -2297,63 +2286,6 @@ if `(locate-library "python-mode")' is not succesful.
 py-set-load-path
 ----------------
 Include needed subdirs of python-mode directory. 
-
-autopair-insert-or-skip-quote
------------------------------
-Insert or possibly skip over a quoting character.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-insert-opening
------------------------
-Insert opening delimiter and possibly automatically close it.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-skip-close-maybe
--------------------------
-Insert or possibly skip over a closing delimiter.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-backspace
-------------------
-Possibly delete a pair of paired delimiters.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-newline
-----------------
-Do a smart newline when right between parenthesis.
-
-In other words, insert an extra newline along with the one inserted normally
-by this command. Then place point after the first, indented.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-extra-insert-opening
------------------------------
-Insert (an extra) opening delimiter and possibly automatically close it.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-extra-skip-close-maybe
--------------------------------
-Insert or possibly skip over a (and extra) closing delimiter.
-
-Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
-
-autopair-insert-or-skip-paired-delimiter
-----------------------------------------
-Insert or possibly skip over a character with a syntax-class of "paired delimiter".Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist.
 
 py-edit-abbrevs
 ---------------
@@ -2460,7 +2392,9 @@ py-script-complete
 
 py-python-script-complete
 -------------------------
-Complete word before point, if any. Otherwise insert TAB. 
+Complete word before point, if any.
+
+When `py-no-completion-calls-dabbrev-expand-p' is non-nil, try dabbrev-expand. Otherwise, when `py-indent-no-completion-p' is non-nil, call `tab-to-tab-stop'. 
 
 py-python2-shell-complete
 -------------------------
@@ -4411,4 +4345,11 @@ Send line at point to Python3.2 unique interpreter.
 py-execute-line-python3\.2-dedicated-switch
 -------------------------------------------
 Send line at point to Python3.2 unique interpreter and switch to result. 
+
+py-load-pymacs
+--------------
+Load Pymacs as delivered with python-mode.el.
+
+Pymacs has been written by François Pinard and many others.
+See original source: http://pymacs.progiciels-bpi.ca
 

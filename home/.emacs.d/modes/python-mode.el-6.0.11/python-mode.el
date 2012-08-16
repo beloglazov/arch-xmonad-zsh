@@ -64,13 +64,14 @@
 (require 'rx)
 (require 'flymake)
 (require 'imenu)
+(require 'thingatpt)
 
 (defgroup python-mode nil
   "Support for the Python programming language, <http://www.python.org/>"
   :group 'languages
   :prefix "py-")
 
-(defconst py-version "6.0.10")
+(defconst py-version "6.0.11")
 
 (defvar python-local-version nil
   "Used internally. ")
@@ -115,8 +116,42 @@ Default is nil. "
   :type 'boolean
   :group 'python-mode)
 
+
+(defcustom py-load-pymacs-p nil
+  "If Pymacs as delivered with python-mode.el shall be loaded.
+Default is nil.
+
+Pymacs has been written by François Pinard and many others.
+See original source: http://pymacs.progiciels-bpi.ca"
+
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-smart-operator-mode-p nil
+  "If python-mode calls (smart-operator-mode-on)
+
+Default is non-nil. "
+
+  :type 'boolean
+  :group 'python-mode)
+(make-variable-buffer-local 'py-smart-operator-mode-p)
+
 (defcustom py-prepare-autopair-mode-p t
   "If autopair-mode hook should be loaded. Default is `t'. "
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-no-completion-calls-dabbrev-expand-p t
+  "If completion function should call dabbrev-expand when no completion found. Default is `t'
+
+See also `py-indent-no-completion-p'"
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-indent-no-completion-p t
+  "If completion function should insert a TAB when no completion found. Default is `t'
+
+See also `py-no-completion-calls-dabbrev-expand-p'"
   :type 'boolean
   :group 'python-mode)
 
@@ -168,14 +203,6 @@ Default is nil "
 
 (defcustom py-guess-py-install-directory-p t
   "If in cases, `py-install-directory' isn't set,  `py-set-load-path'should guess it from `buffer-file-name'. "
-
-  :type 'boolean
-  :group 'python-mode)
-
-(defcustom py-report-position-p nil
-  "If functions moving point like `py-forward-into-nomenclature' should report reached position.
-
-Default is nil. "
 
   :type 'boolean
   :group 'python-mode)
@@ -263,6 +290,11 @@ Default is nil. "
 
 (defcustom py-electric-colon-active-p nil
   "`py-electric-colon' feature.  Default is `nil'. See lp:837065 for discussions. "
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-electric-colon-newline-and-indent-p nil
+  "If non-nil, `py-electric-colon' will call `newline-and-indent'.  Default is `nil'. "
   :type 'boolean
   :group 'python-mode)
 
@@ -628,6 +660,34 @@ Default is `t'."
 (defvar py-which-bufname "Python")
 (make-variable-buffer-local 'py-which-bufname)
 
+(defcustom py-honor-IPYTHONDIR-p nil
+  "When non-nil ipython-history file is constructed by $IPYTHONDIR
+followed by \"/history\". Default is nil.
+
+Otherwise value of py-ipython-history is used. "
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-ipython-history "~/.ipython/history"
+  "ipython-history default file. Used when py-honor-IPYTHONDIR-p is nil (default) "
+
+  :type 'string
+  :group 'python-mode)
+
+(defcustom py-honor-PYTHONHISTORY-p nil
+  "When non-nil python-history file is set by $PYTHONHISTORY
+Default is nil.
+
+Otherwise value of py-python-history is used. "
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-python-history "~/.python_history"
+  "python-history default file. Used when py-honor-PYTHONHISTORY-p is nil (default) "
+
+  :type 'string
+  :group 'python-mode)
+
 (defcustom py-master-file nil
   "If non-nil, \\[py-execute-buffer] executes the named
 master file instead of the buffer's file.  If the file name has a
@@ -744,6 +804,12 @@ to select the appropriate python interpreter mode for a file.")
   :type 'string
   :group 'python-mode)
 
+(defcustom py-shell-prompt-read-only t
+  "If non-nil, the python prompt is read only.  Setting this
+variable will only effect new shells."
+  :type 'boolean
+  :group 'python-mode)
+
 (defcustom py-shell-switch-buffers-on-execute-p t
   "When non-nil switch to the new Python shell. "
 
@@ -829,7 +895,7 @@ value to determine defaults."
   :group 'python-mode)
 
 (defcustom py-shell-prompt-alist
-  '(("ipython" . "^In \\[[0-9]+\\]: *")
+  '(("ipython" . "^In \\[[0-9]+\\]: ")
     (t . "^>>> "))
   "Alist of Python input prompts.
 Each element has the form (PROGRAM . REGEXP), where PROGRAM is
@@ -841,7 +907,7 @@ element matches `py-shell-name'."
   :group 'python-mode)
 
 (defcustom py-shell-continuation-prompt-alist
-  '(("ipython" . "^   [.][.][.]+: *")
+  '(("ipython" . "^   [.][.][.]+: ")
     (t . "^[.][.][.] "))
   "Alist of Python continued-line prompts.
 Each element has the form (PROGRAM . REGEXP), where PROGRAM is
@@ -853,17 +919,23 @@ element matches `py-shell-name'."
   :type 'string
   :group 'python-mode)
 
+(defvar ipython-de-input-prompt-regexp "In \\[[0-9]+\\]:\\|^[ ]\\{3\\}[.]\\{3,\\}:"
+  "A regular expression to match the IPython input prompt. ")
+
+;; make sure it's set that way
+(setq ipython-de-input-prompt-regexp "In \\[[0-9]+\\]:\\|^[ ]\\{3\\}[.]\\{3,\\}:")
+
 ;; ipython.el
-(defvar ipython-de-input-prompt-regexp "\\(?:
-In \\[[0-9]+\\]: *.*
-----+> \\(.*
-\\)[\n]?\\)\\|\\(?:
-In \\[[0-9]+\\]: *\\(.*
-\\)\\)\\|^[ ]\\{3\\}[.]\\{3,\\}: *\\(.*
-\\)"
-  "A regular expression to match the IPython input prompt and the python
-command after it. The first match group is for a command that is rewritten,
-the second for a 'normal' command, and the third for a multiline command.")
+;; (defvar ipython-de-input-prompt-regexp "\\(?:
+;; In \\[[0-9]+\\]: *.*
+;; ----+> \\(.*
+;; \\)[\n]?\\)\\|\\(?:
+;; In \\[[0-9]+\\]: *\\(.*
+;; \\)\\)\\|^[ ]\\{3\\}[.]\\{3,\\}: *\\(.*
+;; \\)"
+;;   "A regular expression to match the IPython input prompt and the python
+;; command after it. The first match group is for a command that is rewritten,
+;; the second for a 'normal' command, and the third for a multiline command.")
 
 (defvar ipython-de-output-prompt-regexp "^Out\\[[0-9]+\\]: "
   "A regular expression to match the output prompt of IPython.")
@@ -1077,6 +1149,15 @@ actually punts to `jython-mode'."
   :group 'python-mode)
 (defvar py-exception-name-face 'py-exception-name-face)
 
+(defcustom py-set-complete-keymap-p  nil
+  "If `py-complete-initialize', which sets up enviroment for Pymacs based py-complete, should load it's keys into `python-mode-map'
+
+Default is nil.
+See also resp. edit `py-complete-set-keymap' "
+
+  :type 'boolean
+  :group 'python-mode)
+
 (defcustom py-use-local-default nil
   "If `t', py-shell will use `py-shell-local-path' instead
   of default Python.
@@ -1215,6 +1296,15 @@ See bug report at launchpad, lp:944093. "
   "Execute region through `shell-command-on-region' as
 v5 did it - lp:990079. This might fail with certain chars - see UnicodeEncodeError lp:550661"
 
+  :type 'boolean
+  :group 'python-mode)
+
+(defcustom py-trailing-whitespace-smart-delete-p nil
+  "Default is nil. When t, python-mode calls
+    (add-hook 'before-save-hook 'delete-trailing-whitespace nil 'local)
+
+Also commands may delete trailing whitespace by the way.
+When editing other peoples code, this may produce a larger diff than expected "
   :type 'boolean
   :group 'python-mode)
 
@@ -1702,8 +1792,10 @@ When `py-verbose-p' and MSG is non-nil messages the first line of STRING."
   (interactive "sPython command: ")
   (let* ((process (or process (python-shell-get-or-create-process)))
          (lines (split-string string "\n" t))
-         ;; (temp-file-name (make-temp-file "py"))
-         (temp-file-name (concat (py-normalize-directory py-temp-directory) "psss-temp.py"))
+         (temp-file-name (concat (with-current-buffer (process-buffer process)
+                                   (file-remote-p default-directory))
+                                 (py-normalize-directory py-temp-directory)
+                                 "psss-temp.py"))
          (file-name (or (buffer-file-name) temp-file-name)))
     ;; (when (and py-verbose-p msg)
     ;; (message (format "Sent: %s..." (nth 0 lines)))
@@ -1799,7 +1891,7 @@ FILE-NAME."
       (concat "__pyfile = open('''%s''');"
               "exec(compile(__pyfile.read(), '''%s''', 'exec'));"
               "__pyfile.close()")
-      (or temp-file-name file-name) file-name)
+      (or (file-remote-p temp-file-name 'localname) file-name) file-name)
      process)))
 
 (defun python-shell-switch-to-shell ()
@@ -1962,11 +2054,19 @@ completions on the current context."
 		 (when python-completion-original-window-configuration
 		   (set-window-configuration
 		    python-completion-original-window-configuration)))
-	     (setq python-completion-original-window-configuration nil)
+	     ;; (setq python-completion-original-window-configuration nil)
+             (if py-no-completion-calls-dabbrev-expand-p
+                 (or (ignore-errors (dabbrev-expand nil))(when py-indent-no-completion-p
+                                                           (tab-to-tab-stop)))
+               (when py-indent-no-completion-p
+                 (tab-to-tab-stop)))
 	     nil)
 	    ((null completion)
-	     (message "Can't find completion for \"%s\"" input)
-	     (ding)
+             (if py-no-completion-calls-dabbrev-expand-p
+                 (or (dabbrev-expand nil)(when py-indent-no-completion-p
+                                           (tab-to-tab-stop))(message "Can't find completion "))
+               (when py-indent-no-completion-p
+                 (tab-to-tab-stop)))
              nil)
             ((not (string= input completion))
              (progn (delete-char (- (length input)))
@@ -2251,7 +2351,6 @@ See http://debbugs.gnu.org/cgi/bugreport.cgi?bug=7115"
       (when (bolp) (setq count (1+ count)))
       (when (interactive-p) (message "%s" count))
       count)))
-
 
 (eval-when-compile
   (defconst python-rx-constituents
@@ -2797,158 +2896,12 @@ The criterion is either a match for `jython-mode' via
                       (throw 'done t))))
               (jython-mode)))))))
 
-(defun python-fill-paragraph (&optional justify)
-  "`fill-paragraph-function' handling multi-line strings and possibly comments.
-If any of the current line is in or at the end of a multi-line string,
-fill the string or the paragraph of it that point is in, preserving
-the string's indentation."
-  (interactive "P")
-  (or (fill-comment-paragraph justify)
-      (save-excursion
-        (end-of-line)
-        (let* ((syntax (syntax-ppss))
-               (orig (point))
-               start end)
-          (cond ((nth 4 syntax)	; comment.   fixme: loses with trailing one
-                 (let (fill-paragraph-function)
-                   (fill-paragraph justify)))
-                ;; The `paragraph-start' and `paragraph-separate'
-                ;; variables don't allow us to delimit the last
-                ;; paragraph in a multi-line string properly, so narrow
-                ;; to the string and then fill around (the end of) the
-                ;; current line.
-                ((eq t (nth 3 syntax))	; in fenced string
-                 (goto-char (nth 8 syntax)) ; string start
-                 (setq start (line-beginning-position))
-                 (setq end (condition-case () ; for unbalanced quotes
-                               (progn (forward-sexp)
-                                      (- (point) 3))
-                             (error (point-max)))))
-                ((re-search-backward "\\s|\\s-*\\=" nil t) ; end of fenced string
-                 (forward-char)
-                 (setq end (point))
-                 (condition-case ()
-                     (progn (backward-sexp)
-                            (setq start (line-beginning-position)))
-                   (error nil))))
-          (when end
-            (save-restriction
-              (narrow-to-region start end)
-              (goto-char orig)
-              ;; Avoid losing leading and trailing newlines in doc
-              ;; strings written like:
-              ;;   """
-              ;;   ...
-              ;;   """
-              (let ((paragraph-separate
-                     ;; Note that the string could be part of an
-                     ;; expression, so it can have preceding and
-                     ;; trailing non-whitespace.
-                     (concat
-                      (rx (or
-                           ;; Opening triple quote without following text.
-                           (and (* nonl)
-                                (group (syntax string-delimiter))
-                                (repeat 2 (backref 1))
-                                ;; Fixme:  Not sure about including
-                                ;; trailing whitespace.
-                                (* (any " \t"))
-                                eol)
-                           ;; Closing trailing quote without preceding text.
-                           (and (group (any ?\" ?')) (backref 2)
-                                (syntax string-delimiter))))
-                      "\\(?:" paragraph-separate "\\)"))
-                    fill-paragraph-function)
-                (fill-paragraph justify))))))) t)
-
-(defun python-shift-left (start end &optional count)
-  "Shift lines in region COUNT (the prefix arg) columns to the left.
-COUNT defaults to `py-indent-offset'.  If region isn't active, just shift
-current line.  The region shifted includes the lines in which START and
-END lie.  It is an error if any lines in the region are indented less than
-COUNT columns."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end) current-prefix-arg)
-     (list (line-beginning-position) (line-end-position) current-prefix-arg)))
-  (if count
-      (setq count (prefix-numeric-value count))
-    (setq count py-indent-offset))
-  (when (> count 0)
-    (save-excursion
-      (goto-char start)
-      (while (< (point) end)
-        (if (and (< (current-indentation) count)
-                 (not (looking-at "[ \t]*$")))
-            (error "Can't shift all lines enough"))
-        (forward-line))
-      (indent-rigidly start end (- count)))))
-
-(add-to-list 'debug-ignored-errors "^Can't shift all lines enough")
-
-(defun python-shift-right (start end &optional count)
-  "Shift lines in region COUNT (the prefix arg) columns to the right.
-COUNT defaults to `py-indent-offset'.  If region isn't active, just shift
-current line.  The region shifted includes the lines in which START and
-END lie."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end) current-prefix-arg)
-     (list (line-beginning-position) (line-end-position) current-prefix-arg)))
-  (if count
-      (setq count (prefix-numeric-value count))
-    (setq count py-indent-offset))
-  (indent-rigidly start end count))
-
 (defun python-outline-level ()
   "`outline-level' function for Python mode.
 The level is the number of `py-indent-offset' steps of indentation
 of current line."
   (1+ (/ (current-indentation) py-indent-offset)))
 
-;; Fixme: Consider top-level assignments, imports, &c.
-(defun python-current-defun (&optional length-limit)
-  "`add-log-current-defun-function' for Python."
-  (save-excursion
-    ;; Move up the tree of nested `class' and `def' blocks until we
-    ;; get to zero indentation, accumulating the defined names.
-    (let ((accum)
-          (length -1))
-      (catch 'done
-        (while (or (null length-limit)
-                   (null (cdr accum))
-                   (< length length-limit))
-          (let ((started-from (point)))
-            (python-beginning-of-block)
-            (end-of-line)
-            (beginning-of-defun)
-            (when (= (point) started-from)
-              (throw 'done nil)))
-          (when (looking-at (rx (0+ space) (or "def" "class") (1+ space)
-                                (group (1+ (or word (syntax symbol))))))
-            (push (match-string 1) accum)
-            (setq length (+ length 1 (length (car accum)))))
-          (when (= (current-indentation) 0)
-            (throw 'done nil))))
-      (when accum
-	(when (and length-limit (> length length-limit))
-	  (setcar accum ".."))
-	(mapconcat 'identity accum ".")))))
-
-(defun python-mark-block ()
-  "Mark the block around point.
-Uses `python-beginning-of-block', `python-end-of-block'."
-  (interactive)
-  (push-mark)
-  (python-beginning-of-block)
-  (push-mark (point) nil t)
-  (python-end-of-block)
-  (exchange-point-and-mark))
-
-;; Fixme:  Provide a find-function-like command to find source of a
-;; definition (separate from BicycleRepairMan).  Complicated by
-;; finding the right qualified name.
-
 ;;;; Completion.
 
 ;; http://lists.gnu.org/archive/html/bug-gnu-emacs/2008-01/msg00076.html
@@ -3144,19 +3097,51 @@ Currently-active file is at the head of the list.")
 (add-to-list 'interpreter-mode-alist (cons (purecopy "jython") 'jython-mode))
 (add-to-list 'same-window-buffer-names (purecopy "*Python*"))
 
+;; Bind python-file-queue before installing the kill-emacs-hook.
+(defvar python-file-queue nil
+  "Queue of Python temp files awaiting execution.
+Currently-active file is at the head of the list.")
+
+(defvar python-pdbtrack-is-tracking-p nil)
+
+(defconst python-pdbtrack-stack-entry-regexp
+  "^> \\(.*\\)(\\([0-9]+\\))\\([?a-zA-Z0-9_<>]+\\)()"
+  "Regular expression pdbtrack uses to find a stack trace entry.")
+
+(defconst python-pdbtrack-input-prompt "\n[(<]*[Ii]?[Pp]db[>)]+ "
+  "Regular expression pdbtrack uses to recognize a pdb prompt.")
+
+(defconst python-pdbtrack-track-range 10000
+  "Max number of characters from end of buffer to search for stack entry.")
+
+
+(defconst python-compilation-regexp-alist
+  ;; FIXME: maybe these should move to compilation-error-regexp-alist-alist.
+  ;;   The first already is (for CAML), but the second isn't.  Anyhow,
+  ;;   these are specific to the inferior buffer.  -- fx
+  `((,(rx line-start (1+ (any " \t")) "File \""
+          (group (1+ (not (any "\"<")))) ; avoid `<stdin>' &c
+          "\", line " (group (1+ digit)))
+     1 2)
+    (,(rx " in file " (group (1+ not-newline)) " on line "
+          (group (1+ digit)))
+     1 2)
+    ;; pdb stack trace
+    (,(rx line-start "> " (group (1+ (not (any "(\"<"))))
+          "(" (group (1+ digit)) ")" (1+ (not (any "("))) "()")
+     1 2))
+  "`compilation-error-regexp-alist' for inferior Python.")
+
 (defconst python-font-lock-syntactic-keywords
   ;; Make outer chars of matching triple-quote sequences into generic
   ;; string delimiters.  Fixme: Is there a better way?
   ;; First avoid a sequence preceded by an odd number of backslashes.
   `((,(concat "\\(?:^\\|[^\\]\\(?:\\\\.\\)*\\)" ;Prefix.
-              "\\(?1:\"\\)\\(?2:\"\\)\\(?3:\"\\)\\(?4:\"\\)\\(?5:\"\\)\\(?6:\"\\)\\|\\(?1:\"\\)\\(?2:\"\\)\\(?3:\"\\)\\|\\('\\)\\('\\)\\('\\)\\|\\('\\)\\('\\)\\('\\)\\('\\)\\('\\)\\('\\)")
+              "\\(?1:\"\\)\\(?2:\"\\)\\(?3:\"\\)\\(?4:\"\\)\\(?5:\"\\)\\(?6:\"\\)\\|\\(?1:\"\\)\\(?2:\"\\)\\(?3:\"\\)\\|\\(?1:'\\)\\(?2:'\\)\\(?3:'\\)\\(?4:'\\)\\(?5:'\\)\\(?6:'\\)\\|\\(?1:'\\)\\(?2:'\\)\\(?3:'\\)\\(?4:'\\)\\(?5:'\\)\\(?6:'\\)\\|\\(?1:'\\)\\(?2:'\\)\\(?3:'\\)")
      (1 (python-quote-syntax 1) t t)
      (2 (python-quote-syntax 2) t t)
      (3 (python-quote-syntax 3) t t)
-     (6 (python-quote-syntax 1) t t))
-    ;; This doesn't really help.
-    ;;     (,(rx (and ?\\ (group ?\n))) (1 " "))
-    ))
+     (6 (python-quote-syntax 1) t t))))
 
 (defun python-quote-syntax (n)
   "Put `syntax-table' property correctly on triple quote.
@@ -3613,7 +3598,9 @@ With optional \\[universal-argument] an indent with length `py-indent-offset' is
          (cui (current-indentation))
          (cuc (current-column)))
     (cond ((eq 4 (prefix-numeric-value arg))
-           (insert (make-string py-indent-offset ?\ )))
+	   (if indent-tabs-mode
+	       (insert (make-string 1 9))
+	     (insert (make-string py-indent-offset 32))))
           (t
            (if (and (eq need cui)(not (eq cuc cui)))
                (back-to-indentation)
@@ -3675,7 +3662,7 @@ Returns current indentation "
            (indent-to (+ need py-indent-offset)))
           ((not (eq 1 (prefix-numeric-value arg)))
            (py-smart-indentation-off)
-           (py-indent-line-intern)
+           (py-indent-line-intern need cui)
            (setq py-smart-indentation psi))
           (t (py-indent-line-intern need cui))))
   (when (and (interactive-p) py-verbose-p)(message "%s" (current-indentation)))
@@ -3692,11 +3679,15 @@ When indent is set back manually, this is honoured in following lines. "
         (progn
           (newline)
           (save-excursion
-            (goto-char orig) (delete-trailing-whitespace))
+            (goto-char orig)
+            (when py-trailing-whitespace-smart-delete-p
+              (delete-trailing-whitespace)))
           (setq erg (indent-to-column (py-compute-indentation))))
       (beginning-of-line)
       (insert-char ?\n 1)
-      (insert (make-string (setq erg (py-compute-indentation)) ?\ ))
+      (if indent-tabs-mode
+	  (insert (make-string (/ (setq erg (py-compute-indentation)) py-indent-offset) 9))
+	(insert (make-string (setq erg (py-compute-indentation)) 32)))
       ;; (move-to-column erg)
       (when (looking-at "\\([ \t]+\\)") (delete-region (match-beginning 1) (match-end 1))))
     (when (and (looking-at "[ \t]+")
@@ -3840,12 +3831,12 @@ Returns value of `indent-tabs-mode' switched to. "
 (defun py-indent-tabs-mode-on (arg)
   "Switch `indent-tabs-mode' on. "
   (interactive "p")
-  (indent-tabs-mode (abs arg)(interactive-p)))
+  (py-indent-tabs-mode (abs arg)(interactive-p)))
 
 (defun py-indent-tabs-mode-off (arg)
   "Switch `indent-tabs-mode' on. "
   (interactive "p")
-  (indent-tabs-mode (- (abs arg))(interactive-p)))
+  (py-indent-tabs-mode (- (abs arg))(interactive-p)))
 
 ;;; Guess indent offset
 (defun py-guessed-sanity-check (guessed)
@@ -3882,7 +3873,12 @@ Returns `py-indent-offset'"
                                (setq firstindent (progn (py-beginning-of-block)(current-indentation))))
                              (when (ignore-errors (< firstindent (py-down-statement)))
                                (current-indentation)))))))
-           (guessed (when erg (abs (- firstindent erg)))))
+           (second (progn (py-end-of-statement)
+                          (py-end-of-statement)
+                          (py-beginning-of-statement)
+                          (current-indentation)))
+           (guessed (when erg
+                      (abs (- second erg)))))
       (if (and guessed (py-guessed-sanity-check guessed))
           (setq py-indent-offset guessed)
         (setq py-indent-offset (default-value 'py-indent-offset)))
@@ -3914,12 +3910,10 @@ Returns `py-indent-offset'"
   "Make text outside current def or class invisible.
 
 The defun visible is the one that contains point or follows point. "
-  (interactive "P")
+  (interactive)
   (save-excursion
-    (widen)
-    (py-end-of-def-or-class)
-    (let ((end (point)))
-      (py-beginning-of-def-or-class)
+    (let ((end (py-beginning-of-def-or-class)))
+      (py-end-of-def-or-class)
       (narrow-to-region (point) end))))
 
 ;; make general form below work also in these cases
@@ -5084,11 +5078,13 @@ When HONOR-BLOCK-CLOSE-P is non-nil, statements such as `return',
                       (py-compute-indentation orig origline closing line inside repeat))
                   (current-indentation)))
                ((and (looking-at py-block-closing-keywords-re)(eq (py-count-lines) origline))
-                (py-beginning-of-block-or-clause)
-                (+
-                 (if py-smart-indentation (py-guess-indent-offset nil orig origline) py-indent-offset)
-                 ;; py-indent-offset
-                 (current-indentation)))
+                (skip-chars-backward "[ \t\r\n\f]")
+                (py-beginning-of-statement)
+                (if (py-beginning-of-block-or-clause-p)
+                    (+
+                     (if py-smart-indentation (py-guess-indent-offset nil orig origline) py-indent-offset)
+                     (current-indentation))
+                  (current-column)))
                ((looking-at py-block-closing-keywords-re)
                 (py-beginning-of-block-or-clause (current-indentation))
                 (current-indentation))
@@ -5139,8 +5135,8 @@ When HONOR-BLOCK-CLOSE-P is non-nil, statements such as `return',
                 (py-beginning-of-statement)
                 (py-compute-indentation orig origline closing line inside repeat))
                ((and (eq origline (py-count-lines))
-                     (save-excursion (and (setq erg (py-go-to-keyword py-block-or-clause-re))
-                                          (ignore-errors (< orig (py-end-of-block-or-clause))))))
+                     (save-excursion (and (save-excursion (setq erg (py-go-to-keyword py-block-or-clause-re)))
+                                          (ignore-errors (< orig (or (py-end-of-block-or-clause)(point)))))))
                 (+ (car erg) (if py-smart-indentation (py-guess-indent-offset nil orig origline) py-indent-offset)))
                ((and (eq origline (py-count-lines))
                      (py-beginning-of-statement-p))
@@ -5365,6 +5361,127 @@ will work.
   (when (and (looking-at py-def-or-class-re)
              (not (py-in-string-or-comment-p)))
     (point)))
+
+;;; End-of- p
+(defun py-end-of-line-p ()
+  "Returns position, if cursor is at the end of a line, nil otherwise. "
+  (when (eolp)(point)))
+
+(defun py-end-of-buffer-p ()
+  "Returns position, if cursor is at the end of buffer, nil otherwise. "
+  (when (eobp)(point)))
+
+(defun py-end-of-paragraph-p ()
+  "Returns position, if cursor is at the end of a paragraph, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (if (and (eolp) (looking-at paragraph-separate))
+        (setq erg (point))
+      (save-excursion
+        (py-beginning-of-paragraph)
+        (py-end-of-paragraph)
+        (when (eq orig (point))
+          (setq erg orig)))
+      erg)))
+
+(defun py-end-of-statement-p ()
+  "Returns position, if cursor is at the end of a statement, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-statement)
+      (py-end-of-statement)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-expression-p ()
+  "Returns position, if cursor is at the end of a expression, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-expression)
+      (py-end-of-expression)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-partial-expression-p ()
+  "Returns position, if cursor is at the end of a partial-expression, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-partial-expression)
+      (py-end-of-partial-expression)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-block-p ()
+  "Returns position, if cursor is at the end of a block, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-block)
+      (py-end-of-block)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-clause-p ()
+  "Returns position, if cursor is at the end of a clause, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-clause)
+      (py-end-of-clause)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-block-or-clause-p ()
+  "Returns position, if cursor is at the end of a block-or-clause, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-block-or-clause)
+      (py-end-of-block-or-clause)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-def-p ()
+  "Returns position, if cursor is at the end of a def, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-def)
+      (py-end-of-def)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-class-p ()
+  "Returns position, if cursor is at the end of a class, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-class)
+      (py-end-of-class)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
+
+(defun py-end-of-def-or-class-p ()
+  "Returns position, if cursor is at the end of a def-or-class, nil otherwise. "
+  (let ((orig (point))
+        erg)
+    (save-excursion
+      (py-beginning-of-def-or-class)
+      (py-end-of-def-or-class)
+      (when (eq orig (point))
+        (setq erg orig))
+      erg)))
 
 ;;; Opens- p
 (defun py-statement-opens-block-p (&optional regexp)
@@ -5716,23 +5833,19 @@ http://docs.python.org/reference/compound_stmts.html"
             (setq erg (py-travel-current-indent ind)))
         (py-look-downward-for-beginning py-def-or-class-re)
         (unless (eobp)
-          ;; (py-end-base py-def-or-class-re orig)
           (progn
             (setq ind
                   (+ (if py-smart-indentation
                          (save-excursion
                            (goto-char orig)
-                           ;; (setq origline (py-count-lines))
                            (py-end-of-statement)
                            (py-end-of-statement)
-                           ;; (when (eq origline (py-count-lines)) (py-end-of-statement))
                            (py-guess-indent-offset nil (point)))
                        py-indent-offset)
                      (current-indentation)))
             (py-end-of-statement)
             (forward-line 1)
-            (setq erg (py-travel-current-indent ind)))
-          ))
+            (setq erg (py-travel-current-indent ind)))))
       (if (< orig (point))
           (setq erg (point))
         (setq erg (py-look-downward-for-beginning py-def-or-class-re))
@@ -5741,9 +5854,7 @@ http://docs.python.org/reference/compound_stmts.html"
             (setq ind (+ py-indent-offset (current-indentation)))
             (py-end-of-statement)
             (forward-line 1)
-            (setq erg (py-travel-current-indent ind)))
-          ;; (py-end-base py-def-or-class-re orig)
-          ))
+            (setq erg (py-travel-current-indent ind)))))
       (when (and py-verbose-p (interactive-p)) (message "%s" erg))
       erg)))
 
@@ -6032,7 +6143,9 @@ If already at the beginning or before a partial-expression, go to next partial-e
          ((nth 1 pps)
           (goto-char (nth 1 pps))
           ;; (skip-chars-backward py-partial-expression-backward-regexp)
-          (setq erg (point)))
+          (setq erg (point))
+          (when (< 0 (abs (skip-chars-backward py-partial-expression-skip-regexp)))
+            (setq erg (point))))
          ((nth 8 pps)
           (when (nth 2 pps)
             (goto-char (nth 2 pps)))
@@ -6213,19 +6326,30 @@ http://docs.python.org/reference/compound_stmts.html
         (py-beginning-of-statement orig done))
        ((nth 8 pps)
         (goto-char (1- (nth 8 pps)))
-        (setq done t)
+        ;; (setq done t)
         (py-beginning-of-statement orig done))
        ((nth 1 pps)
         (goto-char (1- (nth 1 pps)))
         (setq done t)
         (py-beginning-of-statement orig done))
+       ((and (eq (point) orig)(looking-back ";[ \t]*"))
+        (goto-char (match-beginning 0))
+        (skip-chars-backward ";")
+        (py-beginning-of-statement orig done))
+       ((and (not (eq (point) orig))(looking-back ";[ \t]*"))
+        (setq erg (point)))
        ((and (not done) (not (eq 0 (skip-chars-backward " \t\r\n\f"))))
-        (setq done t)
+        ;; (setq done t)
         (py-beginning-of-statement orig done))
        ((not (eq (current-column) (current-indentation)))
-        (back-to-indentation)
-        (setq done t)
-        (py-beginning-of-statement orig done))
+        (if (< 0 (abs (skip-chars-backward "^;\t\r\n\f")))
+            (progn
+              (setq done t)
+              (back-to-indentation)
+              (py-beginning-of-statement orig done))
+          (back-to-indentation)
+          (setq done t)
+          (py-beginning-of-statement orig done)))
        ((looking-at "[ \t]*#")
         (skip-chars-backward " \t\r\n\f")
         (setq done t)
@@ -6242,15 +6366,20 @@ http://docs.python.org/reference/compound_stmts.html
 (defun py-go-to-keyword (regexp &optional maxindent)
   "Returns a list, whose car is indentation, cdr position. "
   (let ((orig (point))
-        (origline (py-count-lines))
+        ;; (origline (py-count-lines))
         (maxindent maxindent)
+        (first t)
         done erg cui)
     (while (and (not done) (not (bobp)))
       (py-beginning-of-statement)
-      (when (and (looking-at regexp)(if maxindent
-                                        (< (current-indentation) maxindent)t))
-        (setq erg (point))
-        (setq done t)))
+      (if (and (looking-at regexp)(if maxindent
+                                      (< (current-indentation) maxindent)t))
+          (progn
+            (setq erg (point))
+            (setq done t))
+        (when (and first (not maxindent))
+          (setq maxindent (current-indentation))
+          (setq first nil))))
     (when erg (setq erg (cons (current-indentation) erg)))
     erg))
 
@@ -6280,15 +6409,16 @@ To go just beyond the final line of the current statement, use `py-down-statemen
     (let ((pps (syntax-ppss))
           (orig (point))
           ;; use by scan-lists
-          parse-sexp-ignore-comments erg)
+          parse-sexp-ignore-comments erg stringchar)
       (cond
        ((and (not done) (< 0 (skip-chars-forward " \t\r\n\f")))
-        (end-of-line)
+        (skip-chars-forward "^;" (line-end-position))
         (py-beginning-of-comment)
-        (skip-chars-backward " \t\r\n\f" (line-beginning-position))
+        (unless (looking-back "^[ \t]*")
+          (skip-chars-backward " \t\r\n\f" (line-beginning-position)))
         (if (eq (point) orig)
             (progn
-              (end-of-line)
+              (skip-chars-forward "^;" (line-end-position))
               (forward-comment 99999)
               (py-end-of-statement orig done))
           (setq done t)
@@ -6303,52 +6433,62 @@ To go just beyond the final line of the current statement, use `py-down-statemen
                 (when (looking-at ":[ \t]*$")
                   (forward-char 1))
                 (setq done t)
-                (end-of-line)
+                (skip-chars-forward "^;" (line-end-position))
                 (skip-chars-backward " \t\r\n\f")
                 (py-end-of-statement orig done))
             (goto-char orig))))
        ((and (nth 8 pps)(nth 3 pps))
         (goto-char (nth 8 pps))
         (if (looking-at "\"\"\"\\|'''")
-            (goto-char (match-end 0))
-          (forward-char 1))
-        (while (and (re-search-forward (match-string-no-properties 0) nil (quote move) 1)
-                    (nth 3 (syntax-ppss))))
+            (progn
+              (goto-char (match-end 0))
+              (while (and (re-search-forward (match-string-no-properties 0) nil (quote move) 1)
+                          (nth 3 (syntax-ppss)))))
+          (setq stringchar (char-to-string (char-after)))
+          (forward-char 1)
+          (while (and (re-search-forward stringchar nil t 1)
+                      (nth 3 (syntax-ppss)))))
+        (skip-chars-forward "^;\t\r\n\f")
         (setq done t)
-        (end-of-line)
-        (skip-chars-backward " \t\r\n\f" (line-beginning-position))
-        (py-end-of-statement orig done))
+        (skip-chars-backward " " (line-beginning-position))
+        (when (< orig (point))
+          (py-end-of-statement orig done)))
        ;; in comment
        ((nth 4 pps)
         (if (eobp)
             nil
-          (setq done t)
+          (skip-chars-forward "^;" (line-end-position))
           (forward-comment 99999)
-          (end-of-line)
           (skip-chars-backward " \t\r\n\f" (line-beginning-position))
-          (py-beginning-of-comment)
-          (skip-chars-backward " \t\r\n\f")
+          (when (py-beginning-of-comment)
+            (skip-chars-backward " \t\r\n\f" (line-beginning-position)))
           (py-end-of-statement orig done)))
        ((looking-at "#")
         ;; (skip-chars-forward "#")
-        (end-of-line)
+        (skip-chars-forward "^;" (line-end-position))
         (forward-comment 99999)
         (setq done t)
-        (end-of-line)
+        (skip-chars-forward "^;" (line-end-position))
         (skip-chars-backward " \t\r\n\f")
         (py-beginning-of-comment)
         (skip-chars-backward " \t\r\n\f")
         (py-end-of-statement orig done))
        ((py-current-line-backslashed-p)
         (skip-chars-forward " \t\r\n\f")
-        (end-of-line)
-        (skip-chars-backward " \t\r\n\f")
+        (skip-chars-forward "^;" (line-end-position))
         (py-beginning-of-comment)
-        (skip-chars-backward " \t\r\n\f")
+        (skip-chars-backward " " (line-beginning-position))
         (setq done t)
         (py-end-of-statement orig done))
+       ((and (not done) (eq (point) orig)(looking-at ";"))
+        (skip-chars-forward ";" (line-end-position))
+        (when (< 0 (skip-chars-forward "^;" (line-end-position)))
+          (py-beginning-of-comment)
+          (skip-chars-backward " \t\r\n\f")
+          (setq done t))
+        (py-end-of-statement orig done))
        ((and (not done) (eq (point) orig))
-        (end-of-line)
+        (skip-chars-forward "^;" (line-end-position))
         (skip-chars-backward " \t\r\n\f")
         (py-beginning-of-comment)
         (skip-chars-backward " \t\r\n\f")
@@ -6574,6 +6714,7 @@ Returns beginning and end positions of marked area, a cons. "
     (when (and py-verbose-p (interactive-p)) (message "%s" erg))
     erg))
 
+(defalias 'py-minor-expression 'py-copy-partial-expression)
 (defalias 'py-partial-expression 'py-copy-partial-expression)
 (defun py-copy-partial-expression ()
   "Mark partial-expression at point.
@@ -7227,7 +7368,7 @@ A `nomenclature' is a fancy way of saying AWordWithMixedCaseNotUnderscores."
       (if (and (< orig (point)) (not (eobp)))
           (setq erg (point))
         (setq erg nil)))
-    (when (and py-report-position-p (or iact (interactive-p))) (message "%s" erg))
+    (when (and py-verbose-p (or iact (interactive-p))) (message "%s" erg))
     erg))
 
 (defun py-backward-into-nomenclature (&optional arg)
@@ -7240,8 +7381,6 @@ A `nomenclature' is a fancy way of saying AWordWithMixedCaseNotUnderscores."
   (interactive "p")
   (setq arg (or arg 1))
   (py-forward-into-nomenclature (- arg) arg))
-
-(defalias 'py-match-paren 'match-paren)
 
 (defun match-paren (&optional arg)
   "Go to the matching brace, bracket or parenthesis if on its counterpart.
@@ -7294,18 +7433,17 @@ Takes a list, INDENT and START position. "
 (defun py-comint-output-filter-function (string)
   "Watch output for Python prompt and exec next file waiting in queue.
 This function is appropriate for `comint-output-filter-functions'."
-  ;; TBD: this should probably use split-string
-  (when (and (or (string-equal string ">>> ")
-		 (and (>= (length string) 5)
-		      (string-equal (substring string -5) "\n>>> ")))
-	     (or (setq py-shell-input-lines nil)
-		 py-file-queue))
-    (pop-to-buffer (current-buffer))
+  ;;remove ansi terminal escape sequences from string
+  (setq string (ansi-color-filter-apply string))
+  (when (and (string-match py-shell-input-prompt-1-regexp string)
+             py-file-queue)
+    (if py-switch-buffers-on-execute-p
+        (pop-to-buffer (current-buffer)))
     (ignore-errors (delete-file (car py-file-queue)))
     (setq py-file-queue (cdr py-file-queue))
     (if py-file-queue
         (let ((pyproc (get-buffer-process (current-buffer))))
-	  (py-execute-file pyproc (car py-file-queue))))))
+          (py-execute-file-base pyproc (car py-file-queue))))))
 
 (defun py-guess-default-python ()
   "Defaults to \"python\", if guessing didn't succeed. "
@@ -7357,7 +7495,6 @@ Returns char found. "
                     (nname))))
     (unless (or nostars (string-match "^\*" erg))(setq erg (concat "*" erg "*")))
     erg))
-
 
 (defvar ipython-completion-command-string nil
   "Either ipython0.10-completion-command-string or ipython0.11-completion-command-string.
@@ -7535,7 +7672,9 @@ When DONE is `t', `py-shell-manage-windows' is omitted
 "
   (interactive "P")
   (if (or argprompt dedicated pyshellname switch sepchar py-buffer-name done (interactive-p))
-      (let* ((sepchar (or sepchar (char-to-string py-separator-char)))
+      (let* ((coding-system-for-read 'utf-8)
+             (coding-system-for-write 'utf-8)
+             (sepchar (or sepchar (char-to-string py-separator-char)))
              (args py-python-command-args)
              (oldbuf (current-buffer))
              (path (getenv "PYTHONPATH"))
@@ -7591,23 +7730,23 @@ When DONE is `t', `py-shell-manage-windows' is omitted
              proc)
         (set-buffer (apply 'make-comint-in-buffer executable py-buffer-name executable nil args))
         (set (make-local-variable 'comint-prompt-regexp)
-             (concat "\\("
-                     (mapconcat 'identity
-                                (delq nil (list py-shell-input-prompt-1-regexp py-shell-input-prompt-2-regexp ipython-de-input-prompt-regexp ipython-de-output-prompt-regexp py-pdbtrack-input-prompt py-pydbtrack-input-prompt))
-                                "\\|")
-                     "\\)"))
+             (cond ((string-match "[iI][pP]ython[[:alnum:]*-]*$" py-buffer-name)
+                    (concat "\\("
+                            (mapconcat 'identity
+                                       (delq nil (list py-shell-input-prompt-1-regexp py-shell-input-prompt-2-regexp ipython-de-input-prompt-regexp ipython-de-output-prompt-regexp py-pdbtrack-input-prompt py-pydbtrack-input-prompt))
+                                       "\\|")
+                            "\\)"))
+                   (t (concat "\\("
+                              (mapconcat 'identity
+                                         (delq nil (list py-shell-input-prompt-1-regexp py-shell-input-prompt-2-regexp py-pdbtrack-input-prompt py-pydbtrack-input-prompt))
+                                         "\\|")
+                              "\\)"))))
         (set (make-local-variable 'comint-input-filter) 'py-history-input-filter)
-
-        (set (make-local-variable 'comint-use-prompt-regexp) t)
+        (set (make-local-variable 'comint-prompt-read-only) py-shell-prompt-read-only)
+        (set (make-local-variable 'comint-use-prompt-regexp) nil)
         (set (make-local-variable 'compilation-error-regexp-alist)
              python-compilation-regexp-alist)
-        (setq completion-at-point-functions nil)
-        ;; (py-set-shell-complete-function)
-        ;; (if py-complete-function
-        ;;     (add-hook 'completion-at-point-functions
-        ;;               py-complete-function nil 'local)
-        ;;   (add-hook 'completion-at-point-functions
-        ;;             'py-shell-complete nil 'local))
+        ;; (setq completion-at-point-functions nil)
         (add-hook 'comint-preoutput-filter-functions #'python-preoutput-filter
                   nil t)
         (if py-fontify-shell-buffer-p
@@ -7636,17 +7775,24 @@ When DONE is `t', `py-shell-manage-windows' is omitted
         ;; (sit-for 0.1)
         (setq comint-input-sender 'py-shell-simple-send)
         (setq comint-input-ring-file-name
-              (cond ((string-match "[iI][pP]ython[[:alnum:]]*$" py-buffer-name)
-                     (if (getenv "IPYTHONDIR")
-                         (concat (getenv "IPYTHONDIR") "/history")
-                       "~/.ipython/history"))
-                    ((getenv "PYTHONHISTORY")
-                     (concat (getenv "PYTHONHISTORY") "/" (py-report-executable py-buffer-name) "_history"))
-                    (dedicated
-                     (concat "~/." (substring py-buffer-name 0 (string-match "-" py-buffer-name)) "_history"))
+              (cond ((string-match "[iI][pP]ython[[:alnum:]*-]*$" py-buffer-name)
+                     (if py-honor-IPYTHONDIR-p
+                         (if (getenv "IPYTHONDIR")
+                             (concat (getenv "IPYTHONDIR") "/history")
+                           py-ipython-history)
+                       py-ipython-history))
+                    (t
+                     (if py-honor-PYTHONHISTORY-p
+                         (if (getenv "PYTHONHISTORY")
+                             (concat (getenv "PYTHONHISTORY") "/" (py-report-executable py-buffer-name) "_history")
+                           py-ipython-history)
+                       py-ipython-history))
+                    ;; (dedicated
+                    ;; (concat "~/." (substring py-buffer-name 0 (string-match "-" py-buffer-name)) "_history"))
                     ;; .pyhistory might be locked from outside Emacs
                     ;; (t "~/.pyhistory")
-                    (t (concat "~/." (py-report-executable py-buffer-name) "_history"))))
+                    ;; (t (concat "~/." (py-report-executable py-buffer-name) "_history"))
+                    ))
         (comint-read-input-ring t)
         (set-process-sentinel (get-buffer-process (current-buffer))
                               #'shell-write-history-on-exit)
@@ -7659,9 +7805,7 @@ When DONE is `t', `py-shell-manage-windows' is omitted
         (use-local-map py-shell-map)
         ;; (add-hook 'py-shell-hook 'py-dirstack-hook)
         (when py-shell-hook (run-hooks 'py-shell-hook))
-        (if (and (interactive-p) py-shell-switch-buffers-on-execute-p)
-            (pop-to-buffer py-buffer-name)
-          (unless done (py-shell-manage-windows switch py-split-windows-on-execute-p py-switch-buffers-on-execute-p oldbuf py-buffer-name)))
+        (unless done (py-shell-manage-windows switch py-split-windows-on-execute-p py-switch-buffers-on-execute-p oldbuf py-buffer-name))
         py-buffer-name)
     (cond ((comint-check-proc (current-buffer))
            (buffer-name (current-buffer)))
@@ -8023,22 +8167,24 @@ When called from a programm, it accepts a string specifying a shell which will b
   "Adapt the variables used in the process. "
   (let* ((oldbuf (current-buffer))
          (pyshellname (or pyshellname (py-choose-shell)))
-         (py-execute-directory (or (ignore-errors (file-name-directory (buffer-file-name)))(getenv "WORKON_HOME")(getenv "HOME")))
+         (py-execute-directory (or (ignore-errors (file-name-directory (file-remote-p (buffer-file-name) 'localname)))(getenv "WORKON_HOME")(getenv "HOME")))
          (strg (buffer-substring-no-properties start end))
          (sepchar (or sepchar (char-to-string py-separator-char)))
          (py-buffer-name (py-buffer-name-prepare pyshellname sepchar))
          (temp (make-temp-name
                 (concat (replace-regexp-in-string (regexp-quote sepchar) "-" (replace-regexp-in-string (concat "^" (regexp-quote sepchar)) "" (replace-regexp-in-string ":" "-" pyshellname))) "-")))
-         (file (concat (expand-file-name py-temp-directory) sepchar (replace-regexp-in-string (regexp-quote sepchar) "-" temp) ".py"))
-         (filebuf (get-buffer-create file))
+         (localname (concat (expand-file-name py-temp-directory) sepchar (replace-regexp-in-string (regexp-quote sepchar) "-" temp) ".py"))
          (proc (if dedicated
                    (get-buffer-process (py-shell nil dedicated pyshellname switch sepchar py-buffer-name t))
                  (or (get-buffer-process (py-buffer-name-prepare pyshellname))
                      (get-buffer-process (py-shell nil dedicated pyshellname switch sepchar py-buffer-name t)))))
          (procbuf (process-buffer proc))
+         (file (with-current-buffer py-buffer-name ; create the file to be executed in context of the shell
+                 (concat (file-remote-p default-directory) localname)))
+         (filebuf (get-buffer-create file))
          (pec (if (string-match "[pP]ython ?3" py-buffer-name)
-                  (format "exec(compile(open('%s').read(), '%s', 'exec')) # PYTHON-MODE\n" file file)
-                (format "execfile(r'%s') # PYTHON-MODE\n" file)))
+                  (format "exec(compile(open('%s').read(), '%s', 'exec')) # PYTHON-MODE\n" localname localname)
+                (format "execfile(r'%s') # PYTHON-MODE\n" localname)))
          (wholebuf (when (boundp 'wholebuf) wholebuf))
          (comint-scroll-to-bottom-on-output t)
          erg)
@@ -8083,8 +8229,8 @@ When called from a programm, it accepts a string specifying a shell which will b
                    (sit-for 0.1)
                    (unless py-execute-keep-temporary-file-p
                      (delete-file file)
-                     (when (buffer-live-p file)
-                       (kill-buffer file)))
+                     (when (buffer-live-p localname)
+                       (kill-buffer localname)))
                    erg)
                (message "%s not readable. %s" file "Do you have write permissions?"))))))
 
@@ -8588,13 +8734,15 @@ Optional arguments DEDICATED (boolean) and SWITCH (symbols 'noswitch/'switch)"
          (shell (or shell (progn (with-temp-buffer (insert-file-contents file)(py-choose-shell)))))
          (name (py-process-name shell dedicated))
          (proc (get-buffer-process (py-shell nil dedicated (or shell (downcase name)))))
-         (procbuf (if dedicated
-                      (buffer-name (get-buffer (current-buffer)))
-                    (buffer-name (get-buffer (concat "*" name "*")))))
+         (procbuf (get-process proc))
+         ;; (procbuf (if dedicated
+         ;;              (buffer-name (get-buffer (current-buffer)))
+         ;;            (buffer-name (get-buffer (concat "*" name "*")))))
          (pec (if (string-match "Python3" name)
                   (format "exec(compile(open('%s').read(), '%s', 'exec')) # PYTHON-MODE\n" file file)
                 (format "execfile(r'%s') # PYTHON-MODE\n" file)))
-         (comint-scroll-to-bottom-on-output t))
+         (comint-scroll-to-bottom-on-output t)
+         erg)
     (if (file-readable-p file)
         (progn
           (setq erg (py-execute-file-base proc file pec))
@@ -9003,18 +9151,25 @@ Useful for newly defined symbol, not known to python yet. "
             (insert erg)))))))
 
 (defun py-find-imports ()
-  "Find top-level imports, updating `python-imports'."
+  "Find top-level imports, updating `python-imports'.
+
+Returns python-imports"
   (interactive)
-  (let* (imports)
+  (let (imports)
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward
-              "^import *[A-Za-z_][A-Za-z_0-9].*\\|^from +[A-Za-z_][A-Za-z_0-9]+ +import .*" nil t)
+              "^import *[A-Za-z_][A-Za-z_0-9].*\\|^from +[A-Za-z_][A-Za-z_0-9.]+ +import .*" nil t)
+        (unless (py-end-of-statement-p)
+          (py-end-of-statement))
         (setq imports
               (concat
                imports
-               (buffer-substring-no-properties (match-beginning 0) (match-end 0)) ";"))))
+               (replace-regexp-in-string
+                "[\\]\r?\n?\s*" ""
+                (buffer-substring-no-properties (match-beginning 0) (point))) ";"))))
     (when (and py-verbose-p (interactive-p)) (message "%s" imports))
+    (setq python-imports imports)
     imports))
 
 (defun py-eldoc-function ()
@@ -9071,8 +9226,17 @@ Optional \\[universal-argument] used for debugging, will prevent deletion of tem
          (file (concat (expand-file-name temp py-temp-directory) ".py"))
          (cmd (py-find-imports)))
     (goto-char orig)
+    (when cmd
+      (setq cmd (mapconcat
+                 (lambda (arg) (concat "try: " arg "\nexcept: pass\n"))
+                 (split-string cmd ";" t)
+                 "")))
     (setq cmd (concat "import pydoc\n"
                       cmd))
+    (when (not py-remove-cwd-from-path)
+      (setq cmd (concat cmd "import sys\n"
+                        "sys.path.insert(0, '"
+                        (file-name-directory origfile) "')\n")))
     (setq cmd (concat cmd "pydoc.help('" sym "')\n"))
     (with-temp-buffer
       (insert cmd)
@@ -9625,7 +9789,7 @@ With arg, do it that many times.
 ;;; from string-strip.el --- Strip CHARS from STRING
 
 ;; (setq strip-chars-before  "[ \t\r\n]*")
-(defcustom strip-chars-before  "[ \t\r\n]*"
+(defcustom strip-chars-before  "\\`[ \t\r\n]*"
   "Regexp indicating which chars shall be stripped before STRING - which is defined by `string-chars-preserve'."
 
   :type 'string
@@ -9638,28 +9802,18 @@ With arg, do it that many times.
   :type 'string
   :group 'convenience)
 
-(defcustom string-chars-preserve "\\(.*?\\)"
-  "Chars preserved of STRING.
-`strip-chars-after' and
-`strip-chars-before' indicate what class of chars to strip."
-  :type 'string
-  :group 'convenience)
-
-(defun string-strip (str &optional chars-before chars-after chars-preserve)
+(defun string-strip (str &optional chars-before chars-after)
   "Return a copy of STR, CHARS removed.
 `CHARS-BEFORE' and `CHARS-AFTER' default is \"[ \t\r\n]*\",
-i.e. spaces, tabs, carriage returns, newlines and newpages.
-`CHARS-PRESERVE' must be a parentized expression,
-it defaults to \"\\(.*?\\)\""
+i.e. spaces, tabs, carriage returns, newlines and newpages. "
   (let ((s-c-b (or chars-before
                    strip-chars-before))
         (s-c-a (or chars-after
                    strip-chars-after))
-        (s-c-p (or chars-preserve
-                   string-chars-preserve)))
-    (string-match
-     (concat "\\`[" s-c-b"]*" s-c-p "[" s-c-a "]*\\'") str)
-    (match-string 1 str)))
+        (erg str))
+    (setq erg (replace-regexp-in-string  s-c-b "" erg))
+    (setq erg (replace-regexp-in-string  s-c-a "" erg))
+    erg))
 
 ;;;
 
@@ -10225,6 +10379,7 @@ With \\[universal-argument] 4 is called `py-switch-shell' see docu there.
         (when (interactive-p) (message "%s" "Could not detect Python on your system. Maybe set `py-edit-only-p'?")))
       erg)))
 
+;;; Smart indentation
 (defalias 'toggle-py-smart-indentation 'py-toggle-smart-indentation)
 (defun py-toggle-smart-indentation (&optional arg)
   "If `py-smart-indentation' should be on or off.
@@ -10258,6 +10413,43 @@ Returns value of `py-smart-indentation'. "
     (toggle-py-smart-indentation arg))
   (when (interactive-p) (message "py-smart-indentation: %s" py-smart-indentation))
   py-smart-indentation)
+
+;;; Smart operator
+(defalias 'toggle-py-smart-operator 'py-toggle-smart-operator)
+(defun py-toggle-smart-operator (&optional arg)
+  "If `py-smart-operator-mode-p' should be on or off.
+
+Returns value of `py-smart-operator-mode-p' switched to. "
+  (interactive)
+  (let ((arg (or arg (if py-smart-operator-mode-p -1 1))))
+    (if (< 0 arg)
+        (progn
+          (setq py-smart-operator-mode-p t)
+          (py-smart-operator-mode 1))
+      (setq py-smart-operator-mode-p nil)
+      (py-smart-operator-mode -1))
+    (when (interactive-p) (message "py-smart-operator-mode: %s" py-smart-operator-mode-p))
+    py-smart-operator-mode-p))
+
+(defun py-smart-operator-mode-on (&optional arg)
+  "Make sure, `py-smart-operator-mode-p' is on.
+
+Returns value of `py-smart-operator-mode-p'. "
+  (interactive "p")
+  (let ((arg (or arg 1)))
+    (py-toggle-smart-operator arg))
+  (when (interactive-p) (message "py-smart-operator-mode: %s" py-smart-operator-mode-p))
+  py-smart-operator-mode-p)
+
+(defun py-smart-operator-mode-off (&optional arg)
+  "Make sure, `py-smart-operator-mode-p' is off.
+
+Returns value of `py-smart-operator-mode-p'. "
+  (interactive "p")
+  (let ((arg (if arg (- arg) -1)))
+    (py-toggle-smart-operator arg))
+  (when (interactive-p) (message "py-smart-operator-mode: %s" py-smart-operator-mode-p))
+  py-smart-operator-mode-p)
 
 ;;; Split-Windows-On-Execute forms
 (defalias 'toggle-py-split-windows-on-execute 'py-toggle-split-windows-on-execute)
@@ -10462,912 +10654,17 @@ if `(locate-library \"python-mode\")' is not succesful. "
     (cond ((and (not (string= "" py-install-directory))(stringp py-install-directory))
            (add-to-list 'load-path (expand-file-name py-install-directory))
            (add-to-list 'load-path (concat (expand-file-name py-install-directory) "completion"))
+           (add-to-list 'load-path (concat (expand-file-name py-install-directory) "extensions"))
            (add-to-list 'load-path (concat (expand-file-name py-install-directory) "test"))
-           (add-to-list 'load-path (concat (expand-file-name py-install-directory) "tools")))
+           (add-to-list 'load-path (concat (expand-file-name py-install-directory) "tools"))
+           (add-to-list 'load-path (concat (expand-file-name py-install-directory) "autopair"))
+           )
           ((when py-guess-py-install-directory-p
              (let ((guessed-py-install-directory (py-guess-py-install-directory)))
                (when guessed-py-install-directory
                  (add-to-list 'load-path guessed-py-install-directory)))))
           (t (error "Please set `py-install-directory', see INSTALL"))
           (when (interactive-p) (message "%s" load-path)))))
-
-;;; Autopair
-;; Original author: Joao Tavora <joaotavora [at] gmail.com>
-;; X-URL: http://autopair.googlecode.com
-
-;; variables
-(defvar autopair-pair-criteria 'help-balance
-  "How to decide whether to pair opening brackets or quotes.
-
-Set this to 'always to always pair, or 'help-balance to be more
-criterious when pairing.")
-
-(defvar autopair-skip-criteria 'help-balance
-  "How to decide whether to skip closing brackets or quotes.
-
-Set this to 'always to always skip, or 'help-balance to be more
-criterious when skipping.")
-
-(defvar autopair-emulation-alist nil
-  "A dinamic keymap for autopair set mostly from the current
-  syntax table.")
-
-(unless (> emacs-major-version 23)
-  (defvar autopair-dont-activate nil
-    "Control activation of `autopair-global-mode'.
-
-Set this to a non-nil value to skip activation of `autopair-mode'
-in certain contexts.  If however the value satisfies `functionp'
-and is a function of no arguments, the function is called and it is
-the return value that decides.")
-  (make-variable-buffer-local 'autopair-dont-activate))
-
-(defvar autopair-extra-pairs nil
-  "Extra pairs for which to use pairing.
-
-It's a Common-lisp-style even-numbered property list, each pair
-of elements being of the form (TYPE , PAIRS). PAIRS is a mixed
-list whose elements are cons cells, which look like cells look
-like (OPENING . CLOSING). Autopair pairs these like
-parenthesis.
-
-TYPE can be one of:
-
-:string : whereby PAIRS will be considered only when inside a
-          string literal
-
-:comment : whereby PAIRS will be considered only when inside a comment
-
-:code : whereby PAIRS will be considered only when outisde a
-        string and a comment.
-
-:everywhere : whereby PAIRS will be considered in all situations
-
-In Emacs-lisp, this might be useful
-
-(add-hook 'emacs-lisp-mode-hook
-          #'(lambda ()
-              (setq autopair-extra-pairs `(:comment ((?`. ?'))))))
-
-Note that this does *not* work for single characters,
-e.x. characters you want to behave as quotes.  See the
-docs/source comments for more details.")
-
-(make-variable-buffer-local 'autopair-extra-pairs)
-
-(defvar autopair-dont-pair `(:string (?') :comment  (?'))
-  "Characters for which to skip any pairing behaviour.
-
-This variable overrides `autopair-pair-criteria' and
-`autopair-extra-pairs'. It does not
-  (currently) affect the skipping behaviour.
-
-It's a Common-lisp-style even-numbered property list, each pair
-of elements being of the form (TYPE , CHARS). CHARS is a list of
-characters and TYPE can be one of:
-
-:string : whereby characters in CHARS will not be autopaired when
-          inside a string literal
-
-:comment : whereby characters in CHARS will not be autopaired when
-          inside a comment
-
-:never : whereby characters in CHARS won't even have their
-         bindings replaced by autopair's. This particular option
-         should be used for troubleshooting and requires
-         `autopair-mode' to be restarted to have any effect.")
-(make-variable-buffer-local 'autopair-dont-pair)
-
-(defvar autopair-action nil
-  "Autopair action decided on by last interactive autopair command, or nil.
-
-When autopair decides on an action this is a list whose first
-three elements are (ACTION PAIR POS-BEFORE).
-
-ACTION is one of `opening', `insert-quote', `skip-quote',
-`backspace', `newline' or `paired-delimiter'. PAIR is the pair of
-the `autopair-inserted' character, if applicable. POS-BEFORE is
-value of point before action command took place .")
-
-(defvar autopair-wrap-action nil
-  "Autowrap action decided on by autopair, if any.
-
-When autopair decides on an action this is a list whose first
-three elements are (ACTION PAIR POS-BEFORE REGION-BEFORE).
-
-ACTION can only be `wrap' currently. PAIR and POS-BEFORE
-delimiter are as in `autopair-action'. REGION-BEFORE is a cons
-cell with the bounds of the region before the command takes
-place")
-
-(defvar autopair-handle-action-fns '()
-  "Autopair handlers to run *instead* of the default handler.
-
-Each element is a function taking three arguments (ACTION, PAIR
-and POS-BEFORE), which are the three elements of the
-`autopair-action' variable, which see.
-
-If non-nil, these functions are called *instead* of the single
-function `autopair-default-handle-action', so use this variable
-to specify special behaviour. To also run the default behaviour,
-be sure to include `autopair-default-handle-action' in the
-list, or call it from your handlers.")
-(make-variable-buffer-local 'autopair-handle-action-fns)
-
-(defvar autopair-handle-wrap-action-fns '()
-  "Autopair wrap handlers to run *instead* of the default handler.
-
-Each element is a function taking four arguments (ACTION, PAIR,
-POS-BEFORE and REGION-BEFORE), which are the three elements of the
-`autopair-wrap-action' variable, which see.
-
-If non-nil, these functions are called *instead* of the single
-function `autopair-default-handle-wrap-action', so use this
-variable to specify special behaviour. To also run the default
-behaviour, be sure to include `autopair-default-handle-wrap-action' in
-the list, or call it in your handlers.")
-(make-variable-buffer-local 'autopair-handle-wrap-action-fns)
-
-(defvar autopair-inserted nil
-  "Delimiter inserted by last interactive autopair command.
-
-This is calculated with `autopair-calculate-inserted', which see.")
-
-(defun autopair-calculate-inserted ()
-  "Attempts to guess the delimiter the current command is inserting.
-
-For now, simply returns `last-command-event'"
-  last-command-event)
-
-;; minor mode and global mode
-;;
-(define-globalized-minor-mode autopair-global-mode autopair-mode autopair-on)
-
-(defun autopair-on ()
-  (unless (or buffer-read-only
-              (and (not (minibufferp))
-                   (string-match "^ \\*" (buffer-name)))
-              (eq major-mode 'sldb-mode)
-              (and (boundp 'autopair-dont-activate)
-                   autopair-dont-activate))
-    (autopair-mode 1)))
-
-(define-minor-mode autopair-mode
-  "Automagically pair braces and quotes. "
-  nil " pair" nil
-  (cond (autopair-mode
-         ;; Setup the dynamic emulation keymap
-         ;;
-         (let ((map (make-sparse-keymap)))
-           (define-key map [remap delete-backward-char] 'autopair-backspace)
-           (define-key map [remap backward-delete-char-untabify] 'autopair-backspace)
-           (define-key map (kbd "<backspace>") 'autopair-backspace)
-           (define-key map [backspace] 'autopair-backspace)
-           (define-key map (kbd "DEL") 'autopair-backspace)
-           (define-key map [return] 'autopair-newline)
-           (define-key map (kbd "RET") 'autopair-newline)
-           (dotimes (char 256) ;; only searches the first 256 chars,
-             ;; TODO: is this enough/toomuch/stupid?
-             (unless (member char
-                             (getf autopair-dont-pair :never))
-               (let* ((syntax-entry (aref (syntax-table) char))
-                      (class (and syntax-entry
-                                  (syntax-class syntax-entry)))
-                      (pair (and syntax-entry
-                                 (cdr syntax-entry))))
-                 (cond ((eq class (car (string-to-syntax "(")))
-                        ;; syntax classes "opening parens" and "close parens"
-                        (define-key map (string char) 'autopair-insert-opening)
-                        (define-key map (string pair) 'autopair-skip-close-maybe))
-                       ((eq class (car (string-to-syntax "\"")))
-                        ;; syntax class "string quote
-                        (define-key map (string char) 'autopair-insert-or-skip-quote))
-                       ((eq class (car (string-to-syntax "$")))
-                        ;; syntax class "paired-delimiter"
-                        ;;
-                        ;; Apropos this class, see Issues 18, 25 and
-                        ;; elisp info node "35.2.1 Table of Syntax
-                        ;; Classes". The fact that it supresses
-                        ;; syntatic properties in the delimited region
-                        ;; dictates that deciding to autopair/autoskip
-                        ;; can't really be as clean as the string
-                        ;; delimiter.
-                        ;;
-                        ;; Apparently, only `TeX-mode' uses this, so
-                        ;; the best is to bind this to
-                        ;; `autopair-insert-or-skip-paired-delimiter'
-                        ;; which defers any decision making to
-                        ;; mode-specific post-command handler
-                        ;; functions.
-                        ;;
-                        (define-key map (string char) 'autopair-insert-or-skip-paired-delimiter))))))
-           ;; read `autopair-extra-pairs'
-           (dolist (pairs-list (remove-if-not #'listp autopair-extra-pairs))
-             (dolist (pair pairs-list)
-               (define-key map (string (car pair)) 'autopair-extra-insert-opening)
-               (define-key map (string (cdr pair)) 'autopair-extra-skip-close-maybe)))
-
-           (set (make-local-variable 'autopair-emulation-alist) (list (cons t map)))
-           (add-hook 'python-mode-hook
-                     #'(lambda ()
-                         (setq autopair-handle-action-fns
-                               (list #'autopair-default-handle-action
-                                     #'autopair-python-triple-quote-action)))))
-         (setq autopair-action nil)
-         (setq autopair-wrap-action nil)
-         (add-hook 'emulation-mode-map-alists 'autopair-emulation-alist 'append)
-         (add-hook 'post-command-hook 'autopair-post-command-handler nil 'local))
-        (t
-         (remove-hook 'python-mode-hook
-                      #'(lambda ()
-                          (setq autopair-handle-action-fns
-                                (list #'autopair-default-handle-action
-                                      #'autopair-python-triple-quote-action))))
-         (setq autopair-emulation-alist nil)
-         (remove-hook 'emulation-mode-map-alists 'autopair-emulation-alist)
-         (remove-hook 'post-command-hook         'autopair-post-command-handler 'local))))
-
-;; helper functions
-;;
-(defun autopair-syntax-ppss ()
-  "Calculate syntax info relevant to autopair.
-
-A list of four elements is returned:
-
-- SYNTAX-INFO is either the result `syntax-ppss' or the result of
-  calling `parse-partial-sexp' with the appropriate
-  bounds (previously calculated with `syntax-ppss'.
-
-- WHERE-SYM can be one of the symbols :string, :comment or :code.
-
-- QUICK-SYNTAX-INFO is always the result returned by `syntax-ppss'.
-
-- BOUNDS are the boudaries of the current string or comment if
-  we're currently inside one."
-  (let* ((quick-syntax-info (syntax-ppss))
-         (string-or-comment-start (nth 8 quick-syntax-info)))
-    (cond (;; inside a string, recalculate
-           (nth 3 quick-syntax-info)
-           (list (parse-partial-sexp (1+ string-or-comment-start) (point))
-                 :string
-                 quick-syntax-info
-                 (cons string-or-comment-start
-                       (condition-case nil
-                           (scan-sexps string-or-comment-start 1)
-                         (error nil)))))
-          ((nth 4 quick-syntax-info)
-           (list (parse-partial-sexp (1+ (nth 8 quick-syntax-info)) (point))
-                 :comment
-                 quick-syntax-info))
-          (t
-           (list quick-syntax-info
-                 :code
-                 quick-syntax-info)))))
-
-(defun autopair-find-pair (delim &optional closing)
-  (when (and delim
-             (integerp delim))
-    (let ((syntax-entry (aref (syntax-table) delim)))
-      (cond ((eq (syntax-class syntax-entry) (car (string-to-syntax "(")))
-             (cdr syntax-entry))
-            ((or (eq (syntax-class syntax-entry) (car (string-to-syntax "\"")))
-                 (eq (syntax-class syntax-entry) (car (string-to-syntax "$"))))
-             delim)
-            ((and (not closing)
-                  (eq (syntax-class syntax-entry) (car (string-to-syntax ")"))))
-             (cdr syntax-entry))
-            (autopair-extra-pairs
-             (some #'(lambda (pair-list)
-                       (some #'(lambda (pair)
-                                 (cond ((eq (cdr pair) delim) (car pair))
-                                       ((eq (car pair) delim) (cdr pair))))
-                             pair-list))
-                   (remove-if-not #'listp autopair-extra-pairs)))))))
-
-(defun autopair-calculate-wrap-action ()
-  (when (and transient-mark-mode mark-active)
-    (when (> (point) (mark))
-      (exchange-point-and-mark))
-    (save-excursion
-      (let* ((region-before (cons (region-beginning)
-                                  (region-end)))
-             (point-before (point))
-             (start-syntax (syntax-ppss (car region-before)))
-             (end-syntax   (syntax-ppss (cdr region-before))))
-        (when (or (not (eq autopair-autowrap 'help-balance))
-                  (and (eq (nth 0 start-syntax) (nth 0 end-syntax))
-                       (eq (nth 3 start-syntax) (nth 3 end-syntax))))
-          (list 'wrap (or (second autopair-action)
-                          (autopair-find-pair autopair-inserted))
-                point-before
-                region-before))))))
-
-(defun autopair-original-binding (fallback-keys)
-  (or (key-binding `[,autopair-inserted])
-      (key-binding (this-single-command-keys))
-      (key-binding fallback-keys)))
-
-(defun autopair-fallback (&optional fallback-keys)
-  (let* ((autopair-emulation-alist nil)
-         (beyond-cua (let ((cua--keymap-alist nil))
-                       (autopair-original-binding fallback-keys)))
-         (beyond-autopair (autopair-original-binding fallback-keys)))
-    (when autopair-autowrap
-      (setq autopair-wrap-action (autopair-calculate-wrap-action)))
-
-    (setq this-original-command beyond-cua)
-    ;; defer to "paredit-mode" if that is installed and running
-    (when (and (featurep 'paredit)
-               (string-match "paredit" (symbol-name beyond-cua)))
-      (setq autopair-action nil))
-    (let ((cua-delete-selection (not autopair-autowrap))
-          (blink-matching-paren (not autopair-action)))
-      (call-interactively beyond-autopair))))
-
-(defvar autopair-autowrap 'help-balance
-  "If non-nil autopair attempts to wrap the selected region.
-
-This is also done in an optimistic \"try-to-balance\" fashion.
-Set this to to 'help-balance to be more criterious when wrapping.")
-
-(defvar autopair-skip-whitespace nil
-  "If non-nil also skip over whitespace when skipping closing delimiters.
-
-If set to 'chomp, this will be most useful in lisp-like languages where you want
-lots of )))))....")
-
-(defvar autopair-blink (if (boundp 'blink-matching-paren)
-                           blink-matching-paren
-                         t)
-  "If non-nil autopair blinks matching delimiters.")
-
-(defvar autopair-blink-delay 0.1
-  "Autopair's blink-the-delimiter delay.")
-
-(defun autopair-document-bindings (&optional fallback-keys)
-  (concat
-   "Works by scheduling possible autopair behaviour, then calls
-original command as if autopair didn't exist"
-   (when (eq this-command 'describe-key)
-     (let* ((autopair-emulation-alist nil)
-            (command (or (key-binding (this-single-command-keys))
-                         (key-binding fallback-keys))))
-       (when command
-         (format ", which in this case is `%s'" command))))
-   "."))
-
-(defun autopair-escaped-p (syntax-info)
-  (nth 5 syntax-info))
-
-(defun autopair-exception-p (where-sym exception-where-sym blacklist &optional fn)
-  (and (or (eq exception-where-sym :everywhere)
-           (eq exception-where-sym where-sym))
-       (member autopair-inserted
-               (if fn
-                   (mapcar fn (getf blacklist exception-where-sym))
-                 (getf blacklist exception-where-sym)))))
-
-(defun autopair-up-list (syntax-info &optional closing)
-  "Try to uplist as much as possible, moving point.
-
-Return nil if something prevented uplisting.
-
-Otherwise return a cons of char positions of the starting
-delimiter and end delimiters of the last list we just came out
-of. If we aren't inside any lists return a cons of current point.
-
-If inside nested lists of mixed parethesis types, finding a
-matching parenthesis of a mixed-type is considered OK (non-nil is
-returned) and uplisting stops there."
-  (condition-case nil
-      (let ((howmany (car syntax-info))
-            (retval (cons (point)
-                          (point))))
-        (while (and (> howmany 0)
-                    (condition-case err
-                        (progn
-                          (scan-sexps (point) (- (point-max)))
-                          (error err))
-                      (error (let ((opening (and closing
-                                                 (autopair-find-pair closing))))
-                               (setq retval (cons (fourth err)
-                                                  (point)))
-                               (or (not opening)
-                                   (eq opening (char-after (fourth err))))))))
-          (goto-char (scan-lists (point) 1 1))
-          (decf howmany))
-        retval)
-    (error nil)))
-
-;; interactive commands and their associated predicates
-;;
-(defun autopair-insert-or-skip-quote ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (let* ((syntax-triplet (autopair-syntax-ppss))
-         (syntax-info (first syntax-triplet))
-         (where-sym (second syntax-triplet))
-         (orig-info (third syntax-triplet))
-         ;; inside-string may the quote character itself or t if this
-         ;; is a "generically terminated string"
-         (inside-string (and (eq where-sym :string)
-                             (fourth orig-info)))
-         (escaped-p (autopair-escaped-p syntax-info))
-
-         )
-    (cond (;; decides whether to skip the quote...
-           ;;
-           (and (not escaped-p)
-                (eq autopair-inserted (char-after (point)))
-                (or
-                 ;; ... if we're already inside a string and the
-                 ;; string starts with the character just inserted,
-                 ;; or it's a generically terminated string
-                 (and inside-string
-                      (or (eq inside-string t)
-                          (eq autopair-inserted inside-string)))
-                 ;; ... if we're in a comment and ending a string
-                 ;; (the inside-string criteria does not work
-                 ;; here...)
-                 (and (eq where-sym :comment)
-                      (condition-case nil
-                          (eq autopair-inserted (char-after (scan-sexps (1+ (point)) -1)))
-                        (error nil)))))
-           (setq autopair-action (list 'skip-quote autopair-inserted (point))))
-          (;; decides whether to pair, i.e do *not* pair the quote if...
-           ;;
-           (not
-            (or
-             escaped-p
-             ;; ... inside a generic string
-             (eq inside-string t)
-             ;; ... inside an unterminated string started by this char
-             (autopair-in-unterminated-string-p syntax-triplet)
-             ;; ... uplisting forward causes an error which leaves us
-             ;; inside an unterminated string started by this char
-             (condition-case err
-                 (progn (save-excursion (up-list)) nil)
-               (error
-                (autopair-in-unterminated-string-p (save-excursion
-                                                     (goto-char (fourth err))
-                                                     (autopair-syntax-ppss)))))
-             (autopair-in-unterminated-string-p (save-excursion
-                                                  (goto-char (point-max))
-                                                  (autopair-syntax-ppss)))
-             ;; ... comment-disable or string-disable are true here.
-             ;; The latter is only useful if we're in a string
-             ;; terminated by a character other than
-             ;; `autopair-inserted'.
-             (some #'(lambda (sym)
-                       (autopair-exception-p where-sym sym autopair-dont-pair))
-                   '(:comment :string))))
-           (setq autopair-action (list 'insert-quote autopair-inserted (point)))))
-    (autopair-fallback)))
-
-(put 'autopair-insert-or-skip-quote 'function-documentation
-     '(concat "Insert or possibly skip over a quoting character.\n\n"
-              (autopair-document-bindings)))
-
-(defun autopair-in-unterminated-string-p (autopair-triplet)
-  (and (eq autopair-inserted (fourth (third autopair-triplet)))
-       (condition-case nil (progn (scan-sexps (ninth (third autopair-triplet)) 1) nil) (error t))))
-
-(defun autopair-insert-opening ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (when (autopair-pair-p)
-    (setq autopair-action (list 'opening (autopair-find-pair autopair-inserted) (point))))
-  (autopair-fallback))
-(put 'autopair-insert-opening 'function-documentation
-     '(concat "Insert opening delimiter and possibly automatically close it.\n\n"
-              (autopair-document-bindings)))
-
-(defun autopair-skip-close-maybe ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (when (autopair-skip-p)
-    (setq autopair-action (list 'closing (autopair-find-pair autopair-inserted) (point))))
-  (autopair-fallback))
-(put 'autopair-skip-close-maybe 'function-documentation
-     '(concat "Insert or possibly skip over a closing delimiter.\n\n"
-              (autopair-document-bindings)))
-
-(defun autopair-backspace ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (when (char-before)
-    (setq autopair-action (list 'backspace (autopair-find-pair (char-before) 'closing) (point))))
-  (autopair-fallback (kbd "DEL")))
-(put 'autopair-backspace 'function-documentation
-     '(concat "Possibly delete a pair of paired delimiters.\n\n"
-              (autopair-document-bindings (kbd "DEL"))))
-
-(defun autopair-newline ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (let ((pair (autopair-find-pair (char-before))))
-    (when (and pair
-               (eq (char-syntax pair) ?\))
-               (eq (char-after) pair))
-      (setq autopair-action (list 'newline pair (point))))
-    (autopair-fallback (kbd "RET"))))
-(put 'autopair-newline 'function-documentation
-     '(concat "Do a smart newline when right between parenthesis.\n
-In other words, insert an extra newline along with the one inserted normally
-by this command. Then place point after the first, indented.\n\n"
-              (autopair-document-bindings (kbd "RET"))))
-
-(defun autopair-skip-p ()
-  (let* ((syntax-triplet (autopair-syntax-ppss))
-         (syntax-info (first syntax-triplet))
-         (orig-point (point)))
-    (cond ((eq autopair-skip-criteria 'help-balance)
-           (save-excursion
-             (let ((pos-pair (autopair-up-list syntax-info autopair-inserted)))
-               ;; if `autopair-up-list' returned something valid, we
-               ;; probably want to skip but only if on of the following is true.
-               ;;
-               ;; 1. it returned a cons of equal values (we're not inside any list
-               ;;
-               ;; 2. up-listing stopped at a list that contains our original point
-               ;;
-               ;; 3. up-listing stopped at a list that does not
-               ;;    contain out original point but its starting
-               ;;    delimiter matches the one we expect.
-               (and pos-pair
-                    (or (eq (car pos-pair) (cdr pos-pair))
-                        (< orig-point (cdr pos-pair))
-                        (eq (char-after (car pos-pair))
-                            (autopair-find-pair autopair-inserted)))))))
-          ((eq autopair-skip-criteria 'need-opening)
-           (save-excursion
-             (condition-case err
-                 (progn
-                   (backward-list)
-                   t)
-               (error nil))))
-          (t
-           t))))
-
-(defun autopair-pair-p ()
-  (let* ((syntax-triplet (autopair-syntax-ppss))
-         (syntax-info (first syntax-triplet))
-         (where-sym (second syntax-triplet))
-         (orig-point (point)))
-    (and (not (some #'(lambda (sym)
-                        (autopair-exception-p where-sym sym autopair-dont-pair))
-                    '(:string :comment :code :everywhere)))
-         (cond ((eq autopair-pair-criteria 'help-balance)
-                (and (not (autopair-escaped-p syntax-info))
-                     (save-excursion
-                       (let ((pos-pair (autopair-up-list syntax-info))
-                             (prev-point (point-max))
-                             (expected-closing (autopair-find-pair autopair-inserted)))
-                         (condition-case err
-                             (progn
-                               (while (not (eq prev-point (point)))
-                                 (setq prev-point (point))
-                                 (forward-sexp))
-                               t)
-                           (error
-                            ;; if `forward-sexp' (called byp
-                            ;; `autopair-forward') returned an error.
-                            ;; typically we don't want to autopair,
-                            ;; unless one of the following occurs:
-                            ;;
-                            (cond (;; 1. The error is *not* of type "containing
-                                   ;;    expression ends prematurely", which means
-                                   ;;    we're in the "too-many-openings" situation
-                                   ;;    and thus want to autopair.
-                                   (not (string-match "prematurely" (second err)))
-                                   t)
-                                  (;; 2. We stopped at a closing parenthesis. Do
-                                   ;; autopair if we're in a mixed parens situation,
-                                   ;; i.e. the last list jumped over was started by
-                                   ;; the paren we're trying to match
-                                   ;; (`autopair-inserted') and ended by a different
-                                   ;; parens, or the closing paren we stopped at is
-                                   ;; also different from the expected. The second
-                                   ;; `scan-lists' places point at the closing of the
-                                   ;; last list we forwarded over.
-                                   ;;
-                                   (condition-case err
-                                       (prog1
-                                           (eq (char-after (scan-lists (point) -1 0))
-                                               autopair-inserted)
-                                         (goto-char (scan-lists (point) -1 -1)))
-                                     (error t))
-
-                                   (or
-                                    ;; mixed () ] for input (, yes autopair
-                                    (not (eq expected-closing (char-after (third err))))
-                                    ;; mixed (] ) for input (, yes autopair
-                                    (not (eq expected-closing (char-after (point))))
-                                    ;; ()) for input (, not mixed
-                                    ;; hence no autopair
-                                    ))
-                                  (t
-                                   nil))
-                            ;; (eq (fourth err) (point-max))
-                            ))))))
-               ((eq autopair-pair-criteria 'always)
-                t)
-               (t
-                (not (autopair-escaped-p syntax-info)))))))
-
-;; post-command-hook stuff
-;;
-(defun autopair-post-command-handler ()
-  "Performs pairing and wrapping based on `autopair-action' and
-`autopair-wrap-action'. "
-  (when (and autopair-wrap-action
-             (notany #'null autopair-wrap-action))
-
-    (if autopair-handle-wrap-action-fns
-        (condition-case err
-            (mapc #'(lambda (fn)
-                      (apply fn autopair-wrap-action))
-                  autopair-handle-wrap-action-fns)
-          (error (progn
-                   (message "[autopair] error running custom `autopair-handle-wrap-action-fns', switching autopair off")
-                   (autopair-mode -1))))
-      (apply #'autopair-default-handle-wrap-action autopair-wrap-action))
-    (setq autopair-wrap-action nil))
-
-  (when (and autopair-action
-             (notany #'null autopair-action))
-    (if autopair-handle-action-fns
-        (condition-case err
-            (mapc #'(lambda (fn)
-                      (funcall fn (first autopair-action) (second autopair-action) (third autopair-action)))
-                  autopair-handle-action-fns)
-          (error (progn
-                   (message "[autopair] error running custom `autopair-handle-action-fns', switching autopair off")
-                   (autopair-mode -1))))
-      (apply #'autopair-default-handle-action autopair-action))
-    (setq autopair-action nil)))
-
-(defun autopair-blink-matching-open ()
-  (let ((blink-matching-paren autopair-blink)
-        (show-paren-mode nil)
-        (blink-matching-delay autopair-blink-delay))
-    (blink-matching-open)))
-
-(defun autopair-blink (&optional pos)
-  (when autopair-blink
-    (if pos
-        (save-excursion
-          (goto-char pos)
-          (sit-for autopair-blink-delay))
-      (sit-for autopair-blink-delay))))
-
-(defun autopair-default-handle-action (action pair pos-before)
-  ;;(message "action is %s" action)
-  (condition-case err
-      (cond (;; automatically insert closing delimiter
-             (and (eq 'opening action)
-                  (not (eq pair (char-before))))
-             (insert pair)
-             (autopair-blink)
-             (backward-char 1))
-            (;; automatically insert closing quote delimiter
-             (eq 'insert-quote action)
-             (insert pair)
-             (autopair-blink)
-             (backward-char 1))
-            (;; automatically skip oper closer quote delimiter
-             (and (eq 'skip-quote action)
-                  (eq pair (char-after (point))))
-             (delete-char 1)
-             (autopair-blink-matching-open))
-            (;; skip over newly-inserted-but-existing closing delimiter
-             ;; (normal case)
-             (eq 'closing action)
-             (let ((skipped 0))
-               (when autopair-skip-whitespace
-                 (setq skipped (save-excursion (skip-chars-forward "\s\n\t"))))
-               (when (eq autopair-inserted (char-after (+ (point) skipped)))
-                 (backward-delete-char 1)
-                 (unless (zerop skipped) (autopair-blink (+ (point) skipped)))
-                 (if (eq autopair-skip-whitespace 'chomp)
-                     (delete-char skipped)
-                   (forward-char skipped))
-                 (forward-char))
-               (autopair-blink-matching-open)))
-            (;; autodelete closing delimiter
-             (and (eq 'backspace action)
-                  (eq pair (char-after (point))))
-             (delete-char 1))
-            (;; opens an extra line after point, then indents
-             (and (eq 'newline action)
-                  (eq pair (char-after (point))))
-             (save-excursion
-               (newline-and-indent))
-             (indent-according-to-mode)
-             (when (or (and (boundp 'global-hl-line-mode)
-                            global-hl-line-mode)
-                       (and (boundp 'hl-line-mode)
-                            hl-line-mode))
-               (hl-line-unhighlight) (hl-line-highlight))))
-    (error
-     (message "[autopair] Ignored error in `autopair-default-handle-action'"))))
-
-(defun autopair-default-handle-wrap-action (action pair pos-before region-before)
-  "Default handler for the wrapping action in `autopair-wrap'"
-  (condition-case err
-      (when (eq 'wrap action)
-        (let ((delete-active-region nil))
-          (cond
-           ((eq 'opening (first autopair-action))
-            (goto-char (1+ (cdr region-before)))
-            (insert pair)
-            (autopair-blink)
-            (goto-char (1+ (car region-before))))
-           (;; wraps
-            (eq 'closing (first autopair-action))
-            (delete-backward-char 1)
-            (insert pair)
-            (goto-char (1+ (cdr region-before)))
-            (insert autopair-inserted))
-           ((eq 'insert-quote (first autopair-action))
-            (goto-char (1+ (cdr region-before)))
-            (insert pair)
-            (autopair-blink))
-           (t
-            (delete-backward-char 1)
-            (goto-char (cdr region-before))
-            (insert autopair-inserted)))
-          (setq autopair-action nil)))
-    (error
-     (message "[autopair] Ignored error in `autopair-default-handle-wrap-action'"))))
-
-;; example python triple quote helper
-;;
-(defun autopair-python-triple-quote-action (action pair pos-before)
-  (cond ((and (eq 'insert-quote action)
-              (>= (point) 3)
-              (string= (buffer-substring (- (point) 3)
-                                         (point))
-                       (make-string 3 pair)))
-         (save-excursion (insert (make-string 2 pair))))
-        ((and (eq 'backspace action)
-              (>= (point) 2)
-              (<= (point) (- (point-max) 2))
-              (string= (buffer-substring (- (point) 2)
-                                         (+ (point) 2))
-                       (make-string 4 pair)))
-         (delete-region (- (point) 2)
-                        (+ (point) 2)))
-        ((and (eq 'skip-quote action)
-              (<= (point) (- (point-max) 2))
-              (string= (buffer-substring (point)
-                                         (+ (point) 2))
-                       (make-string 2 pair)))
-         (forward-char 2))
-        (t
-         t)))
-
-;; example latex paired-delimiter helper
-;;
-(defun autopair-latex-mode-paired-delimiter-action (action pair pos-before)
-  "Pair or skip latex's \"paired delimiter\" syntax in math mode. Added AucText support, thanks Massimo Lauria"
-  (when (eq action 'paired-delimiter)
-    (when (eq (char-before) pair)
-      (if (and (or
-                (eq (get-text-property pos-before 'face) 'tex-math)
-                (eq (get-text-property (- pos-before 1) 'face) 'font-latex-math-face)
-                (member 'font-latex-math-face (get-text-property (- pos-before 1) 'face)))
-               (eq (char-after) pair))
-          (cond ((and (eq (char-after) pair)
-                      (eq (char-after (1+ (point))) pair))
-                 ;; double skip
-                 (delete-char 1)
-                 (forward-char))
-                ((eq (char-before pos-before) pair)
-                 ;; doube insert
-                 (insert pair)
-                 (backward-char))
-                (t
-                 ;; simple skip
-                 (delete-char 1)))
-        (insert pair)
-        (backward-char)))))
-
-;; Commands and predicates for the autopair-extra* feature
-;;
-
-(defun autopair-extra-insert-opening ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (when (autopair-extra-pair-p)
-    (setq autopair-action (list 'opening (autopair-find-pair autopair-inserted) (point))))
-  (autopair-fallback))
-(put 'autopair-extra-insert-opening 'function-documentation
-     '(concat "Insert (an extra) opening delimiter and possibly automatically close it.\n\n"
-              (autopair-document-bindings)))
-
-(defun autopair-extra-skip-close-maybe ()
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (when (autopair-extra-skip-p)
-    (setq autopair-action (list 'closing autopair-inserted (point))))
-  (autopair-fallback))
-(put 'autopair-extra-skip-close-maybe 'function-documentation
-     '(concat "Insert or possibly skip over a (and extra) closing delimiter.\n\n"
-              (autopair-document-bindings)))
-
-(defun autopair-extra-pair-p ()
-  (let* ((syntax-triplet (autopair-syntax-ppss))
-         (syntax-info (first syntax-triplet))
-         (where-sym (second syntax-triplet)))
-    (some #'(lambda (sym)
-              (autopair-exception-p where-sym sym autopair-extra-pairs #'car))
-          '(:everywhere :comment :string :code))))
-
-(defun autopair-extra-skip-p ()
-  (let* ((syntax-triplet (autopair-syntax-ppss))
-         (syntax-info (first syntax-triplet))
-         (where-sym (second syntax-triplet))
-         (orig-point (point)))
-    (and (eq (char-after (point)) autopair-inserted)
-         (some #'(lambda (sym)
-                   (autopair-exception-p where-sym sym autopair-extra-pairs #'cdr))
-               '(:comment :string :code :everywhere))
-         (save-excursion
-           (condition-case err
-               (backward-sexp (point-max))
-             (error
-              (goto-char (third err))))
-           (search-forward (make-string 1 (autopair-find-pair autopair-inserted))
-                           orig-point
-                           'noerror)))))
-
-;; Commands and tex-mode specific handler functions for the "paired
-;; delimiter" syntax class.
-;;
-(defun autopair-insert-or-skip-paired-delimiter ()
-  " insert or skip a character paired delimiter"
-  (interactive)
-  (setq autopair-inserted (autopair-calculate-inserted))
-  (setq autopair-action (list 'paired-delimiter autopair-inserted (point)))
-  (autopair-fallback))
-
-(put 'autopair-insert-or-skip-paired-delimiter 'function-documentation
-     '(concat "Insert or possibly skip over a character with a syntax-class of \"paired delimiter\"."
-              (autopair-document-bindings)))
-
-
-;; monkey-patching: Compatibility with delete-selection-mode and cua-mode
-;;
-;; Ideally one would be able to use functions as the value of the
-;; 'delete-selection properties of the autopair commands. The function
-;; would return non-nil when no wrapping should/could be performed.
-;;
-;; Until then use some `defadvice' i.e. monkey-patching, which relies
-;; on these features' implementation details.
-;;
-(put 'autopair-insert-opening 'delete-selection t)
-(put 'autopair-skip-close-maybe 'delete-selection t)
-(put 'autopair-insert-or-skip-quote 'delete-selection t)
-(put 'autopair-extra-insert-opening 'delete-selection t)
-(put 'autopair-extra-skip-close-maybe 'delete-selection t)
-(put 'autopair-backspace 'delete-selection 'supersede)
-(put 'autopair-newline 'delete-selection t)
-
-(defun autopair-should-autowrap ()
-  (let ((name (symbol-name this-command)))
-    (and autopair-mode
-         (not (eq this-command 'autopair-backspace))
-         (string-match "^autopair" (symbol-name this-command))
-         (autopair-calculate-wrap-action))))
-
-(defadvice cua--pre-command-handler-1 (around autopair-override activate)
-  "Don't actually do anything if autopair is about to autowrap. "
-  (unless (autopair-should-autowrap) ad-do-it))
-
-(defadvice delete-selection-pre-hook (around autopair-override activate)
-  "Don't actually do anything if autopair is about to autowrap. "
-  (unless (autopair-should-autowrap) ad-do-it))
 
 ;;;
 (defvar py-menu)
@@ -11381,7 +10678,6 @@ by this command. Then place point after the first, indented.\n\n"
         (define-key map [(backspace)] 'py-electric-backspace)
         (define-key map [(control backspace)] 'py-hungry-delete-backwards)
         (define-key map [(control c) (delete)] 'py-hungry-delete-forward)
-        (define-key map [(control c)(control a)] 'py-mark-statement)
         ;; moving point
         (define-key map [(control c)(control p)] 'py-beginning-of-statement)
         (define-key map [(control c)(control n)] 'py-end-of-statement)
@@ -11417,6 +10713,7 @@ by this command. Then place point after the first, indented.\n\n"
         (define-key map [(control c)(control k)] 'py-mark-block-or-clause)
         (define-key map [(control c)(.)] 'py-expression)
         ;; Miscellaneous
+        (define-key map [(super q)] 'py-copy-statement)
         (define-key map [(control c)(control d)] 'py-pdbtrack-toggle-stack-tracking)
         (define-key map [(control c)(control f)] 'py-sort-imports)
         (define-key map [(control c)(\#)] 'py-comment-region)
@@ -11431,8 +10728,11 @@ by this command. Then place point after the first, indented.\n\n"
         (define-key map [(control c)(control w)] 'py-pychecker-run)
         (define-key map (kbd "TAB") 'py-indent-line)
         (if py-complete-function
-            (define-key map [(meta tab)] py-complete-function)
-          (define-key map [(meta tab)] 'py-shell-complete))
+            (progn
+              (define-key map [(meta tab)] py-complete-function)
+              (define-key map [(esc) (tab)] py-complete-function))
+          (define-key map [(meta tab)] 'py-shell-complete)
+          (define-key map [(esc) (tab)] 'py-shell-complete))
         ;; (substitute-key-definition 'complete-symbol 'completion-at-point
         ;; map global-map)
         (easy-menu-define py-menu map "Python Tools"
@@ -11570,6 +10870,9 @@ Run pdb under GUD"]
 
             ["Toggle py-smart-indentation" toggle-py-smart-indentation
              :help "See also `py-smart-indentation-on', `-off' "]
+
+            ["Toggle py-smart-operator" py-toggle-smart-operator
+             :help "See also `py-smart-operator-on', `-off' "]
 
             ["Toggle indent-tabs-mode" py-toggle-indent-tabs-mode
              :help "See also `py-indent-tabs-mode-on', `-off' "]
@@ -12911,8 +12214,6 @@ Don't use this function in a Lisp program; use `define-abbrev' instead."
                         (py-guess-indent-offset)))
                   (py-guess-indent-offset)))))
 
-(add-hook 'which-func-functions 'python-which-func nil t)
-
 (add-hook 'comint-output-filter-functions
           'py-comint-output-filter-function)
 
@@ -12956,6 +12257,17 @@ Don't use this function in a Lisp program; use `define-abbrev' instead."
 (setq imenu-generic-expression 'py-imenu-generic-regexp)
 ;;;
 (defvar skeleton-further-elements)
+
+(defcustom python-use-skeletons nil
+  "Non-nil means template skeletons will be automagically inserted.
+This happens when pressing \"if<SPACE>\", for example, to prompt for
+the if condition.
+
+Kept for compatibility reasons.
+Don't activate this, with some probability it will mess up abbrev edits, leaving abbrev-mode unusable. "
+  :type 'boolean
+  :group 'python-mode)
+
 (define-derived-mode python-mode fundamental-mode python-mode-modeline-display
   "Major mode for editing Python files.
 
@@ -13017,14 +12329,23 @@ py-beep-if-tab-change\t\tring the bell if `tab-width' is changed
        '((< '(backward-delete-char-untabify (min py-indent-offset
                                                  (current-column))))
          (^ '(- (1+ (current-indentation))))))
-
+  (py-set-load-path)
+  ;; (add-to-list 'load-path py-install-directory)
+  ;; (add-to-list 'load-path (concat py-install-directory "extensions"))
   (when py-prepare-autopair-mode-p
+    (load (concat (py-normalize-directory py-install-directory) "autopair" (char-to-string py-separator-char) "autopair.el") nil t)
     (add-hook 'python-mode-hook
               #'(lambda ()
                   (setq autopair-handle-action-fns
                         (list #'autopair-default-handle-action
                               #'autopair-python-triple-quote-action)))))
-
+  (when py-trailing-whitespace-smart-delete-p
+    (add-hook 'before-save-hook 'delete-trailing-whitespace nil 'local))
+  (if py-complete-function
+      (add-hook 'completion-at-point-functions
+                py-complete-function nil 'local)
+    (add-hook 'completion-at-point-functions
+              'py-shell-complete nil 'local))
   (when (and py-imenu-create-index-p (fboundp 'imenu-add-to-menubar)(ignore-errors (require 'imenu)))
     (setq imenu-create-index-function #'py-imenu-create-index-new)
     (imenu-add-to-menubar "PyIndex"))
@@ -13046,10 +12367,15 @@ py-beep-if-tab-change\t\tring the bell if `tab-width' is changed
         (save-excursion
           (py-shell)
           (set-buffer oldbuf))))
-    (jump-to-register 213465879))
+    ;; (jump-to-register 213465879)
+    )
   ;; (run-mode-hooks 'python-mode-hook)
   (when py-outline-minor-mode-p (outline-minor-mode 1))
-  (when (interactive-p) (message "python-mode loaded from: %s" "python-mode.el")))
+  (when py-smart-operator-mode-p
+    (unless (featurep 'py-smart-operator)
+      (load (concat (py-normalize-directory py-install-directory) "extensions/py-smart-operator.el")))
+    (py-smart-operator-mode-on))
+  (when (interactive-p) (message "python-mode loaded from: %s" "python-components-mode.el")))
 
 (defadvice pdb (before gud-query-cmdline activate)
   "Provide a better default command line when called interactively."
@@ -13259,42 +12585,6 @@ Eval resulting buffer to install it, see customizable `py-extensions'. "
 (or (assq 'python-pdbtrack-is-tracking-p minor-mode-alist)
     (push '(python-pdbtrack-is-tracking-p python-pdbtrack-minor-mode-string)
           minor-mode-alist))
-
-;; Bind python-file-queue before installing the kill-emacs-hook.
-(defvar python-file-queue nil
-  "Queue of Python temp files awaiting execution.
-Currently-active file is at the head of the list.")
-
-(defvar python-pdbtrack-is-tracking-p nil)
-
-(defconst python-pdbtrack-stack-entry-regexp
-  "^> \\(.*\\)(\\([0-9]+\\))\\([?a-zA-Z0-9_<>]+\\)()"
-  "Regular expression pdbtrack uses to find a stack trace entry.")
-
-(defconst python-pdbtrack-input-prompt "\n[(<]*[Ii]?[Pp]db[>)]+ "
-  "Regular expression pdbtrack uses to recognize a pdb prompt.")
-
-(defconst python-pdbtrack-track-range 10000
-  "Max number of characters from end of buffer to search for stack entry.")
-
-;;;; Inferior mode stuff (following cmuscheme).
-
-(defconst python-compilation-regexp-alist
-  ;; FIXME: maybe these should move to compilation-error-regexp-alist-alist.
-  ;;   The first already is (for CAML), but the second isn't.  Anyhow,
-  ;;   these are specific to the inferior buffer.  -- fx
-  `((,(rx line-start (1+ (any " \t")) "File \""
-          (group (1+ (not (any "\"<")))) ; avoid `<stdin>' &c
-          "\", line " (group (1+ digit)))
-     1 2)
-    (,(rx " in file " (group (1+ not-newline)) " on line "
-          (group (1+ digit)))
-     1 2)
-    ;; pdb stack trace
-    (,(rx line-start "> " (group (1+ (not (any "(\"<"))))
-          "(" (group (1+ digit)) ")" (1+ (not (any "("))) "()")
-     1 2))
-  "`compilation-error-regexp-alist' for inferior Python.")
 
 (defvar inferior-python-mode-syntax-table
   (let ((st (make-syntax-table py-mode-syntax-table)))
@@ -13619,21 +12909,21 @@ comint believe the user typed this string so that
     (process-send-string proc cmd)))
 
 ;; from pycomplete.el
-(defun py-find-global-imports ()
-  (save-excursion
-    (let (first-class-or-def imports)
-      (goto-char (point-min))
-      (setq first-class-or-def
-            (re-search-forward "^ *\\(def\\|class\\) " nil t))
-      (goto-char (point-min))
-      (while (re-search-forward
-              "^\\(import \\|from \\([A-Za-z_][A-Za-z_0-9]*\\) import \\).*"
-              nil t)
-        (setq imports (append imports
-                              (list (buffer-substring
-                                     (match-beginning 0)
-                                     (match-end 0))))))
-      imports)))
+;; (defun py-find-global-imports ()
+;;   (save-excursion
+;;     (let (first-class-or-def imports)
+;;       (goto-char (point-min))
+;;       (setq first-class-or-def
+;;             (re-search-forward "^ *\\(def\\|class\\) " nil t))
+;;       (goto-char (point-min))
+;;       (while (re-search-forward
+;;               "^\\(import \\|from \\([A-Za-z_][A-Za-z_0-9]*\\) import \\).*"
+;;               nil t)
+;;         (setq imports (append imports
+;;                               (list (buffer-substring
+;;                                      (match-beginning 0)
+;;                                      (match-end 0))))))
+;;       imports)))
 
 ;;; Code Completion.
 
@@ -13654,12 +12944,12 @@ comint believe the user typed this string so that
 (defun py-shell-simple-send (proc string)
   (comint-simple-send proc string))
 
-(defun py-shell-execute-string-now (string &optional shell buffer)
+(defun py-shell-execute-string-now (string &optional shell buffer proc)
   "Send to Python interpreter process PROC \"exec STRING in {}\".
 and return collected output"
-  (let* ((procbuf (or buffer (py-shell nil nil shell)))
+  (let* ((procbuf (or buffer (process-buffer proc) (py-shell nil nil shell)))
 
-         (proc (get-buffer-process procbuf))
+         (proc (or proc (get-buffer-process procbuf)))
          (cmd (format "exec '''%s''' in {}"
                       (mapconcat 'identity (split-string string "\n") "\\n")))
          (outbuf (get-buffer-create " *pyshellcomplete-output*"))
@@ -13750,7 +13040,9 @@ Uses `python-imports' to load modules against which to complete."
        #'string<))))
 
 (defun py-python-script-complete (&optional shell imports beg end word)
-  "Complete word before point, if any. Otherwise insert TAB. "
+  "Complete word before point, if any.
+
+When `py-no-completion-calls-dabbrev-expand-p' is non-nil, try dabbrev-expand. Otherwise, when `py-indent-no-completion-p' is non-nil, call `tab-to-tab-stop'. "
   (interactive)
   (let* (py-split-windows-on-execute-p
          py-switch-buffers-on-execute-p
@@ -13759,11 +13051,11 @@ Uses `python-imports' to load modules against which to complete."
          (beg (or beg (save-excursion (skip-chars-backward "a-zA-Z0-9_.") (point))))
          (end (or end (point)))
          (word (or word (buffer-substring-no-properties beg end)))
-         (imports (or imports (py-find-imports)))
-         )
+         (imports (or imports (py-find-imports))))
     (cond ((string= word "")
-           (message "%s" "Nothing to complete. ")
-           (tab-to-tab-stop))
+           (if py-indent-no-completion-p
+               (tab-to-tab-stop)
+             (message "%s" "Nothing to complete. ")))
           (t (or (setq proc (get-buffer-process (py-buffer-name-prepare shell)))
                  (setq proc (get-buffer-process (py-shell nil nil shell))))
              (if (processp proc)
@@ -13774,24 +13066,12 @@ Uses `python-imports' to load modules against which to complete."
                      (save-excursion
                        (save-match-data
                          (goto-char (point-min))
-                         (when (re-search-forward (concat "^[ \t]*" (match-string-no-properties 1 word) "[ \t]*=[ \t]*[^ \n\r\f\t]+") nil t 1)))
-                       (if imports
-                           (unless (string-match (concat "import " (match-string-no-properties 1 word) ";") imports)
-                             (setq imports
-                                   (concat imports (concat "import" (match-string-no-properties 1 word) ";"))))
-                         (setq imports (match-string-no-properties 0 word)))))
-                   (python-shell-completion--do-completion-at-point proc imports word)
-                   ;; (unless (python-shell-completion--do-completion-at-point proc imports word)
-                   (when (eq (point) orig)
-                     (if (and (not (window-full-height-p))
-                              (buffer-live-p (get-buffer "*Python Completions*")))
-                         (progn
-                           (set-buffer "*Python Completions*")
-                           (switch-to-buffer (current-buffer))
-                           (delete-other-windows)
-                           (search-forward word))
-                       (dabbrev-expand nil)))
-                   nil)
+                         (when (re-search-forward (concat "^[ \t]*" (match-string-no-properties 1 word) "[ \t]*=[ \t]*[^ \n\r\f\t]+") nil t 1))
+                         (when py-verbose-p (message "%s" (match-string-no-properties 0)))
+                         (if imports
+                             (setq imports (concat imports (match-string-no-properties 0) ";"))
+                           (setq imports (match-string-no-properties 0))))))
+                   (python-shell-completion--do-completion-at-point proc imports word))
                (error "No completion process at proc"))))))
 
 (defun py-python2-shell-complete (&optional shell)
@@ -13835,39 +13115,47 @@ Uses `python-imports' to load modules against which to complete."
   (if (or (eq major-mode 'comint-mode)(eq major-mode 'inferior-python-mode))
       ;;  kind of completion resp. to shell
       (let (py-fontify-shell-buffer-p
-            (shell (or shell (py-report-executable (buffer-name (current-buffer))))))
+            (shell (or shell (py-report-executable (buffer-name (current-buffer)))))
+            (imports (py-find-imports)))
         (if (string-match "[iI][pP]ython" shell)
             (ipython-complete)
           (let* ((orig (point))
                  (beg (save-excursion (skip-chars-backward "a-zA-Z0-9_.") (point)))
                  (end (point))
-                 (word (buffer-substring-no-properties beg end)))
+                 (word (buffer-substring-no-properties beg end))
+                 (proc (get-buffer-process (current-buffer))))
             (cond ((string= word "")
                    (tab-to-tab-stop))
                   ((string-match "[pP]ython3[^[:alpha:]]*$" shell)
-                   (python-shell-completion--do-completion-at-point (get-buffer-process (current-buffer)) "" word))
-                  (t (py-shell-complete-intern word beg end shell))))))
+                   (python-shell-completion--do-completion-at-point proc imports word))
+                  (t (py-shell-complete-intern word beg end shell imports proc))))))
     ;; complete in script buffer
-    (let* ((shell (or shell (py-choose-shell)))
+    (let* (
+           ;; (a (random 999999999))
+           (shell (or shell (py-choose-shell)))
            py-split-windows-on-execute-p
            py-switch-buffers-on-execute-p
-           (proc (or (get-buffer-process shell)
+           (proc (or (get-process shell)
                      (get-buffer-process (py-shell nil nil shell 'noswitch nil))))
            (beg (save-excursion (skip-chars-backward "a-zA-Z0-9_.") (point)))
            (end (point))
            (word (buffer-substring-no-properties beg end))
            (imports (py-find-imports)))
+      ;; (window-configuration-to-register a)
       (cond ((string= word "")
              (tab-to-tab-stop))
             ((string-match "[iI][pP]ython" shell)
-             (ipython-complete))
+             (ipython-complete nil nil beg end word))
             ((string-match "[pP]ython3[^[:alpha:]]*$" shell)
              (python-shell-completion--do-completion-at-point proc (buffer-substring-no-properties beg end) word))
+            ;; deals better with imports
             (imports
              (py-python-script-complete shell imports beg end word))
-            (t (py-shell-complete-intern word beg end shell imports))))))
+            (t (py-shell-complete-intern word beg end shell imports proc)))
+      ;; (jump-to-register a)
+      )))
 
-(defun py-shell-complete-intern (word &optional beg end shell imports)
+(defun py-shell-complete-intern (word &optional beg end shell imports proc)
   (let (result)
     (if imports
         (setq result (py-shell-execute-string-now (format (concat imports "
@@ -13896,7 +13184,7 @@ def complete(text):
         print_completions(keyword.kwlist, text)
         print_completions(dir(__builtin__), text)
         print_completions(dir(__main__), text)
-complete('%s')") word) shell))
+complete('%s')") word) shell nil proc))
       (setq result (py-shell-execute-string-now (format "
 def print_completions(namespace, text, prefix=''):
    for name in namespace:
@@ -13923,9 +13211,13 @@ def complete(text):
         print_completions(keyword.kwlist, text)
         print_completions(dir(__builtin__), text)
         print_completions(dir(__main__), text)
-complete('%s')" word) shell (when (comint-check-proc (current-buffer)) (current-buffer)))))
+complete('%s')" word) shell nil proc)))
     (if (or (eq result nil)(string= "" result))
-        (message "Can't complete")
+        (progn
+          (if py-no-completion-calls-dabbrev-expand-p
+              (or (dabbrev-expand nil) (message "Can't complete"))
+            (message "No completion found")))
+
       (setq result (replace-regexp-in-string comint-prompt-regexp "" result))
       (let ((comint-completion-addsuffix nil)
             (completions
@@ -13938,7 +13230,7 @@ complete('%s')" word) shell (when (comint-check-proc (current-buffer)) (current-
             (tab-to-tab-stop)
           (delete-region beg end)
           (insert (car completions))))
-      ;; list-typ return required by `completion-at-point'
+      ;; (jump-to-register a)
       (point))))
 
 ;;; IPython Shell Complete
@@ -13953,14 +13245,18 @@ If no completion available, insert a TAB.
 Returns the completed symbol, a string, if successful, nil otherwise. "
 
   (interactive "*")
-  (let* (py-split-windows-on-execute-p
-         py-switch-buffers-on-execute-p
+  (let* (
+         ;; py-split-windows-on-execute-p
+         ;; py-switch-buffers-on-execute-p
          (beg (or beg (progn (save-excursion (skip-chars-backward "a-z0-9A-Z_." (point-at-bol))
                                              (point)))))
          (end (or end (point)))
          (pattern (or word (buffer-substring-no-properties beg end)))
          (sep ";")
-         (pyshellname "ipython")
+         (shell (py-choose-shell))
+         (pyshellname (if (string-match "ipython" shell)
+                          shell
+                        "ipython"))
          (processlist (process-list))
          done
          (process
@@ -13994,30 +13290,47 @@ Returns the completed symbol, a string, if successful, nil otherwise. "
     (if (string= pattern "")
         (tab-to-tab-stop)
       (process-send-string python-process (format ccs pattern))
-      (accept-process-output python-process 5)
-      (setq completions
-            (split-string (substring ugly-return 0 (position ?\n ugly-return)) sep))
-      (setq completion-table (loop for str in completions
-                                   collect (list str nil)))
-      (setq completion (try-completion pattern completion-table))
-      (cond ((eq completion t)
-             (tab-to-tab-stop))
-            ((null completion)
-             ;; if an (I)Python shell didn't run
-             ;; before, first completion are not delivered
-             ;; (if done (ipython-complete done)
-             (message "Can't find completion for \"%s\"" pattern)
-             (ding)
-             nil)
-            ((not (string= pattern completion))
-             (delete-region beg end)
-             (insert completion)
-             nil)
-            (t
-             (when py-verbose-p (message "Making completion list..."))
-             (with-output-to-temp-buffer "*Python Completions*"
-               (display-completion-list (all-completions pattern completion-table)))
-             nil)))))
+      (accept-process-output python-process 0.1)
+      (if ugly-return
+          (progn
+            (setq completions
+                  (split-string (substring ugly-return 0 (position ?\n ugly-return)) sep))
+            ;; (setq completion (when completions
+            ;; (try-completion pattern completions)))
+            (if completions
+                (cond ((eq completions t)
+                       (if (eq this-command last-command)
+                           (when python-completion-original-window-configuration
+                             (set-window-configuration
+                              python-completion-original-window-configuration)))
+                       (setq python-completion-original-window-configuration nil)
+                       (message "Can't find completion for \"%s\"" pattern)
+                       (ding)
+                       nil)
+                      ((< 1 (length completions))
+                       (unless python-completion-original-window-configuration
+                         (setq python-completion-original-window-configuration
+                               (current-window-configuration)))
+                       (with-output-to-temp-buffer "*IPython Completions*"
+                         (display-completion-list
+                          (all-completions pattern completions)))
+                       (set-buffer "*IPython Completions*")
+                       (switch-to-buffer "*IPython Completions*")
+                       (goto-char (point-min))
+                       (when
+                           (search-forward (car (all-completions pattern completions)))
+                         (forward-word -1)
+                         (delete-other-windows)
+                         (word-at-point)))
+                      ((not (string= pattern (car completions)))
+                       (progn (delete-char (- (length pattern)))
+                              (insert (car completions))
+                              nil)))
+              (when py-no-completion-calls-dabbrev-expand-p
+                (ignore-errors (dabbrev-expand nil)))
+              (when py-indent-no-completion-p
+                (tab-to-tab-stop))))
+        (message "%s" "No response from Python process. Please check your configuration. If config is okay, please file a bug-regport at http://launchpad.net/python-mode")))))
 
 (defun ipython-complete-py-shell-name (&optional done)
   "Complete the python symbol before point.
@@ -17301,8 +16614,51 @@ FACE is the face to use.  If nil, then face `column-marker-1' is used."
 
 (defalias 'ipython-send-and-indent 'py-execute-line-ipython)
 (defalias 'py-execute-region-in-shell 'py-execute-region)
-(defalias 'py-shell-command-on-region 'py-execute-region-region)
+(defalias 'py-shell-command-on-region 'py-execute-region)
 (defalias 'py-send-region-ipython 'py-execute-region-ipython)
 (defalias 'py-ipython-shell-command-on-region 'py-execute-region-ipython)
+
+;;; Pymacs
+(defun py-load-pymacs ()
+  "Load Pymacs as delivered with python-mode.el.
+
+Pymacs has been written by François Pinard and many others.
+See original source: http://pymacs.progiciels-bpi.ca"
+  (interactive)
+  (let* ((pyshell (py-choose-shell))
+         (path (getenv "PYTHONPATH"))
+         (py-install-directory (cond ((string= "" py-install-directory)
+                                      (py-guess-py-install-directory))
+                                     (t (py-normalize-directory py-install-directory))))
+         (pymacs-installed-p
+          (ignore-errors (string-match (expand-file-name (concat py-install-directory "Pymacs")) path))))
+    ;; Python side
+    (unless pymacs-installed-p
+      (setenv "PYTHONPATH" (concat
+                            (expand-file-name py-install-directory)
+                            path-separator
+                            (expand-file-name py-install-directory) "completion"
+                            (if path (concat path-separator path)))))
+
+    (if (py-install-directory-check)
+        (progn
+          ;; don't interfere with already installed Pymacs
+          (unless (featurep 'pymacs)
+            (load (concat py-install-directory "pymacs.el") nil t))
+          (setenv "PYMACS_PYTHON" (if (string-match "IP" pyshell)
+                                      "python"
+                                    pyshell))
+          (autoload 'pymacs-apply "pymacs")
+          (autoload 'pymacs-call "pymacs")
+          (autoload 'pymacs-eval "pymacs")
+          (autoload 'pymacs-exec "pymacs")
+          (autoload 'pymacs-load "pymacs")
+          (require 'pymacs)
+          (load (concat py-install-directory "completion/pycomplete.el") nil t)
+          (add-hook 'python-mode-hook 'py-complete-initialize))
+      (error "`py-install-directory' not set, see INSTALL"))))
+
+(when py-load-pymacs-p (py-load-pymacs))
+
 (provide 'python-mode)
 ;;; python-mode.el ends here

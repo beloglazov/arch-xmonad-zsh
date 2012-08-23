@@ -62,12 +62,13 @@
 (ac-define-source nropemacs
   '((candidates . ac-ropemacs-candidates)
     ;(document   . py-documentation)
-    (symbol     . "p")))
+    ;(symbol     . "p")
+    ))
 
 (ac-define-source nropemacs-dot
   '((candidates . ac-ropemacs-candidates)
     ;(document   . py-documentation)
-    (symbol     . "p")
+    ;(symbol     . "p")
     (prefix     . c-dot)
     (requires   . 0)))
 
@@ -76,9 +77,9 @@
 	  (lambda ()
 
 	    ;; fill-column-indicator
-	    (setq fill-column 80)
-	    (setq fci-rule-color "gray6")
-	    (fci-mode 1)
+	    ;(setq fill-column 80)
+	    ;(setq fci-rule-color "gray6")
+	    ;(fci-mode 1)
 
 	    ;; automatically open a rope project if there is one
 	    ;; in the current or in the upper level directory
@@ -112,7 +113,7 @@
 	    ;; auto-complete
 	    (setq ac-delay 0.1)
 	    (setq ac-auto-start 4)
-	    (setq popup-use-optimized-column-computation nil)
+	    ;(setq popup-use-optimized-column-computation nil)
 	    ;; enable ropemacs completions
 	    ;(add-to-list 'ac-sources 'ac-source-ropemacs)
 	    ;(add-to-list 'ac-sources 'ac-source-filename)

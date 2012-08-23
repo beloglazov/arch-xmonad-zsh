@@ -62,13 +62,13 @@
 (ac-define-source nropemacs
   '((candidates . ac-ropemacs-candidates)
     ;(document   . py-documentation)
-    ;(symbol     . "p")
+    (symbol     . "r") ; rope
     ))
 
 (ac-define-source nropemacs-dot
   '((candidates . ac-ropemacs-candidates)
     ;(document   . py-documentation)
-    ;(symbol     . "p")
+    (symbol     . "r") ; rope
     (prefix     . c-dot)
     (requires   . 0)))
 
@@ -97,7 +97,7 @@
 
 	    ;; enable flymake
 	    (flymake-mode t)
- 	    (setq flymake-cursor-error-display-delay 0.0)
+ 	    ;(setq flymake-cursor-error-display-delay 0.0)
 
 	    ;; rope keybindings
 	    (define-key python-mode-map "\C-ci" 'rope-auto-import)
@@ -111,7 +111,7 @@
 	    ;(setq yas/trigger-key (kbd "C-c <kp-multiply>"))
 
 	    ;; auto-complete
-	    (setq ac-delay 0.1)
+	    ;(setq ac-delay 0.1)
 	    (setq ac-auto-start 4)
 	    ;(setq popup-use-optimized-column-computation nil)
 	    ;; enable ropemacs completions

@@ -31,3 +31,6 @@
 [submodule "home/.emacs.d/modes/fill-column-indicator"]
 	path = home/.emacs.d/modes/fill-column-indicator
 	url = https://github.com/alpaker/Fill-Column-Indicator.git
+[submodule "home/.emacs.d/modes/php-mode"]
+	path = home/.emacs.d/modes/php-mode
+	url = https://github.com/ejmr/php-mode.git

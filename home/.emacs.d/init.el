@@ -50,6 +50,8 @@
 ;; python
 (load-file "~/.emacs.d/init-python.el")
 
+;; php
+(require 'php-mode)
 
 ;; magit
 (require 'magit)

@@ -40,7 +40,7 @@ source /etc/profile
 # Colorized ls
 eval `dircolors -b`
 
-export EDITOR="nano"
+export EDITOR="emacs"
 
 # Key Bindings
 

@@ -176,7 +176,8 @@
 (setq sentence-end-double-space nil)
 (setq imenu-auto-rescan t) ;; auto-updating the index of M-x imenu
 (setq doc-view-continuous t) ;; continuous scrolling in pdfs
-
+(setq inhibit-startup-screen t) ;; don't show the startup screen
+(blink-cursor-mode -1) ;; disable cursor blinking
 
 ;; ibuffer grouping
 (setq ibuffer-saved-filter-groups

@@ -28,36 +28,36 @@ main = do
 	xmonad $ ewmh defaultConfig
 		{ layoutHook = smartBorders $ myLayout
 		, terminal		= "urxvtc"
-		, modMask		= mod4Mask
+		, modMask		= mod3Mask
 		, borderWidth		= 2
 		, normalBorderColor	= "#0c0d0e"
 		, focusedBorderColor	= "#333333"
-		, handleEventHook	= fullscreenEventHook		
+		, handleEventHook	= fullscreenEventHook
 		}
 		`additionalKeys`
-                 [ ((mod4Mask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
-                 , ((mod4Mask, xK_e), spawn "e")
-                 , ((mod4Mask, xK_o), spawn "dmenu-edit")
-                 , ((mod4Mask, xK_u), spawn "dmenu-urxvt")
-		 , ((mod4Mask, xK_p), spawn "dmenu-run")
-                 , ((mod4Mask, xK_Right), windows W.focusDown)
-                 , ((mod4Mask, xK_Left),  windows W.focusUp)
-                 , ((mod4Mask, xK_Down),  sendMessage Shrink)
-                 , ((mod4Mask, xK_Up),    sendMessage Expand)
-                 , ((mod4Mask .|. shiftMask, xK_Right), windows W.swapDown)
-                 , ((mod4Mask .|. shiftMask, xK_Left),  windows W.swapUp)
-                 , ((mod4Mask .|. shiftMask, xK_Down), sendMessage (IncMasterN (-1)))
-                 , ((mod4Mask .|. shiftMask, xK_Up),   sendMessage (IncMasterN 1))
-		 , ((mod4Mask .|. shiftMask, xK_F10), spawn "slock")
-		 , ((mod4Mask .|. shiftMask, xK_F11), spawn "reboot")
-		 , ((mod4Mask .|. shiftMask, xK_F12), spawn "shutdown")
+                 [ ((modMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
+                 , ((modMask, xK_e), spawn "e")
+                 , ((modMask, xK_o), spawn "dmenu-edit")
+                 , ((modMask, xK_u), spawn "dmenu-urxvt")
+		 , ((modMask, xK_p), spawn "dmenu-run")
+                 , ((modMask, xK_Right), windows W.focusDown)
+                 , ((modMask, xK_Left),  windows W.focusUp)
+                 , ((modMask, xK_Down),  sendMessage Shrink)
+                 , ((modMask, xK_Up),    sendMessage Expand)
+                 , ((modMask .|. shiftMask, xK_Right), windows W.swapDown)
+                 , ((modMask .|. shiftMask, xK_Left),  windows W.swapUp)
+                 , ((modMask .|. shiftMask, xK_Down), sendMessage (IncMasterN (-1)))
+                 , ((modMask .|. shiftMask, xK_Up),   sendMessage (IncMasterN 1))
+		 , ((modMask .|. shiftMask, xK_F10), spawn "slock")
+		 , ((modMask .|. shiftMask, xK_F11), spawn "reboot")
+		 , ((modMask .|. shiftMask, xK_F12), spawn "shutdown")
                  ]
                  `additionalKeysP`
                  [ ("M-S-a", kill)
-                 , ("M-<Insert>", spawn "amixer -q set Front toggle")
+                 , ("M-<Insert>", spawn "amixer -q set Master toggle")
                  , ("M-<Page_Up>", spawn "amixer set Master 1+")
                  , ("M-<Page_Down>", spawn "amixer set Master 1-")
-                 
+
                  , ("M-z", windows $ W.greedyView "1")
                  , ("S-M-z", windows $ W.shift "1")
                  , ("M-x", windows $ W.greedyView "2")
@@ -67,5 +67,5 @@ main = do
                  , ("M-v", windows $ W.greedyView "4")
                  , ("S-M-v", windows $ W.shift "4")
                  , ("M-b", windows $ W.greedyView "5")
-                 , ("S-M-b", windows $ W.shift "5")                   
+                 , ("S-M-b", windows $ W.shift "5")
                  ]

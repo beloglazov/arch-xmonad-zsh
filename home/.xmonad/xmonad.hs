@@ -23,34 +23,35 @@ myLayout = tiled ||| Full
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
+myModMask = mod4Mask
 
 main = do
 	xmonad $ ewmh defaultConfig
 		{ layoutHook = smartBorders $ myLayout
 		, terminal		= "urxvtc"
-		, modMask		= mod3Mask
+		, modMask		= myModMask
 		, borderWidth		= 2
 		, normalBorderColor	= "#0c0d0e"
 		, focusedBorderColor	= "#333333"
 		, handleEventHook	= fullscreenEventHook
 		}
 		`additionalKeys`
-                 [ ((modMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
-                 , ((modMask, xK_e), spawn "e")
-                 , ((modMask, xK_o), spawn "dmenu-edit")
-                 , ((modMask, xK_u), spawn "dmenu-urxvt")
-		 , ((modMask, xK_p), spawn "dmenu-run")
-                 , ((modMask, xK_Right), windows W.focusDown)
-                 , ((modMask, xK_Left),  windows W.focusUp)
-                 , ((modMask, xK_Down),  sendMessage Shrink)
-                 , ((modMask, xK_Up),    sendMessage Expand)
-                 , ((modMask .|. shiftMask, xK_Right), windows W.swapDown)
-                 , ((modMask .|. shiftMask, xK_Left),  windows W.swapUp)
-                 , ((modMask .|. shiftMask, xK_Down), sendMessage (IncMasterN (-1)))
-                 , ((modMask .|. shiftMask, xK_Up),   sendMessage (IncMasterN 1))
-		 , ((modMask .|. shiftMask, xK_F10), spawn "slock")
-		 , ((modMask .|. shiftMask, xK_F11), spawn "reboot")
-		 , ((modMask .|. shiftMask, xK_F12), spawn "shutdown")
+                 [ ((myModMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
+                 , ((myModMask, xK_e), spawn "e")
+                 , ((myModMask, xK_o), spawn "dmenu-edit")
+                 , ((myModMask, xK_u), spawn "dmenu-urxvt")
+		 , ((myModMask, xK_p), spawn "dmenu-run")
+                 , ((myModMask, xK_Right), windows W.focusDown)
+                 , ((myModMask, xK_Left),  windows W.focusUp)
+                 , ((myModMask, xK_Down),  sendMessage Shrink)
+                 , ((myModMask, xK_Up),    sendMessage Expand)
+                 , ((myModMask .|. shiftMask, xK_Right), windows W.swapDown)
+                 , ((myModMask .|. shiftMask, xK_Left),  windows W.swapUp)
+                 , ((myModMask .|. shiftMask, xK_Down), sendMessage (IncMasterN (-1)))
+                 , ((myModMask .|. shiftMask, xK_Up),   sendMessage (IncMasterN 1))
+		 , ((myModMask .|. shiftMask, xK_F10), spawn "slock")
+		 , ((myModMask .|. shiftMask, xK_F11), spawn "reboot")
+		 , ((myModMask .|. shiftMask, xK_F12), spawn "shutdown")
                  ]
                  `additionalKeysP`
                  [ ("M-S-a", kill)

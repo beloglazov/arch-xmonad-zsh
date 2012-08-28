@@ -3,6 +3,7 @@ DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # xorg
 ln -s ${DIR}/home/.Xresources ~/.Xresources
+ln -s ${DIR}/home/.Xmodmap ~/.Xmodmap
 ln -s ${DIR}/home/.xinitrc ~/.xinitrc
 
 # zsh

@@ -34,3 +34,6 @@
 [submodule "home/.emacs.d/modes/php-mode"]
 	path = home/.emacs.d/modes/php-mode
 	url = https://github.com/ejmr/php-mode.git
+[submodule "home/.emacs.d/modes/ace-jump-mode"]
+	path = home/.emacs.d/modes/ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode.git

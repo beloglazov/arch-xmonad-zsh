@@ -45,6 +45,16 @@
 (ido-ubiquitous t)
 (setq ido-enable-flex-matching t)
 
+;; ace-jump
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;; (define-key global-map (kbd "s-a") 'ace-jump-mode)
+(define-key global-map (kbd "M-z") 'ace-jump-mode)
 
 
 ;; python
@@ -88,6 +98,7 @@
  uniquify-separator ":")
 
 ;; haskell
+(require 'haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 

@@ -87,6 +87,10 @@
 
 	    (define-key python-mode-map (kbd "<backtab>") 'py-dedent)
 
+	    (define-key python-mode-map (kbd "M-s-i") 'py-previous-block-or-clause)
+	    (define-key python-mode-map (kbd "M-s-k") 'py-down-block-or-clause)
+
+
 	    ;; fill-column-indicator
 	    ;(setq fill-column 80)
 	    ;(setq fci-rule-color "gray6")

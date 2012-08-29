@@ -53,7 +53,7 @@
   t)
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "s-a") 'ace-jump-mode)
+(define-key global-map (kbd "s-q") 'ace-jump-mode)
 
 
 ;; python
@@ -326,6 +326,8 @@
 
 (put 'smart-beginning-of-line 'CUA 'move)
 (global-set-key [home] 'smart-beginning-of-line)
+(global-set-key (kbd "s-a") 'smart-beginning-of-line)
+(global-set-key (kbd "s-e") 'move-end-of-line)
 
 
 ;; move text

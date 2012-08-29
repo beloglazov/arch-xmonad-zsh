@@ -126,6 +126,10 @@
 	    (local-set-key (kbd "C-M-<right>") 'outline-forward-same-level)
 	    (local-set-key (kbd "C-M-<up>") 'outline-previous-visible-heading)
 	    (local-set-key (kbd "C-M-<down>") 'outline-next-visible-heading)
+	    (local-set-key (kbd "C-M-j") 'outline-backward-same-level)
+	    (local-set-key (kbd "C-M-l") 'outline-forward-same-level)
+	    (local-set-key (kbd "C-M-i") 'outline-previous-visible-heading)
+	    (local-set-key (kbd "C-M-k") 'outline-next-visible-heading)
 
 	    (local-set-key (kbd "C-c C-p") 'markdown-preview)
 	    (local-set-key (kbd "C-c C-b") 'markdown-insert-bold)
@@ -225,6 +229,14 @@
 (add-hook 'javascript-mode-hook 'set-local-newline-and-indent)
 
 
+;; movement
+(global-set-key (kbd "s-j") 'left-char)
+(global-set-key (kbd "s-l") 'right-char)
+(global-set-key (kbd "s-i") 'previous-line)
+(global-set-key (kbd "s-k") 'next-line)
+(global-set-key (kbd "s-C-j") 'left-word)
+(global-set-key (kbd "s-C-l") 'right-word)
+
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
 
@@ -298,6 +310,8 @@
 
 (global-set-key [C-up] 'scroll-down-in-place)
 (global-set-key [C-down] 'scroll-up-in-place)
+(global-set-key (kbd "C-s-i") 'scroll-down-in-place)
+(global-set-key (kbd "C-s-k") 'scroll-up-in-place)
 
 
 ;; smart home
@@ -354,6 +368,8 @@
 
 (global-set-key (kbd "M-<up>") 'move-text-up)
 (global-set-key (kbd "M-<down>") 'move-text-down)
+(global-set-key (kbd "s-M-i") 'move-text-up)
+(global-set-key (kbd "s-M-k") 'move-text-down)
 
 
 ;; duplicate line

@@ -224,7 +224,7 @@
 ;; key bindings
 
 (defun set-local-newline-and-indent ()
-  (local-set-key (kbd "<return>") 'newline-and-indent))
+  (local-set-key (kbd "s-h") 'newline-and-indent))
 (add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'javascript-mode-hook 'set-local-newline-and-indent)

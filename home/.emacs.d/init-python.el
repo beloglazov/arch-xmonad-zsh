@@ -77,6 +77,7 @@
 	  (lambda ()
 
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
+	    (define-key python-mode-map (kbd "s-h") 'py-newline-and-indent)
 
 	    ;; fill-column-indicator
 	    ;(setq fill-column 80)

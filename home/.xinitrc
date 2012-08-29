@@ -1,6 +1,6 @@
 (sleep 10s && xset b off) &
 (sleep 10s && xset r rate 250 45) &
-(sleep 15s && xmodmap ~/.Xmodmap) &
+(sleep 20s && xmodmap ~/.Xmodmap) &
 export PATH=~/bin:$PATH
 xset +fp /usr/share/fonts/local
 xsetroot -cursor_name left_ptr &

@@ -23,7 +23,7 @@ myLayout = tiled ||| Full
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-myModMask = mod3Mask
+myModMask = mod4Mask
 
 main = do
 	xmonad $ ewmh defaultConfig

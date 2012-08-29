@@ -5,6 +5,6 @@ clear Mod4
 clear Mod5
 add Mod1 = Alt_L Alt_R Meta_L
 add Mod2 = Num_Lock
-add Mod3 = Hyper_L
-add Mod4 = Super_L Super_R
+add Mod3 = Super_L Super_R
+add Mod4 = Hyper_L
 add Mod5 = ISO_Level3_Shift Mode_switch

@@ -238,6 +238,9 @@
 (global-set-key (kbd "s-C-j") 'left-word)
 (global-set-key (kbd "s-C-l") 'right-word)
 
+(global-set-key (kbd "s-p") 'cua-scroll-down)
+(global-set-key (kbd "s-;") 'cua-scroll-up)
+
 (global-set-key (kbd "s-d") 'delete-forward-char)
 (global-set-key (kbd "s-w") 'backward-delete-char-untabify)
 

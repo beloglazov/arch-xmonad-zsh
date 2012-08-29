@@ -238,8 +238,14 @@
 (global-set-key (kbd "s-C-j") 'left-word)
 (global-set-key (kbd "s-C-l") 'right-word)
 
+(global-set-key (kbd "s-d") 'delete-forward-char)
+(global-set-key (kbd "s-w") 'backward-delete-char-untabify)
+
 (global-set-key (kbd "C-<prior>") 'next-buffer) ;; page up
 (global-set-key (kbd "C-<next>") 'previous-buffer) ;; page down
+
+(global-set-key (kbd "s-o") 'next-buffer)
+(global-set-key (kbd "s-u") 'previous-buffer)
 
 ;(global-set-key (kbd "C-f") 'isearch-forward)
 ;(global-set-key (kbd "C-f") 'isearch-repeat-forward)
@@ -248,8 +254,6 @@
 
 (global-set-key (kbd "C-M-<prior>") 'isearch-ring-retreat)
 (global-set-key (kbd "C-M-<next>") 'isearch-ring-advance)
-
-(global-set-key (kbd "H-a") 'delete-forward-char)
 
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
 ;(global-set-key (kbd "C-s") 'save-buffer)

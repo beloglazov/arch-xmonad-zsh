@@ -241,6 +241,9 @@
 (global-set-key (kbd "s-p") 'cua-scroll-down)
 (global-set-key (kbd "s-;") 'cua-scroll-up)
 
+(global-set-key (kbd "C-s-a") 'beginning-of-buffer)
+(global-set-key (kbd "C-s-e") 'end-of-buffer)
+
 (global-set-key (kbd "s-d") 'delete-forward-char)
 (global-set-key (kbd "s-w") 'backward-delete-char-untabify)
 

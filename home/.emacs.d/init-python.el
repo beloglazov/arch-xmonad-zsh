@@ -76,6 +76,8 @@
 (add-hook 'python-mode-hook
 	  (lambda ()
 
+	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
+
 	    ;; fill-column-indicator
 	    ;(setq fill-column 80)
 	    ;(setq fci-rule-color "gray6")

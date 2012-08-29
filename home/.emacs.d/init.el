@@ -45,17 +45,6 @@
 (ido-ubiquitous t)
 (setq ido-enable-flex-matching t)
 
-;; ace-jump
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
-;; you can select the key you prefer to
-;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "s-q") 'ace-jump-mode)
-
-
 ;; python
 (load-file "~/.emacs.d/init-python.el")
 
@@ -156,6 +145,18 @@
 
 ;; move the mouse pointer to the corner when typing
 (mouse-avoidance-mode)
+
+;; ace-jump
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "s-q") 'ace-jump-mode)
+
+
 
 ;; before-save hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

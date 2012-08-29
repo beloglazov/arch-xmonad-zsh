@@ -79,6 +79,14 @@
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
 	    (define-key python-mode-map (kbd "s-h") 'py-newline-and-indent)
 
+	    (define-key python-mode-map (kbd "s-w") 'py-electric-backspace)
+	    (define-key python-mode-map (kbd "s-d") 'py-electric-delete)
+
+	    (define-key python-mode-map (kbd "C-s-w") 'py-hungry-delete-backwards)
+	    (define-key python-mode-map (kbd "C-s-d") 'py-hungry-delete-forward)
+
+	    (define-key python-mode-map (kbd "<backtab>") 'py-dedent)
+
 	    ;; fill-column-indicator
 	    ;(setq fill-column 80)
 	    ;(setq fci-rule-color "gray6")

@@ -250,6 +250,9 @@
 (global-set-key (kbd "s-o") 'next-buffer)
 (global-set-key (kbd "s-u") 'previous-buffer)
 
+(global-set-key (kbd "C-x f") 'ido-find-file)
+(global-set-key (kbd "C-x C-f") 'set-fill-column)
+
 ;(global-set-key (kbd "C-f") 'isearch-forward)
 ;(global-set-key (kbd "C-f") 'isearch-repeat-forward)
 ;(global-set-key (kbd "C-S-f") 'isearch-backward)

@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# name: self.assertEquals()
+# contributor: Anton Beloglazov
+# key: ass
+# --
+self.assertEqual($1, $2)$0

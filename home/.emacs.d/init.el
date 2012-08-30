@@ -155,6 +155,7 @@
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (define-key global-map (kbd "s-q") 'ace-jump-mode)
+(define-key global-map (kbd "M-z") 'ace-jump-mode)
 
 
 

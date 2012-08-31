@@ -78,6 +78,10 @@
 
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
 	    (define-key python-mode-map (kbd "s-h") 'py-newline-and-indent)
+	    (define-key python-mode-map (kbd "s-H") (lambda ()
+						      (interactive)
+						      (move-end-of-line nil)
+						      (py-newline-and-indent)))
 
 	    (define-key python-mode-map (kbd "s-w") 'py-electric-backspace)
 	    (define-key python-mode-map (kbd "s-d") 'py-electric-delete)
@@ -87,8 +91,11 @@
 
 	    (define-key python-mode-map (kbd "<backtab>") 'py-dedent)
 
-	    (define-key python-mode-map (kbd "M-s-i") 'py-previous-block-or-clause)
-	    (define-key python-mode-map (kbd "M-s-k") 'py-down-block-or-clause)
+	    (define-key python-mode-map (kbd "M-s-i") 'backward-paragraph)
+	    (define-key python-mode-map (kbd "M-s-k") 'forward-paragraph)
+
+	    ;; (define-key python-mode-map (kbd "M-s-i") 'py-previous-block-or-clause)
+	    ;; (define-key python-mode-map (kbd "M-s-k") 'py-down-block-or-clause)
 
 
 	    ;; fill-column-indicator

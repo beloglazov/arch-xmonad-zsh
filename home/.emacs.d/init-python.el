@@ -77,11 +77,11 @@
 	  (lambda ()
 
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
-	    (define-key python-mode-map (kbd "s-h") 'py-newline-and-indent)
-	    (define-key python-mode-map (kbd "s-H") (lambda ()
-						      (interactive)
-						      (move-end-of-line nil)
-						      (py-newline-and-indent)))
+	    (define-key python-mode-map (kbd "s-SPC") 'py-newline-and-indent)
+	    (define-key python-mode-map (kbd "S-s-SPC") (lambda ()
+							  (interactive)
+							  (move-end-of-line nil)
+							  (py-newline-and-indent)))
 
 	    (define-key python-mode-map (kbd "s-w") 'py-electric-backspace)
 	    (define-key python-mode-map (kbd "s-d") 'py-electric-delete)

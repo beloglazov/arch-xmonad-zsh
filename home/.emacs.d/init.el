@@ -236,8 +236,13 @@
 (global-set-key (kbd "s-l") 'right-char)
 (global-set-key (kbd "s-i") 'previous-line)
 (global-set-key (kbd "s-k") 'next-line)
-(global-set-key (kbd "s-C-j") 'left-word)
-(global-set-key (kbd "s-C-l") 'right-word)
+(global-set-key (kbd "M-s-j") 'left-word)
+(global-set-key (kbd "M-s-l") 'right-word)
+
+(global-set-key (kbd "C-M-<up>") 'backward-paragraph)
+(global-set-key (kbd "C-M-<down>") 'forward-paragraph)
+(global-set-key (kbd "M-s-i") 'backward-paragraph)
+(global-set-key (kbd "M-s-k") 'forward-paragraph)
 
 (global-set-key (kbd "s-p") 'cua-scroll-down)
 (global-set-key (kbd "s-;") 'cua-scroll-up)
@@ -257,22 +262,19 @@
 (global-set-key (kbd "C-x f") 'ido-find-file)
 (global-set-key (kbd "C-x C-f") 'set-fill-column)
 
-;(global-set-key (kbd "C-f") 'isearch-forward)
-;(global-set-key (kbd "C-f") 'isearch-repeat-forward)
-;(global-set-key (kbd "C-S-f") 'isearch-backward)
-;(global-set-key (kbd "C-S-f") 'isearch-repeat-backward)
-
 (global-set-key (kbd "C-M-<prior>") 'isearch-ring-retreat)
 (global-set-key (kbd "C-M-<next>") 'isearch-ring-advance)
 
 (global-set-key (kbd "C-S-a") 'mark-whole-buffer)
-;(global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-S-w") 'kill-this-buffer)
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-d") 'kill-word)
+(global-set-key (kbd "s-W") 'backward-kill-word)
+(global-set-key (kbd "s-D") 'kill-word)
+
 (global-set-key (kbd "C-<delete>") 'kill-word)
 (global-set-key (kbd "C-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-<tab>") 'other-window)
@@ -285,13 +287,13 @@
 (global-set-key (kbd "M-3") 'split-window-vertically)
 
 ;; search
-(global-set-key (kbd "<f1>") 'isearch-forward)
-(global-set-key (kbd "<f2>") 'isearch-backward)
+(global-set-key (kbd "s-s") 'isearch-forward)
+(global-set-key (kbd "s-r") 'isearch-backward)
 
 (add-hook 'isearch-mode-hook
 	  (lambda ()
-	    (define-key isearch-mode-map (kbd "<f1>") 'isearch-repeat-forward)
-	    (define-key isearch-mode-map (kbd "<f2>") 'isearch-repeat-backward)))
+	    (define-key isearch-mode-map (kbd "s-s") 'isearch-repeat-forward)
+	    (define-key isearch-mode-map (kbd "s-r") 'isearch-repeat-backward)))
 
 ;; registers
 (global-set-key (kbd "M-<f5>") 'point-to-register)

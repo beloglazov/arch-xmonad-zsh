@@ -94,6 +94,9 @@
 	    (define-key python-mode-map (kbd "M-s-i") 'backward-paragraph)
 	    (define-key python-mode-map (kbd "M-s-k") 'forward-paragraph)
 
+	    (define-key python-mode-map (kbd "C-M-<up>") 'backward-paragraph)
+	    (define-key python-mode-map (kbd "C-M-<down>") 'forward-paragraph)
+
 	    ;; (define-key python-mode-map (kbd "M-s-i") 'py-previous-block-or-clause)
 	    ;; (define-key python-mode-map (kbd "M-s-k") 'py-down-block-or-clause)
 

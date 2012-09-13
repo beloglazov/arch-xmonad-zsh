@@ -78,7 +78,7 @@
 
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
 	    (define-key python-mode-map (kbd "s-SPC") 'py-newline-and-indent)
-	    (define-key python-mode-map (kbd "S-s-SPC") (lambda ()
+	    (define-key python-mode-map (kbd "M-s-SPC") (lambda ()
 							  (interactive)
 							  (move-end-of-line nil)
 							  (py-newline-and-indent)))

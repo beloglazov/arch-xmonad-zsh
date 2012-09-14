@@ -224,19 +224,11 @@
 
 ;; key bindings
 
-(global-set-key (kbd "s-SPC") 'newline)
-
-(defun set-local-newline-and-indent ()
-  (local-set-key (kbd "s-SPC") 'newline-and-indent)
-  (local-set-key (kbd "M-s-SPC") (lambda ()
-				   (interactive)
-				   (move-end-of-line nil)
-				   (newline-and-indent))))
-
-(add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
-(add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)
-(add-hook 'javascript-mode-hook 'set-local-newline-and-indent)
-
+(global-set-key (kbd "s-SPC") 'newline-and-indent)
+(global-set-key (kbd "M-s-SPC") (lambda ()
+				  (interactive)
+				  (move-end-of-line nil)
+				  (newline-and-indent)))
 
 ;; movement
 (global-set-key (kbd "s-j") 'left-char)
@@ -276,6 +268,7 @@
 (global-set-key (kbd "C-S-w") 'kill-this-buffer)
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x s") 'save-buffer)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-d") 'kill-word)

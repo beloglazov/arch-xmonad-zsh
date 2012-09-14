@@ -388,8 +388,8 @@
 
 (global-set-key (kbd "M-<up>") 'move-text-up)
 (global-set-key (kbd "M-<down>") 'move-text-down)
-(global-set-key (kbd "s-M-i") 'move-text-up)
-(global-set-key (kbd "s-M-k") 'move-text-down)
+(global-set-key (kbd "M-s-I") 'move-text-up)
+(global-set-key (kbd "M-s-K") 'move-text-down)
 
 
 ;; duplicate line

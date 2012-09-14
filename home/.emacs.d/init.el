@@ -231,7 +231,7 @@
   (local-set-key (kbd "M-s-SPC") (lambda ()
 				   (interactive)
 				   (move-end-of-line nil)
-				   (newline-and-indent)))
+				   (newline-and-indent))))
 
 (add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)

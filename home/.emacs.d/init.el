@@ -224,8 +224,15 @@
 
 ;; key bindings
 
+(global-set-key (kbd "s-SPC") 'newline)
+
 (defun set-local-newline-and-indent ()
-  (local-set-key (kbd "s-h") 'newline-and-indent))
+  (local-set-key (kbd "s-SPC") 'newline-and-indent)
+  (local-set-key (kbd "M-s-SPC") (lambda ()
+				   (interactive)
+				   (move-end-of-line nil)
+				   (newline-and-indent)))
+
 (add-hook 'lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'emacs-lisp-mode-hook 'set-local-newline-and-indent)
 (add-hook 'javascript-mode-hook 'set-local-newline-and-indent)

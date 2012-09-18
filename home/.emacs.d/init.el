@@ -278,7 +278,8 @@
 (global-set-key (kbd "C-<delete>") 'kill-word)
 (global-set-key (kbd "C-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-<tab>") 'other-window)
-(global-set-key (kbd "C-k") 'kill-whole-line)
+(global-set-key (kbd "C-k") 'kill-line)
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
 
 (global-set-key (kbd "C-M-1") 'kill-buffer-and-window)
 (global-set-key (kbd "M-`") 'delete-window)

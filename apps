@@ -14,6 +14,7 @@ dmidecode		system information
 dehtml			extract text from html
 detex			extract text from tex
 elinks			console browser
+glances			a CLI curses based monitoring tool
 google-talkplugin	Video chat plugin 
 iftop			network monitor
 hdparm			hdd benchmark

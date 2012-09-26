@@ -64,7 +64,8 @@ urxvt*color5:      #dc8cc3
 urxvt*color6:      #8cd0d3
 urxvt*color7:      #dcdccc
 ! bright-black + bright-red
-urxvt*color8:      #000000
+!urxvt*color8:      #000000
+urxvt*color8:      #333333
 urxvt*color9:      #dca3a3
 ! bright-green + bright-yellow
 urxvt*color10:     #c3bf9f

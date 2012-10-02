@@ -5,6 +5,7 @@ aspell-ru
 atdtool			command line interfact to After the Deadline
 axel
 bc			calculator
+cloc			count lines of code
 colordiff		colorized diff
 colorsvn		colorized svn
 cope-git		color wrapper for terminal programs
@@ -15,7 +16,7 @@ dehtml			extract text from html
 detex			extract text from tex
 elinks			console browser
 glances			a CLI curses based monitoring tool
-google-talkplugin	Video chat plugin 
+google-talkplugin	Video chat plugin
 iftop			network monitor
 hdparm			hdd benchmark
 latex2rtf		converter from latex to rtf
@@ -44,5 +45,3 @@ tidy			clean up and format html
 unclutter		hide mouse when it's unused
 extract
 zgv			image viewer
-
-

@@ -58,8 +58,10 @@ main = do
 		 , ((myModMask .|. shiftMask, xK_F10), 	 spawn "slock")
 		 , ((myModMask .|. shiftMask, xK_F11), 	 spawn "reboot")
 		 , ((myModMask .|. shiftMask, xK_F12), 	 spawn "shutdown")
+                 , ((myModMask, xK_s), screenWorkspace 1 >>= flip whenJust (windows . W.view))
+                 , ((myModMask, xK_d), screenWorkspace 0 >>= flip whenJust (windows . W.view))
                  ]
-                 `additionalKeysP`
+                `additionalKeysP`
                  [ ("M-S-a", kill)
                  , ("M-<Insert>", spawn "amixer -q set Master toggle")
                  , ("M-<Page_Up>", spawn "amixer set Master 1+")

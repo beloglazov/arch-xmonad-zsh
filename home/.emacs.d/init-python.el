@@ -72,10 +72,16 @@
     (prefix     . c-dot)
     (requires   . 0)))
 
+(eval-after-load "python-mode"
+  '(progn
+     (define-key python-mode-map [(delete)] nil)
+     (define-key python-mode-map [(backspace)] nil)
+     (global-unset-key (kbd "DEL"))
+     (global-unset-key (kbd "<deletechar>"))
+     ))
 
 (add-hook 'python-mode-hook
 	  (lambda ()
-
 	    (define-key python-mode-map (kbd "s-q") 'ace-jump-mode)
 	    (define-key python-mode-map (kbd "s-SPC") 'py-newline-and-indent)
 	    (define-key python-mode-map (kbd "M-s-SPC") (lambda ()

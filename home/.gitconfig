@@ -15,3 +15,5 @@
 	s = status
 	d = diff --stat
 	p = push -u
+[push]
+	default = simple

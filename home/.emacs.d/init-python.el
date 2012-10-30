@@ -76,8 +76,8 @@
   '(progn
      (define-key python-mode-map [(delete)] nil)
      (define-key python-mode-map [(backspace)] nil)
-     (global-unset-key (kbd "DEL"))
-     (global-unset-key (kbd "<deletechar>"))
+     ;(global-unset-key (kbd "DEL"))
+     ;(global-unset-key (kbd "<deletechar>"))
      ))
 
 (add-hook 'python-mode-hook

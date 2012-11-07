@@ -37,6 +37,7 @@ pacman-color
 palimpsest		hdd benchmark
 pydf
 ranger			cli file manager
+rstudio			IDE for R
 rsync
 rtorrent		torrent client
 slock 			screen locker

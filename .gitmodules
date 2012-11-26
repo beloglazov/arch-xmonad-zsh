@@ -1,12 +1,6 @@
 [submodule "home/.emacs.d/modes/yasnippet"]
 	path = home/.emacs.d/modes/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
-[submodule "home/.emacs.d/modes/popup-el"]
-	path = home/.emacs.d/modes/popup-el
-	url = https://github.com/auto-complete/popup-el.git
-[submodule "home/.emacs.d/modes/auto-complete"]
-	path = home/.emacs.d/modes/auto-complete
-	url = https://github.com/auto-complete/auto-complete.git
 [submodule "home/.emacs.d/modes/magit"]
 	path = home/.emacs.d/modes/magit
 	url = https://github.com/magit/magit.git

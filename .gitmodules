@@ -31,3 +31,9 @@
 [submodule "home/.emacs.d/modes/ace-jump-mode"]
 	path = home/.emacs.d/modes/ace-jump-mode
 	url = https://github.com/winterTTr/ace-jump-mode.git
+[submodule "home/.emacs.d/modes/popup-el"]
+	path = home/.emacs.d/modes/popup-el
+	url = https://github.com/auto-complete/popup-el
+[submodule "home/.emacs.d/modes/auto-complete"]
+	path = home/.emacs.d/modes/auto-complete
+	url = https://github.com/auto-complete/auto-complete

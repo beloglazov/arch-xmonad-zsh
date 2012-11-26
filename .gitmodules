@@ -1,9 +1,12 @@
 [submodule "home/.emacs.d/modes/yasnippet"]
 	path = home/.emacs.d/modes/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
+[submodule "home/.emacs.d/modes/popup-el"]
+	path = home/.emacs.d/modes/popup-el
+	url = https://github.com/auto-complete/popup-el.git
 [submodule "home/.emacs.d/modes/auto-complete"]
 	path = home/.emacs.d/modes/auto-complete
-	url = https://github.com/m2ym/auto-complete.git
+	url = https://github.com/auto-complete/auto-complete.git
 [submodule "home/.emacs.d/modes/magit"]
 	path = home/.emacs.d/modes/magit
 	url = https://github.com/magit/magit.git
@@ -25,9 +28,6 @@
 [submodule "home/.emacs.d/modes/smex"]
 	path = home/.emacs.d/modes/smex
 	url = https://github.com/nonsequitur/smex.git
-[submodule "home/.emacs.d/modes/popup-el"]
-	path = home/.emacs.d/modes/popup-el
-	url = https://github.com/m2ym/popup-el.git
 [submodule "home/.emacs.d/modes/fill-column-indicator"]
 	path = home/.emacs.d/modes/fill-column-indicator
 	url = https://github.com/alpaker/Fill-Column-Indicator.git

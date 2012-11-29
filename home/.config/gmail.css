@@ -1,7 +1,36 @@
+/** top header **/
+.nH.w-asV.aiw {
+    position: absolute;
+    top: -100px;
+}
+
+/** search field **/
+#gbfwa {
+    width: 250px;
+    position: absolute;
+    top: 83px;
+    right: 250px;
+}
+
+#gbqfq {
+    background: #0c0d0e;
+    color: #7f8f9f;
+}
+
+#gbqfqw {
+    background: #0c0d0e;
+    border: solid 1px #272B2E;
+}
+
+#gbqfab .aoq {
+    opacity: 0.55;
+}
+
 /** main background **/
 
 body > div > div > div {
     background: #0c0d0e;
+    padding-top: 5px;
 }
 
 /** main background **/

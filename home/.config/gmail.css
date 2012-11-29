@@ -26,6 +26,12 @@
     opacity: 0.55;
 }
 
+/** header bottom border **/
+
+.G-atb {
+    border: none;
+}
+
 /** main background **/
 
 body > div > div > div {
@@ -66,7 +72,7 @@ a.J-Ke.n0 {
 /** current menu item side bar **/
 
 .ain {
-    border-left: 2px solid #7f8f9f;
+    border-left: 2px solid #0c0d0e;
 }
 
 /** drafts count **/
@@ -185,4 +191,9 @@ input.dI.dG {
 
 div.nH.ko.aXjCH {
     height: 350px;
+}
+
+/** a line over the chat **/
+.aeS {
+    display: none;
 }

@@ -35,6 +35,7 @@ main = do
 		}
 		`additionalKeys`
                  [ ((myModMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
+		 , ((myModMask, xK_w), spawn "acpi -b | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
                  , ((myModMask, xK_e), spawn "e")
                  , ((myModMask, xK_o), spawn "dmenu-edit")
                  , ((myModMask, xK_u), spawn "dmenu-urxvt")
@@ -55,6 +56,7 @@ main = do
                  , ((myModMask .|. shiftMask, xK_j),  	 windows W.swapUp)
                  , ((myModMask .|. shiftMask, xK_k),  	 sendMessage (IncMasterN (-1)))
                  , ((myModMask .|. shiftMask, xK_i),     sendMessage (IncMasterN 1))
+		 , ((myModMask .|. shiftMask, xK_F9), 	 spawn "suspend-to-mem")
 		 , ((myModMask .|. shiftMask, xK_F10), 	 spawn "slock")
 		 , ((myModMask .|. shiftMask, xK_F11), 	 spawn "reboot")
 		 , ((myModMask .|. shiftMask, xK_F12), 	 spawn "shutdown")

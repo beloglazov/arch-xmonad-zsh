@@ -27,56 +27,47 @@
 }
 
 /** header bottom border **/
-
 .G-atb {
     border: none;
 }
 
 /** main background **/
-
 body > div > div > div {
     background: #0c0d0e;
     padding-top: 5px;
 }
 
 /** main background **/
-
 .no {
     background: #0c0d0e;
 }
 
 /** content height **/
-
 .oLaOvc.aeJ {
     height: 966px;
 }
 
 /** Gmail title **/
-
 .akh {
     color: #7f8f9f;
 }
 
 /** Gmail title arrow **/
-
 .asT-asx.J-J5-Ji {
     display: none;
 }
 
 /** left menu items**/
-
 a.J-Ke.n0 {
     color: #7f8f9f;
 }
 
 /** current menu item side bar **/
-
 .ain {
     border-left: 2px solid #0c0d0e;
 }
 
 /** drafts count **/
-
 .LrBjie> .TK> .aim:nth-of-type(5) .aio.UKr6le span {
     overflow: hidden;
     width: 36px;
@@ -86,25 +77,21 @@ a.J-Ke.n0 {
 }
 
 /** drafts **/
-
 .LrBjie> .TK> .aim:nth-of-type(5) .aio.UKr6le a {
     font-weight: normal;
 }
 
 /** menu more **/
-
 .CJ {
     color: #7f8f9f;
 }
 
 /** menu more arrow **/
-
 .ait {
     display: none;
 }
 
 /** chat search **/
-
 input.dI.dG {
     background-color: #0c0d0e;
     color: #7f8f9f;
@@ -128,25 +115,21 @@ tr.vm {
 }
 
 /** chat contacts **/
-
 .az1 {
     color: #7f8f9f;
 }
 
 /** under chat tabs **/
-
 .J-KU-Jg.J-KU-Jg-Zc.aj5 {
     display: none;
 }
 
 /** float contact email **/
-
 .tG, .tB {
     color: #7f8f9f;
 }
 
 /** buttons **/
-
 .T-I.J-J5-Ji.T-Pm.T-I-ax7.L3.J-JN-M-I, .T-I.J-J5-Ji.nu.T-I-ax7.L3, .T-I.J-J5-Ji.ar7, .T-I.J-J5-Ji.amD.T-I-awG.amE.T-I-ax7.T-I-JE.L3, .T-I.J-J5-Ji.adg.T-I-awG.T-I-ax7.L3, .T-I.J-J5-Ji.ash.T-I-ax7.L3, .T-I.J-J5-Ji.T-I-KE.L3 {
     background-image: none;
     background-color: #181A1C;
@@ -155,7 +138,6 @@ tr.vm {
 }
 
 /** buttons **/
-
 .T-I.J-J5-Ji.T-Pm.T-I-ax7.L3.J-JN-M-I:hover, .T-I.J-J5-Ji.nu.T-I-ax7.L3:hover, .T-I.J-J5-Ji.ar7:hover, .T-I.J-J5-Ji.amD.T-I-awG.amE.T-I-ax7.T-I-JE.L3:hover, .T-I.J-J5-Ji.adg.T-I-awG.T-I-ax7.L3:hover, .T-I.J-J5-Ji.ash.T-I-ax7.L3:hover, .T-I.J-J5-Ji.T-I-KE.L3:hover {
     background-image: none;
     background-color: #212426;
@@ -165,45 +147,43 @@ tr.vm {
 }
 
 /** page numbers **/
-
 .Dj {
     color: #7f8f9f;
 }
 
 /** page numbers **/
-
 .adl {
     color: #7f8f9f;
 }
 
 /** current email side bar **/
-
 .PF.PE {
     background: transparent;
     border: none;
 }
 
 /** labels **/
-
 .at, .au, .av {
     background-color: #2b1f2b;
     border: none;
 }
 
 /** checkboxes **/
-
 .T-Jo:focus {
     border: 1px solid rgba(155, 155, 155, .57);
 }
 
 /** checkboxes **/
-
 .T-Jo:focus:hover {
     border: 1px solid #B2B2B2;
 }
 
-/** chat window **/
+/** email list top border **/
+table.F.cf.zt {
+    border-top: 1px solid #2A2A2A;
+}
 
+/** chat window **/
 div.nH.ko.aXjCH {
     height: 350px;
 }

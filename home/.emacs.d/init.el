@@ -90,6 +90,11 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
+;; clojure
+(require 'clojure-mode)
+(require 'paredit)
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
+
 ;; elisp
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 

@@ -3,6 +3,7 @@ clear Mod2
 clear Mod3
 clear Mod4
 clear Mod5
+keycode 135 = Super_L
 add Mod1 = Alt_L Alt_R Meta_L
 add Mod2 = Num_Lock
 add Mod3 = Super_L Super_R

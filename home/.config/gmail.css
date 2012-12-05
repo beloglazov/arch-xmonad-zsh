@@ -197,3 +197,11 @@ div.nH.ko.aXjCH {
 .l2.ov {
     display: none;
 }
+
+/** message sent notification **/
+.vh {
+    position: absolute;
+    top: 47px;
+    right: -160px;
+    width: 310px;
+}

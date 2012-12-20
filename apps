@@ -5,6 +5,7 @@ aspell-ru
 atdtool			command line interfact to After the Deadline
 axel
 bc			calculator
+briss			pdf cropping
 cloc			count lines of code
 colordiff		colorized diff
 colorsvn		colorized svn

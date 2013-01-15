@@ -20,6 +20,7 @@ elinks			console browser
 glances			a CLI curses based monitoring tool
 google-talkplugin	Video chat plugin
 iftop			network monitor
+inxi			system information
 hdparm			hdd benchmark
 latex2rtf		converter from latex to rtf
 languagetool		grammar checker
@@ -27,6 +28,7 @@ lesspipe		colorized less
 lftp			console ftp client
 highlight		cli source code highlighter
 mpd			audio player, deamon
+multitail		watch multiple log files or commands
 nano			editor
 nanosyntax		nano syntax highlighting
 ncdu			du analyser
@@ -43,6 +45,7 @@ rstudio			IDE for R
 rsync
 rtorrent		torrent client
 slock 			screen locker
+speedometer		network monitor
 style			analyses the style of text
 tidy			clean up and format html
 unclutter		hide mouse when it's unused

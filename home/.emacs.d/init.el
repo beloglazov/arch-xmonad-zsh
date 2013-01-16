@@ -100,6 +100,13 @@
 
 ;; ebib
 (require 'ebib)
+(setq ebib-index-window-size 30)
+(setq ebib-autogenerate-keys t)
+(setq ebib-uniquify-keys t)
+(setq bibtex-autokey-year-length 4)
+(setq bibtex-autokey-year-title-separator "")
+(setq bibtex-autokey-titlewords 1)
+(setq bibtex-autokey-titleword-length nil)
 
 ;; markdown
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)

@@ -98,6 +98,9 @@
 ;; elisp
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
+;; ebib
+(require 'ebib)
+
 ;; markdown
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))

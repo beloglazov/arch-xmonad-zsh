@@ -40,3 +40,6 @@
 [submodule "home/.emacs.d/modes/clojure-mode"]
 	path = home/.emacs.d/modes/clojure-mode
 	url = git://github.com/technomancy/clojure-mode.git
+[submodule "home/.emacs.d/modes/ebib"]
+	path = home/.emacs.d/modes/ebib
+	url = git://github.com/joostkremers/ebib.git

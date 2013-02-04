@@ -15,5 +15,6 @@
 	s = status
 	d = diff --stat
 	p = push -u
+	pu = pull origin master
 [push]
 	default = simple

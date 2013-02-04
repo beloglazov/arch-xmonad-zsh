@@ -123,6 +123,7 @@ alias gitco='git co'
 alias gitb='git b'
 alias gitd='git diff'
 alias gitp='git p'
+alias gitpu='git pu'
 
 # Eclipse aliases
 alias eclipse-clojure='silent ~/soft/eclipse/eclipse-clojure-indigo/eclipse'

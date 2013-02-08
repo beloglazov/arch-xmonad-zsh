@@ -46,3 +46,6 @@
 [submodule "home/.emacs.d/modes/erc-nick-notify"]
 	path = home/.emacs.d/modes/erc-nick-notify
 	url = git://github.com/emacsmirror/erc-nick-notify.git
+[submodule "home/.emacs.d/modes/yaml-mode"]
+	path = home/.emacs.d/modes/yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git

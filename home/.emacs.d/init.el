@@ -108,6 +108,13 @@
 (setq bibtex-autokey-titlewords 1)
 (setq bibtex-autokey-titleword-length nil)
 
+;; yaml
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+ 	  '(lambda ()
+ 	     (define-key yaml-mode-map (kbd "<return>") 'newline-and-indent)))
+
 ;; ERC
 (require 'erc)
 ;(erc-modules (quote (autojoin button completion fill irccontrols

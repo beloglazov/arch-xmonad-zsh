@@ -1,6 +1,6 @@
 #!/bin/sh
 
-modes='ace-jump-mode auto-complete clojure-mode ebib fill-column-indicator flymake-cursor haskell-mode ido-ubiquitous magit markdown-mode paredit php-mode popup-el pylookup smex yasnippet'
+modes='ace-jump-mode auto-complete clojure-mode ebib erc-nick-notify fill-column-indicator flymake-cursor haskell-mode ido-ubiquitous magit markdown-mode paredit php-mode popup-el pylookup smex yasnippet'
 
 for mode in $modes; do
     cd $mode

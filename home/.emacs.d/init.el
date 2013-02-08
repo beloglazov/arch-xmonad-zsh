@@ -108,6 +108,17 @@
 (setq bibtex-autokey-titlewords 1)
 (setq bibtex-autokey-titleword-length nil)
 
+;; ERC
+(require 'erc)
+;(erc-modules (quote (autojoin button completion fill irccontrols
+;			      list match menu move-to-prompt
+;			      netsplit networks noncommands
+;			      readonly ring stamp track)))
+(require 'erc-nick-notify)
+(add-hook 'erc-mode-hook
+	  (lambda ()
+	    (erc-nick-notify-mode t)))
+
 ;; markdown
 (autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))

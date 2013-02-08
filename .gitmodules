@@ -43,3 +43,6 @@
 [submodule "home/.emacs.d/modes/ebib"]
 	path = home/.emacs.d/modes/ebib
 	url = git://github.com/joostkremers/ebib.git
+[submodule "home/.emacs.d/modes/erc-nick-notify"]
+	path = home/.emacs.d/modes/erc-nick-notify
+	url = git://github.com/emacsmirror/erc-nick-notify.git

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-yaourt -S texlive-most texlive-pstricks texmaker zathura zathura-pdf-poppler acroread
+yaourt -S texlive-most texlive-pstricks auctex texmaker zathura zathura-pdf-poppler acroread

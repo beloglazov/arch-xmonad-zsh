@@ -205,3 +205,8 @@ div.nH.ko.aXjCH {
     right: -160px;
     width: 310px;
 }
+
+/** empty inbox message **/
+td.TC {
+    display: none;
+}

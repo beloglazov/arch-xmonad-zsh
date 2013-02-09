@@ -48,6 +48,9 @@
 ;; python
 (load-file "~/.emacs.d/init-python.el")
 
+;; latex
+(load-file "~/.emacs.d/init-latex.el")
+
 ;; php
 (require 'php-mode)
 

@@ -49,3 +49,6 @@
 [submodule "home/.emacs.d/modes/yaml-mode"]
 	path = home/.emacs.d/modes/yaml-mode
 	url = git://github.com/yoshiki/yaml-mode.git
+[submodule "home/.emacs.d/modes/ess"]
+	path = home/.emacs.d/modes/ess
+	url = git://github.com/emacs-ess/ESS.git

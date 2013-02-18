@@ -101,6 +101,24 @@
 ;; elisp
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
+;; ess
+(require 'ess-site)
+(setq ess-swv-processor 'knitr)
+(setq ess-swv-pdflatex-commands '("pdflatex"))
+(setq ess-pdf-viewer-pref "")
+(defun knitr-pdf ()
+  (interactive)
+  (ess-swv-knit)
+  (ess-wait-for-process (get-process ess-current-process-name))
+  (delete-other-windows)
+  (ess-swv-PDF))
+(add-hook 'LaTeX-mode-hook
+ 	  (lambda ()
+	    (local-set-key (kbd "<f1>") 'knitr-pdf)))
+(add-hook 'ess-mode-hook
+ 	  (lambda ()
+	    (local-set-key (kbd "<f1>") 'knitr-pdf)))
+
 ;; ebib
 (require 'ebib)
 (setq ebib-index-window-size 30)
@@ -118,7 +136,7 @@
  	  '(lambda ()
  	     (define-key yaml-mode-map (kbd "<return>") 'newline-and-indent)))
 
-;; ERC
+;; erc
 (require 'erc)
 ;(erc-modules (quote (autojoin button completion fill irccontrols
 ;			      list match menu move-to-prompt

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ffmpeg -y -i $1 -r 30000/1001 -b 2M -bt 4M -vcodec libx264 -pass 1 -vpre fastfirstpass -an $2
+ffmpeg -y -i $1 -r 30000/1001 -b 2M -bt 4M -vcodec libx264 -pass 2 -vpre hq -acodec libfaac -ac 2 -ar 48000 -ab 192k $2

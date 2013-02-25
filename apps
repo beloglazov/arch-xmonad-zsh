@@ -26,6 +26,7 @@ latex2rtf		converter from latex to rtf
 languagetool		grammar checker
 lesspipe		colorized less
 lftp			console ftp client
+lnav			log file navigator
 highlight		cli source code highlighter
 mpd			audio player, deamon
 multitail		watch multiple log files or commands

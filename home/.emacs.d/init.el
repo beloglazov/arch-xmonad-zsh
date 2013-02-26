@@ -303,6 +303,11 @@
 (global-set-key (kbd "C-s-a") 'beginning-of-buffer)
 (global-set-key (kbd "C-s-e") 'end-of-buffer)
 
+(global-set-key (kbd "s-z") 'undo)
+(global-set-key (kbd "s-x") 'cua-cut-region)
+(global-set-key (kbd "s-c") 'cua-copy-region)
+(global-set-key (kbd "s-v") 'cua-paste)
+
 (global-set-key (kbd "s-d") 'delete-forward-char)
 (global-set-key (kbd "s-w") 'backward-delete-char-untabify)
 

@@ -77,6 +77,10 @@ sudo mkdir /root/.backups
 sudo mkdir /root/.backups/nano
 sudo mkdir /root/.backups/emacs
 
+# bin
+sudo mkdir /root/bin
+sudo ln -s ${DIR}/home/bin/e-root /root/bin/e
+
 
 # /etc
 

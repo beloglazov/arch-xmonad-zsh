@@ -40,7 +40,7 @@ source /etc/profile
 # Colorized ls
 eval `dircolors -b`
 
-export EDITOR="emacs"
+export EDITOR="e"
 
 # Key Bindings
 
@@ -162,5 +162,6 @@ export PERL_MB_OPT="--install_base /home/anton/perl5";
 export PERL_MM_OPT="INSTALL_BASE=/home/anton/perl5";
 export PERL5LIB="/home/anton/perl5/lib/perl5/i686-linux-thread-multi:/home/anton/perl5/lib/perl5";
 export PATH="/home/anton/perl5/bin:$PATH";
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk/jre/lib/i386:/usr/lib/jvm/java-7-openjdk/jre/lib/i386/client"
 
 source ~/.zshenv

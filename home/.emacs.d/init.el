@@ -2,7 +2,7 @@
 ;Add all modes to the load path
 (progn (cd "~/.emacs.d/modes")
        (normal-top-level-add-subdirs-to-load-path))
-
+ 
 ;; Color theme
 ;(load-theme 'solarized-dark t)
 ;(require 'zenburn-theme)
@@ -328,6 +328,7 @@
 (global-set-key (kbd "C-b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-x s") 'save-buffer)
+(global-set-key (kbd "s-C-s") 'save-buffer)
 
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-d") 'kill-word)
@@ -340,6 +341,7 @@
 (global-set-key (kbd "C-k") 'kill-line)
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
 
+(global-set-key (kbd "s-g") 'keyboard-quit)
 (global-set-key (kbd "C-M-1") 'kill-buffer-and-window)
 (global-set-key (kbd "M-`") 'delete-window)
 (global-set-key (kbd "M-1") 'delete-other-windows)

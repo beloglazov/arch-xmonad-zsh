@@ -106,6 +106,7 @@ alias emacs-restart='pkill emacs; emacs --daemon'
 alias g='grep -i'
 alias x='extract'
 alias za='silent zathura'
+alias diff='colordiff'
 
 # SVN aliales
 alias svn='colorsvn'

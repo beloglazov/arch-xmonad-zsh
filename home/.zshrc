@@ -157,6 +157,7 @@ alias dir='ls -1'
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY
+unsetopt SHARE_HISTORY
 
 export PERL_LOCAL_LIB_ROOT="/home/anton/perl5";
 export PERL_MB_OPT="--install_base /home/anton/perl5";

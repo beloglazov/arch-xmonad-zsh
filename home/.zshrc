@@ -24,7 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux extract history-substring-search lein svn autojump)
+plugins=(git archlinux extract history-substring-search lein svn)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)
@@ -35,7 +35,10 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 # To enable autojump
-source /etc/profile
+# source /etc/profile
+
+# To enable fasd
+eval "$(fasd --init auto)"
 
 # Colorized ls
 eval `dircolors -b`

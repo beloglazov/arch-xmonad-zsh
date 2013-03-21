@@ -32,7 +32,9 @@ rm ~/bin/disk-benchmark
 rm ~/bin/pyflakespep8.py
 rm ~/bin/fix-keyboard
 rm ~/bin/reboot
+rm ~/bin/screenshot
 rm ~/bin/shutdown
+rm ~/bin/silent
 
 # .config
 rm ~/.config/dmenu/urxvt-list
@@ -53,11 +55,10 @@ sudo rm /root/.nanorc
 sudo rm /root/.xxkbrc
 
 
-# /etc 
+# /etc
 
 sudo rm /etc/X11/xorg.conf.d/50-keyboard.conf
 sudo rm /etc/X11/xorg.conf.d/50-mouse-acceleration.conf
 
 sudo rm /etc/nanorc
 sudo mv /etc/nanorc-backup /etc/nanorc
-

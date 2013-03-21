@@ -40,13 +40,15 @@ ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
 ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
 ln -s ${DIR}/home/bin/e ~/bin/e
 ln -s ${DIR}/home/bin/fix-keyboard ~/bin/fix-keyboard
+ln -s ${DIR}/home/bin/libreoffice ~/bin/libreoffice
 ln -s ${DIR}/home/bin/mem ~/bin/mem
 ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py
 ln -s ${DIR}/home/bin/reboot ~/bin/reboot
 ln -s ${DIR}/home/bin/screenshot ~/bin/screenshot
 ln -s ${DIR}/home/bin/shutdown ~/bin/shutdown
+ln -s ${DIR}/home/bin/silent ~/bin/silent
 ln -s ${DIR}/home/bin/urxvtc ~/bin/urxvtc
-ln -s ${DIR}/home/bin/za ~/bin/za
+ln -s ${DIR}/home/bin/zathura ~/bin/zathura
 
 # .config
 mkdir ~/.config

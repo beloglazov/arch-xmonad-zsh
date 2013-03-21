@@ -76,15 +76,12 @@ bindkey "\e[F" end-of-line
 
 # Functions
 
-function silent () {nohup $@ &>/dev/null &!}
-function e () {silent emacsclient -c $*}
-function acroread () {silent acroread $*}
 function svnd () {svn diff $* | colordiff}
 function top10 () {history | awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}' | sort | uniq -c | sort -rn | head -10}
-function f() {find ./ -iname "*$1*" 2>/dev/null | grep -i $1}
+function ff() {find ./ -iname "*$1*" 2>/dev/null | grep -i $1}
 
-unalias g
-function g () {git ca $*; git push}
+# unalias g
+# function g () {git ca $*; git push}
 
 unalias yain
 function yain () {yaourt -S $*; rehash}
@@ -94,6 +91,8 @@ function yain () {yaourt -S $*; rehash}
 alias ll='ls -lah'
 alias l='ls -lh'
 alias lltime='ll -tr'
+alias lld='ls -lhd *(-/DN)'
+alias llh='ls -lhd .*'
 alias df='pydf'
 alias du='du -hs'
 alias mkdirs='mkdir -p'
@@ -109,18 +108,18 @@ alias emacs-restart='pkill emacs; emacs --daemon'
 alias g='grep -i'
 alias x='extract'
 alias le='less'
-alias za='silent zathura'
 alias diff='colordiff'
 
 # fasd aliases
-alias ee='fasd -e e'
-alias ed='fasd -de e'
-alias ef='fasd -fe e'
+alias ee='f -e e'
+alias ed='d -e e'
+alias ef='f -e e'
+alias za='f -e zathura'
+alias libre='f -e libreoffice'
 
 # SVN aliales
 alias svn='colorsvn'
 alias svnc='svn ci -m'
-# alias svnd='svn diff $* | colordiff'
 alias svnl='svn up -q; colorsvn log -l 10'
 alias svns='svn st'
 
@@ -158,11 +157,8 @@ alias eclipse-jee='silent ~/soft/eclipse/eclipse-jee-indigo/eclipse'
 #alias -s PKGBUILD=$EDITOR
 
 # Other aliases
-alias lsd='ls -lhd *(-/DN)'
-alias lsh='ls -lhd .*'
-alias ff='find |grep'
+alias fff='find |grep'
 alias c="clear"
-alias dir='ls -1'
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY

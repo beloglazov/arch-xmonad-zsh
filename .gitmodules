@@ -52,3 +52,6 @@
 [submodule "home/.emacs.d/modes/ess"]
 	path = home/.emacs.d/modes/ess
 	url = git://github.com/emacs-ess/ESS.git
+[submodule "home/.emacs.d/modes/multiple-cursors"]
+	path = home/.emacs.d/modes/multiple-cursors
+	url = git://github.com/magnars/multiple-cursors.el.git

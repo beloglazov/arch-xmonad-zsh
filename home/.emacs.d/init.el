@@ -211,6 +211,12 @@
 (define-key global-map (kbd "s-q") 'ace-jump-mode)
 (define-key global-map (kbd "M-z") 'ace-jump-mode)
 
+;; multiple cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "s-/") 'mc/edit-lines)
+(global-set-key (kbd "s-?") 'mc/mark-all-like-this)
+(global-set-key (kbd "s->") 'mc/mark-next-like-this)
+(global-set-key (kbd "s-<") 'mc/mark-previous-like-this)
 
 
 ;; before-save hooks

@@ -112,6 +112,11 @@ alias le='less'
 alias za='silent zathura'
 alias diff='colordiff'
 
+# fasd aliases
+alias ee='fasd -e e'
+alias ed='fasd -de e'
+alias ef='fasd -fe e'
+
 # SVN aliales
 alias svn='colorsvn'
 alias svnc='svn ci -m'

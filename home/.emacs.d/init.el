@@ -291,6 +291,8 @@
 (global-set-key (kbd "s-k") 'next-line)
 (global-set-key (kbd "C-s-j") 'left-word)
 (global-set-key (kbd "C-s-l") 'right-word)
+(global-set-key (kbd "M-s-j") 'left-word)
+(global-set-key (kbd "M-s-l") 'right-word)
 
 (global-set-key (kbd "C-M-<up>") 'backward-paragraph)
 (global-set-key (kbd "C-M-<down>") 'forward-paragraph)

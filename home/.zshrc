@@ -73,12 +73,18 @@ bindkey "\eOF" end-of-line
 bindkey "\e[H" beginning-of-line
 bindkey "\e[F" end-of-line
 
+# fasd
+bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (fils and directories)
+bindkey '^Z' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
+bindkey '^X' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
 
 # Functions
 
 function svnd () {svn diff $* | colordiff}
 function top10 () {history | awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}' | sort | uniq -c | sort -rn | head -10}
-function ff() {find ./ -iname "*$1*" 2>/dev/null | grep -i $1}
+
+unalias f
+function f() {find ./ -iname "*$1*" 2>/dev/null | grep -i $1}
 
 # unalias g
 # function g () {git ca $*; git push}
@@ -109,13 +115,12 @@ alias g='grep -i'
 alias x='extract'
 alias le='less'
 alias diff='colordiff'
+alias za='zathura'
 
 # fasd aliases
 alias ee='f -e e'
 alias ed='d -e e'
 alias ef='f -e e'
-alias za='f -e zathura'
-alias libre='f -e libreoffice'
 
 # SVN aliales
 alias svn='colorsvn'
@@ -157,8 +162,8 @@ alias eclipse-jee='silent ~/soft/eclipse/eclipse-jee-indigo/eclipse'
 #alias -s PKGBUILD=$EDITOR
 
 # Other aliases
-alias fff='find |grep'
-alias c="clear"
+alias ff='find |grep'
+# alias c="clear"
 
 # Don't share history between terminals
 unsetopt APPEND_HISTORY

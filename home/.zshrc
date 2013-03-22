@@ -118,9 +118,9 @@ alias diff='colordiff'
 alias za='zathura'
 
 # fasd aliases
-alias ee='f -e e'
-alias ed='d -e e'
-alias ef='f -e e'
+alias ee='fasd -ae e'
+alias ed='fasd -de e'
+alias ef='fasd -fe e'
 
 # SVN aliales
 alias svn='colorsvn'

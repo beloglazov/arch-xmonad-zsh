@@ -1,3 +1,3 @@
 #!/bin/sh
 
-silent emacsclient -c "$*"
+silent emacsclient -c "$@"

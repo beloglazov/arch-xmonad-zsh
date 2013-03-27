@@ -55,3 +55,6 @@
 [submodule "home/.emacs.d/modes/multiple-cursors"]
 	path = home/.emacs.d/modes/multiple-cursors
 	url = git://github.com/magnars/multiple-cursors.el.git
+[submodule "home/.emacs.d/modes/jump-char"]
+	path = home/.emacs.d/modes/jump-char
+	url = git://github.com/lewang/jump-char.git

@@ -207,13 +207,13 @@
   "Emacs quick move minor mode"
   t)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "s-q") 'ace-jump-mode)
-(define-key global-map (kbd "M-z") 'ace-jump-mode)
+(define-key global-map (kbd "s-<tab>") 'ace-jump-mode)
+;; (define-key global-map (kbd "M-z") 'ace-jump-mode)
 
 ;; jump-char
-(require 'jump-char)
-(global-set-key (kbd "s-<tab>") 'jump-char-forward)
-(global-set-key (kbd "S-s-<iso-lefttab>") 'jump-char-backward)
+;; (require 'jump-char)
+;; (global-set-key (kbd "s-<tab>") 'jump-char-forward)
+;; (global-set-key (kbd "S-s-<iso-lefttab>") 'jump-char-backward)
 
 ;; multiple cursors
 (require 'multiple-cursors)

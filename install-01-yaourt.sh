@@ -22,5 +22,3 @@ makepkg
 sudo pacman -U *.xz
 cd ../
 rm -rf yaourt
-
-yaourt -S pacman-color

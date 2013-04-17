@@ -58,3 +58,6 @@
 [submodule "home/.emacs.d/modes/jump-char"]
 	path = home/.emacs.d/modes/jump-char
 	url = git://github.com/lewang/jump-char.git
+[submodule "home/.emacs.d/modes/evil"]
+	path = home/.emacs.d/modes/evil
+	url = git://gitorious.org/evil/evil.git

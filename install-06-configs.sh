@@ -22,6 +22,7 @@ ln -s ${DIR}/home/.xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 # other
 ln -s ${DIR}/home/.gitconfig ~/.gitconfig
 ln -s ${DIR}/home/.emacs.d ~/.emacs.d
+ln -s ${DIR}/home/.vimrc ~/.vimrc
 ln -s ${DIR}/home/.nanorc ~/.nanorc
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
 ln -s ${DIR}/home/.xxkbrc ~/.xxkbrc

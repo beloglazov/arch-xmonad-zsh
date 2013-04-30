@@ -61,3 +61,6 @@
 [submodule "home/.emacs.d/modes/evil"]
 	path = home/.emacs.d/modes/evil
 	url = git://gitorious.org/evil/evil.git
+[submodule "home/.vim/bundle/vundle"]
+	path = home/.vim/bundle/vundle
+	url = git://github.com/gmarik/vundle.git

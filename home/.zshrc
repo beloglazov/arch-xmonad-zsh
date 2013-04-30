@@ -176,4 +176,6 @@ export PERL5LIB="/home/anton/perl5/lib/perl5/i686-linux-thread-multi:/home/anton
 export PATH="/home/anton/perl5/bin:$PATH";
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk/jre/lib/i386:/usr/lib/jvm/java-7-openjdk/jre/lib/i386/client"
 
+stty -ixon
+
 source ~/.zshenv

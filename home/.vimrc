@@ -13,6 +13,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'jcf/vim-latex'
 
 filetype plugin indent on
 syntax on
@@ -42,6 +43,11 @@ set showcmd  " display incomplete commands
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 noremap <C-b> :CtrlPBuffer<CR>
+
+" latex
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='pdf, aux'
+noremap <f12> \ll
 
 inoremap jk <esc>
 

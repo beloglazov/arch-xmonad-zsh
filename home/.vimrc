@@ -18,7 +18,7 @@ Bundle 'jcf/vim-latex'
 filetype plugin indent on
 syntax on
 set ofu=syntaxcomplete#Complete  " omnicompletion
-colorscheme molokai
+" colorscheme molokai
 
 "set hlsearch
 set ignorecase

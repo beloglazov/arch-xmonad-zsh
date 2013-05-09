@@ -50,7 +50,10 @@ noremap <C-b> :CtrlPBuffer<CR>
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='pdf, aux'
 let g:Tex_FoldedMisc = 'preamble,<<<'
-autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=0
+autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=80
+autocmd bufreadpre *.tex setlocal tabstop=2
+autocmd bufreadpre *.tex setlocal shiftwidth=2
+autocmd bufreadpre *.tex setlocal expandtab
 noremap <f12> \ll
 
 inoremap jk <esc>

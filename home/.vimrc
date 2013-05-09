@@ -9,8 +9,10 @@ Bundle 'ervandew/supertab'
 Bundle 'goldfeld/vim-seek'
 Bundle 'jcf/vim-latex'
 Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
@@ -24,6 +26,9 @@ filetype plugin indent on
 syntax on
 set ofu=syntaxcomplete#Complete  " omnicompletion
 " colorscheme molokai
+
+set laststatus=2
+set encoding=utf-8
 
 "set hlsearch
 set ignorecase

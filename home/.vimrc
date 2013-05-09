@@ -93,5 +93,6 @@ vnoremap <silent> <C-s> <C-c>:update<CR>
 inoremap <silent> <C-s> <C-o>:update<CR>
 
 noremap <f1> :NERDTreeToggle<CR>
-noremap <f2> gqip
+noremap <f2> :NERDTreeFind<CR>
+noremap <f3> gqip
 noremap <leader><SPACE> :TlistToggle<CR>

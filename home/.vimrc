@@ -7,6 +7,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'ervandew/supertab'
 Bundle 'goldfeld/vim-seek'
+Bundle 'jcf/vim-latex'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-abolish'
@@ -15,7 +16,8 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
-Bundle 'jcf/vim-latex'
+Bundle 'vim-scripts/InsertChar'
+Bundle 'vim-scripts/taglist.vim'
 
 filetype plugin indent on
 syntax on

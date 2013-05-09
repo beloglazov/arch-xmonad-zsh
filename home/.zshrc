@@ -116,11 +116,14 @@ alias x='extract'
 alias le='less'
 alias diff='colordiff'
 alias za='zathura'
+alias v='vim'
 
 # fasd aliases
 alias ee='fasd -ae e'
 alias ed='fasd -de e'
 alias ef='fasd -fe e'
+alias vd='fasd -de vim'
+alias vf='fasd -fe vim'
 
 # SVN aliales
 alias svn='colorsvn'

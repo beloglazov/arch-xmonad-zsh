@@ -6,11 +6,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'ervandew/supertab'
+Bundle 'goldfeld/vim-seek'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'jcf/vim-latex'
@@ -60,6 +62,8 @@ noremap <Up> <PageUp>
 noremap <Down> <PageDown>
 noremap <Left> :bprev<CR>
 noremap <Right> :bnext<CR>
+
+nnoremap <SPACE> :<C-U>call InsertChar#insert(v:count1)<CR>
 
 noremap  <silent> <C-s> :update<CR>
 vnoremap <silent> <C-s> <C-c>:update<CR>

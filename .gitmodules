@@ -64,3 +64,6 @@
 [submodule "home/.vim/bundle/vundle"]
 	path = home/.vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git
+[submodule "home/.vim/bundle/insert-char"]
+	path = home/.vim/bundle/insert-char
+	url = git://github.com/vim-scripts/InsertChar.git

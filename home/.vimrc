@@ -16,6 +16,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/AutoComplPop'
 Bundle 'vim-scripts/InsertChar'
 Bundle 'vim-scripts/taglist.vim'
 

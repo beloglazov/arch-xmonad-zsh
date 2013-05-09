@@ -66,6 +66,8 @@ sudo ln -s ${DIR}/home/.xinitrc /root/.xinitrc
 sudo ln -s ${DIR}/home/.zsh /root/.zsh
 sudo ln -s ${DIR}/home/.zshrc /root/.zshrc
 sudo ln -s ${DIR}/home/.zshenv /root/.zshenv
+sudo ln -s ${DIR}/home/.vimrc /root/.vimrc
+sudo ln -s ${DIR}/home/.vim /root/.vim
 
 sudo git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh
 sudo ln -s ${DIR}/home/.oh-my-zsh/themes/beloglazov.zsh-theme /root/.oh-my-zsh/themes/beloglazov.zsh-theme

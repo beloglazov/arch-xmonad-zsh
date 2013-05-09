@@ -1,3 +1,4 @@
+*.swp
 home/.emacs.d/auto-save-list
 home/.emacs.d/ac-comphist.dat
 home/.emacs.d/eshell/

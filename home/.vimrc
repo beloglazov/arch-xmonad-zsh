@@ -59,6 +59,8 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 
+let g:Powerline_symbols = 'unicode'
+
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 noremap <C-b> :CtrlPBuffer<CR>

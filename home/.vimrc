@@ -73,6 +73,7 @@ autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=80
 autocmd bufreadpre *.tex setlocal tabstop=2
 autocmd bufreadpre *.tex setlocal shiftwidth=2
 autocmd bufreadpre *.tex setlocal expandtab
+autocmd bufreadpre *.tex AcpLock
 noremap <f12> \ll
 
 inoremap jk <esc>

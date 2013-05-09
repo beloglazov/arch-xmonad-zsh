@@ -45,6 +45,15 @@ set autoindent
 set ruler  " cursor position
 set showcmd  " display incomplete commands
 
+let Tlist_Auto_Update = 1
+let Tlist_Auto_Highlight_Tag = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Highlight_Tag_On_BufEnter = 1
+
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 noremap <C-b> :CtrlPBuffer<CR>
@@ -76,5 +85,5 @@ vnoremap <silent> <C-s> <C-c>:update<CR>
 inoremap <silent> <C-s> <C-o>:update<CR>
 
 noremap <f1> :NERDTreeToggle<CR>
-noremap <f2> :TlistToggle<CR><C-w><C-w>
+noremap <f2> :TlistToggle<CR>
 noremap <f3> gqip

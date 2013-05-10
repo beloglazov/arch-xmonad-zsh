@@ -56,6 +56,9 @@ autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=80
 autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add
 
+" thesaurus
+autocmd BufRead *.tex,*.md setlocal thesaurus+=~/.vim/mthesaur.txt
+
 " taglist
 let Tlist_Auto_Update = 1
 let Tlist_Auto_Highlight_Tag = 1

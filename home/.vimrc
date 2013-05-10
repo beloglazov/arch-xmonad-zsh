@@ -24,7 +24,7 @@ Bundle 'vim-scripts/taglist.vim'
 
 filetype plugin indent on
 syntax on
-set ofu=syntaxcomplete#Complete  " omnicompletion
+set omnifunc=syntaxcomplete#Complete  " omnicompletion
 " colorscheme molokai
 
 set laststatus=2
@@ -50,6 +50,13 @@ set autoindent
 set ruler  " cursor position
 set showcmd  " display incomplete commands
 
+autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=80
+
+" spell checking
+autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
+set spellfile=~/.vim/spell.en.add
+
+" taglist
 let Tlist_Auto_Update = 1
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -59,8 +66,10 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 
+" powerline
 let g:Powerline_symbols = 'unicode'
 
+" ctrl-p
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 noremap <C-b> :CtrlPBuffer<CR>
@@ -69,13 +78,12 @@ noremap <C-b> :CtrlPBuffer<CR>
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='pdf, aux'
 let g:Tex_FoldedMisc = 'preamble,<<<'
-autocmd bufreadpre *.tex,*.txt,*.md setlocal textwidth=80
 autocmd bufreadpre *.tex setlocal tabstop=2
 autocmd bufreadpre *.tex setlocal shiftwidth=2
 autocmd bufreadpre *.tex setlocal expandtab
 autocmd bufreadpre *.tex AcpLock
-noremap <f12> \ll
 
+" key bindings
 inoremap jk <esc>
 
 noremap <C-j> j<C-e>

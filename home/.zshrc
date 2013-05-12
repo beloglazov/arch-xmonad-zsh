@@ -63,6 +63,9 @@ bindkey "\e[Z" reverse-menu-complete # Shift+Tab
 bindkey "^[[3^" delete-word # C-Del
 bindkey "^H" backward-delete-word # C-BackSpace
 
+bindkey '^K' up-line-or-search
+bindkey '^J' down-line-or-search
+
 # for rxvt
 bindkey "\e[7~" beginning-of-line # Home
 bindkey "\e[8~" end-of-line # End

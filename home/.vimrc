@@ -39,6 +39,7 @@ noremap <leader>b :CtrlPBuffer<CR>
 
 Bundle 'Lokaltog/vim-powerline'
 set laststatus=2
+set noshowmode
 set encoding=utf-8
 let g:Powerline_symbols = 'unicode'
 

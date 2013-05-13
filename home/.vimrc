@@ -51,6 +51,10 @@ let NERDTreeShowHidden=1
 noremap <f1> :NERDTreeToggle<CR>
 noremap <f2> :NERDTreeFind<CR>
 
+Bundle 'tomku/thesauri'
+let g:mobythesaurus_file = '~/.vim/mthesaur.txt'
+autocmd BufRead *.tex,*.md setlocal completefunc=CompleteThesauri
+
 Bundle 'tpope/vim-abolish'
 
 Bundle 'tpope/vim-commentary'
@@ -155,7 +159,7 @@ autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add
 
 " thesaurus
-autocmd BufRead *.tex,*.md setlocal thesaurus+=~/.vim/mthesaur.txt
+" autocmd BufRead *.tex,*.md setlocal thesaurus+=~/.vim/mthesaur.txt
 
 
 " Key bindings

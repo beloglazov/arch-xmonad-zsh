@@ -162,6 +162,7 @@ highlight NonText ctermfg=0
 " Spell checking
 autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add
+nmap <leader>= 1z=
 
 " thesaurus
 " autocmd BufRead *.tex,*.md setlocal thesaurus+=~/.vim/mthesaur.txt

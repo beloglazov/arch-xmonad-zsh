@@ -156,6 +156,9 @@ set textwidth=79
 set colorcolumn=80
 highlight ColorColumn ctermbg=0
 
+" Hide black line tildas
+highlight NonText ctermfg=0
+
 " Spell checking
 autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add

@@ -256,3 +256,6 @@ map <leader>a ggVG
 " Easier increment / decrement
 nnoremap + <C-a>
 nnoremap - <C-x>
+
+" Duplicate a line and comment the first copy
+nmap gcd yyPgcc

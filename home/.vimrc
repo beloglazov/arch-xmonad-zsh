@@ -83,6 +83,8 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <leader>t :TlistToggle<CR>
 
+Bundle 'git://git.code.sf.net/p/atp-vim/code'
+
 " End of my bundles
 
 filetype plugin indent on

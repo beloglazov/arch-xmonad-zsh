@@ -88,6 +88,7 @@ let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <leader>t :TlistToggle<CR>
 
 Bundle 'git://git.code.sf.net/p/atp-vim/code'
+let g:atp_tab_map = 1
 
 " End of my bundles
 

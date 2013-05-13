@@ -29,10 +29,6 @@ Bundle 'goldfeld/vim-seek'
 " let g:Tex_DefaultTargetFormat = 'pdf'
 " let g:Tex_MultipleCompileFormats='pdf, aux'
 " let g:Tex_FoldedMisc = 'preamble,<<<'
-" autocmd bufreadpre *.tex setlocal tabstop=2
-" autocmd bufreadpre *.tex setlocal shiftwidth=2
-" autocmd bufreadpre *.tex setlocal expandtab
-" autocmd bufreadpre *.tex AcpLock
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
@@ -89,6 +85,10 @@ noremap <leader>t :TlistToggle<CR>
 
 Bundle 'git://git.code.sf.net/p/atp-vim/code'
 let g:atp_tab_map = 1
+autocmd bufreadpre *.tex setlocal tabstop=2
+autocmd bufreadpre *.tex setlocal shiftwidth=2
+autocmd bufreadpre *.tex setlocal expandtab
+autocmd bufreadpre *.tex AcpLock
 
 " End of my bundles
 

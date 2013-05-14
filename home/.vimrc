@@ -186,7 +186,7 @@ vnoremap <C-q> <Esc>
 cmap <C-q> <C-c>
 
 " Enter the command-line mode
-noremap <leader><space> :
+noremap <leader><Space> :
 
 " Better command-line editing
 cnoremap <C-j> <t_kd>
@@ -272,3 +272,6 @@ nnoremap - <C-x>
 
 " Duplicate a line and comment the first copy
 nmap gcd yyPgcc
+
+" Switch capitalization of the first letter of the current word
+nmap crf m`T<Space>~``

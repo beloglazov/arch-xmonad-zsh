@@ -160,8 +160,8 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Line length and wrapping
-set textwidth=79
-set colorcolumn=80
+set textwidth=80
+set colorcolumn=81
 highlight ColorColumn ctermbg=0
 
 " Hide black line tildas

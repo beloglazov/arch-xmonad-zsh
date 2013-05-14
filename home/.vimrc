@@ -273,5 +273,8 @@ nnoremap - <C-x>
 " Duplicate a line and comment the first copy
 nmap gcd yyPgcc
 
+" Indent everything
+noremap <leader>i gg=G<C-o><C-o>
+
 " Switch capitalization of the first letter of the current word
 nmap crf m`T<Space>~``

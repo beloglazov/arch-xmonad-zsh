@@ -12,6 +12,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+
 " My bundles
 
 Bundle 'bitc/vim-bad-whitespace'
@@ -25,17 +26,27 @@ let g:SuperTabMappingBackward = '<s-tab>'
 
 Bundle 'goldfeld/vim-seek'
 
-" Bundle 'jcf/vim-latex'
-" let g:Tex_DefaultTargetFormat = 'pdf'
-" let g:Tex_MultipleCompileFormats='pdf, aux'
-" let g:Tex_FoldedMisc = 'preamble,<<<'
-
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_prompt_mappings = { 'PrtExit()': ['<esc>', '<c-q>'] }
 noremap <leader>p :CtrlP<CR>
 noremap <leader>b :CtrlPBuffer<CR>
+
+Bundle 'LaTeX-Box-Team/LaTeX-Box'
+let g:LatexBox_complete_inlineMath = 1
+autocmd bufreadpre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+autocmd bufreadpre *.tex let g:SuperTabLongestHighlight = 1
+autocmd bufreadpre *.tex setlocal tabstop=2
+autocmd bufreadpre *.tex setlocal shiftwidth=2
+autocmd bufreadpre *.tex setlocal expandtab
+autocmd bufreadpre *.tex nmap <leader>t :LatexTOCToggle<CR>
+autocmd bufreadpre *.tex imap <buffer> [[ \begin{
+autocmd bufreadpre *.tex imap <buffer> ]] <Plug>LatexCloseCurEnv
+autocmd bufreadpre *.tex nmap <buffer> <F5> <Plug>LatexChangeEnv
+autocmd bufreadpre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
+autocmd bufreadpre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
+autocmd bufreadpre *.tex AcpLock
 
 Bundle 'Lokaltog/vim-powerline'
 set laststatus=2
@@ -84,14 +95,8 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <leader>t :TlistToggle<CR>
 
-Bundle 'git://git.code.sf.net/p/atp-vim/code'
-let g:atp_tab_map = 1
-autocmd bufreadpre *.tex setlocal tabstop=2
-autocmd bufreadpre *.tex setlocal shiftwidth=2
-autocmd bufreadpre *.tex setlocal expandtab
-autocmd bufreadpre *.tex AcpLock
-
 " End of my bundles
+
 
 filetype plugin indent on
 
@@ -117,6 +122,9 @@ set gdefault
 " History and undo sizes
 set history=1000
 set undolevels=1000
+
+" Share the system clipboard
+set clipboard=unnamedplus
 
 " Wildmenu
 set wildmenu

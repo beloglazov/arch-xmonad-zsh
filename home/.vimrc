@@ -162,7 +162,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " Line length and wrapping
 set textwidth=80
 set colorcolumn=81
-highlight ColorColumn ctermbg=0
+highlight ColorColumn ctermbg=234
 
 " Hide black line tildas
 highlight NonText ctermfg=0

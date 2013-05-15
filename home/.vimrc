@@ -206,8 +206,8 @@ inoremap <C-d> <S-Right><C-w>
 inoremap <C-l> <Delete>
 
 " Insert mode movement
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
+inoremap <C-j> <S-Left>
+inoremap <C-k> <S-Right>
 
 " Save
 noremap  <silent> <C-s> :update<CR>

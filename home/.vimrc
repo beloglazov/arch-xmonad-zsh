@@ -243,6 +243,10 @@ noremap <leader>e :e <Tab>
 noremap <C-j> j<C-e>
 noremap <C-k> k<C-y>
 
+" Center the screen with search jumps
+noremap n nzz
+noremap N Nzz
+
 " Sort in visual mode
 vnoremap <leader>s :sort<CR>
 

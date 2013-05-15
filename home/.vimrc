@@ -172,9 +172,6 @@ autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add
 nmap <leader>= 1z=
 
-" thesaurus
-" autocmd BufRead *.tex,*.md setlocal thesaurus+=~/.vim/mthesaur.txt
-
 
 " Key bindings
 
@@ -194,9 +191,23 @@ cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-" Home row start / end
+" Home row beginning / end of line
 noremap H ^
 noremap L $
+
+" Insert mode beginning / end of line
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" Insert mode delete a word forward
+inoremap <C-d> <S-Right><C-w>
+
+" Insert mode delete a character forward
+inoremap <C-l> <Delete>
+
+" Insert mode movement
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
 
 " Save
 noremap  <silent> <C-s> :update<CR>
@@ -232,20 +243,6 @@ noremap <leader>e :e <Tab>
 noremap <C-j> j<C-e>
 noremap <C-k> k<C-y>
 
-" Cursor in omni-completion
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
-inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
 " Sort in visual mode
 vnoremap <leader>s :sort<CR>
 
@@ -278,3 +275,6 @@ noremap <leader>i gg=G<C-o><C-o>
 
 " Switch capitalization of the first letter of the current word
 nmap crf m`T<Space>~``
+
+" Change current word - kill
+noremap K ciw

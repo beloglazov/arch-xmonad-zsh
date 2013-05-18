@@ -15,6 +15,8 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 
+Bundle 'beloglazov/vim-online-thesaurus'
+
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
@@ -31,7 +33,10 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_prompt_mappings = { 'PrtExit()': ['<esc>', '<c-q>'] }
 noremap <leader>p :CtrlP<CR>
+noremap <leader>P :CtrlPCurFile<CR>
 noremap <leader>b :CtrlPBuffer<CR>
+noremap <leader>r :CtrlPMRUFiles<CR>
+noremap <leader>; :CtrlPLine<CR>
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -52,16 +57,13 @@ Bundle 'Lokaltog/vim-powerline'
 set laststatus=2
 set noshowmode
 set encoding=utf-8
+set t_Co=256
 let g:Powerline_symbols = 'unicode'
 
 Bundle 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
 noremap <f1> :NERDTreeToggle<CR>
 noremap <f2> :NERDTreeFind<CR>
-
-Bundle 'tomku/thesauri'
-let g:mobythesaurus_file = '~/.vim/mthesaur.txt'
-autocmd BufRead *.tex,*.md setlocal completefunc=CompleteThesauri
 
 Bundle 'tpope/vim-abolish'
 
@@ -130,6 +132,7 @@ set clipboard=unnamedplus
 set wildmenu
 set wildmode=longest:full,full
 set wildcharm=<Tab>
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 " Scrolling by blocks
 set scrolloff=3

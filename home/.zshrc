@@ -125,8 +125,8 @@ alias v='vim --servername vim'
 alias ee='fasd -ae e'
 alias ed='fasd -de e'
 alias ef='fasd -fe e'
-alias vd='fasd -de vim --servername vim'
-alias vf='fasd -fe vim --servername vim'
+alias vd='fasd -de vim'
+alias vf='fasd -fe vim'
 
 # SVN aliales
 alias svn='colorsvn'

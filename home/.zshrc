@@ -43,7 +43,7 @@ eval "$(fasd --init auto)"
 # Colorized ls
 eval `dircolors -b`
 
-export EDITOR="e"
+export EDITOR="vim"
 
 # Key Bindings
 

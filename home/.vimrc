@@ -20,6 +20,8 @@ Bundle 'beloglazov/vim-online-thesaurus'
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
+Bundle 'davidhalter/jedi-vim'
+
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabLongestEnhanced = 1
@@ -37,6 +39,19 @@ noremap <leader>P :CtrlPCurFile<CR>
 noremap <leader>b :CtrlPBuffer<CR>
 noremap <leader>r :CtrlPMRUFiles<CR>
 noremap <leader>; :CtrlPLine<CR>
+
+Bundle 'klen/python-mode'
+let g:pymode_options = 0
+let g:pymode_doc_key = '<leader>K'
+let g:pymode_lint_checker = 'pep8,mccabe'
+let g:pymode_lint_onfly = 1
+let g:pymode_rope = 0
+let g:pymode_folding = 0
+autocmd bufreadpre *.py setlocal complete+=t
+autocmd bufreadpre *.py setlocal formatoptions-=t
+autocmd bufreadpre *.py setlocal nowrap
+autocmd bufreadpre *.py setlocal commentstring=#%s
+
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -174,6 +189,11 @@ highlight NonText ctermfg=0
 autocmd BufRead *.tex,*.md setlocal spell spelllang=en_au
 set spellfile=~/.vim/spell.en.add
 nmap <leader>= 1z=
+
+" Yaml
+autocmd bufreadpre *.yaml setlocal nowrap
+autocmd bufreadpre *.yaml setlocal tabstop=2
+autocmd bufreadpre *.yaml setlocal shiftwidth=2
 
 
 " Key bindings

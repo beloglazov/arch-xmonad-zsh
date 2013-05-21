@@ -48,6 +48,7 @@ Bundle 'klen/python-mode'
 let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_folding = 0
+let g:pymode_lint_cwindow = 0
 let g:pymode_lint_message = 0
 let g:pymode_doc_key = 'NONE'
 let g:pymode_breakpoint_key = '<localleader>b'

@@ -21,6 +21,8 @@ Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'davidhalter/jedi-vim'
+let g:jedi#pydoc = '<leader>K'
+let g:jedi#use_tabs_not_buffers = 0
 
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -44,7 +46,7 @@ Bundle 'klen/python-mode'
 let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_folding = 0
-let g:pymode_doc_key = '<leader>K'
+let g:pymode_doc_key = 'NONE'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0
 autocmd bufreadpre *.py setlocal complete+=t

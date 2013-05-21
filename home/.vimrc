@@ -43,15 +43,15 @@ noremap <leader>; :CtrlPLine<CR>
 Bundle 'klen/python-mode'
 let g:pymode_options = 0
 let g:pymode_doc_key = '<leader>K'
+let g:pymode_run = 0
 let g:pymode_lint_checker = 'pep8,mccabe'
-let g:pymode_lint_onfly = 1
 let g:pymode_rope = 0
 let g:pymode_folding = 0
+let g:pymode_breakpoint_key = '<localleader>b'
 autocmd bufreadpre *.py setlocal complete+=t
 autocmd bufreadpre *.py setlocal formatoptions-=t
 autocmd bufreadpre *.py setlocal nowrap
 autocmd bufreadpre *.py setlocal commentstring=#%s
-
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -120,6 +120,10 @@ filetype plugin indent on
 " Syntax highlighting and colorscheme
 syntax on
 " colorscheme molokai
+hi Search     ctermbg=NONE
+hi Error      ctermbg=NONE ctermfg=red
+hi SignColumn ctermbg=234
+hi FoldColumn ctermbg=234
 
 " Allow unsaved changes when opening another file
 set hidden

@@ -1,7 +1,7 @@
 set nocompatible
 
 " Automatic reloading of .vimrc
-autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost .vimrc nested source %
 
 " Leader key
 let mapleader=" "
@@ -23,6 +23,8 @@ nnoremap <leader>W :EraseBadWhitespace<CR>
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#pydoc = '<leader>K'
 let g:jedi#use_tabs_not_buffers = 0
+" let g:jedi#popup_select_first = 0
+" let g:jedi#autocompletion_command = '<tab>'
 
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -55,6 +57,7 @@ autocmd bufreadpre *.py setlocal complete+=t
 autocmd bufreadpre *.py setlocal formatoptions-=t
 autocmd bufreadpre *.py setlocal nowrap
 autocmd bufreadpre *.py setlocal commentstring=#%s
+autocmd bufreadpre *.py AcpLock
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -71,12 +74,18 @@ autocmd bufreadpre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
 autocmd bufreadpre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
 autocmd bufreadpre *.tex AcpLock
 
-Bundle 'Lokaltog/vim-powerline'
-set laststatus=2
+Bundle 'millermedeiros/vim-statline'
 set noshowmode
-set encoding=utf-8
-set t_Co=256
-let g:Powerline_symbols = 'unicode'
+set laststatus=2
+let g:statline_fugitive = 1
+let g:statline_show_n_buffers = 0
+let g:statline_show_encoding = 0
+let g:statline_filename_relative = 1
+hi StatusLine   ctermfg=234 ctermbg=4
+hi StatusLineNC ctermfg=233 ctermbg=8
+
+Bundle 'molok/vim-smartusline'
+let g:smartusline_string_to_highlight = '[%n]'
 
 Bundle 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
@@ -122,11 +131,15 @@ filetype plugin indent on
 
 " Syntax highlighting and colorscheme
 syntax on
+set t_Co=256
 " colorscheme molokai
 hi Search     ctermbg=NONE
 hi Error      ctermbg=NONE ctermfg=red
 hi SignColumn ctermbg=234
 hi FoldColumn ctermbg=234
+
+" Encoding
+set encoding=utf-8
 
 " Allow unsaved changes when opening another file
 set hidden

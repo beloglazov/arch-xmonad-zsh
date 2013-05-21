@@ -23,8 +23,10 @@ nnoremap <leader>W :EraseBadWhitespace<CR>
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#pydoc = '<leader>K'
 let g:jedi#use_tabs_not_buffers = 0
-" let g:jedi#popup_select_first = 0
+let g:jedi#popup_select_first = 0
 " let g:jedi#autocompletion_command = '<tab>'
+autocmd bufreadpre *.py let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+autocmd bufreadpre *.py let g:SuperTabLongestHighlight = 1
 
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -168,7 +170,7 @@ set clipboard=unnamedplus
 set wildmenu
 set wildmode=longest:full,full
 set wildcharm=<Tab>
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc
 
 " Scrolling by blocks
 set scrolloff=3

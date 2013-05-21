@@ -41,13 +41,12 @@ noremap <leader>r :CtrlPMRUFiles<CR>
 noremap <leader>; :CtrlPLine<CR>
 
 Bundle 'klen/python-mode'
-let g:pymode_options = 0
-let g:pymode_doc_key = '<leader>K'
 let g:pymode_run = 0
-let g:pymode_lint_checker = 'pep8,mccabe'
 let g:pymode_rope = 0
 let g:pymode_folding = 0
+let g:pymode_doc_key = '<leader>K'
 let g:pymode_breakpoint_key = '<localleader>b'
+let g:pymode_options = 0
 autocmd bufreadpre *.py setlocal complete+=t
 autocmd bufreadpre *.py setlocal formatoptions-=t
 autocmd bufreadpre *.py setlocal nowrap

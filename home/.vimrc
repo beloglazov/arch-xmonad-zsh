@@ -89,8 +89,6 @@ let g:statline_fugitive = 1
 let g:statline_show_n_buffers = 0
 let g:statline_show_encoding = 0
 let g:statline_filename_relative = 1
-hi StatusLine   cterm=reverse ctermfg=233 ctermbg=4
-hi StatusLineNC cterm=reverse ctermfg=233 ctermbg=8
 
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
@@ -142,6 +140,8 @@ filetype plugin indent on
 syntax on
 set t_Co=256
 " colorscheme molokai
+hi StatusLine   cterm=reverse ctermfg=233 ctermbg=4
+hi StatusLineNC cterm=reverse ctermfg=233 ctermbg=8
 hi Search     ctermbg=NONE
 hi Error      ctermbg=NONE ctermfg=red
 hi SignColumn ctermbg=233
@@ -259,7 +259,10 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " Insert mode delete a word forward
-" inoremap <C-d> <C-o>dw
+inoremap <C-d> <C-o>dw
+
+" Insert mode dedent the current line
+inoremap <C-f> <C-d>
 
 " Insert mode delete a character forward
 inoremap <C-l> <Delete>
@@ -334,13 +337,13 @@ nnoremap - <C-x>
 nmap gcd yyPgcc
 
 " Indent everything
-noremap <leader>i gg=G<C-o><C-o>
+noremap <leader>I gg=G<C-o><C-o>
 
 " Indent selection in visual mode
 vnoremap <leader>i =
 
 " Indent the current line
-noremap <leader>I v=
+noremap <leader>i v=
 
 " Switch capitalization of the first letter of the current word
 nmap crf m`T<Space>~``

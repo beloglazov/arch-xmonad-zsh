@@ -89,8 +89,8 @@ let g:statline_fugitive = 1
 let g:statline_show_n_buffers = 0
 let g:statline_show_encoding = 0
 let g:statline_filename_relative = 1
-hi StatusLine   ctermfg=234 ctermbg=4
-hi StatusLineNC ctermfg=233 ctermbg=8
+hi StatusLine   cterm=reverse ctermfg=233 ctermbg=4
+hi StatusLineNC cterm=reverse ctermfg=233 ctermbg=8
 
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
@@ -144,8 +144,8 @@ set t_Co=256
 " colorscheme molokai
 hi Search     ctermbg=NONE
 hi Error      ctermbg=NONE ctermfg=red
-hi SignColumn ctermbg=234
-hi FoldColumn ctermbg=234
+hi SignColumn ctermbg=233
+hi FoldColumn ctermbg=233
 
 " Encoding
 set encoding=utf-8
@@ -209,7 +209,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " Line length and wrapping
 set textwidth=80
 set colorcolumn=81
-highlight ColorColumn ctermbg=234
+highlight ColorColumn ctermbg=233
 
 " Hide black line tildas
 highlight NonText ctermfg=0

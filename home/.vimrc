@@ -21,12 +21,14 @@ Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'davidhalter/jedi-vim'
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#popup_on_dot = 0
 let g:jedi#pydoc = '<leader>K'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_select_first = 0
 " let g:jedi#autocompletion_command = '<tab>'
-autocmd bufreadpre *.py let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-autocmd bufreadpre *.py let g:SuperTabLongestHighlight = 1
+autocmd FileType python let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+autocmd FileType python let g:SuperTabLongestHighlight = 1
 
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -61,7 +63,7 @@ autocmd FileType python setlocal complete+=t
 autocmd FileType python setlocal formatoptions-=t
 autocmd FileType python setlocal nowrap
 autocmd FileType python setlocal commentstring=#%s
-autocmd FileType python AcpLock
+" autocmd FileType python AcpLock
 " autocmd FileType python source ~/.vim/google_python_style.vim
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
@@ -69,6 +71,7 @@ let g:LatexBox_complete_inlineMath = 1
 autocmd bufreadpre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 autocmd bufreadpre *.tex let g:SuperTabLongestHighlight = 1
 autocmd bufreadpre *.tex setlocal tabstop=2
+autocmd bufreadpre *.tex setlocal softtabstop=2
 autocmd bufreadpre *.tex setlocal shiftwidth=2
 autocmd bufreadpre *.tex setlocal expandtab
 autocmd bufreadpre *.tex nmap <leader>t :LatexTOCToggle<CR>
@@ -114,6 +117,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/Auto-Pairs'
 
 Bundle 'vim-scripts/AutoComplPop'
+let g:acp_completeoptPreview = 1
 
 Bundle 'vim-scripts/InsertChar'
 nnoremap <leader>c :<C-u>call InsertChar#insert(v:count1)<CR>
@@ -218,14 +222,15 @@ nmap <leader>= 1z=
 " Yaml
 autocmd bufreadpre *.yaml setlocal nowrap
 autocmd bufreadpre *.yaml setlocal tabstop=2
+autocmd bufreadpre *.yaml setlocal softtabstop=2
 autocmd bufreadpre *.yaml setlocal shiftwidth=2
 
 
 " Key bindings
 
 " Escape
-inoremap jk <Esc>
-inoremap <C-q> <Esc>
+inoremap jk <Esc>l
+inoremap <C-q> <Esc>l
 noremap <C-q> <Esc>
 vnoremap <C-q> <Esc>
 cmap <C-q> <C-c>
@@ -243,12 +248,18 @@ cnoremap <C-e> <End>
 noremap H ^
 noremap L $
 
+" Insert mode movement
+inoremap OO <Esc>o
+inoremap CC <Esc>C
+inoremap DD <C-o>dd
+inoremap UU <C-o>u
+
 " Insert mode beginning / end of line
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " Insert mode delete a word forward
-inoremap <C-d> <S-Right><C-w>
+" inoremap <C-d> <C-o>dw
 
 " Insert mode delete a character forward
 inoremap <C-l> <Delete>

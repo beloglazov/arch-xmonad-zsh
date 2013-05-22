@@ -228,9 +228,12 @@ autocmd bufreadpre *.yaml setlocal shiftwidth=2
 
 " Key bindings
 
+" Enter insert mode and save position
+nnoremap i mii
+
 " Escape
-inoremap jk <Esc>l
-inoremap <C-q> <Esc>l
+inoremap jk <Esc>`i
+inoremap <C-q> <Esc>`i
 noremap <C-q> <Esc>
 vnoremap <C-q> <Esc>
 cmap <C-q> <C-c>

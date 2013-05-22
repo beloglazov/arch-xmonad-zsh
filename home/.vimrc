@@ -50,17 +50,19 @@ Bundle 'klen/python-mode'
 let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_folding = 0
+" let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_message = 0
 let g:pymode_doc_key = 'NONE'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0
-autocmd bufreadpre *.py noremap <F5> :PyLint<CR>
-autocmd bufreadpre *.py setlocal complete+=t
-autocmd bufreadpre *.py setlocal formatoptions-=t
-autocmd bufreadpre *.py setlocal nowrap
-autocmd bufreadpre *.py setlocal commentstring=#%s
-autocmd bufreadpre *.py AcpLock
+autocmd FileType python noremap <F5> :PyLint<CR>
+autocmd FileType python setlocal complete+=t
+autocmd FileType python setlocal formatoptions-=t
+autocmd FileType python setlocal nowrap
+autocmd FileType python setlocal commentstring=#%s
+autocmd FileType python AcpLock
+" autocmd FileType python source ~/.vim/google_python_style.vim
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -322,6 +324,12 @@ nmap gcd yyPgcc
 
 " Indent everything
 noremap <leader>i gg=G<C-o><C-o>
+
+" Indent selection in visual mode
+vnoremap <leader>i =
+
+" Indent the current line
+noremap <leader>I v=
 
 " Switch capitalization of the first letter of the current word
 nmap crf m`T<Space>~``

@@ -27,6 +27,7 @@ let g:jedi#pydoc = '<leader>K'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_select_first = 0
 " let g:jedi#autocompletion_command = '<tab>'
+let g:jedi#get_definition_command = '<leader>D'
 autocmd FileType python let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 autocmd FileType python let g:SuperTabLongestHighlight = 1
 

@@ -143,6 +143,7 @@ set t_Co=256
 " colorscheme molokai
 hi StatusLine   cterm=reverse ctermfg=233 ctermbg=4
 hi StatusLineNC cterm=reverse ctermfg=233 ctermbg=8
+hi VertSplit    cterm=reverse ctermfg=233 ctermbg=8
 hi Search     ctermbg=NONE
 hi Error      ctermbg=NONE ctermfg=red
 hi SignColumn ctermbg=233

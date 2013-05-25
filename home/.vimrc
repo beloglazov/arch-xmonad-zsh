@@ -67,6 +67,8 @@ autocmd FileType python setlocal commentstring=#%s
 " autocmd FileType python AcpLock
 " autocmd FileType python source ~/.vim/google_python_style.vim
 
+" Bundle 'kljohann/vim-python-pep8-indent'
+
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
 autocmd bufreadpre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
@@ -83,7 +85,8 @@ autocmd bufreadpre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
 autocmd bufreadpre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
 autocmd bufreadpre *.tex AcpLock
 
-Bundle 'millermedeiros/vim-statline'
+" Bundle 'millermedeiros/vim-statline'
+Bundle 'beloglazov/vim-statline'
 set noshowmode
 set laststatus=2
 let g:statline_fugitive = 1
@@ -98,6 +101,12 @@ Bundle 'scrooloose/nerdtree'
 let NERDTreeShowHidden=1
 noremap <f1> :NERDTreeToggle<CR>
 noremap <f2> :NERDTreeFind<CR>
+
+Bundle 'tacahiroy/ctrlp-funky'
+let g:ctrlp_extensions = ['funky']
+nnoremap <leader>f :CtrlPFunky<CR>
+" Narrow the list down with a word under cursor
+nnoremap <leader>F :execute 'CtrlPFunky ' . expand('<cword>')<CR>
 
 Bundle 'tpope/vim-abolish'
 

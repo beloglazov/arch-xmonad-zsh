@@ -39,6 +39,8 @@ let g:SuperTabMappingBackward = '<s-tab>'
 
 Bundle 'goldfeld/vim-seek'
 
+Bundle 'jiangmiao/auto-pairs'
+
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
@@ -122,8 +124,6 @@ Bundle 'tpope/vim-surround'
 
 Bundle 'tpope/vim-unimpaired'
 
-Bundle 'vim-scripts/Auto-Pairs'
-
 Bundle 'vim-scripts/AutoComplPop'
 let g:acp_completeoptPreview = 1
 
@@ -140,6 +140,9 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <leader>t :TlistToggle<CR>
+
+Bundle 'vim-scripts/YankRing.vim'
+nnoremap <silent> <F3> :YRShow<CR>
 
 " End of my bundles
 

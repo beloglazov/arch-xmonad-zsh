@@ -158,8 +158,8 @@ tr.vm {
 
 /** current email side bar **/
 .PF.PE {
-    background: transparent;
-    border: none;
+    background: #555;
+    border: #555;
 }
 
 /** labels **/

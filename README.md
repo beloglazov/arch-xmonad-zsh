@@ -47,4 +47,4 @@ Enjoy!
 
 The source code is released under the Apache 2.0 license.
 
-Copyright (C) 2012 Anton Beloglazov
+Copyright (C) 2013 Anton Beloglazov

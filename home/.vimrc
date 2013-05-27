@@ -131,7 +131,7 @@ Bundle 'vim-scripts/AutoComplPop'
 let g:acp_completeoptPreview = 1
 
 Bundle 'vim-scripts/InsertChar'
-nnoremap <leader>c :<C-u>call InsertChar#insert(v:count1)<CR>
+nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
 
 Bundle 'vim-scripts/taglist.vim'
 let Tlist_Auto_Update = 1

@@ -143,6 +143,8 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <silent> <leader>t :TlistToggle<CR>
 
+Bundle 'SirVer/ultisnips'
+
 Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>
 

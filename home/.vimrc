@@ -60,6 +60,7 @@ let g:pymode_folding = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_message = 0
 let g:pymode_doc_key = 'NONE'
+let g:pymode_lint_ignore = 'W0401'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0
 autocmd FileType python noremap <F5> :PyLint<CR>

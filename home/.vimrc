@@ -256,7 +256,7 @@ vnoremap <C-q> <Esc>
 cmap <C-q> <C-c>
 
 " Enter the command-line mode
-noremap <leader><Space> :
+noremap <CR> :
 
 " Better command-line editing
 cnoremap <C-j> <t_kd>

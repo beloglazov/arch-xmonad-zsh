@@ -45,6 +45,7 @@ Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_prompt_mappings = { 'PrtExit()': ['<esc>', '<c-q>'] }
+let g:ctrlp_max_height = 30
 noremap <leader>p :CtrlP<CR>
 noremap <leader>P :CtrlPCurFile<CR>
 noremap <leader>b :CtrlPBuffer<CR>
@@ -100,9 +101,10 @@ Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
 
 Bundle 'scrooloose/nerdtree'
-let NERDTreeShowHidden=1
-noremap <f1> :NERDTreeToggle<CR>
-noremap <f2> :NERDTreeFind<CR>
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['.*\.pyc$']
+noremap <silent> <f1> :NERDTreeToggle<CR>
+noremap <silent> <f2> :NERDTreeFind<CR>
 
 Bundle 'tacahiroy/ctrlp-funky'
 let g:ctrlp_extensions = ['funky']
@@ -139,7 +141,7 @@ let Tlist_Enable_Fold_Column = 0
 let Tlist_File_Fold_Auto_Close = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
-noremap <leader>t :TlistToggle<CR>
+noremap <silent> <leader>t :TlistToggle<CR>
 
 Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>
@@ -190,7 +192,7 @@ set clipboard=unnamedplus
 set wildmenu
 set wildmode=longest:full,full
 set wildcharm=<Tab>
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.ropeproject/*,*.egg,*.egg-info/*
 
 " Scrolling by blocks
 set scrolloff=3

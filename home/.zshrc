@@ -120,6 +120,7 @@ alias le='less'
 alias diff='colordiff'
 alias za='zathura'
 alias v='vim --servername vim'
+alias view='view -'
 
 # fasd aliases
 alias ee='fasd -ae e'

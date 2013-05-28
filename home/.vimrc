@@ -118,6 +118,7 @@ Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-commentary'
 
 Bundle 'tpope/vim-fugitive'
+noremap <silent> <f12> :Gstatus<CR>
 
 Bundle 'tpope/vim-markdown'
 
@@ -247,6 +248,12 @@ autocmd bufreadpre *.yaml setlocal shiftwidth=2
 
 " Key bindings
 
+" Open .vimrc
+nnoremap <leader>ve :split $MYVIMRC<CR>
+
+" Source .vimrc
+nnoremap <leader>vs :source $MYVIMRC<CR>i<Esc>
+
 " Escape
 inoremap jk <Esc>`^
 inoremap kj <Esc>`^
@@ -263,6 +270,28 @@ cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+" Operator movements
+onoremap p i(
+onoremap b i{
+onoremap ( i(
+onoremap { i{
+onoremap [ i[
+onoremap < i<
+onoremap q i'
+onoremap ` i"
+onoremap ' i'
+onoremap " i"
+onoremap np :<C-u>normal! f(lvi(<CR>
+onoremap n( :<C-u>normal! f(lvi(<CR>
+onoremap n{ :<C-u>normal! f{lvi{<CR>
+onoremap nb :<C-u>normal! fblvib<CR>
+onoremap n[ :<C-u>normal! f[lvi[<CR>
+onoremap n< :<C-u>normal! f<lvi<<CR>
+onoremap nq :<C-u>normal! f'lvi'<CR>
+onoremap n` :<C-u>normal! f"lvi"<CR>
+onoremap n' :<C-u>normal! f'lvi'<CR>
+onoremap n" :<C-u>normal! f"lvi"<CR>
 
 " Home row beginning / end of line
 noremap H ^

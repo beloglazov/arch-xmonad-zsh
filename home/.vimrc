@@ -256,7 +256,7 @@ nnoremap <leader>vs :source $MYVIMRC<CR>i<Esc>
 
 " Escape
 inoremap jk <Esc>`^
-inoremap kj <Esc>`^
+" inoremap kj <Esc>`^
 inoremap <C-q> <Esc>`^
 noremap <C-q> <Esc>
 vnoremap <C-q> <Esc>

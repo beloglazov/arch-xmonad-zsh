@@ -126,6 +126,10 @@ Bundle 'tpope/vim-repeat'
 
 Bundle 'tpope/vim-surround'
 
+Bundle 'milkypostman/vim-togglelist'
+let g:toggle_list_no_mappings = 1
+nnoremap <script> <silent> <f10> :call ToggleQuickfixList()<CR>
+
 Bundle 'tpope/vim-unimpaired'
 
 Bundle 'vim-scripts/AutoComplPop'

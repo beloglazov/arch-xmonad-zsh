@@ -2,6 +2,9 @@
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 
+! scrollback buffer lines - 65535 is max on most machines (64 is default)
+URxvt*saveLines: 65535
+
 URxvt.perl-ext-common:  default,keyboard-select,url-select,clipboard
 URxvt.urlLauncher:      /usr/bin/chromium
 URxvt.underlineURLs:    true

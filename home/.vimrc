@@ -40,6 +40,11 @@ let g:SuperTabMappingBackward = '<s-tab>'
 Bundle 'goldfeld/vim-seek'
 
 Bundle 'jiangmiao/auto-pairs'
+let g:AutoPairsMapSpace = 0
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsShortcutFastWrap = '<C-y>'
+let g:AutoPairsShortcutJump = '<C-z>'
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
@@ -149,7 +154,7 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Highlight_Tag_On_BufEnter = 1
 noremap <silent> <leader>t :TlistToggle<CR>
 
-Bundle 'SirVer/ultisnips'
+" Bundle 'SirVer/ultisnips'
 
 Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>

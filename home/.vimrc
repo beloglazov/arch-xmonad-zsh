@@ -171,10 +171,10 @@ set t_Co=256
 hi StatusLine   cterm=reverse ctermfg=233 ctermbg=4
 hi StatusLineNC cterm=reverse ctermfg=233 ctermbg=8
 hi VertSplit    cterm=reverse ctermfg=233 ctermbg=8
-hi Search     ctermbg=NONE
-hi Error      ctermbg=NONE ctermfg=red
-hi SignColumn ctermbg=233
-hi FoldColumn ctermbg=233
+hi Search       ctermbg=NONE
+hi Error        ctermbg=NONE ctermfg=red
+hi SignColumn   ctermbg=233
+hi FoldColumn   ctermbg=233
 
 " Encoding
 set encoding=utf-8
@@ -304,6 +304,52 @@ onoremap nq :<C-u>normal! f'lvi'<CR>
 onoremap n` :<C-u>normal! f"lvi"<CR>
 onoremap n' :<C-u>normal! f'lvi'<CR>
 onoremap n" :<C-u>normal! f"lvi"<CR>
+
+onoremap q :<C-u>call <SID>SmartMotionsQuote()<CR>
+
+" test 'qwe1' asd 'qwe' asd 'qwe3' asd
+" test `qwe1` asd `qwe2` asd `qwe3` asd
+function! s:SmartMotionsQuote()
+    let s:line = getline('.')
+    " let s:column = getpos('.')[2]
+    let s:column = col('.')
+    let s:lineHead = s:line[: s:column - 1]
+    let s:lineTail = s:line[s:column :]
+    let s:quotes = ["'", '"']
+    let s:headQuoteCnts = {}
+    let s:tailQuoteCnts = {}
+    let s:totalQuoteCnts = {}
+
+    " echom string(searchpos("'", 'cs'))
+
+    for s:q in s:quotes
+        let s:headQuoteCnts[s:q] = strlen(substitute(s:lineHead, '[^' . s:q . ']', '', 'g'))
+        let s:tailQuoteCnts[s:q] = strlen(substitute(s:lineTail, '[^' . s:q . ']', '', 'g'))
+        let s:totalQuoteCnts[s:q] = s:headQuoteCnts[s:q] + s:tailQuoteCnts[s:q]
+    endfor
+
+    for s:q in s:quotes
+        " if s:headQuoteCnts[s:q] % 2 && !(s:totalQuoteCnts[s:q] % 2)
+        if s:headQuoteCnts[s:q] % 2 && s:tailQuoteCnts[s:q] > 0
+            exec 'normal! vi' . s:q
+            return
+        endif
+    endfor
+
+    for s:q in s:quotes
+        if s:tailQuoteCnts[s:q] > 0
+            exec 'normal! f' . s:q . 'lvi'. s:q
+            return
+        endif
+    endfor
+
+    for s:q in s:quotes
+        if s:headQuoteCnts[s:q] > 0
+            exec 'normal! F' . s:q . 'vi'. s:q
+            return
+        endif
+    endfor
+endfunction
 
 " Home row beginning / end of line
 noremap H ^

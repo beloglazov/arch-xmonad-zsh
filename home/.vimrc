@@ -80,19 +80,19 @@ autocmd FileType python setlocal commentstring=#%s
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
-autocmd bufreadpre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-autocmd bufreadpre *.tex let g:SuperTabLongestHighlight = 1
-autocmd bufreadpre *.tex setlocal tabstop=2
-autocmd bufreadpre *.tex setlocal softtabstop=2
-autocmd bufreadpre *.tex setlocal shiftwidth=2
-autocmd bufreadpre *.tex setlocal expandtab
-autocmd bufreadpre *.tex nmap <leader>t :LatexTOCToggle<CR>
-autocmd bufreadpre *.tex imap <buffer> [[ \begin{
-autocmd bufreadpre *.tex imap <buffer> ]] <Plug>LatexCloseCurEnv
-autocmd bufreadpre *.tex nmap <buffer> <F5> <Plug>LatexChangeEnv
-autocmd bufreadpre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
-autocmd bufreadpre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
-autocmd bufreadpre *.tex AcpLock
+autocmd BufReadPre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+autocmd BufReadPre *.tex let g:SuperTabLongestHighlight = 1
+autocmd BufReadPre *.tex setlocal tabstop=2
+autocmd BufReadPre *.tex setlocal softtabstop=2
+autocmd BufReadPre *.tex setlocal shiftwidth=2
+autocmd BufReadPre *.tex setlocal expandtab
+autocmd BufReadPre *.tex nmap <leader>t :LatexTOCToggle<CR>
+autocmd BufReadPre *.tex imap <buffer> [[ \begin{
+autocmd BufReadPre *.tex imap <buffer> ]] <Plug>LatexCloseCurEnv
+autocmd BufReadPre *.tex nmap <buffer> <F5> <Plug>LatexChangeEnv
+autocmd BufReadPre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
+autocmd BufReadPre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
+autocmd BufReadPre *.tex AcpLock
 
 " Bundle 'millermedeiros/vim-statline'
 Bundle 'beloglazov/vim-statline'
@@ -249,10 +249,13 @@ set spellfile=~/.vim/spell.en.add
 nmap <leader>= 1z=
 
 " Yaml
-autocmd bufreadpre *.yaml setlocal nowrap
-autocmd bufreadpre *.yaml setlocal tabstop=2
-autocmd bufreadpre *.yaml setlocal softtabstop=2
-autocmd bufreadpre *.yaml setlocal shiftwidth=2
+autocmd BufReadPre *.yaml setlocal nowrap
+autocmd BufReadPre *.yaml setlocal tabstop=2
+autocmd BufReadPre *.yaml setlocal softtabstop=2
+autocmd BufReadPre *.yaml setlocal shiftwidth=2
+autocmd BufReadPre *.yaml highlight link yamlPathKeyword Keyword
+autocmd BufEnter,BufNew,BufReadPost *.yaml match yamlPathKeyword "\v[a-zA-Z0-9-_.*]*(/|\.)[a-zA-Z0-9-_.*]*"
+
 
 
 " Key bindings

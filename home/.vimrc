@@ -306,6 +306,32 @@ onoremap n' :<C-u>normal! f'lvi'<CR>
 onoremap n" :<C-u>normal! f"lvi"<CR>
 
 onoremap q :<C-u>call <SID>SmartMotionsQuote()<CR>
+nnoremap <leader>A :call <SID>GetClosestCharInFront()<CR>
+
+function! s:GetClosestCharInFront()
+    let s:chars = ['"', "'"]
+    return s:GetClosestChar(s:chars, 1)
+endfunction
+
+function! s:GetClosestChar(chars, direction)
+    " let s:chars = ['"', "'"]
+    let s:line = getline('.')
+    let s:col = col('.')
+    if a:direction
+        let s:range = range(s:col, len(s:line))
+    else
+        let s:range = range(0, s:col - 1)
+    endif
+    " echom s:col
+    " echom s:line
+    for s:c in s:range
+        if index(a:chars, s:line[s:c]) > -1
+            echom s:line[s:c]
+            return
+        endif
+    endfor
+    echom "Not found"
+endfunction
 
 " test 'qwe1' asd 'qwe' asd 'qwe3' asd
 " test `qwe1` asd `qwe2` asd `qwe3` asd

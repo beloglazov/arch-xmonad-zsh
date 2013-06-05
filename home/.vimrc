@@ -41,7 +41,7 @@ Bundle 'goldfeld/vim-seek'
 
 Bundle 'jiangmiao/auto-pairs'
 let g:AutoPairsMapSpace = 0
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
 let g:AutoPairsShortcutFastWrap = '<C-y>'
 let g:AutoPairsShortcutJump = '<C-z>'

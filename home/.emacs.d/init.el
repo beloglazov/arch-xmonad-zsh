@@ -38,8 +38,8 @@
 
 
 ;; w3m browser
-(require 'w3m-load)
-(setq browse-url-browser-function 'w3m-browse-url)
+; (require 'w3m-load)
+; (setq browse-url-browser-function 'w3m-browse-url)
 
 ;; ido
 (require 'ido-ubiquitous)

@@ -16,4 +16,4 @@ emacs --daemon
 urxvtd -q -o -f
 chromium &
 
-exec ck-launch-session dbus-launch xmonad
+exec dbus-launch xmonad

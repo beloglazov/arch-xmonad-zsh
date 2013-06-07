@@ -1,6 +1,8 @@
 #!/bin/sh
 
-yaourt -S --noconfirm xorg-xfontsel terminus-font terminus-font-ttf ttf-dejavu otf-texgyre ttf-mac-fonts ttf-ms-fonts freetype2-infinality fontconfig-infinality
+yaourt -S freetype2-infinality
+yaourt -S --noconfirm xorg-xfontsel terminus-font terminus-font-ttf ttf-dejavu \
+    otf-texgyre ttf-mac-fonts ttf-ms-fonts fontconfig-infinality
 
 # lib32-freetype2-infinality
 

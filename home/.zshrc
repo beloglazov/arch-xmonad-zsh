@@ -24,7 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux extract history-substring-search lein svn)
+plugins=(git archlinux history-substring-search svn)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)
@@ -115,7 +115,7 @@ alias bc='bc -l'
 alias psg='ps aux | grep'
 alias emacs-restart='pkill emacs; emacs --daemon'
 alias g='grep -i'
-alias x='extract'
+alias x='dtrx'
 alias le='less'
 alias diff='colordiff'
 alias za='zathura'

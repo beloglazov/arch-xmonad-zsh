@@ -486,3 +486,9 @@ nmap crf m`T<Space>~``
 
 " Change current word - kill
 noremap K ciw
+
+" Change current WORD - kill
+noremap J ciW
+
+" Join lines
+nnoremap <leader>J J

@@ -78,8 +78,8 @@ bindkey "\e[F" end-of-line
 
 # fasd
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (fils and directories)
-bindkey '^Z' fasd-complete-f  # C-x C-f to do fasd-complete-f (only files)
-bindkey '^X' fasd-complete-d  # C-x C-d to do fasd-complete-d (only directories)
+bindkey '^X' fasd-complete-f  # C-x to do fasd-complete-f (only files)
+bindkey '^Z' fasd-complete-d  # C-z to do fasd-complete-d (only directories)
 
 # Functions
 
@@ -100,6 +100,7 @@ function yain () {yaourt -S $*; rehash}
 alias ll='ls -lah'
 alias l='ls -lh'
 alias lltime='ll -tr'
+alias llsize='l --group-directories-first -S'
 alias lld='ls -lhd *(-/DN)'
 alias llh='ls -lhd .*'
 alias df='pydf'

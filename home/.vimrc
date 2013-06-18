@@ -254,7 +254,7 @@ autocmd BufReadPre *.yaml setlocal tabstop=2
 autocmd BufReadPre *.yaml setlocal softtabstop=2
 autocmd BufReadPre *.yaml setlocal shiftwidth=2
 autocmd BufReadPre *.yaml highlight link yamlPathKeyword Keyword
-autocmd BufEnter,BufNew,BufReadPost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*(/|\.)[a-zA-Z0-9-_.*/]*"
+autocmd BufEnter,BufNew,BufReadPost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*/[a-zA-Z0-9-_.*/]*"
 
 
 

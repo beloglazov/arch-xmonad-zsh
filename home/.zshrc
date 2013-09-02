@@ -24,7 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode git archlinux history-substring-search svn)
+plugins=(vi-mode git archlinux history-substring-search svn virtualenvwrapper)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)

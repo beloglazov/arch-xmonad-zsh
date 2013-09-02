@@ -24,7 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux history-substring-search svn)
+plugins=(vi-mode git archlinux history-substring-search svn)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)
@@ -47,34 +47,47 @@ export EDITOR="vim"
 
 # Key Bindings
 
-bindkey "\e[1~" beginning-of-line # Home
-bindkey "\e[4~" end-of-line # End
-bindkey "\e[5~" beginning-of-history # PageUp
-bindkey "\e[6~" end-of-history # PageDown
-bindkey "\e[2~" quoted-insert # Ins
-bindkey "\e[3~" delete-char # Del
-bindkey "\e[5C" forward-word
-bindkey "\eOc" emacs-forward-word
-bindkey "\e[5D" backward-word
-bindkey "\eOd" emacs-backward-word
-bindkey "\e\e[C" forward-word
-bindkey "\e\e[D" backward-word
-bindkey "\e[Z" reverse-menu-complete # Shift+Tab
-bindkey "^[[3^" delete-word # C-Del
-bindkey "^H" backward-delete-word # C-BackSpace
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins '^Q' vi-cmd-mode
+bindkey -M vicmd 'H' beginning-of-line
+bindkey -M vicmd 'L' end-of-line
+bindkey -M vicmd 'k' up-line-or-search
+bindkey -M vicmd 'j' down-line-or-search
+bindkey -M vicmd 'u' undo
+bindkey -M vicmd '^R' redo
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^W' backward-kill-word
+bindkey -M viins '^H' backward-delete-char
+bindkey -s "[15~]" 'ls -l'
+
+# bindkey "\e[1~" beginning-of-line # Home
+# bindkey "\e[4~" end-of-line # End
+# bindkey "\e[5~" beginning-of-history # PageUp
+# bindkey "\e[6~" end-of-history # PageDown
+# bindkey "\e[2~" quoted-insert # Ins
+# bindkey "\e[3~" delete-char # Del
+# bindkey "\e[5C" forward-word
+# bindkey "\eOc" emacs-forward-word
+# bindkey "\e[5D" backward-word
+# bindkey "\eOd" emacs-backward-word
+# bindkey "\e\e[C" forward-word
+# bindkey "\e\e[D" backward-word
+# bindkey "\e[Z" reverse-menu-complete # Shift+Tab
+# bindkey "^[[3^" delete-word # C-Del
+# bindkey "^H" backward-delete-word # C-BackSpace
 
 bindkey '^K' up-line-or-search
 bindkey '^J' down-line-or-search
 
-# for rxvt
-bindkey "\e[7~" beginning-of-line # Home
-bindkey "\e[8~" end-of-line # End
-# for non RH/Debian xterm, can't hurt for RH/Debian xterm
-bindkey "\eOH" beginning-of-line
-bindkey "\eOF" end-of-line
-# for freebsd console
-bindkey "\e[H" beginning-of-line
-bindkey "\e[F" end-of-line
+# # for rxvt
+# bindkey "\e[7~" beginning-of-line # Home
+# bindkey "\e[8~" end-of-line # End
+# # for non RH/Debian xterm, can't hurt for RH/Debian xterm
+# bindkey "\eOH" beginning-of-line
+# bindkey "\eOF" end-of-line
+# # for freebsd console
+# bindkey "\e[H" beginning-of-line
+# bindkey "\e[F" end-of-line
 
 # fasd
 bindkey '^X^A' fasd-complete    # C-x C-a to do fasd-complete (fils and directories)

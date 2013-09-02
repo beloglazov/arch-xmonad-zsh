@@ -205,7 +205,7 @@ set clipboard=unnamedplus
 set wildmenu
 set wildmode=longest:full,full
 set wildcharm=<Tab>
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.ropeproject/*,*.egg,*.egg-info/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.ropeproject/*,*.egg,*.egg-info/*,*build/*
 
 " Scrolling by blocks
 set scrolloff=3
@@ -253,9 +253,8 @@ autocmd BufReadPre *.yaml setlocal nowrap
 autocmd BufReadPre *.yaml setlocal tabstop=2
 autocmd BufReadPre *.yaml setlocal softtabstop=2
 autocmd BufReadPre *.yaml setlocal shiftwidth=2
-autocmd BufReadPre *.yaml highlight link yamlPathKeyword Keyword
-autocmd BufEnter,BufNew,BufReadPost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*/[a-zA-Z0-9-_.*/]*"
-
+autocmd BufEnter,BufNew,BufReadPost,BufWritePost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*/[a-zA-Z0-9-_.*/]*"
+highlight link yamlPathKeyword Keyword
 
 
 " Key bindings
@@ -453,7 +452,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Copy to the end of the line
-map Y y$
+nnoremap Y y$
 
 " Up / down on wrapped lines
 nnoremap j gj

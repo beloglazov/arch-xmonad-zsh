@@ -7,9 +7,9 @@ function git_prompt_info() {
 
 # Checks if there are commits ahead from remote
 function git_prompt_ahead_count() {
-  log=$(git log origin/$(current_branch)..HEAD 2> /dev/null)
-  if $(echo "$log" | grep '^commit' &> /dev/null); then
-    echo "$ZSH_THEME_GIT_PROMPT_AHEAD_PREFIX$(echo "$log" | grep '^commit' | wc -l)$ZSH_THEME_GIT_PROMPT_AHEAD_SUFFIX"
+  cnt=$(git branch -vv 2> /dev/null | egrep '^\*' | sed 's/.*ahead \([0-9]\+\).*/\1/')
+  if [[ -n $cnt ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_AHEAD_PREFIX$cnt$ZSH_THEME_GIT_PROMPT_AHEAD_SUFFIX"
   fi
 }
 

@@ -22,7 +22,7 @@ nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'davidhalter/jedi-vim'
 " let g:jedi#auto_vim_configuration = 0
-" let g:jedi#popup_on_dot = 0
+let g:jedi#popup_on_dot = 0
 let g:jedi#pydoc = '<leader>K'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#popup_select_first = 0
@@ -253,8 +253,8 @@ autocmd BufReadPre *.yaml setlocal nowrap
 autocmd BufReadPre *.yaml setlocal tabstop=2
 autocmd BufReadPre *.yaml setlocal softtabstop=2
 autocmd BufReadPre *.yaml setlocal shiftwidth=2
-autocmd BufEnter,BufNew,BufReadPost,BufWritePost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*/[a-zA-Z0-9-_.*/]*"
-highlight link yamlPathKeyword Keyword
+" autocmd BufEnter,BufNew,BufReadPost,BufWritePost *.yaml match yamlPathKeyword "\v[a-zA-Z_.*]+[a-zA-Z0-9-_.*]*/[a-zA-Z0-9-_.*/]*"
+" highlight link yamlPathKeyword Keyword
 
 
 " Key bindings

@@ -20,6 +20,16 @@ Bundle 'beloglazov/vim-online-thesaurus'
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
+Bundle 'davidhalter/jedi-vim'
+let g:jedi#auto_initialization = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#completions_enable = 0
+nnoremap <silent> <buffer> <leader>K :call jedi#show_documentation()<cr>
+nnoremap <silent> <buffer> <leader>R :call jedi#rename()<cr>
+nnoremap <silent> <buffer> <leader>U :call jedi#usages()<cr>
+
 Bundle 'goldfeld/vim-seek'
 
 Bundle 'kien/ctrlp.vim'
@@ -39,8 +49,9 @@ let g:pymode_rope = 0
 let g:pymode_folding = 0
 " let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
-let g:pymode_doc = 1
-let g:pymode_doc_key = '<leader>K'
+let g:pymode_doc = 0
+" let g:pymode_doc_key = '<leader>K'
+let g:pymode_doc_key = ''
 let g:pymode_lint_ignore = 'W0401,E125,C901'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0
@@ -123,7 +134,6 @@ nnoremap <script> <silent> <f10> :call ToggleQuickfixList()<CR>
 Bundle 'tpope/vim-unimpaired'
 
 Bundle 'Valloric/YouCompleteMe'
-" nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_tags_files = 1

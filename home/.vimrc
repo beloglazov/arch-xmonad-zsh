@@ -446,6 +446,9 @@ vnoremap > >gv
 " Copy to the end of the line
 nnoremap Y y$
 
+" Copy the selected region and jump to its end
+vmap y y`]
+
 " Up / down on wrapped lines
 nnoremap j gj
 nnoremap k gk

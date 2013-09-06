@@ -22,13 +22,6 @@ nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'goldfeld/vim-seek'
 
-" Bundle 'jiangmiao/auto-pairs'
-" let g:AutoPairsMapSpace = 0
-" let g:AutoPairsFlyMode = 0
-" let g:AutoPairsShortcutBackInsert = '<C-b>'
-" let g:AutoPairsShortcutFastWrap = '<C-y>'
-" let g:AutoPairsShortcutJump = '<C-z>'
-
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
@@ -46,8 +39,8 @@ let g:pymode_rope = 0
 let g:pymode_folding = 0
 " let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
-let g:pymode_lint_message = 0
-let g:pymode_doc_key = 'NONE'
+let g:pymode_doc = 1
+let g:pymode_doc_key = '<leader>K'
 let g:pymode_lint_ignore = 'W0401,E125,C901'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0

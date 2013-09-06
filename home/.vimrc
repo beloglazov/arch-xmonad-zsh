@@ -20,31 +20,14 @@ Bundle 'beloglazov/vim-online-thesaurus'
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
-Bundle 'davidhalter/jedi-vim'
-" let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#pydoc = '<leader>K'
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#popup_select_first = 0
-" let g:jedi#autocompletion_command = '<tab>'
-let g:jedi#get_definition_command = '<leader>D'
-autocmd FileType python let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-autocmd FileType python let g:SuperTabLongestHighlight = 1
-
-Bundle 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabMappingForward = '<tab>'
-let g:SuperTabMappingBackward = '<s-tab>'
-
 Bundle 'goldfeld/vim-seek'
 
-Bundle 'jiangmiao/auto-pairs'
-let g:AutoPairsMapSpace = 0
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<C-b>'
-let g:AutoPairsShortcutFastWrap = '<C-y>'
-let g:AutoPairsShortcutJump = '<C-z>'
+" Bundle 'jiangmiao/auto-pairs'
+" let g:AutoPairsMapSpace = 0
+" let g:AutoPairsFlyMode = 0
+" let g:AutoPairsShortcutBackInsert = '<C-b>'
+" let g:AutoPairsShortcutFastWrap = '<C-y>'
+" let g:AutoPairsShortcutJump = '<C-z>'
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
@@ -73,7 +56,6 @@ autocmd FileType python setlocal complete+=t
 autocmd FileType python setlocal formatoptions-=t
 autocmd FileType python setlocal nowrap
 autocmd FileType python setlocal commentstring=#%s
-" autocmd FileType python AcpLock
 " autocmd FileType python source ~/.vim/google_python_style.vim
 
 " Bundle 'kljohann/vim-python-pep8-indent'
@@ -106,6 +88,10 @@ let g:statline_filename_relative = 1
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
 
+Bundle 'Raimondi/delimitMate'
+let delimitMate_balance_matchpairs = 1
+au FileType python let b:delimitMate_nesting_quotes = ['"']
+
 Bundle 'scrooloose/nerdtree'
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['.*\.pyc$']
@@ -137,8 +123,15 @@ nnoremap <script> <silent> <f10> :call ToggleQuickfixList()<CR>
 
 Bundle 'tpope/vim-unimpaired'
 
-Bundle 'vim-scripts/AutoComplPop'
-let g:acp_completeoptPreview = 1
+Bundle 'Valloric/YouCompleteMe'
+nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_detailed_diagnostics = '<leader>yd'
 
 Bundle 'vim-scripts/InsertChar'
 nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>

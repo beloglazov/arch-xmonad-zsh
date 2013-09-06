@@ -85,6 +85,8 @@ let g:statline_show_n_buffers = 0
 let g:statline_show_encoding = 0
 let g:statline_filename_relative = 1
 
+Bundle 'mhinz/vim-startify'
+
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
 

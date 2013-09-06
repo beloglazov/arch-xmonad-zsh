@@ -104,6 +104,10 @@ nnoremap <leader>f :CtrlPFunky<CR>
 " Narrow the list down with a word under cursor
 nnoremap <leader>F :execute 'CtrlPFunky ' . expand('<cword>')<CR>
 
+Bundle 'terryma/vim-multiple-cursors'
+let g:multi_cursor_start_key = '<F6>'
+let g:multi_cursor_quit_key = '<C-q>'
+
 Bundle 'tpope/vim-abolish'
 
 Bundle 'tpope/vim-commentary'
@@ -124,7 +128,7 @@ nnoremap <script> <silent> <f10> :call ToggleQuickfixList()<CR>
 Bundle 'tpope/vim-unimpaired'
 
 Bundle 'Valloric/YouCompleteMe'
-nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
+" nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_tags_files = 1

@@ -51,10 +51,12 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^Q' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
-bindkey -M vicmd 'k' up-line-or-search
-bindkey -M vicmd 'j' down-line-or-search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 bindkey -M vicmd 'u' undo
 bindkey -M vicmd '^R' redo
+bindkey -M viins '^R' history-incremental-search-backward
+bindkey -M viins '^S' history-incremental-search-forward
 bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^W' backward-kill-word
 bindkey -M viins '^H' backward-delete-char
@@ -76,8 +78,8 @@ bindkey -s "[15~]" 'ls -l'
 # bindkey "^[[3^" delete-word # C-Del
 # bindkey "^H" backward-delete-word # C-BackSpace
 
-bindkey '^K' up-line-or-search
-bindkey '^J' down-line-or-search
+bindkey '^K' history-substring-search-up
+bindkey '^J' history-substring-search-down
 
 # # for rxvt
 # bindkey "\e[7~" beginning-of-line # Home

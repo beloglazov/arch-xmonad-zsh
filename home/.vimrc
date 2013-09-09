@@ -47,7 +47,7 @@ Bundle 'klen/python-mode'
 let g:pymode_run = 0
 let g:pymode_rope = 0
 let g:pymode_folding = 0
-" let g:pymode_indent = 0
+let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_doc = 0
 " let g:pymode_doc_key = '<leader>K'
@@ -61,6 +61,8 @@ autocmd FileType python setlocal formatoptions-=t
 autocmd FileType python setlocal nowrap
 autocmd FileType python setlocal commentstring=#%s
 " autocmd FileType python source ~/.vim/google_python_style.vim
+
+Bundle 'Valloric/python-indent'
 
 " Bundle 'kljohann/vim-python-pep8-indent'
 

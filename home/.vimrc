@@ -135,6 +135,7 @@ Bundle 'tpope/vim-unimpaired'
 
 Bundle 'Valloric/YouCompleteMe'
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -160,6 +161,9 @@ noremap <silent> <leader>t :TlistToggle<CR>
 
 Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
 
 " End of my bundles
 
@@ -452,9 +456,6 @@ vnoremap <leader>s :sort<CR>
 " Moving blocks of text in visual mode
 vnoremap < <gv
 vnoremap > >gv
-
-" Copy to the end of the line
-nnoremap Y y$
 
 " Copy the selected region and jump to its end
 vmap y y`]

@@ -17,6 +17,14 @@ Bundle 'gmarik/vundle'
 
 Bundle 'beloglazov/vim-online-thesaurus'
 
+Bundle 'beloglazov/vim-statline'
+set noshowmode
+set laststatus=2
+let g:statline_fugitive = 1
+let g:statline_show_n_buffers = 0
+let g:statline_show_encoding = 0
+let g:statline_filename_relative = 1
+
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
@@ -50,7 +58,6 @@ let g:pymode_folding = 0
 let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_doc = 0
-" let g:pymode_doc_key = '<leader>K'
 let g:pymode_doc_key = ''
 let g:pymode_lint_ignore = 'W0401,E125,C901'
 let g:pymode_breakpoint_key = '<localleader>b'
@@ -60,11 +67,6 @@ autocmd FileType python setlocal complete+=t
 autocmd FileType python setlocal formatoptions-=t
 autocmd FileType python setlocal nowrap
 autocmd FileType python setlocal commentstring=#%s
-" autocmd FileType python source ~/.vim/google_python_style.vim
-
-Bundle 'Valloric/python-indent'
-
-" Bundle 'kljohann/vim-python-pep8-indent'
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
@@ -82,19 +84,12 @@ autocmd BufReadPre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
 autocmd BufReadPre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
 autocmd BufReadPre *.tex AcpLock
 
-" Bundle 'millermedeiros/vim-statline'
-Bundle 'beloglazov/vim-statline'
-set noshowmode
-set laststatus=2
-let g:statline_fugitive = 1
-let g:statline_show_n_buffers = 0
-let g:statline_show_encoding = 0
-let g:statline_filename_relative = 1
-
 Bundle 'mhinz/vim-startify'
 
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
+
+Bundle 'python_match.vim'
 
 Bundle 'Raimondi/delimitMate'
 let delimitMate_balance_matchpairs = 1
@@ -134,6 +129,8 @@ let g:toggle_list_no_mappings = 1
 nnoremap <script> <silent> <f10> :call ToggleQuickfixList()<CR>
 
 Bundle 'tpope/vim-unimpaired'
+
+Bundle 'Valloric/python-indent'
 
 Bundle 'Valloric/YouCompleteMe'
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>

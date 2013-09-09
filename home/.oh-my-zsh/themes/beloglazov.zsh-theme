@@ -9,7 +9,7 @@ function git_prompt_info() {
 function git_prompt_ahead_count() {
   summary=$(git branch -vv 2> /dev/null | egrep '^\*')
   if echo "$summary" | egrep -q 'ahead [0-9]+'; then
-    cnt=$(echo $summary | sed 's/.*ahead \([0-9]\+\).*/\1/')
+    cnt=$(echo $summary | sed 's/.*ahead \([0-9]*\).*/\1/')
     echo "$ZSH_THEME_GIT_PROMPT_AHEAD_PREFIX$cnt$ZSH_THEME_GIT_PROMPT_AHEAD_SUFFIX"
   fi
 }

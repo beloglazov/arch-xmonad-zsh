@@ -45,8 +45,8 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_prompt_mappings = { 'PrtExit()': ['<esc>', '<c-q>'] }
 let g:ctrlp_max_height = 30
-noremap <leader>p :CtrlP<CR>
-noremap <leader>P :CtrlPCurFile<CR>
+noremap <leader>o :CtrlP<CR>
+noremap <leader>O :CtrlPCurFile<CR>
 noremap <leader>b :CtrlPBuffer<CR>
 noremap <leader>r :CtrlPMRUFiles<CR>
 noremap <leader>; :CtrlPLine<CR>
@@ -85,6 +85,8 @@ autocmd BufReadPre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
 autocmd BufReadPre *.tex AcpLock
 
 Bundle 'mhinz/vim-startify'
+
+Bundle 'mileszs/ack.vim'
 
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'

@@ -28,6 +28,13 @@ let g:statline_filename_relative = 1
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
+Bundle 'chrisbra/csv.vim'
+hi CSVColumnEven ctermbg=0
+hi CSVColumnOdd  ctermbg=235
+let g:csv_autocmd_arrange = 1
+let g:csv_nomap_cr = 1
+let g:csv_highlight_column = 'y'
+
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0

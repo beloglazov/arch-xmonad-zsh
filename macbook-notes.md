@@ -18,7 +18,7 @@ These notes are for installing Arch Linux as dual boot on a Macbook Pro Retina 2
 Download rEFInd from http://www.rodsbooks.com/refind/, then install it into the
 ESP:
 
-```BASH
+```Bash
 ./install.sh --esp
 ```
 
@@ -30,6 +30,7 @@ Mount the EFI partition and add the following options to refind.conf located on 
 
 ## In the Arch install
 
+```Bash
 pacstrap /mnt grub dosfstools efibootmgr grub-efi-x86_64
 arch-chroot /mnt
 mkdir -p /boot/efi
@@ -39,3 +40,4 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_
 mkdir -p /boot/grub/locale
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
+```

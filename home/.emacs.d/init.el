@@ -9,7 +9,7 @@
 (load-theme 'deeper-blue)
 
 ;; evil
-(require 'evil)
+; (require 'evil)
 
 ;; auto-complete: https://github.com/m2ym/auto-complete
 (require 'auto-complete-config)

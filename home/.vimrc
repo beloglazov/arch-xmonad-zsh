@@ -30,7 +30,8 @@ nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'chrisbra/csv.vim'
 hi CSVColumnEven ctermbg=0
-hi CSVColumnOdd  ctermbg=235
+" hi CSVColumnOdd  ctermbg=235
+hi CSVColumnOdd  ctermbg=0
 let g:csv_autocmd_arrange = 1
 let g:csv_nomap_cr = 1
 let g:csv_highlight_column = 'y'
@@ -46,6 +47,8 @@ nnoremap <silent> <buffer> <leader>R :call jedi#rename()<cr>
 nnoremap <silent> <buffer> <leader>U :call jedi#usages()<cr>
 
 Bundle 'goldfeld/vim-seek'
+
+Bundle 'JuliaLang/julia-vim'
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1

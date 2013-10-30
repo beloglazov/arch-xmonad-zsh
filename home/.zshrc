@@ -47,6 +47,19 @@ export EDITOR="vim"
 
 # Key Bindings
 
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -A key
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Delete]=${terminfo[kdch1]}
+bindkey -M viins "${key[Home]}" beginning-of-line
+bindkey -M viins "${key[End]}" end-of-line
+bindkey -M viins "${key[Delete]}" delete-char
+bindkey -M vicmd "${key[Delete]}" delete-char
+bindkey -M vicmd "${key[Home]}" beginning-of-line
+bindkey -M vicmd "${key[End]}" end-of-line
+
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^Q' vi-cmd-mode
 bindkey -M vicmd 'H' beginning-of-line
@@ -60,6 +73,7 @@ bindkey -M viins '^S' history-incremental-search-forward
 bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^W' backward-kill-word
 bindkey -M viins '^H' backward-delete-char
+bindkey -M viins '^L' delete-char
 bindkey -s "[15~]" 'ls -l'
 
 # bindkey "\e[1~" beginning-of-line # Home

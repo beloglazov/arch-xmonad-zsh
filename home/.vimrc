@@ -399,9 +399,21 @@ noremap L $
 
 " Insert mode movement
 inoremap OO <Esc>o
-inoremap CC <Esc>C
-inoremap DD <C-o>dd
+" inoremap CC <Esc>C
+" inoremap DD <C-o>dd
 inoremap UU <C-o>u
+
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Insert mode delete a character forward
+" inoremap <C-l> <Delete>
+
+" Insert mode movement
+" inoremap <C-j> <S-Left>
+" inoremap <C-k> <S-Right>
 
 " Insert mode beginning / end of line
 inoremap <C-a> <Home>
@@ -412,13 +424,6 @@ inoremap <C-d> <C-o>dw
 
 " Insert mode dedent the current line
 inoremap <C-f> <C-d>
-
-" Insert mode delete a character forward
-inoremap <C-l> <Delete>
-
-" Insert mode movement
-inoremap <C-j> <S-Left>
-inoremap <C-k> <S-Right>
 
 " Save
 noremap  <silent> <C-s> :update<CR>

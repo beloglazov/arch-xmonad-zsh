@@ -25,13 +25,13 @@ myModMask = mod4Mask
 
 main = do
 	xmonad $ ewmh defaultConfig
-		{ layoutHook = smartBorders $ myLayout
-		, terminal		= "urxvtc"
-		, modMask		= myModMask
-		, borderWidth		= 2
-		, normalBorderColor	= "#0c0d0e"
-		, focusedBorderColor	= "#333333"
-		, handleEventHook	= fullscreenEventHook
+		{ layoutHook         = smartBorders $ myLayout
+		, terminal           = "urxvtc"
+		, modMask            = myModMask
+		, borderWidth        = 2
+		, normalBorderColor  = "#0c0d0e"
+		, focusedBorderColor = "#333333"
+		, handleEventHook    = fullscreenEventHook
 		}
 		`additionalKeys`
                  [ ((myModMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")

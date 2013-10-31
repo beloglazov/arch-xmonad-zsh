@@ -8,3 +8,6 @@ source /etc/profile.d/apache-ant.sh
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repos/ibm
 source /usr/bin/virtualenvwrapper.sh
+
+# Fixes java/xmonad issue with JOSM
+export _JAVA_AWT_WM_NONREPARENTING=1

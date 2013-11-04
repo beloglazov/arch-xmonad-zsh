@@ -46,6 +46,9 @@ nnoremap <silent> <buffer> <leader>K :call jedi#show_documentation()<cr>
 nnoremap <silent> <buffer> <leader>R :call jedi#rename()<cr>
 nnoremap <silent> <buffer> <leader>U :call jedi#usages()<cr>
 
+Bundle 'derekwyatt/vim-scala'
+let g:scala_sort_across_groups=1
+
 Bundle 'goldfeld/vim-seek'
 
 Bundle 'JuliaLang/julia-vim'
@@ -153,6 +156,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_detailed_diagnostics = '<leader>yd'
+let g:EclimCompletionMethod = 'omnifunc'
 
 Bundle 'vim-scripts/InsertChar'
 nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>

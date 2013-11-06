@@ -72,7 +72,7 @@ let g:pymode_indent = 0
 let g:pymode_lint_cwindow = 0
 let g:pymode_doc = 0
 let g:pymode_doc_key = ''
-let g:pymode_lint_ignore = 'W0401,E125,C901'
+let g:pymode_lint_ignore = 'W0401,E125,C901,C0110'
 let g:pymode_breakpoint_key = '<localleader>b'
 let g:pymode_options = 0
 autocmd FileType python noremap <F5> :PyLint<CR>

@@ -226,7 +226,7 @@ set clipboard=unnamedplus
 set wildmenu
 set wildmode=longest:full,full
 set wildcharm=<Tab>
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.ropeproject/*,*.egg,*.egg-info/*,*build/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.pyc,*/.ropeproject/*,*.egg,*.egg-info/*,*build/*,*bin/*,*target/*
 
 " Scrolling by blocks
 set scrolloff=3

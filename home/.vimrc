@@ -48,6 +48,8 @@ nnoremap <silent> <buffer> <leader>U :call jedi#usages()<cr>
 
 Bundle 'derekwyatt/vim-scala'
 let g:scala_sort_across_groups=1
+autocmd FileType scala setlocal textwidth=90
+autocmd FileType scala setlocal colorcolumn=91
 
 Bundle 'goldfeld/vim-seek'
 

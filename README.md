@@ -61,6 +61,9 @@ usermod -G wheel -a <username>
 passwd <username>
 ```
 
+6. Added a Haskell repository as described here (it will be used to install
+   Xmonad): https://wiki.archlinux.org/index.php/Haskell_Package_Guidelines
+
 Now, you are ready to clone the current repository and start running the
 configuration scripts. This needs to be done under `<username>`. The following
 commands switch to the `<username>` user, create a `repos` directory, and clone

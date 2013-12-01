@@ -85,8 +85,6 @@ autocmd FileType python setlocal commentstring=#%s
 
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:LatexBox_complete_inlineMath = 1
-autocmd BufReadPre *.tex let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-autocmd BufReadPre *.tex let g:SuperTabLongestHighlight = 1
 autocmd BufReadPre *.tex setlocal tabstop=2
 autocmd BufReadPre *.tex setlocal softtabstop=2
 autocmd BufReadPre *.tex setlocal shiftwidth=2
@@ -97,7 +95,6 @@ autocmd BufReadPre *.tex imap <buffer> ]] <Plug>LatexCloseCurEnv
 autocmd BufReadPre *.tex nmap <buffer> <F5> <Plug>LatexChangeEnv
 autocmd BufReadPre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
 autocmd BufReadPre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
-autocmd BufReadPre *.tex AcpLock
 
 Bundle 'mhinz/vim-startify'
 

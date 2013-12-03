@@ -147,14 +147,14 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/python-indent'
 
 Bundle 'Valloric/YouCompleteMe'
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_detailed_diagnostics = '<leader>yd'
+" nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
+" let g:ycm_complete_in_comments = 1
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_key_detailed_diagnostics = '<leader>yd'
 let g:EclimCompletionMethod = 'omnifunc'
 
 Bundle 'vim-scripts/InsertChar'

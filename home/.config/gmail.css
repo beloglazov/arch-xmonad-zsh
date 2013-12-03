@@ -5,11 +5,18 @@
 }
 
 /** search field **/
-#gbfwa {
+/*#gbfwa {
     width: 250px;
     position: absolute;
     top: 83px;
     right: 280px;
+}*/
+
+#gbqfw {
+    position: absolute;
+    right: -100px;
+    top: 108px;
+    width: 250px;
 }
 
 #gbqfq {

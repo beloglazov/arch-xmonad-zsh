@@ -157,8 +157,8 @@ Bundle 'Valloric/YouCompleteMe'
 " let g:ycm_key_detailed_diagnostics = '<leader>yd'
 let g:EclimCompletionMethod = 'omnifunc'
 
-Bundle 'vim-scripts/InsertChar'
-nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
+" Bundle 'vim-scripts/InsertChar'
+" nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
 
 Bundle 'vim-scripts/taglist.vim'
 let Tlist_Auto_Update = 1
@@ -516,3 +516,6 @@ noremap J ciW
 
 " Join lines
 nnoremap <leader>J J
+
+" Insert a space
+nnoremap <leader><Space> i<Space><Esc>

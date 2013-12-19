@@ -173,6 +173,8 @@ noremap <silent> <leader>t :TlistToggle<CR>
 
 " Bundle 'SirVer/ultisnips'
 
+Bundle 'vim-scripts/visualrepeat'
+
 Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>
 function! YRRunAfterMaps()

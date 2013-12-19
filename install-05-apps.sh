@@ -5,7 +5,8 @@ yaourt -S openssh chromium rsync jdk7-openjdk apache-ant maven lftp unzip unrar 
 	ack glances aspell aspell-en ispell bc colordiff colorsvn fasd \
 	dmidecode elinks htop iftop lesspipe highlight mpd ncdu ncmpcpp feh \
 	hwinfo pydf atool libcaca rtorrent dzen2 emacs mplayer tcl tk lnav \
-	ntfs-3g cloc zathura zathura-pdf-poppler dtrx dosfstools ntfsprogs ctags gvim
+	ntfs-3g cloc zathura zathura-pdf-poppler dtrx dosfstools ntfsprogs ctags \
+    gvim fzf-git
 
 mkdir -p ~/.config/ranger
 ranger --copy-config=scope

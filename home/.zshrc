@@ -323,3 +323,4 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk/jre/lib/i38
 stty -ixon
 
 source ~/.zshenv
+source ~/.fzf.zsh

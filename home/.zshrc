@@ -117,6 +117,7 @@ function top10 () {history | awk '{print $2}'|awk 'BEGIN {FS="|"} {print $1}' | 
 
 unalias f
 function f() {find ./ -iname "*$1*" 2>/dev/null | grep -i $1}
+function fd() {find ./ -type d -iname "*$1*" 2>/dev/null | grep -i $1}
 
 # unalias g
 # function g () {git ca $*; git push}

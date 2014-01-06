@@ -145,26 +145,26 @@ zle     -N   fzf-cd-home-widget
 bindkey '^H' fzf-cd-home-widget
 
 # C-O: open a file in vim from the current subtree
-fzf-vim-subtree-widget() {
-  FILE=$(find * -path '*/\.*' -prune -o -type f -print 2> /dev/null | fzf)
-  if [ -n "$FILE" ]; then
-    echo "$FILE" | xargs bash -c '</dev/tty vim "$@"' ignoreme
-  fi
-  zle reset-prompt
-}
-zle     -N   fzf-vim-subtree-widget
-bindkey '^O' fzf-vim-subtree-widget
+# fzf-vim-subtree-widget() {
+#   FILE=$(find * -path '*/\.*' -prune -o -type f -print 2> /dev/null | fzf)
+#   if [ -n "$FILE" ]; then
+#     echo "$FILE" | xargs bash -c '</dev/tty vim "$@"' ignoreme
+#   fi
+#   zle reset-prompt
+# }
+# zle     -N   fzf-vim-subtree-widget
+# bindkey '^O' fzf-vim-subtree-widget
 
 # C-P: open a file in vim from fasd
-fzf-vim-home-widget() {
-  FILE=$(fasd -f -l | fzf --no-sort)
-  if [ -n "$FILE" ]; then
-    echo "$FILE" | xargs bash -c '</dev/tty vim "$@"' ignoreme
-  fi
-  zle reset-prompt
-}
-zle     -N   fzf-vim-home-widget
-bindkey '^P' fzf-vim-home-widget
+# fzf-vim-home-widget() {
+#   FILE=$(fasd -f -l | fzf --no-sort)
+#   if [ -n "$FILE" ]; then
+#     echo "$FILE" | xargs bash -c '</dev/tty vim "$@"' ignoreme
+#   fi
+#   zle reset-prompt
+# }
+# zle     -N   fzf-vim-home-widget
+# bindkey '^P' fzf-vim-home-widget
 
 # C-A: insert a path from the current subtree
 fzf-file-widget() {
@@ -230,6 +230,11 @@ fzf-history-widget() {
 zle     -N   fzf-history-widget
 bindkey '^R' fzf-history-widget
 
+# vimf - Open selected file in Vim
+vf() {
+  FILE=$(fzf) && vim "$FILE"
+}
+
 
 # Aliases
 
@@ -264,7 +269,7 @@ alias ee='fasd -ae e'
 alias ed='fasd -de e'
 alias ef='fasd -fe e'
 alias vd='fasd -de vim'
-alias vf='fasd -fe vim'
+alias vz='fasd -fe vim'
 
 # SVN aliales
 alias svn='colorsvn'

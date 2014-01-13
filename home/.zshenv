@@ -12,4 +12,4 @@ source /usr/bin/virtualenvwrapper.sh
 # Fixes java/xmonad issue with JOSM
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-source ~/.zshenv-extra
+source ~/.zshenv-extra 2> /dev/null

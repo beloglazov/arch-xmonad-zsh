@@ -50,6 +50,9 @@ Bundle 'derekwyatt/vim-scala'
 let g:scala_sort_across_groups=1
 autocmd FileType scala setlocal textwidth=90
 autocmd FileType scala setlocal colorcolumn=91
+autocmd FileType scala setlocal tabstop=2
+autocmd FileType scala setlocal softtabstop=2
+autocmd FileType scala setlocal shiftwidth=2
 
 Bundle 'goldfeld/vim-seek'
 

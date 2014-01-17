@@ -294,6 +294,11 @@ alias eclipse-clojure='silent ~/soft/eclipse/eclipse-clojure-indigo/eclipse'
 alias eclipse-java='silent ~/soft/eclipse/eclipse-java-indigo/eclipse'
 alias eclipse-jee='silent ~/soft/eclipse/eclipse-jee-indigo/eclipse'
 
+# Ack aliases
+alias ack='ack --smart-case --sort-files'
+alias ackscala='ack --scala'
+alias ackpython='ack --python'
+
 # Set up auto extension stuff
 #alias -s html=$BROWSER
 #alias -s org=$BROWSER

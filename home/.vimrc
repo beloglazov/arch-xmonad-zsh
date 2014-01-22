@@ -99,6 +99,29 @@ autocmd BufReadPre *.tex nmap <buffer> <F5> <Plug>LatexChangeEnv
 autocmd BufReadPre *.tex vmap <buffer> <F6> <Plug>LatexWrapSelection
 autocmd BufReadPre *.tex vmap <buffer> <F7> <Plug>LatexEnvWrapSelection
 
+Bundle 'majutsushi/tagbar'
+nnoremap <silent> <leader>t :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+let g:tagbar_compact = 1
+let g:tagbar_indent = 1
+let g:tagbar_type_scala = {
+    \ 'ctagstype' : 'Scala',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }
+
 Bundle 'mhinz/vim-startify'
 
 Bundle 'mileszs/ack.vim'
@@ -162,17 +185,6 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 " Bundle 'vim-scripts/InsertChar'
 " nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
-
-Bundle 'vim-scripts/taglist.vim'
-let Tlist_Auto_Update = 1
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_File_Fold_Auto_Close = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Highlight_Tag_On_BufEnter = 1
-noremap <silent> <leader>t :TlistToggle<CR>
 
 " Bundle 'SirVer/ultisnips'
 

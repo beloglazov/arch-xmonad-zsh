@@ -24,7 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode git archlinux history-substring-search svn virtualenvwrapper)
+plugins=(vi-mode git archlinux history-substring-search svn virtualenvwrapper mvn)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)
@@ -264,6 +264,7 @@ alias diff='colordiff'
 alias za='zathura'
 alias v='vim --servername vim'
 alias view='vim -R -'
+alias mvn='mvn-color'
 
 # fasd aliases
 alias ee='fasd -ae e'

@@ -173,8 +173,8 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/python-indent'
 
 Bundle 'Valloric/YouCompleteMe'
+inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 " let g:ycm_complete_in_comments = 1
 " let g:ycm_collect_identifiers_from_tags_files = 1
 " let g:ycm_seed_identifiers_with_syntax = 1
@@ -186,7 +186,11 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Bundle 'vim-scripts/InsertChar'
 " nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
 
-" Bundle 'SirVer/ultisnips'
+Bundle 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<C-Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsListSnippets="<c-z>"
 
 Bundle 'vim-scripts/visualrepeat'
 
@@ -416,6 +420,11 @@ endfunction
 " Home row beginning / end of line
 noremap H ^
 noremap L $
+
+" C-Tab
+imap <Esc>[27;5;9~ <C-Tab>
+nmap <Esc>[27;5;9~ <C-Tab>
+" imap <Esc>[27;6;9~ <C-S-Tab>
 
 " Insert mode movement
 inoremap OO <Esc>o

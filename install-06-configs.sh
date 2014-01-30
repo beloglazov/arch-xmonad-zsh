@@ -44,6 +44,7 @@ ln -s ${DIR}/home/bin/dmenu-run ~/bin/dmenu-run
 ln -s ${DIR}/home/bin/dmenu-urxvt ~/bin/dmenu-urxvt
 ln -s ${DIR}/home/bin/e ~/bin/e
 ln -s ${DIR}/home/bin/fix-keyboard ~/bin/fix-keyboard
+ln -s ${DIR}/home/bin/javarepl ~/bin/javarepl
 ln -s ${DIR}/home/bin/libreoffice ~/bin/libreoffice
 ln -s ${DIR}/home/bin/mem ~/bin/mem
 ln -s ${DIR}/home/bin/pyflakespep8.py ~/bin/pyflakespep8.py

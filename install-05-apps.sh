@@ -18,3 +18,6 @@ cabal update
 cabal install cabal-install
 cabal install happy
 cabal install haskell-awk
+
+wget http://albertlatacz.published.s3.amazonaws.com/javarepl/javarepl.jar \
+    -r -O ~/bin/javarepl.jar

@@ -547,3 +547,16 @@ nnoremap <leader>J J
 
 " Insert a space
 nnoremap <leader><Space> i<Space><Esc>
+
+" Java key bindings
+autocmd FileType java nnoremap <silent> <buffer> <localleader>i :JavaImport<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>o :JavaImportOrganize<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>d :JavaDocSearch -x declarations<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>s :JavaSearchContext<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>c :JavaCorrect<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>f :%JavaFormat<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>h :JavaHierarchy<cr>
+autocmd FileType java nnoremap <buffer> <localleader>rr :JavaRename<space>
+autocmd FileType java nnoremap <buffer> <localleader>rm :JavaMove<space>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>ru :RefactorUndo<cr>
+

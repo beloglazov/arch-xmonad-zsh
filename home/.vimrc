@@ -151,6 +151,8 @@ Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_start_key = '<F6>'
 let g:multi_cursor_quit_key = '<C-q>'
 
+Bundle 'tfnico/vim-gradle'
+
 Bundle 'tpope/vim-abolish'
 
 Bundle 'tpope/vim-commentary'

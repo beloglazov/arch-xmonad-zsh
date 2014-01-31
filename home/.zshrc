@@ -290,6 +290,9 @@ alias gitd='git diff'
 alias gitp='git p'
 alias gitpu='git pu'
 
+# Gradle aliases
+alias gr='gradle'
+
 # Eclipse aliases
 alias eclipse-clojure='silent ~/soft/eclipse/eclipse-clojure-indigo/eclipse'
 alias eclipse-java='silent ~/soft/eclipse/eclipse-java-indigo/eclipse'

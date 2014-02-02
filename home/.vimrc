@@ -54,6 +54,10 @@ autocmd FileType scala setlocal tabstop=2
 autocmd FileType scala setlocal softtabstop=2
 autocmd FileType scala setlocal shiftwidth=2
 
+Bundle 'dyng/ctrlsf.vim'
+let g:ctrlsf_selected_line_hl = 'p'
+nnoremap <F4> :CtrlSF<space>
+
 Bundle 'goldfeld/vim-seek'
 
 Bundle 'JuliaLang/julia-vim'

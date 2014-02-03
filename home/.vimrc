@@ -61,8 +61,15 @@ nnoremap <F4> :CtrlSF<space>
 Bundle 'JuliaLang/julia-vim'
 
 Bundle 'justinmk/vim-sneak'
-nmap ; <Plug>SneakStreak
-" let g:sneak#streak = 1
+let g:sneak#f_reset = 0
+let g:sneak#t_reset = 0
+let g:sneak#streak = 0
+nmap j <Plug>SneakNext
+xmap j <Plug>VSneakNext
+nmap k <Plug>SneakPrevious
+xmap k <Plug>VSneakPrevious
+map : <Plug>SneakStreakBackward
+map ; <Plug>SneakStreak
 " replace 'f' with inclusive 1-char Sneak
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
@@ -163,7 +170,9 @@ let NERDTreeIgnore = ['.*\.pyc$']
 noremap <silent> <f1> :NERDTreeToggle<CR>
 noremap <silent> <f2> :NERDTreeFind<CR>
 
-Bundle 'sickill/vim-pasta'
+" Bundle 'sickill/vim-pasta'
+
+" Bundle 'spiiph/vim-space'
 
 Bundle 'tacahiroy/ctrlp-funky'
 let g:ctrlp_extensions = ['funky']
@@ -225,10 +234,6 @@ nnoremap <silent> <F3> :YRShow<CR>
 function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 endfunction
-
-Bundle 'wikitopian/hardmode'
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-nnoremap <F5> <Esc>:call ToggleHardMode()<CR>
 
 " End of my bundles
 
@@ -515,8 +520,10 @@ noremap <leader>d :bdelete<CR>
 noremap <leader>e :e <Tab>
 
 " Scroll screen with the cursor
-noremap <C-j> j<C-e>
-noremap <C-k> k<C-y>
+noremap <C-j> gj<C-e>
+noremap <C-k> gk<C-y>
+noremap <C-h> h
+noremap <C-l> l
 
 " Very magic regex search by default
 nnoremap / /\v
@@ -536,8 +543,8 @@ vnoremap > >gv
 vmap y y`]
 
 " Up / down on wrapped lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " Force saving that requires root permissions
 cmap w!! %!sudo tee > /dev/null %
@@ -569,6 +576,13 @@ noremap K ciw
 
 " Change current WORD - kill
 noremap J ciW
+
+" Search the current word in front / behind
+noremap h #
+noremap l *
+
+" Jump to the matching brace
+noremap , %
 
 " Join lines
 nnoremap <leader>J J

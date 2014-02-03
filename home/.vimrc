@@ -144,6 +144,8 @@ let g:tagbar_type_scala = {
 
 Bundle 'mhinz/vim-startify'
 
+Bundle 'michaeljsmith/vim-indent-object'
+
 Bundle 'mileszs/ack.vim'
 
 Bundle 'molok/vim-smartusline'

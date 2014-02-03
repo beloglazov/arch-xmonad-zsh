@@ -226,6 +226,10 @@ function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 endfunction
 
+Bundle 'wikitopian/hardmode'
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <F5> <Esc>:call ToggleHardMode()<CR>
+
 " End of my bundles
 
 

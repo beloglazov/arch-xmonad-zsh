@@ -170,7 +170,7 @@ let NERDTreeIgnore = ['.*\.pyc$']
 noremap <silent> <f1> :NERDTreeToggle<CR>
 noremap <silent> <f2> :NERDTreeFind<CR>
 
-" Bundle 'sickill/vim-pasta'
+Bundle 'sickill/vim-pasta'
 
 " Bundle 'spiiph/vim-space'
 

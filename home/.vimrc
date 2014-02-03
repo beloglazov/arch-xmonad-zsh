@@ -161,6 +161,8 @@ let NERDTreeIgnore = ['.*\.pyc$']
 noremap <silent> <f1> :NERDTreeToggle<CR>
 noremap <silent> <f2> :NERDTreeFind<CR>
 
+Bundle 'sickill/vim-pasta'
+
 Bundle 'tacahiroy/ctrlp-funky'
 let g:ctrlp_extensions = ['funky']
 nnoremap <leader>f :CtrlPFunky<CR>

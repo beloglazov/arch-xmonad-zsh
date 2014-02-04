@@ -31,6 +31,17 @@ let g:statline_filename_relative = 1
 Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
+Bundle 'bkad/CamelCaseMotion'
+map W <Plug>CamelCaseMotion_w
+map B <Plug>CamelCaseMotion_b
+map E <Plug>CamelCaseMotion_e
+omap <silent> iW <Plug>CamelCaseMotion_iw
+xmap <silent> iW <Plug>CamelCaseMotion_iw
+omap <silent> iB <Plug>CamelCaseMotion_ib
+xmap <silent> iB <Plug>CamelCaseMotion_ib
+omap <silent> iE <Plug>CamelCaseMotion_ie
+xmap <silent> iE <Plug>CamelCaseMotion_ie
+
 Bundle 'chrisbra/csv.vim'
 hi CSVColumnEven ctermbg=0
 " hi CSVColumnOdd  ctermbg=235
@@ -211,6 +222,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'Valloric/python-indent'
 
 Bundle 'Valloric/YouCompleteMe'
+inoremap <C-@> <C-X><C-L>
 inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 " nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " let g:ycm_complete_in_comments = 1
@@ -232,11 +244,11 @@ let g:UltiSnipsListSnippets="<c-z>"
 
 Bundle 'vim-scripts/visualrepeat'
 
-Bundle 'vim-scripts/YankRing.vim'
-nnoremap <silent> <F3> :YRShow<CR>
-function! YRRunAfterMaps()
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-endfunction
+" Bundle 'vim-scripts/YankRing.vim'
+" nnoremap <silent> <F3> :YRShow<CR>
+" function! YRRunAfterMaps()
+"     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+" endfunction
 
 " End of my bundles
 

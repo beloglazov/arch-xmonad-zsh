@@ -15,6 +15,9 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 
+Bundle 'arecarn/crunch'
+nnoremap <leader>cr :Crunch<cr>
+
 Bundle 'beloglazov/vim-online-thesaurus'
 
 Bundle 'beloglazov/vim-statline'

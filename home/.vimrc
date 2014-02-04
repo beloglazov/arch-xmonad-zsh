@@ -15,6 +15,8 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 
+Bundle 'aaronbieber/vim-quicktask'
+
 Bundle 'arecarn/crunch'
 nnoremap <leader>cr :Crunch<cr>
 
@@ -72,7 +74,20 @@ Bundle 'dyng/ctrlsf.vim'
 let g:ctrlsf_selected_line_hl = 'p'
 nnoremap <F4> :CtrlSF<space>
 
+Bundle 'fmoralesc/vim-pad'
+let g:pad_dir = '~/notes'
+
+Bundle 'ivyl/vim-bling'
+let g:bling_no_map = 1
+let g:bling_time = 50
+let g:bling_count = 1
+nnoremap <silent> n nzz:call BlingHighight()<CR>
+nnoremap <silent> N Nzz:call BlingHighight()<CR>
+
 Bundle 'JuliaLang/julia-vim'
+
+Bundle 'junegunn/goyo.vim'
+noremap <silent> <F7> :Goyo<cr>
 
 Bundle 'justinmk/vim-sneak'
 let g:sneak#f_reset = 0
@@ -185,6 +200,9 @@ noremap <silent> <f1> :NERDTreeToggle<CR>
 noremap <silent> <f2> :NERDTreeFind<CR>
 
 Bundle 'sickill/vim-pasta'
+
+Bundle 'sk1418/Join'
+noremap <silent> <leader>J :Join<cr>
 
 " Bundle 'spiiph/vim-space'
 
@@ -544,8 +562,8 @@ noremap <C-l> l
 nnoremap / /\v
 
 " Center the screen with search jumps
-noremap n nzz
-noremap N Nzz
+" noremap n nzz
+" noremap N Nzz
 
 " Sort in visual mode
 vnoremap <leader>s :sort<CR>
@@ -600,7 +618,7 @@ noremap l *
 noremap , %
 
 " Join lines
-nnoremap <leader>J J
+" nnoremap <leader>J J
 
 " Insert a space
 nnoremap <leader><Space> i<Space><Esc>

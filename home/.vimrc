@@ -262,11 +262,11 @@ let g:UltiSnipsListSnippets="<c-z>"
 
 Bundle 'vim-scripts/visualrepeat'
 
-" Bundle 'vim-scripts/YankRing.vim'
-" nnoremap <silent> <F3> :YRShow<CR>
-" function! YRRunAfterMaps()
-"     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-" endfunction
+Bundle 'vim-scripts/YankRing.vim'
+nnoremap <silent> <F3> :YRShow<CR>
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
 
 " End of my bundles
 

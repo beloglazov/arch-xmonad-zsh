@@ -212,6 +212,8 @@ nnoremap <leader>f :CtrlPFunky<CR>
 " Narrow the list down with a word under cursor
 nnoremap <leader>F :execute 'CtrlPFunky ' . expand('<cword>')<CR>
 
+Bundle 'terryma/vim-expand-region'
+
 Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_start_key = '<F6>'
 let g:multi_cursor_quit_key = '<C-q>'
@@ -586,8 +588,8 @@ cmap w!! %!sudo tee > /dev/null %
 map <leader>a ggVG
 
 " Easier increment / decrement
-nnoremap + <C-a>
-nnoremap - <C-x>
+" nnoremap + <C-a>
+" nnoremap - <C-x>
 
 " Duplicate a line and comment the first copy
 nmap gcd yyPgcc

@@ -202,7 +202,7 @@ noremap <silent> <f2> :NERDTreeFind<CR>
 Bundle 'sickill/vim-pasta'
 
 Bundle 'sk1418/Join'
-noremap <silent> <leader>J :Join<cr>
+" noremap <silent> <leader>J :Join!<cr>
 
 " Bundle 'spiiph/vim-space'
 
@@ -620,7 +620,7 @@ noremap l *
 noremap , %
 
 " Join lines
-" nnoremap <leader>J J
+nnoremap <leader>J J
 
 " Insert a space
 nnoremap <leader><Space> i<Space><Esc>

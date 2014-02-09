@@ -289,6 +289,7 @@ alias gitb='git b'
 alias gitd='git diff'
 alias gitp='git p'
 alias gitpu='git pu'
+alias cdg='cd $(git rev-parse --show-toplevel)'
 
 # Gradle aliases
 alias gr='gradle'

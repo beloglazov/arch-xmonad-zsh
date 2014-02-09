@@ -57,6 +57,8 @@ let g:csv_autocmd_arrange = 1
 let g:csv_nomap_cr = 1
 let g:csv_highlight_column = 'y'
 
+Bundle 'coderifous/textobj-word-column.vim'
+
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0

@@ -15,7 +15,17 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 
-Bundle 'aaronbieber/vim-quicktask'
+Bundle 'airblade/vim-rooter'
+
+Bundle 'AndrewRadev/sideways.vim'
+nmap <silent> ( :SidewaysJumpLeft<cr>
+nmap <silent> ) :SidewaysJumpRight<cr>
+nmap <silent> <leader>( :SidewaysLeft<cr>
+nmap <silent> <leader>) :SidewaysRight<cr>
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
 
 Bundle 'arecarn/crunch'
 nnoremap <leader>cr :Crunch<cr>
@@ -34,15 +44,10 @@ Bundle 'bitc/vim-bad-whitespace'
 nnoremap <leader>W :EraseBadWhitespace<CR>
 
 Bundle 'bkad/CamelCaseMotion'
-map W <Plug>CamelCaseMotion_w
-map B <Plug>CamelCaseMotion_b
-map E <Plug>CamelCaseMotion_e
-omap <silent> iW <Plug>CamelCaseMotion_iw
-xmap <silent> iW <Plug>CamelCaseMotion_iw
-omap <silent> iB <Plug>CamelCaseMotion_ib
-xmap <silent> iB <Plug>CamelCaseMotion_ib
-omap <silent> iE <Plug>CamelCaseMotion_ie
-xmap <silent> iE <Plug>CamelCaseMotion_ie
+
+Bundle 'briandoll/change-inside-surroundings.vim'
+nnoremap <leader>s :ChangeInsideSurrounding<cr>
+nnoremap <leader>ca :ChangeAroundSurrounding<cr>
 
 Bundle 'chrisbra/csv.vim'
 hi CSVColumnEven ctermbg=0
@@ -94,7 +99,7 @@ nmap j <Plug>SneakNext
 xmap j <Plug>VSneakNext
 nmap k <Plug>SneakPrevious
 xmap k <Plug>VSneakPrevious
-map : <Plug>SneakStreakBackward
+map ' <Plug>SneakStreakBackward
 map ; <Plug>SneakStreak
 " replace 'f' with inclusive 1-char Sneak
 nmap f <Plug>Sneak_f
@@ -178,8 +183,6 @@ let g:tagbar_type_scala = {
 Bundle 'mhinz/vim-startify'
 
 Bundle 'michaeljsmith/vim-indent-object'
-
-Bundle 'mileszs/ack.vim'
 
 Bundle 'molok/vim-smartusline'
 let g:smartusline_string_to_highlight = '[%n]'
@@ -614,7 +617,7 @@ noremap h #
 noremap l *
 
 " Jump to the matching brace
-noremap , %
+noremap ,, %
 
 " Join lines
 nnoremap <leader>J J
@@ -633,4 +636,3 @@ autocmd FileType java nnoremap <silent> <buffer> <localleader>h :JavaHierarchy<c
 autocmd FileType java nnoremap <buffer> <localleader>rr :JavaRename<space>
 autocmd FileType java nnoremap <buffer> <localleader>rm :JavaMove<space>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>ru :RefactorUndo<cr>
-

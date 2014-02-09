@@ -74,9 +74,6 @@ Bundle 'dyng/ctrlsf.vim'
 let g:ctrlsf_selected_line_hl = 'p'
 nnoremap <F4> :CtrlSF<space>
 
-Bundle 'fmoralesc/vim-pad'
-let g:pad_dir = '~/notes'
-
 Bundle 'ivyl/vim-bling'
 let g:bling_no_map = 1
 let g:bling_time = 50

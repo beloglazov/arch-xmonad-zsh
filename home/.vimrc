@@ -18,10 +18,10 @@ Bundle 'gmarik/vundle'
 Bundle 'airblade/vim-rooter'
 
 Bundle 'AndrewRadev/sideways.vim'
-nmap <silent> ( :SidewaysJumpLeft<cr>
-nmap <silent> ) :SidewaysJumpRight<cr>
-nmap <silent> <leader>( :SidewaysLeft<cr>
-nmap <silent> <leader>) :SidewaysRight<cr>
+nmap <silent> H :SidewaysJumpLeft<cr>
+nmap <silent> L :SidewaysJumpRight<cr>
+nmap <silent> <leader>H :SidewaysLeft<cr>
+nmap <silent> <leader>L :SidewaysRight<cr>
 omap aa <Plug>SidewaysArgumentTextobjA
 xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
@@ -488,8 +488,8 @@ function! s:SmartMotionsQuote()
 endfunction
 
 " Home row beginning / end of line
-noremap H ^
-noremap L $
+noremap h ^
+noremap l $
 
 " C-Tab
 imap <Esc>[27;5;9~ <C-Tab>
@@ -613,11 +613,8 @@ noremap K ciw
 noremap J ciW
 
 " Search the current word in front / behind
-noremap h #
-noremap l *
-
-" Jump to the matching brace
-noremap ,, %
+noremap ( #
+noremap ) *
 
 " Join lines
 nnoremap <leader>J J

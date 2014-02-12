@@ -339,6 +339,10 @@ Bundle 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F3> :YRShow<CR>
 function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+    xmap j <Plug>(textobj-brace-i)
+    omap j <Plug>(textobj-brace-i)
+    xmap k <Plug>(textobj-quote-i)
+    omap k <Plug>(textobj-quote-i)
 endfunction
 
 " End of my bundles
@@ -704,3 +708,4 @@ autocmd FileType java nnoremap <silent> <buffer> <localleader>h :JavaHierarchy<c
 autocmd FileType java nnoremap <buffer> <localleader>rr :JavaRename<space>
 autocmd FileType java nnoremap <buffer> <localleader>rm :JavaMove<space>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>ru :RefactorUndo<cr>
+

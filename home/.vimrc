@@ -120,6 +120,8 @@ omap T <Plug>Sneak_T
 
 Bundle 'kana/vim-textobj-user'
 Bundle 'Julian/vim-textobj-brace'
+Bundle 'kana/vim-textobj-function'
+" Bundle 'majutsushi/vim-textobj-function'
 
 call textobj#user#plugin('quote', {
     \ '-': {

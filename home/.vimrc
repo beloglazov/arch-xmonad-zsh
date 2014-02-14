@@ -121,73 +121,8 @@ omap T <Plug>Sneak_T
 Bundle 'kana/vim-textobj-user'
 Bundle 'Julian/vim-textobj-brace'
 Bundle 'kana/vim-textobj-function'
+Bundle 'beloglazov/vim-textobj-quotes'
 " Bundle 'majutsushi/vim-textobj-function'
-
-call textobj#user#plugin('quote', {
-    \ '-': {
-    \     '*sfile*': expand('<sfile>:p'),
-    \     'select-a': 'aq',  '*select-a-function*': 's:select_quote_a',
-    \     'select-i': 'iq',  '*select-i-function*': 's:select_quote_i',
-    \ }})
-
-function! s:select_quote(object_type)
-    let s:regex = '''\|"\|`'
-    let s:pos = getpos('.')
-    let s:line = line('.')
-    let s:content = getline('.')
-    let s:found = 0
-    let s:start_found = search(s:regex, 'be', s:line)
-    if s:start_found > 0
-        let s:start_position = getpos('.')
-        let s:q = getline('.')[col('.') - 1]
-        let s:col = col('.')
-        let s:content_head = s:content[: s:col - 1]
-        let s:content_tail = s:content[s:col :]
-        let s:head_cnt = strlen(substitute(s:content_head, '[^' . s:q . ']', '', 'g'))
-        let s:tail_cnt = strlen(substitute(s:content_tail, '[^' . s:q . ']', '', 'g'))
-        if s:head_cnt % 2 == 1 || s:tail_cnt == 0
-            if s:tail_cnt == 0
-                call search(s:q, 'be')
-                let s:start_position = getpos('.')
-            endif
-            call search(s:q, 'e')
-            let s:end_position = getpos('.')
-            let s:found = 1
-        endif
-    endif
-
-    if s:found == 0
-        call setpos('.', s:pos)
-        let s:start_found = search(s:regex, 'ce', s:line)
-        if s:start_found > 0
-            let s:start_position = getpos('.')
-            let s:q = getline('.')[col('.') - 1]
-            call search(s:q, 'e')
-            let s:end_position = getpos('.')
-            let s:found = 1
-        endif
-    endif
-
-    if s:found == 0
-        return 0
-    endif
-
-    if a:object_type ==? 'i'
-        let s:start_position[2] += 1
-        let s:end_position[2] -= 1
-    endif
-
-    return ['v', s:start_position, s:end_position]
-endfunction
-
-function! s:select_quote_a()
-    return s:select_quote('a')
-endfunction
-
-function! s:select_quote_i()
-    return s:select_quote('i')
-endfunction
-
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
@@ -491,78 +426,6 @@ onoremap nq :<C-u>normal! f'lvi'<CR>
 onoremap n` :<C-u>normal! f"lvi"<CR>
 onoremap n' :<C-u>normal! f'lvi'<CR>
 onoremap n" :<C-u>normal! f"lvi"<CR>
-
-onoremap q :<C-u>call <SID>SmartMotionsQuote()<CR>
-nnoremap <leader>A :call <SID>GetClosestCharInFront()<CR>
-
-function! s:GetClosestCharInFront()
-    let s:chars = ['"', "'"]
-    return s:GetClosestChar(s:chars, 1)
-endfunction
-
-function! s:GetClosestChar(chars, direction)
-    " let s:chars = ['"', "'"]
-    let s:line = getline('.')
-    let s:col = col('.')
-    if a:direction
-        let s:range = range(s:col, len(s:line))
-    else
-        let s:range = range(0, s:col - 1)
-    endif
-    " echom s:col
-    " echom s:line
-    for s:c in s:range
-        if index(a:chars, s:line[s:c]) > -1
-            echom s:line[s:c]
-            return
-        endif
-    endfor
-    echom "Not found"
-endfunction
-
-" test 'qwe1' asd 'qwe' asd 'qwe3' asd
-" test `qwe1` asd `qwe2` asd `qwe3` asd
-function! s:SmartMotionsQuote()
-    let s:line = getline('.')
-    " let s:column = getpos('.')[2]
-    let s:column = col('.')
-    let s:lineHead = s:line[: s:column - 1]
-    let s:lineTail = s:line[s:column :]
-    let s:quotes = ["'", '"']
-    let s:headQuoteCnts = {}
-    let s:tailQuoteCnts = {}
-    let s:totalQuoteCnts = {}
-
-    " echom string(searchpos("'", 'cs'))
-
-    for s:q in s:quotes
-        let s:headQuoteCnts[s:q] = strlen(substitute(s:lineHead, '[^' . s:q . ']', '', 'g'))
-        let s:tailQuoteCnts[s:q] = strlen(substitute(s:lineTail, '[^' . s:q . ']', '', 'g'))
-        let s:totalQuoteCnts[s:q] = s:headQuoteCnts[s:q] + s:tailQuoteCnts[s:q]
-    endfor
-
-    for s:q in s:quotes
-        " if s:headQuoteCnts[s:q] % 2 && !(s:totalQuoteCnts[s:q] % 2)
-        if s:headQuoteCnts[s:q] % 2 && s:tailQuoteCnts[s:q] > 0
-            exec 'normal! vi' . s:q
-            return
-        endif
-    endfor
-
-    for s:q in s:quotes
-        if s:tailQuoteCnts[s:q] > 0
-            exec 'normal! f' . s:q . 'lvi'. s:q
-            return
-        endif
-    endfor
-
-    for s:q in s:quotes
-        if s:headQuoteCnts[s:q] > 0
-            exec 'normal! F' . s:q . 'vi'. s:q
-            return
-        endif
-    endfor
-endfunction
 
 " Home row beginning / end of line
 noremap h ^

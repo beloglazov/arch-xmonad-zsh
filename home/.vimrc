@@ -97,6 +97,7 @@ Bundle 'justinmk/vim-sneak'
 let g:sneak#f_reset = 0
 let g:sneak#t_reset = 0
 let g:sneak#streak = 0
+let g:sneak#s_next = 0
 nmap j <Plug>SneakNext
 xmap j <Plug>VSneakNext
 nmap k <Plug>SneakPrevious

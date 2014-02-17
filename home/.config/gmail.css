@@ -190,6 +190,11 @@ table.F.cf.zt {
     border-top: 1px solid #2A2A2A;
 }
 
+/** email list links **/
+span a.linkclass {
+    color: #7f8f9f;
+}
+
 /** chat window **/
 div.nH.ko.aXjCH {
     height: 350px;

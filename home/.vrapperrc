@@ -54,6 +54,8 @@ nnoremap <space><space> i<space><Esc>
 nnoremap <space>d :q<cr>
 nnoremap <space>j :bnext<cr>
 nnoremap <space>k :bprevious<cr>
+nnoremap <space>h :tabrewind<cr>
+nnoremap <space>l :tablast<cr>
 nnoremap <space>b :ls<cr>
 nnoremap <space>m :maximize<cr>
 

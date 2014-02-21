@@ -23,16 +23,16 @@ inoremap <C-a> <Home>
 inoremap <C-e> <End>
 
 " Scroll screen with the cursor
-noremap <C-j> gj<C-e>
-noremap <C-k> gk<C-y>
+noremap <C-j> gj<C-e>j
+noremap <C-k> gk<C-y>k
 " noremap <C-h> h
 " noremap <C-l> l
 
 " Duplicate a line and comment the first copy
 nnoremap gcd yyPgccj_
 
-" Indent the current line
-noremap <space>i v=
+" Format code
+nnoremap <space>i :format<cr>
 
 " Change current word - kill
 noremap K ciw
@@ -52,11 +52,9 @@ nnoremap <space><space> i<space><Esc>
 
 " Buffers
 nnoremap <space>d :q<cr>
-nnoremap <space>j :bnext<cr>
-nnoremap <space>k :bprevious<cr>
-nnoremap <space>h :tabrewind<cr>
-nnoremap <space>l :tablast<cr>
-nnoremap <space>b :ls<cr>
+nnoremap <C-l> :bnext<cr>
+nnoremap <C-h> :bprevious<cr>
+nnoremap <space>l :ls<cr>
 nnoremap <space>m :maximize<cr>
 
 " Splits
@@ -65,12 +63,13 @@ nnoremap <space>w <C-w>w
 " Eclipse actions
 eclipseaction recenter org.eclipse.ui.edit.text.recenter
 nnoremap zz :recenter<cr>
+eclipseaction editorlist org.eclipse.ui.window.nextEditor
+nnoremap <space>b :editorlist<cr>
 
 
 set autoindent
 set ignorecase
 set smartcase
-" set hlsearch
 set incsearch
 set scrolloff=3
 set clipboard=unnamed

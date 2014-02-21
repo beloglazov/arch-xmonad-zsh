@@ -26,6 +26,7 @@ ln -s ${DIR}/home/.hawk ~/.hawk
 ln -s ${DIR}/home/.emacs.d ~/.emacs.d
 ln -s ${DIR}/home/.vimrc ~/.vimrc
 ln -s ${DIR}/home/.vim ~/.vim
+ln -s ${DIR}/home/.vrapperrc ~/.vrapperrc
 ln -s ${DIR}/home/.nanorc ~/.nanorc
 ln -s ${DIR}/home/.rtorrent.rc ~/.rtorrent.rc
 ln -s ${DIR}/home/.xxkbrc ~/.xxkbrc

@@ -1,0 +1,78 @@
+" Escape
+inoremap jk <Esc>`^
+inoremap <C-q> <Esc>`^
+noremap <C-q> <Esc>
+vnoremap <C-q> <Esc>
+cnoremap <C-q> <C-c>
+
+" Enter the command-line mode
+noremap <CR> :
+
+" Home row beginning / end of line
+noremap H ^
+noremap L $
+
+" Insert mode movement
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Insert mode beginning / end of line
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+
+" Scroll screen with the cursor
+noremap <C-j> gj<C-e>
+noremap <C-k> gk<C-y>
+" noremap <C-h> h
+" noremap <C-l> l
+
+" Duplicate a line and comment the first copy
+nnoremap gcd yyPgccj_
+
+" Indent the current line
+noremap <space>i v=
+
+" Change current word - kill
+noremap K ciw
+
+" Change current WORD - kill
+noremap J ciW
+
+" Search the current word in front / behind
+noremap ( #
+noremap ) *
+
+" Join lines
+nnoremap <space>J J
+
+" Insert a space
+nnoremap <space><space> i<space><Esc>
+
+" Buffers
+nnoremap <space>d :q<cr>
+nnoremap <space>j :bnext<cr>
+nnoremap <space>k :bprevious<cr>
+nnoremap <space>b :ls<cr>
+nnoremap <space>m :maximize<cr>
+
+" Splits
+nnoremap <space>w <C-w>w
+
+" Eclipse actions
+eclipseaction recenter org.eclipse.ui.edit.text.recenter
+nnoremap zz :recenter<cr>
+
+
+set autoindent
+set ignorecase
+set smartcase
+" set hlsearch
+set incsearch
+set scrolloff=3
+set clipboard=unnamed
+
+set saney
+set contentassistmode
+set startnormalmode

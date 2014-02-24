@@ -123,6 +123,7 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'Julian/vim-textobj-brace'
 Bundle 'kana/vim-textobj-function'
 Bundle 'beloglazov/vim-textobj-quotes'
+Bundle 'Julian/vim-textobj-variable-segment'
 " Bundle 'majutsushi/vim-textobj-function'
 
 Bundle 'kien/ctrlp.vim'

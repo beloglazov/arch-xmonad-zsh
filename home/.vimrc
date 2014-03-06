@@ -536,6 +536,9 @@ map <leader>a ggVG
 " Duplicate a line and comment the first copy
 nmap gcd yyPgcc
 
+" Duplicate a region and comment the first copy
+vmap gcd ypgvgc<Esc>
+
 " Indent everything
 noremap <leader>I gg=G<C-o><C-o>
 

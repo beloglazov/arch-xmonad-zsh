@@ -40,6 +40,7 @@ main = do
                  , ((myModMask, xK_o), spawn "dmenu-edit")
                  , ((myModMask, xK_u), spawn "dmenu-urxvt")
                  , ((myModMask, xK_p), spawn "dmenu-run")
+                 , ((myModMask, xK_i), spawn "dmenu-switch")
                  , ((myModMask, xK_Right), windows W.focusDown)
                  , ((myModMask, xK_Left),  windows W.focusUp)
                  , ((myModMask, xK_Down),  sendMessage Shrink)

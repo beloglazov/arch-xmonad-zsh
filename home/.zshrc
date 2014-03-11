@@ -125,6 +125,14 @@ function fd() {find ./ -type d -iname "*$1*" 2>/dev/null | grep -i $1}
 unalias yain
 function yain () {yaourt -S $*; rehash}
 
+# M-. rerun last command
+run-last-command-widget() {
+  eval `history | tail -n 1 | sed "s/^[0-9]*  //"`
+  zle accept-line
+}
+zle     -N   run-last-command-widget
+bindkey -M viins '\e.' run-last-command-widget
+
 # fzf
 
 # C-S: cd to a directory from the current subtree

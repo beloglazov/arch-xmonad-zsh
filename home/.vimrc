@@ -233,6 +233,7 @@ Bundle 'tfnico/vim-gradle'
 Bundle 'tpope/vim-abolish'
 
 Bundle 'tpope/vim-commentary'
+autocmd FileType sql set commentstring=--\ %s
 
 Bundle 'tpope/vim-fugitive'
 noremap <silent> <f12> :Gstatus<CR>

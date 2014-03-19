@@ -99,11 +99,13 @@ let g:sneak#t_reset = 0
 let g:sneak#streak = 0
 let g:sneak#s_next = 0
 nmap j <Plug>SneakNext
-xmap j <Plug>VSneakNext
 nmap k <Plug>SneakPrevious
+xmap j <Plug>VSneakNext
 xmap k <Plug>VSneakPrevious
-map ' <Plug>SneakStreakBackward
-map ; <Plug>SneakStreak
+omap j <Plug>SneakNext
+omap k <Plug>SneakPrevious
+map ; <Plug>(SneakStreak)
+map ' <Plug>(SneakStreakBackward)
 " replace 'f' with inclusive 1-char Sneak
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
@@ -569,8 +571,12 @@ nnoremap <leader>J J
 nnoremap <leader><Space> i<Space><Esc>
 
 " Java key bindings
+autocmd FileType java nnoremap <localleader>o :CtrlP src<CR>
+autocmd FileType java nnoremap <localleader>m :CtrlP src/main<CR>
+autocmd FileType java nnoremap <localleader>t :CtrlP src/test<CR>
+autocmd FileType java nnoremap <localleader>j :CtrlP src/main/java<CR>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>i :JavaImport<cr>
-autocmd FileType java nnoremap <silent> <buffer> <localleader>o :JavaImportOrganize<cr>
+autocmd FileType java nnoremap <silent> <buffer> <localleader>O :JavaImportOrganize<cr>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>d :JavaDocSearch -x declarations<cr>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>s :JavaSearchContext<cr>
 autocmd FileType java nnoremap <silent> <buffer> <localleader>c :JavaCorrect<cr>

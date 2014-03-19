@@ -36,7 +36,7 @@ main = do
 		`additionalKeys`
                  [ ((myModMask, xK_a), spawn "date +'%c' | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
                  , ((myModMask, xK_w), spawn "acpi -b | dzen2 -p 2 -fn '-*-terminus-bold-*-*-*-28-*-*-*-*-*-*-*' -bg '#0c0d0e' -fg '#7f8f9f'")
-                 , ((myModMask, xK_e), spawn "e")
+                 , ((myModMask, xK_e), spawn "wmctrl -a eclipse")
                  , ((myModMask, xK_o), spawn "dmenu-edit")
                  , ((myModMask, xK_u), spawn "dmenu-urxvt")
                  , ((myModMask, xK_p), spawn "dmenu-run")

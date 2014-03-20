@@ -62,6 +62,8 @@ bindkey -M vicmd "${key[End]}" end-of-line
 
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins '^Q' vi-cmd-mode
+bindkey -M vicmd '^H' backward-char
+bindkey -M vicmd '^L' forward-char
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 bindkey -M vicmd 'k' history-substring-search-up

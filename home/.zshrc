@@ -24,7 +24,7 @@ ZSH_THEME="beloglazov"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode git archlinux history-substring-search svn virtualenvwrapper mvn)
+plugins=(vi-mode git archlinux history-substring-search svn virtualenvwrapper mvn colored-man colorize)
 
 # Add custom completion scripts
 fpath=(~/.zsh/completion $fpath)
@@ -349,3 +349,6 @@ stty -ixon
 
 source ~/.zshenv
 source ~/.fzf.zsh
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root)
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

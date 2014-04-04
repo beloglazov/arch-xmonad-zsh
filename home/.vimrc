@@ -295,6 +295,8 @@ Bundle 'dag/vim2hs'
 let g:haskell_autotags = 1
 let g:haskell_tags_generator = 'fast-tags'
 
+Bundle 'eagletmt/ghcmod-vim'
+
 Bundle 'eagletmt/neco-ghc'
 let g:necoghc_enable_detailed_browse = 1
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc

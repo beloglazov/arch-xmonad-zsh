@@ -265,6 +265,7 @@ inoremap <S-Tab> pumvisible() ? "\<C-P>" : "\<S-Tab>"
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 " let g:ycm_key_detailed_diagnostics = '<leader>yd'
 let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 " Bundle 'vim-scripts/InsertChar'
 " nnoremap <leader><Space> :<C-u>call InsertChar#insert(v:count1)<CR>
@@ -293,6 +294,10 @@ endfunction
 Bundle 'dag/vim2hs'
 let g:haskell_autotags = 1
 let g:haskell_tags_generator = 'fast-tags'
+
+Bundle 'eagletmt/neco-ghc'
+let g:necoghc_enable_detailed_browse = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 
 " End of my bundles

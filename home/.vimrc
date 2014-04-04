@@ -287,6 +287,14 @@ function! YRRunAfterMaps()
     omap k <Plug>(textobj-quote-i)
 endfunction
 
+
+" Haskell plugins
+
+Bundle 'dag/vim2hs'
+let g:haskell_autotags = 1
+let g:haskell_tags_generator = 'fast-tags'
+
+
 " End of my bundles
 
 

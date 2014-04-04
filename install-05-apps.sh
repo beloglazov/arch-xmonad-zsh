@@ -17,7 +17,7 @@ sudo ranger --copy-config=scope
 
 cabal update
 cabal install cabal-install
-cabal install happy haskell-awk fast-tags
+cabal install happy haskell-awk fast-tags ghc-mod
 
 wget http://albertlatacz.published.s3.amazonaws.com/javarepl/javarepl.jar \
     -r -O ~/bin/javarepl.jar

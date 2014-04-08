@@ -1,3 +1,19 @@
+# Deprecated!
+
+Previously, I kept my whole configuration in this repo, however, it wasn't
+scalable, as I couldn't for example easily use my Vim or shell configuration in
+Arch and on a Mac. I've decided to split the configuration into multiple repos
+to make it more reusable. In particular, have a look at the following repos:
+
+- https://github.com/beloglazov/arch-config
+- https://github.com/beloglazov/xmonad-config
+- https://github.com/beloglazov/fish-config
+- https://github.com/beloglazov/vimrc
+- https://github.com/beloglazov/mac-config
+
+
+## Introduction
+
 This repository contains my configuration of Arch Linux with Xmonad, Zsh, Vim,
 and other tools. In addition to the configuration files themselves, the
 repository includes scripts for installing software, which I use in my
@@ -16,7 +32,7 @@ configured:
  - Tex, Python libs, and may other useful applications
 
 
-# Initial steps
+## Initial steps
 
 The scripts included in this repo assume that you have Arch Linux installed,
 which can be done by following the installation procedure described in the Arch
@@ -77,7 +93,7 @@ git clone git://github.com/beloglazov/arch-xmonad-zsh.git
 cd arch-xmonad-zsh
 ```
 
-# Installation scripts
+## Installation scripts
 
 Everything is now ready to start running the installation scripts in the order
 of their numbers:
@@ -133,7 +149,7 @@ of their numbers:
 Once the steps are completed, reboot, login, type `startx`, and enjoy! :)
 
 
-# Key-bindings and aliases
+## Key-bindings and aliases
 
 This section is still to be written :) Meanwhile, have a look at
 `~/.xmonad/xmonad.hs`, `~/.zshrc`, `~/.gitconfig`, and `~/.vimrc`.

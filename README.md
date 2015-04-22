@@ -1,3 +1,10 @@
+# Update
+
+I've reorganized all my configs to be managed by
+[rcm](https://github.com/thoughtbot/rcm). The new consolidated repo is located
+at: https://github.com/beloglazov/dotfiles
+
+
 # Deprecated!
 
 Previously, I kept my whole configuration in this repo, however, it wasn't
